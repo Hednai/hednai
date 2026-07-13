@@ -1,0 +1,67 @@
+// ============================================
+// lib/mailer.ts
+// Envoi d'email via Nodemailer (SMTP)
+// Pattern : nouveau
+// Optionnel : si les variables SMTP ne sont pas dans le .env,
+// les emails ne sont pas envoyes mais le message est sauve en base
+// ============================================
+import nodemailer from "nodemailer";
+import { env } from "../config/env";
+
+// Verifier si l'email est configure
+const isMailConfigured =
+  env.SMTP_HOST && env.SMTP_PORT && env.SMTP_USER && env.SMTP_PASS;
+
+// Creer le transporteur SMTP (ou null si pas configure)
+const transporter = isMailConfigured
+  ? nodemailer.createTransport({
+      host: env.SMTP_HOST,
+      port: Number(env.SMTP_PORT),
+      secure: Number(env.SMTP_PORT) === 465,
+      auth: {
+        user: env.SMTP_USER,
+        pass: env.SMTP_PASS,
+      },
+    })
+  : null;
+
+// Interface pour les donnees du message
+interface ContactData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+// Envoyer un email de notification pour un nouveau message contact
+export const sendContactNotification = async (
+  data: ContactData,
+): Promise<boolean> => {
+  // Si l'email n'est pas configure, on skip
+  if (!transporter) {
+    console.warn("SMTP non configure. Email non envoye.");
+    return false;
+  }
+
+  try {
+    // Envoyer l'email
+    await transporter.sendMail({
+      from: `"Hednai Contact" <${env.SMTP_USER}>`,
+      to: env.CONTACT_EMAIL,
+      replyTo: data.email,
+      subject: `[Hednai] ${data.subject}`,
+      text: [
+        `Nouveau message de ${data.name} (${data.email})`,
+        "",
+        `Sujet : ${data.subject}`,
+        "",
+        data.message,
+      ].join("\n"),
+    });
+
+    return true;
+  } catch (error) {
+    console.error("Erreur envoi email :", (error as Error).message);
+    return false;
+  }
+};
