@@ -1,17 +1,23 @@
 // ============================================
 // hooks/useContactForm.ts
 // Logique du formulaire de contact extraite du composant
+// Gere les deux methodes : Email ou WhatsApp
 // Separation logique (ici) / affichage (dans Contact.tsx)
 // ============================================
 import { useState } from "react";
 import { sendContactMessage } from "../routes/contact";
-import { isValidEmail, isMinLength } from "../utils/validation";
-import type { ContactForm, FormStatus } from "../types";
+import { isValidEmail, isMinLength, isValidPhone } from "../utils/validation";
+import { SITE_CONFIG } from "../config/site";
+import type { ContactForm, ContactMethod, FormStatus } from "../types";
 
 // Etat initial du formulaire (tous les champs vides)
+// Methode par defaut : email | Indicatif par defaut : Cote d'Ivoire (+225)
 const INITIAL_FORM: ContactForm = {
+  contactMethod: "email",
   name: "",
   email: "",
+  phone: "",
+  dialCode: "+225",
   subject: "",
   message: "",
   honeypot: "",
@@ -39,6 +45,18 @@ export function useContactForm() {
     }
   };
 
+  // Changer d'onglet (Email <-> WhatsApp)
+  // On efface les erreurs liees au champ qui disparait (email ou phone)
+  const setContactMethod = (method: ContactMethod) => {
+    setForm((prev) => ({ ...prev, contactMethod: method }));
+    setFieldErrors((prev) => {
+      const copy = { ...prev };
+      delete copy.email;
+      delete copy.phone;
+      return copy;
+    });
+  };
+
   // Verifier que tous les champs respectent les regles avant l'envoi
   const validate = (): boolean => {
     const errors: Record<string, string> = {};
@@ -46,9 +64,18 @@ export function useContactForm() {
     if (!isMinLength(form.name, 2)) {
       errors.name = "contact.form.error.name";
     }
-    if (!isValidEmail(form.email)) {
-      errors.email = "contact.form.error.email";
+
+    // Seul le champ de la methode active est verifie
+    if (form.contactMethod === "email") {
+      if (!isValidEmail(form.email)) {
+        errors.email = "contact.form.error.email";
+      }
+    } else {
+      if (!isValidPhone(form.phone)) {
+        errors.phone = "contact.form.error.phone";
+      }
     }
+
     if (!isMinLength(form.subject, 2)) {
       errors.subject = "contact.form.error.subject";
     }
@@ -71,19 +98,56 @@ export function useContactForm() {
     setStatus("loading");
 
     try {
-      // 2. On appelle l'API
-      await sendContactMessage(form);
+      // 2. On appelle l'API avec seulement les champs pertinents
+      // (le backend attend une union discriminee sur contactMethod)
+      const payload =
+        form.contactMethod === "email"
+          ? {
+              contactMethod: "email" as const,
+              name: form.name,
+              email: form.email,
+              subject: form.subject,
+              message: form.message,
+              honeypot: form.honeypot,
+            }
+          : {
+              contactMethod: "whatsapp" as const,
+              name: form.name,
+              phone: `${form.dialCode}${form.phone.replace(/\s/g, "")}`,
+              subject: form.subject,
+              message: form.message,
+              honeypot: form.honeypot,
+            };
 
-      // 3. Succes : on reinitialise le formulaire
+      await sendContactMessage(payload);
+
+      // 3. Succes
       setStatus("success");
       setFieldErrors({});
-      setForm(INITIAL_FORM);
+
+      // 4. Si WhatsApp : ouvrir wa.me avec le message pre-rempli
+      // Le numero vient de SITE_CONFIG, pas d'une valeur en dur
+      if (form.contactMethod === "whatsapp") {
+        const waMessage = encodeURIComponent(
+          `Bonjour,\n\nJe m'appelle ${form.name}.\nJe vous contacte pour : ${form.subject}\n\n${form.message}\n\nMerci.`,
+        );
+
+        setTimeout(() => {
+          window.open(
+            `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=${waMessage}`,
+            "_blank",
+          );
+        }, 800);
+      }
+
+      // 5. Reinitialiser le formulaire (on garde la methode choisie)
+      setForm({ ...INITIAL_FORM, contactMethod: form.contactMethod });
     } catch {
-      // 4. Erreur (ex: serveur injoignable)
+      // 6. Erreur (ex: serveur injoignable)
       setStatus("error");
       setFieldErrors({ general: "contact.form.error.network" });
     }
   };
 
-  return { form, status, fieldErrors, updateField, submit };
+  return { form, status, fieldErrors, updateField, setContactMethod, submit };
 }

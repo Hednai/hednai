@@ -81,10 +81,19 @@ export const en: Record<string, string> = {
   "contact.info.location": "Location",
   "contact.info.available": "Available remotely",
   "contact.info.follow": "Follow me",
+
+  // Email / WhatsApp tabs
+  "contact.tab.email": "Email",
+  "contact.tab.whatsapp": "WhatsApp",
+
+  // Form fields
   "contact.form.name": "Full name",
   "contact.form.name.placeholder": "John Doe",
   "contact.form.email": "Email",
   "contact.form.email.placeholder": "john@example.com",
+  "contact.form.phone": "Phone",
+  "contact.form.phone.placeholder": "01 02 91 90 65",
+  "contact.form.dialCode": "Dial code",
   "contact.form.subject": "Subject",
   "contact.form.subject.placeholder": "Maritime application development",
   "contact.form.message": "Message",
@@ -94,9 +103,11 @@ export const en: Record<string, string> = {
   "contact.form.success": "Message sent!",
   "contact.form.error.name": "Name too short (min 2 characters)",
   "contact.form.error.email": "Invalid email",
+  "contact.form.error.phone": "Invalid phone number",
   "contact.form.error.subject": "Subject too short (min 2 characters)",
   "contact.form.error.message": "Message too short (min 10 characters)",
   "contact.form.error.network": "Network error — check your connection.",
 
   "footer.rights": "All rights reserved.",
+  "scrollToTop": "Back to top",
 };

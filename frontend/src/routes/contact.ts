@@ -3,12 +3,13 @@
 // Appel API pour le formulaire de contact
 // ============================================
 import { fetchAPI } from "./api";
-import type { ContactForm } from "../types";
+import type { ContactPayload } from "../types";
 
 // Envoyer un message de contact au backend
-export const sendContactMessage = async (form: ContactForm) => {
+// On envoie le payload deja "nettoye" (email OU whatsapp, jamais les deux)
+export const sendContactMessage = async (payload: ContactPayload) => {
   return fetchAPI<{ id: number }>("/api/contact", {
     method: "POST",
-    body: JSON.stringify(form),
+    body: JSON.stringify(payload),
   });
 };

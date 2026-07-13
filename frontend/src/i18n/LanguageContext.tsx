@@ -1,6 +1,7 @@
 // ============================================
 // i18n/LanguageContext.tsx
 // Systeme bilingue FR/EN avec React Context
+// v6 : toggle simple (pas de setLang direct)
 // ============================================
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";

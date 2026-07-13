@@ -9,8 +9,10 @@ export const SITE_CONFIG = {
   // Informations de contact
   contact: {
     email: "contact@hednai.com",
-    phone: "+33 1 23 45 67 89",
-    location: "France",
+    phone: "+225 01 02 91 90 65",
+    location: "Côte d'Ivoire",
+    // Numero WhatsApp Business, sans le "+" (format attendu par wa.me)
+    whatsappNumber: "2250102919065",
   },
 
   // Liens reseaux sociaux

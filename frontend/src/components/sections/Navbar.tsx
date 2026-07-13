@@ -1,6 +1,7 @@
 // ============================================
 // components/sections/Navbar.tsx
-// Barre de navigation avec i18n complete + liens externalises
+// Barre de navigation avec toggle FR/EN simple
+// Pattern : toggle langue v6 (remplace les drapeaux)
 // ============================================
 import { useState, useEffect } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
@@ -19,7 +20,7 @@ export function Navbar() {
   // Detecter si l'utilisateur a scrolle, pour changer le style de la navbar
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -32,18 +33,8 @@ export function Navbar() {
         {/* Logo */}
         <a href="#accueil" className="navbar__logo">
           <img src="/logo-anchor.png" alt="Hednai" />
-          <span>Hednai</span>
+          <span>Hed<span style={{ color: "hsl(195 100% 45%)" }}>nai</span></span>
         </a>
-
-        {/* Boutons theme sombre/clair + changement de langue */}
-        <div className="navbar__toggles">
-          <button onClick={toggleTheme} className="navbar__toggle-btn">
-            {isDark ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
-          <button onClick={toggleLang} className="navbar__toggle-btn">
-            {lang === "fr" ? "EN" : "FR"}
-          </button>
-        </div>
 
         {/* Bouton menu burger, visible seulement sur mobile */}
         <button
@@ -53,7 +44,7 @@ export function Navbar() {
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
-        {/* Liste des liens de navigation, generee depuis data/navLinks.ts */}
+        {/* Liste des liens de navigation */}
         <ul className={`navbar__links ${menuOpen ? "navbar__links--open" : ""}`}>
           {NAV_LINKS.map((link) => (
             <li key={link.key}>
@@ -66,6 +57,26 @@ export function Navbar() {
               </a>
             </li>
           ))}
+
+          {/* Theme sombre/clair */}
+          <li className="navbar__toggles">
+            <button
+              onClick={toggleTheme}
+              className="navbar__toggle-btn"
+              aria-label={isDark ? "Mode clair" : "Mode sombre"}
+            >
+              {isDark ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+
+            {/* Toggle langue FR/EN simple */}
+            <button
+              onClick={toggleLang}
+              className="navbar__toggle-btn navbar__lang-btn"
+              aria-label="Changer de langue"
+            >
+              {lang === "fr" ? "EN" : "FR"}
+            </button>
+          </li>
         </ul>
       </div>
     </nav>

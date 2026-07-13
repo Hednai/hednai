@@ -84,6 +84,60 @@
   padding: 36px;
 }
 
+/* ===== ONGLETS EMAIL / WHATSAPP =====
+   Deux boutons cote a cote en haut du formulaire.
+   Celui qui est actif est mis en evidence (fond colore) */
+.contact-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+
+  /* Petite ligne de separation sous les onglets */
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 16px;
+}
+
+.contact-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  flex: 1;
+  justify-content: center;
+
+  padding: 10px 16px;
+
+  background: var(--bg-gray);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+
+  font-family: var(--font-main);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+
+  cursor: pointer;
+
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.contact-tab:hover {
+  color: var(--text-primary);
+}
+
+/* Onglet actif : fond fonce, texte blanc */
+.contact-tab--active {
+  background: var(--brand-dark);
+  border-color: var(--brand-dark);
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .contact-tab--active {
+  background: #F1F5F9;
+  border-color: #F1F5F9;
+  color: #0F172A;
+}
+
 /* Groupe = label + input + message d'erreur eventuel */
 .fg {
   margin-bottom: 22px;
@@ -97,7 +151,8 @@
 }
 
 .fg input,
-.fg textarea {
+.fg textarea,
+.fg select {
   width: 100%;
   background: var(--bg-gray);
   border: 1px solid var(--card-border);
@@ -116,13 +171,32 @@
 }
 
 .fg input:focus,
-.fg textarea:focus {
+.fg textarea:focus,
+.fg select:focus {
   border-color: var(--text-primary);
 }
 
 .fg textarea {
   min-height: 130px;
   resize: vertical;
+}
+
+/* ===== CHAMP TELEPHONE — selecteur d'indicatif + input a cote ===== */
+.phone-field {
+  display: flex;
+  gap: 8px;
+}
+
+.phone-field__code {
+  flex: 0 0 auto;
+  width: 92px;
+
+  /* On reduit le padding par rapport aux autres champs (select plus compact) */
+  padding: 14px 8px;
+}
+
+.phone-field input {
+  flex: 1;
 }
 
 /* ===== MESSAGE DE SUCCES / ERREUR ===== */
@@ -156,6 +230,11 @@
 
   .contact-form {
     padding: 24px;
+  }
+
+  .contact-tab {
+    font-size: 13px;
+    padding: 10px 8px;
   }
 }
 

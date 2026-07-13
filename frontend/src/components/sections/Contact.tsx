@@ -1,22 +1,25 @@
 // ============================================
 // components/sections/Contact.tsx
-// Formulaire de contact — utilise le hook useContactForm pour toute la logique
-// Ce fichier ne gere que l'affichage (JSX), pas la logique metier
+// Formulaire de contact — onglets Email / WhatsApp
+// Ce fichier ne gere que l'affichage (JSX), toute la logique
+// vient du hook useContactForm
 // ============================================
 import { useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { SectionWrapper } from "../ui/SectionWrapper";
 import { Button } from "../ui/Button";
 import { useLanguage } from "../../i18n/LanguageContext";
 import { useContactForm } from "../../hooks/useContactForm";
 import { SITE_CONFIG } from "../../config/site";
+import { countryCodes } from "../../data/countryDialCodes";
 import "./Contact.css";
 
 export function Contact() {
   const { t } = useLanguage();
-  // Toute la logique (validation, envoi, erreurs) vient du hook
-  const { form, status, fieldErrors, updateField, submit } = useContactForm();
+  // Toute la logique (validation, envoi, erreurs, onglet actif) vient du hook
+  const { form, status, fieldErrors, updateField, setContactMethod, submit } = useContactForm();
   // Reference vers le premier message d'erreur, pour scroller dessus sur mobile
   const errorRef = useRef<HTMLDivElement>(null);
 
@@ -28,7 +31,7 @@ export function Contact() {
   }, [status, fieldErrors]);
 
   // A chaque frappe dans un champ, on met a jour le formulaire via le hook
-  const change = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const change = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     updateField(e.target.id, e.target.value);
   };
 
@@ -80,19 +83,87 @@ export function Contact() {
           </div>
         </div>
 
-        {/* Colonne de droite : le formulaire */}
+        {/* Colonne de droite : le formulaire avec onglets */}
         <form className="contact-form" onSubmit={handleSubmit}>
+
+          {/* ===== ONGLETS EMAIL / WHATSAPP ===== */}
+          <div className="contact-tabs">
+            <button
+              type="button"
+              className={`contact-tab ${form.contactMethod === "email" ? "contact-tab--active" : ""}`}
+              onClick={() => setContactMethod("email")}
+            >
+              <Mail size={16} />
+              {t("contact.tab.email")}
+            </button>
+            <button
+              type="button"
+              className={`contact-tab ${form.contactMethod === "whatsapp" ? "contact-tab--active" : ""}`}
+              onClick={() => setContactMethod("whatsapp")}
+            >
+              <FaWhatsapp size={16} />
+              {t("contact.tab.whatsapp")}
+            </button>
+          </div>
+
           <div className="fg">
             <label htmlFor="name">{t("contact.form.name")}</label>
             <input id="name" placeholder={t("contact.form.name.placeholder")} value={form.name} onChange={change} className={fieldErrors.name ? "input--error" : ""} />
             {fieldErrors.name && <span ref={errorRef} className="field-error">{t(fieldErrors.name)}</span>}
           </div>
 
-          <div className="fg">
-            <label htmlFor="email">{t("contact.form.email")}</label>
-            <input id="email" type="email" placeholder={t("contact.form.email.placeholder")} value={form.email} onChange={change} className={fieldErrors.email ? "input--error" : ""} />
-            {fieldErrors.email && <span className="field-error">{t(fieldErrors.email)}</span>}
-          </div>
+          {/* ===== CHAMP QUI CHANGE SELON L'ONGLET ACTIF ===== */}
+          <AnimatePresence mode="wait">
+            {form.contactMethod === "email" ? (
+              <motion.div
+                key="email-field"
+                className="fg"
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+              >
+                <label htmlFor="email">{t("contact.form.email")}</label>
+                <input id="email" type="email" placeholder={t("contact.form.email.placeholder")} value={form.email} onChange={change} className={fieldErrors.email ? "input--error" : ""} />
+                {fieldErrors.email && <span className="field-error">{t(fieldErrors.email)}</span>}
+              </motion.div>
+            ) : (
+              <motion.div
+                key="phone-field"
+                className="fg"
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+              >
+                <label htmlFor="phone">{t("contact.form.phone")}</label>
+                <div className="phone-field">
+                  <select
+                    id="dialCode"
+                    value={form.dialCode}
+                    onChange={change}
+                    className="phone-field__code"
+                    aria-label={t("contact.form.dialCode")}
+                  >
+                    {countryCodes.map((c) => (
+                      <option key={c.iso} value={c.code}>
+                        {c.flag} {c.code}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    id="phone"
+                    type="tel"
+                    placeholder={t("contact.form.phone.placeholder")}
+                    value={form.phone}
+                    onChange={change}
+                    className={fieldErrors.phone ? "input--error" : ""}
+                  />
+                </div>
+                {fieldErrors.phone && <span className="field-error">{t(fieldErrors.phone)}</span>}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <div className="fg">
             <label htmlFor="subject">{t("contact.form.subject")}</label>

@@ -14,13 +14,18 @@ datasource db {
 }
 
 // ── Message de contact ────────────────────────
+// email et phone sont optionnels car un visiteur peut choisir
+// de contacter par Email OU par WhatsApp (pas les deux)
+// contactMethod indique quel canal a ete utilise
 model Message {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String
-  subject   String
-  message   String
-  createdAt DateTime @default(now())
+  id            Int      @id @default(autoincrement())
+  name          String
+  email         String?
+  phone         String?
+  contactMethod String   @default("email")
+  subject       String
+  message       String
+  createdAt     DateTime @default(now())
 }
 
 // ── Types d'actions pour l'audit ──────────────
@@ -32,7 +37,6 @@ enum ActionType {
 
 // ── Journal d'audit ───────────────────────────
 // Les logs restent en base, pas de route API exposee (securite)
-// Alternative : uuid(7) pour des IDs triables par temps (voir ProfMatchAI)
 model AuditLog {
   id         String     @id @default(uuid())
   action     ActionType

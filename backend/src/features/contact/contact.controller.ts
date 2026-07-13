@@ -1,6 +1,7 @@
 // ============================================
 // features/contact/contact.controller.ts
 // Logique metier pour le formulaire de contact
+// Gere les deux methodes : Email ou WhatsApp
 // Pattern : Karibou Market controllers (next(error) + logAction)
 // + Hednai v5.2 (honeypot, validation)
 // ============================================
@@ -13,14 +14,14 @@ import { logAction } from "../../utils/auditLog";
 import { sendContactNotification } from "../../lib/mailer";
 
 // ---- POST /api/contact ----
-// Recevoir et sauvegarder un message de contact
+// Recevoir et sauvegarder un message de contact (Email ou WhatsApp)
 export const submitContact = async (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
   try {
-    // 1. Valider les donnees avec Zod
+    // 1. Valider les donnees avec Zod (union discriminee email/whatsapp)
     const result = contactSchema.safeParse(req.body);
 
     if (!result.success) {
@@ -37,26 +38,36 @@ export const submitContact = async (
       return res.status(200).json({ success: true });
     }
 
-    // 3. Normaliser l'email (Jean@Gmail.COM → jean@gmail.com)
-    // Note : pas de validator.escape() — le middleware xssClean s'en charge
+    // 3. Selon la methode choisie, on ne garde que le champ pertinent
+    // (email normalise si methode = email, phone tel quel si methode = whatsapp)
     const cleanEmail =
-      validator.normalizeEmail(result.data.email) || result.data.email;
+      result.data.contactMethod === "email"
+        ? validator.normalizeEmail(result.data.email) || result.data.email
+        : undefined;
+
+    const cleanPhone =
+      result.data.contactMethod === "whatsapp"
+        ? result.data.phone.replace(/\s/g, "")
+        : undefined;
 
     // 4. Sauvegarder en base de donnees
     const msg = await createMessage({
       name: result.data.name,
       email: cleanEmail,
+      phone: cleanPhone,
+      contactMethod: result.data.contactMethod,
       subject: result.data.subject,
       message: result.data.message,
     });
 
     // 5. Journaliser l'action (non-bloquant)
     await logAction(req, "CONTACT_SUBMIT", "Message", String(msg.id), {
-      email: cleanEmail,
+      contactMethod: result.data.contactMethod,
       subject: result.data.subject,
     });
 
-    // 6. Envoyer l'email de notification (non-bloquant)
+    // 6. Envoyer l'email de notification seulement si methode = email
+    // (sendContactNotification retourne false automatiquement si pas d'email)
     const emailSent = await sendContactNotification({
       name: result.data.name,
       email: cleanEmail,
@@ -64,11 +75,13 @@ export const submitContact = async (
       message: result.data.message,
     });
 
-    // 7. Journaliser le resultat de l'envoi email
-    if (emailSent) {
-      await logAction(req, "CONTACT_EMAIL_SENT", "Message", String(msg.id));
-    } else {
-      await logAction(req, "CONTACT_EMAIL_FAILED", "Message", String(msg.id));
+    // 7. Journaliser le resultat de l'envoi email (seulement si methode = email)
+    if (result.data.contactMethod === "email") {
+      if (emailSent) {
+        await logAction(req, "CONTACT_EMAIL_SENT", "Message", String(msg.id));
+      } else {
+        await logAction(req, "CONTACT_EMAIL_FAILED", "Message", String(msg.id));
+      }
     }
 
     // 8. Reponse au format uniforme

@@ -26,9 +26,11 @@ const transporter = isMailConfigured
   : null;
 
 // Interface pour les donnees du message
+// email est optionnel : si le visiteur a contacte via WhatsApp,
+// il n'y a pas d'email a notifier
 interface ContactData {
   name: string;
-  email: string;
+  email?: string;
   subject: string;
   message: string;
 }
@@ -37,9 +39,15 @@ interface ContactData {
 export const sendContactNotification = async (
   data: ContactData,
 ): Promise<boolean> => {
-  // Si l'email n'est pas configure, on skip
+  // Si l'email n'est pas configure cote serveur, on skip
   if (!transporter) {
     console.warn("SMTP non configure. Email non envoye.");
+    return false;
+  }
+
+  // Si le visiteur a contacte via WhatsApp (pas d'email fourni), on skip aussi
+  // Rien a notifier par email dans ce cas
+  if (!data.email) {
     return false;
   }
 

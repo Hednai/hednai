@@ -1,7 +1,7 @@
 // ============================================
 // __tests__/ContactForm.test.tsx
 // Test du formulaire Contact (interaction utilisateur)
-// Verifie la validation front et le succes d'envoi
+// Verifie la validation front et le succes d'envoi (onglet Email actif par defaut)
 // ============================================
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
@@ -32,7 +32,7 @@ describe("Contact", () => {
     mockSend.mockReset();
   });
 
-  // --- Le formulaire s'affiche ---
+  // --- Le formulaire s'affiche (onglet Email actif par defaut) ---
   it("affiche les champs du formulaire", () => {
     renderContact();
 
@@ -43,7 +43,27 @@ describe("Contact", () => {
     expect(screen.getByLabelText(/message/i)).toBeInTheDocument();
   });
 
-  // --- Erreur si champs vides ---
+  // --- Les deux onglets sont presents ---
+  it("affiche les onglets Email et WhatsApp", () => {
+    renderContact();
+
+    expect(screen.getByRole("button", { name: /email/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /whatsapp/i })).toBeInTheDocument();
+  });
+
+  // --- Cliquer sur l'onglet WhatsApp affiche le champ telephone ---
+  it("affiche le champ telephone quand on clique sur l'onglet WhatsApp", () => {
+    renderContact();
+
+    const ongletWhatsapp = screen.getByRole("button", { name: /whatsapp/i });
+    fireEvent.click(ongletWhatsapp);
+
+    // Le champ email disparait, le champ telephone apparait
+    expect(screen.queryByLabelText(/^email$/i)).not.toBeInTheDocument();
+    expect(screen.getByLabelText(/telephone|phone/i)).toBeInTheDocument();
+  });
+
+  // --- Erreur si champs vides (onglet Email) ---
   it("affiche des erreurs si on soumet le formulaire vide", async () => {
     renderContact();
 
@@ -53,15 +73,13 @@ describe("Contact", () => {
 
     // Attendre que les erreurs apparaissent a l'ecran
     await waitFor(() => {
-      // On verifie directement dans le DOM que des messages d'erreur sont apparus
       const erreurs = document.querySelectorAll(".field-error");
-
       expect(erreurs.length).toBeGreaterThan(0);
     });
   });
 
-  // --- Succes apres soumission valide ---
-  it("affiche le message de succes apres un envoi reussi", async () => {
+  // --- Succes apres soumission valide (Email) ---
+  it("affiche le message de succes apres un envoi reussi par Email", async () => {
     // Simuler une reponse OK du backend (jamais vraiment appele)
     mockSend.mockResolvedValueOnce({ success: true, data: { id: 1 } });
 
@@ -71,7 +89,7 @@ describe("Contact", () => {
     fireEvent.change(screen.getByLabelText(/nom/i), {
       target: { value: "Jean Dupont", id: "name" },
     });
-    fireEvent.change(screen.getByLabelText(/email/i), {
+    fireEvent.change(screen.getByLabelText(/^email$/i), {
       target: { value: "jean@example.com", id: "email" },
     });
     fireEvent.change(screen.getByLabelText(/sujet/i), {
@@ -93,5 +111,10 @@ describe("Contact", () => {
 
     // Verifier que la fonction d'envoi a bien ete appelee une seule fois
     expect(mockSend).toHaveBeenCalledTimes(1);
+
+    // Verifier que le payload envoye correspond bien a la methode "email"
+    expect(mockSend).toHaveBeenCalledWith(
+      expect.objectContaining({ contactMethod: "email" }),
+    );
   });
 });

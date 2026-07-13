@@ -88,10 +88,19 @@ export const fr: Record<string, string> = {
   "contact.info.location": "Localisation",
   "contact.info.available": "Disponible a distance",
   "contact.info.follow": "Suivez-moi",
+
+  // Onglets Email / WhatsApp
+  "contact.tab.email": "Email",
+  "contact.tab.whatsapp": "WhatsApp",
+
+  // Champs du formulaire
   "contact.form.name": "Nom complet",
   "contact.form.name.placeholder": "Jean Dupont",
   "contact.form.email": "Email",
   "contact.form.email.placeholder": "jean@example.com",
+  "contact.form.phone": "Telephone",
+  "contact.form.phone.placeholder": "01 02 91 90 65",
+  "contact.form.dialCode": "Indicatif",
   "contact.form.subject": "Sujet",
   "contact.form.subject.placeholder": "Developpement d'une application maritime",
   "contact.form.message": "Message",
@@ -101,10 +110,12 @@ export const fr: Record<string, string> = {
   "contact.form.success": "Message envoye !",
   "contact.form.error.name": "Nom trop court (min 2 caracteres)",
   "contact.form.error.email": "Email invalide",
+  "contact.form.error.phone": "Numero de telephone invalide",
   "contact.form.error.subject": "Sujet trop court (min 2 caracteres)",
   "contact.form.error.message": "Message trop court (min 10 caracteres)",
   "contact.form.error.network": "Erreur reseau — verifiez votre connexion.",
 
   // Footer (pied de page)
   "footer.rights": "Tous droits reserves.",
+  "scrollToTop": "Retour en haut",
 };
