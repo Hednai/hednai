@@ -1,0 +1,14 @@
+/* Card.css */
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+}
+.card--hoverable:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow-hover);
+}

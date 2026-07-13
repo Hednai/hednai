@@ -1,0 +1,31 @@
+/* SectionWrapper.css */
+
+.section {
+  padding: var(--section-padding) 0;
+}
+
+.section--gray {
+  background: var(--bg-gray);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section__title {
+  font-size: clamp(28px, 5vw, 40px);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.section__subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 16px;
+  max-width: 550px;
+  margin: 0 auto 60px;
+}

@@ -1,0 +1,172 @@
+/* ============================================
+   Contact.css
+   Grille a deux colonnes : infos de contact + formulaire
+   ============================================ */
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 60px;
+  align-items: start;
+}
+
+/* ===== COLONNE INFOS DE CONTACT ===== */
+.contact-info h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 32px;
+}
+
+/* Une ligne d'info (icone + texte), ex: email, telephone */
+.ci {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.ci__icon {
+  width: 44px;
+  height: 44px;
+  background: var(--bg-gray);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.ci h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.ci p {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* ===== RESEAUX SOCIAUX ===== */
+.ci__social-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 36px 0 14px;
+}
+
+.ci__social {
+  display: flex;
+  gap: 10px;
+}
+
+.social-btn {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.social-btn:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+/* ===== FORMULAIRE ===== */
+.contact-form {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+}
+
+/* Groupe = label + input + message d'erreur eventuel */
+.fg {
+  margin-bottom: 22px;
+}
+
+.fg label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.fg input,
+.fg textarea {
+  width: 100%;
+  background: var(--bg-gray);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  font-family: var(--font-main);
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.fg input::placeholder,
+.fg textarea::placeholder {
+  color: var(--text-light);
+}
+
+.fg input:focus,
+.fg textarea:focus {
+  border-color: var(--text-primary);
+}
+
+.fg textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+/* ===== MESSAGE DE SUCCES / ERREUR ===== */
+.form-msg {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.form-msg--ok {
+  background: #ECFDF5;
+  color: #059669;
+}
+
+.form-msg--err {
+  background: #FEF2F2;
+  color: #DC2626;
+}
+
+/* ===== RESPONSIVE : une seule colonne sur mobile ===== */
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .contact-form {
+    padding: 24px;
+  }
+}
+
+/* ===== ERREURS DE CHAMP (bordure rouge + message) ===== */
+.field-error {
+  color: #DC2626;
+  font-size: 13px;
+  margin-top: 4px;
+  display: block;
+}
+
+.input--error {
+  border-color: #DC2626 !important;
+}

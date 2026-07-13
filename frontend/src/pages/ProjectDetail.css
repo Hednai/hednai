@@ -1,0 +1,90 @@
+/* ============================================
+   ProjectDetail.css
+   Page detail d'un projet individuel
+   ============================================ */
+
+.pd {
+  padding: 120px 0 80px;
+}
+
+/* ===== BOUTON RETOUR ===== */
+.pd__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 24px;
+  transition: color 0.2s;
+}
+
+.pd__back:hover {
+  color: var(--text-primary);
+}
+
+/* ===== BADGE CATEGORIE ===== */
+.pd__cat {
+  display: inline-block;
+  background: var(--tag-bg);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+/* ===== TITRE ===== */
+.pd h1 {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+/* ===== IMAGE ===== */
+.pd__img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  margin-bottom: 32px;
+}
+
+/* ===== DESCRIPTION ===== */
+.pd__desc {
+  font-size: 17px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 24px;
+  max-width: 700px;
+}
+
+/* ===== TECHNOLOGIES ===== */
+.pd__techs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+/* ===== FONCTIONNALITES ===== */
+.pd__features h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.pd__features ul {
+  padding-left: 20px;
+  margin-bottom: 32px;
+}
+
+.pd__features li {
+  padding: 4px 0;
+  color: var(--text-secondary);
+  list-style: disc;
+}
+
+/* ===== BOUTONS D'ACTION ===== */
+.pd__actions {
+  display: flex;
+  gap: 16px;
+}

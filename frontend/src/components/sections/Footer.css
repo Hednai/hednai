@@ -1,0 +1,58 @@
+/* ============================================
+   Footer.css
+   ============================================ */
+
+.footer {
+  border-top: 1px solid var(--card-border);
+  padding: 40px 0;
+}
+
+/* ===== CONTENEUR PRINCIPAL ===== */
+.footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* ===== LOGO ===== */
+.footer__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer__logo img {
+  height: 28px;
+}
+
+.footer__logo span {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* ===== NAVIGATION ===== */
+.footer__links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer__links a {
+  color: var(--text-secondary);
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.footer__links a:hover {
+  color: var(--text-primary);
+}
+
+/* ===== COPYRIGHT ===== */
+.footer__inner > p {
+  color: var(--text-light);
+  font-size: 13px;
+  width: 100%;
+  text-align: center;
+  margin-top: 16px;
+}

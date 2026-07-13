@@ -1,0 +1,158 @@
+/* ============================================
+   Portfolio.css
+   Styles des boutons de filtre + grille de projets
+   ============================================ */
+
+/* Boutons de filtre par categorie (Tous, Maritime, IA, Web) */
+.portfolio-filters {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: none;
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-main);
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+/* Style du bouton de filtre actuellement selectionne */
+.filter-btn--active {
+  background: var(--brand-dark);
+  color: #FFF;
+  border-color: var(--brand-dark);
+}
+
+[data-theme="dark"] .filter-btn--active {
+  background: #F1F5F9;
+  color: #0F172A;
+}
+
+/* Grille des cartes de projets (3 colonnes sur grand ecran) */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* Image du projet, avec zoom leger au survol de la carte */
+.proj__img {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.proj__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+
+.card:hover .proj__img img {
+  transform: scale(1.05);
+}
+
+/* Petit badge de categorie affiche sur l'image */
+.proj__badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+
+/* Contenu texte sous l'image */
+.proj__body {
+  padding: 24px;
+}
+
+.proj__body h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.proj__body h3 a {
+  transition: color 0.2s;
+}
+
+.proj__body h3 a:hover {
+  color: var(--text-secondary);
+}
+
+.proj__body > p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+/* Etiquettes des technologies utilisees (React, Node.js, etc.) */
+.proj__techs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.tech-tag {
+  background: var(--tag-bg);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 6px;
+}
+
+/* Liens "voir le projet" et "code source" en bas de carte */
+.proj__links {
+  display: flex;
+  gap: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--card-border);
+}
+
+.proj__links a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+
+.proj__links a:hover {
+  color: var(--text-primary);
+}
+
+/* ── Responsive : on reduit le nombre de colonnes sur petit ecran ── */
+@media (max-width: 1024px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,118 @@
+/* ═══════════════════════════════════════════
+   GLOBAL STYLES — Hednai
+   Variables CSS pour le light/dark mode + reset de base
+   ═══════════════════════════════════════════ */
+
+/* Tailwind v4 — cet import charge tous les utilitaires Tailwind */
+@import "tailwindcss";
+
+/* Police Google Fonts utilisee dans tout le site */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+
+/* ── Mode clair (par defaut) ── */
+:root {
+
+  --bg-white: #FFFFFF;
+  --bg-gray: #F5F5F5;
+
+  --text-primary: #1A1A1A;
+  --text-secondary: #6B7280;
+  --text-light: #9CA3AF;
+
+  --brand-dark: #1A1A1A;
+
+  --card-bg: #FFFFFF;
+  --card-border: #E5E7EB;
+
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+  --tag-bg: #F3F4F6;
+
+  --nav-height: 72px;
+  --max-width: 1200px;
+  --section-padding: 100px;
+
+  --font-main: 'Outfit', sans-serif;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+}
+
+
+/* ── Mode sombre ── */
+[data-theme="dark"] {
+
+  --bg-white: #0F172A;
+  --bg-gray: #1E293B;
+
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-light: #64748B;
+
+  --brand-dark: #F1F5F9;
+
+  --card-bg: #1E293B;
+  --card-border: #334155;
+
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.4);
+
+  --tag-bg: #334155;
+
+}
+
+
+/* ── Reset de base : enleve les styles par defaut du navigateur ── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height);
+}
+
+body {
+  font-family: var(--font-main);
+
+  background: var(--bg-white);
+  color: var(--text-primary);
+
+  line-height: 1.7;
+
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Enleve le soulignement et la couleur bleue par defaut des liens */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* ── Responsive : espacement reduit sur mobile ── */
+@media (max-width: 768px) {
+
+  :root {
+    --section-padding: 60px;
+  }
+
+}
