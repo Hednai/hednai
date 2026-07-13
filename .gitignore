@@ -17,6 +17,10 @@ build/
 # Prisma
 backend/prisma/migrations/
 
+# Client Prisma genere automatiquement
+# (se regenere avec "npx prisma generate", pas besoin de le committer)
+backend/src/generated/
+
 # IDE
 .vscode/
 .idea/
