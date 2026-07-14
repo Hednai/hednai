@@ -188,8 +188,9 @@
 }
 
 .phone-field__code {
-  flex: 0 0 auto;
-  width: 92px;
+  /* flex-basis fixe a 92px : ceci ignore toute regle "width" concurrente,
+     peu importe sa specificite CSS — solution plus fiable que "width" seul */
+  flex: 0 0 92px;
 
   /* On reduit le padding par rapport aux autres champs (select plus compact) */
   padding: 14px 8px;
