@@ -1,13 +1,96 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+  <!-- Encodage et responsive de base -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Police Google Fonts utilisee dans tout le site -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Titre affiche dans l'onglet du navigateur -->
+  <title>Hednai — Solutions Digitales & Intelligence Artificielle</title>
+
+  <!-- Description pour les moteurs de recherche -->
+  <meta
+    name="description"
+    content="Developpeur freelance specialise en solutions digitales, applications web et intelligence artificielle. Expertise maritime, logistique et tous secteurs."
+  />
+
+  <meta
+    name="keywords"
+    content="developpeur freelance, IA, web, applications, maritime, logistique, automatisation"
+  />
+
+  <!-- URL canonique du site -->
+  <link rel="canonical" href="https://hednai.com" />
+
+  <!-- Icone de l'onglet du navigateur -->
+  <link rel="icon" type="image/png" href="/logo-anchor.png" />
+  <link rel="apple-touch-icon" href="/logo-anchor.png" />
+
+  <!-- Open Graph : previsualisation quand le lien est partage (Facebook, LinkedIn...) -->
+  <meta property="og:title" content="Hednai — Solutions Digitales & Intelligence Artificielle" />
+  <meta property="og:description" content="Solutions digitales, applications web et IA pour tous secteurs. Expertise maritime et au-dela." />
+  <meta property="og:image" content="https://hednai.com/og-image.png" />
+  <meta property="og:url" content="https://hednai.com" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Hednai" />
+
+  <!-- Twitter Card : previsualisation quand le lien est partage sur Twitter/X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hednai — Solutions Digitales & Intelligence Artificielle" />
+  <meta name="twitter:description" content="Solutions digitales, applications web et IA pour tous secteurs. Expertise maritime et au-dela." />
+  <meta name="twitter:image" content="https://hednai.com/og-image.png" />
+
+  <!-- Donnees structurees pour les moteurs de recherche (fiche "Personne") -->
+  <!-- A FAIRE : remplacer TON-PROFIL par tes vrais liens LinkedIn/GitHub -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Hednai",
+    "url": "https://hednai.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/TON-PROFIL",
+      "https://github.com/Darenmcs"
+    ],
+    "jobTitle": "Developpeur Freelance — Web & IA",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Hednai"
+    }
+  }
+  </script>
+
+  <!-- Google Analytics -->
+  <!-- A FAIRE : remplacer G-XXXXXXX par ton vrai identifiant Google Analytics -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXX');
+  </script>
+
+</head>
+
+<body>
+
+  <!-- Point d'ancrage ou React va afficher toute l'application -->
+  <div id="root"></div>
+
+  <!-- Script principal qui demarre React -->
+  <script type="module" src="/src/main.tsx"></script>
+
+</body>
 </html>

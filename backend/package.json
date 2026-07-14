@@ -4,7 +4,7 @@
   "description": "API Hednai — portfolio developpeur maritime & IA",
   "type": "module",
   "scripts": {
-    "dev": "node --watch --loader tsx src/server.ts",
+    "dev": "node --watch --import tsx src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
     "test": "vitest run",

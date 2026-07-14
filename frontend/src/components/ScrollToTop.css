@@ -1,0 +1,242 @@
+/* ============================================
+   ScrollToTop.css
+   Bouton boussole maritime, fixe en bas a droite
+   ============================================ */
+
+.compass-btn {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 900;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 56px;
+  height: 56px;
+  will-change: transform;
+}
+
+.compass-btn__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 40% 35%,
+    hsl(210 40% 18%) 0%,
+    hsl(210 50% 10%) 100%
+  );
+  border: 2px solid hsl(184 100% 50% / 0.4);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.35),
+    0 0 12px hsl(184 100% 50% / 0.15),
+    inset 0 1px 0 hsl(184 100% 80% / 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.compass-btn:hover .compass-btn__ring {
+  border-color: hsl(184 100% 50% / 0.7);
+  box-shadow:
+    0 6px 28px rgba(0, 0, 0, 0.45),
+    0 0 20px hsl(184 100% 50% / 0.25),
+    inset 0 1px 0 hsl(184 100% 80% / 0.15);
+}
+
+.compass-btn__ticks {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.compass-btn__tick {
+  position: absolute;
+  width: 2px;
+  height: 6px;
+  background: hsl(184 100% 50% / 0.4);
+  top: 4px;
+  left: 50%;
+  transform-origin: 50% 24px;
+  margin-left: -1px;
+}
+
+.compass-btn__tick--n {
+  background: hsl(184 100% 60%);
+  height: 7px;
+}
+
+.compass-btn__tick--e { transform: rotate(90deg); }
+.compass-btn__tick--s { transform: rotate(180deg); }
+.compass-btn__tick--w { transform: rotate(270deg); }
+
+.compass-btn__north-label {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-main), 'Outfit', sans-serif;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: hsl(184 100% 60%);
+  text-shadow: 0 0 4px hsl(184 100% 50% / 0.5);
+  pointer-events: none;
+}
+
+.compass-btn__needle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 36px;
+  margin-left: -10px;
+  margin-top: -18px;
+}
+
+.compass-btn__needle-north {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 16px solid hsl(184 100% 50%);
+  margin-left: -6px;
+  filter: drop-shadow(0 0 4px hsl(184 100% 50% / 0.6));
+  transition: filter 0.3s;
+}
+
+.compass-btn:hover .compass-btn__needle-north {
+  filter: drop-shadow(0 0 8px hsl(184 100% 50% / 0.9));
+}
+
+.compass-btn__needle-south {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 14px solid hsl(0 60% 45% / 0.7);
+  margin-left: -5px;
+}
+
+.compass-btn__pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: hsl(184 100% 70%);
+  box-shadow: 0 0 6px hsl(184 100% 50% / 0.6);
+}
+
+.compass-btn__glow {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  border-top-color: hsl(184 100% 50% / 0.2);
+  animation: compass-ambient-spin 6s linear infinite;
+}
+
+@keyframes compass-ambient-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.compass-btn__pulse {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 1px solid hsl(184 100% 50% / 0);
+  transition: border-color 0.3s;
+}
+
+.compass-btn:hover .compass-btn__pulse {
+  animation: compass-pulse 1.5s ease-out infinite;
+}
+
+@keyframes compass-pulse {
+  0%   { transform: scale(1);   border-color: hsl(184 100% 50% / 0.4); }
+  100% { transform: scale(1.6); border-color: hsl(184 100% 50% / 0); }
+}
+
+@media (max-width: 768px) {
+  .compass-btn {
+    width: 48px;
+    height: 48px;
+    bottom: 24px;
+    right: 24px;
+  }
+
+  .compass-btn__tick {
+    height: 5px;
+    top: 3px;
+    transform-origin: 50% 21px;
+  }
+
+  .compass-btn__tick--n { height: 6px; }
+
+  .compass-btn__north-label {
+    font-size: 6px;
+    top: 7px;
+  }
+
+  .compass-btn__needle {
+    width: 16px;
+    height: 30px;
+    margin-left: -8px;
+    margin-top: -15px;
+  }
+
+  .compass-btn__needle-north {
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 13px;
+    margin-left: -5px;
+  }
+
+  .compass-btn__needle-south {
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-top-width: 11px;
+    margin-left: -4px;
+  }
+
+  .compass-btn__pin {
+    width: 5px;
+    height: 5px;
+    margin: -2.5px 0 0 -2.5px;
+  }
+
+  .compass-btn__glow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .compass-btn__glow {
+    animation: none;
+  }
+
+  .compass-btn:hover .compass-btn__pulse {
+    animation: none;
+  }
+
+  .compass-btn__needle {
+    transition: none;
+  }
+
+  .compass-btn__ring {
+    transition: none;
+  }
+
+  .compass-btn__needle-north {
+    transition: none;
+    filter: none;
+  }
+}

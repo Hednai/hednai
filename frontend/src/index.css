@@ -6,9 +6,6 @@
 /* Tailwind v4 — cet import charge tous les utilitaires Tailwind */
 @import "tailwindcss";
 
-/* Police Google Fonts utilisee dans tout le site */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
-
 
 /* ── Mode clair (par defaut) ── */
 :root {

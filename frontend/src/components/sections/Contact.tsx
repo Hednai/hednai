@@ -42,7 +42,7 @@ export function Contact() {
   };
 
   return (
-    <SectionWrapper id="contact" title={t("contact.title")} subtitle={t("contact.subtitle")} gray>
+    <SectionWrapper id="contact" title={t("contact.title")} subtitle={t("contact.subtitle")}>
       <div className="contact-grid">
         {/* Colonne de gauche : informations de contact */}
         <div className="contact-info">

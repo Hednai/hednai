@@ -48,15 +48,29 @@ function nettoyerObjet(objet: unknown): unknown {
 
 // Middleware Express
 const xssClean = (req: Request, _res: Response, next: NextFunction) => {
-  // Nettoyer le body, les query params et les params d'URL
+  // Le body peut etre remplace directement, pas de probleme ici
   if (req.body) {
     req.body = nettoyerObjet(req.body);
   }
+
+  // req.query est en lecture seule dans les versions recentes d'Express/Node.
+  // On ne peut plus faire "req.query = ...", il faut modifier l'objet
+  // existant de l'interieur : on vide chaque cle puis on remet la valeur nettoyee
   if (req.query) {
-    req.query = nettoyerObjet(req.query) as typeof req.query;
+    const nettoye = nettoyerObjet(req.query) as Record<string, unknown>;
+    for (const cle of Object.keys(req.query)) {
+      delete (req.query as Record<string, unknown>)[cle];
+    }
+    Object.assign(req.query, nettoye);
   }
+
+  // Meme chose pour req.params, par securite
   if (req.params) {
-    req.params = nettoyerObjet(req.params) as typeof req.params;
+    const nettoye = nettoyerObjet(req.params) as Record<string, unknown>;
+    for (const cle of Object.keys(req.params)) {
+      delete (req.params as Record<string, unknown>)[cle];
+    }
+    Object.assign(req.params, nettoye);
   }
 
   next();

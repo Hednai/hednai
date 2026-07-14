@@ -117,5 +117,7 @@ export const fr: Record<string, string> = {
 
   // Footer (pied de page)
   "footer.rights": "Tous droits reserves.",
+
+  // Bouton retour en haut (boussole maritime)
   "scrollToTop": "Retour en haut",
 };

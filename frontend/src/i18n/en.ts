@@ -109,5 +109,7 @@ export const en: Record<string, string> = {
   "contact.form.error.network": "Network error — check your connection.",
 
   "footer.rights": "All rights reserved.",
+
+  // Back to top button (maritime compass)
   "scrollToTop": "Back to top",
 };

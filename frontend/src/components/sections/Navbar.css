@@ -1,53 +1,44 @@
 /* ============================================
    Navbar.css
-   Styles de la barre de navigation en haut du site
+   Style icones + soulignement actif + theme cercle + FR|EN
+   Fond clair permanent (pas de transparence sur le Hero)
    ============================================ */
 
-/* ===== BARRE PRINCIPALE ===== */
-/* La navbar reste collee en haut de l'ecran meme quand on scroll (position: fixed) */
+/* La navbar reste collee en haut meme quand on scroll */
+/* Fond clair applique en permanence, des le chargement de la page */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-
   height: var(--nav-height);
-
-  /* z-index eleve pour rester au-dessus de tout le reste du contenu */
   z-index: 1000;
 
-  /* Transition douce quand le fond apparait au scroll */
-  transition: background 0.3s, box-shadow 0.3s;
-}
-
-/* Quand l'utilisateur a scrolle vers le bas : fond blanc flou + ombre legere */
-.navbar--scrolled {
   background: rgba(255, 255, 255, 0.95);
-
-  /* Effet de flou derriere la navbar (verre depoli) */
   backdrop-filter: blur(12px);
-
   box-shadow: 0 1px 0 var(--card-border);
+
+  transition: box-shadow 0.3s;
 }
 
-/* Meme chose mais en mode sombre : fond fonce au lieu de blanc */
-[data-theme="dark"] .navbar--scrolled {
+/* Legere ombre en plus une fois qu'on a scrolle, pour marquer la separation */
+.navbar--scrolled {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Mode sombre : fond fonce en permanence aussi */
+[data-theme="dark"] .navbar {
   background: rgba(15, 23, 42, 0.95);
 }
 
-/* ===== CONTENEUR INTERIEUR ===== */
-/* Centre le contenu de la navbar et l'empeche de depasser une largeur max */
+/* Conteneur interieur : logo a gauche, liens a droite */
 .navbar__inner {
   max-width: var(--max-width);
   margin: 0 auto;
-
   height: 100%;
-
-  /* Logo a gauche, liens a droite, alignes verticalement au centre */
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   padding: 0 24px;
 }
 
@@ -55,10 +46,7 @@
 .navbar__logo {
   display: flex;
   align-items: center;
-
   gap: 10px;
-
-  /* Toujours visible au-dessus du menu mobile quand il est ouvert */
   z-index: 1001;
 }
 
@@ -66,116 +54,160 @@
   height: 36px;
 }
 
+/* Texte du logo dans la couleur normale du texte (fond navbar toujours clair) */
 .navbar__logo span {
   font-size: 20px;
   font-weight: 700;
+  color: var(--text-primary);
 }
 
-/* ===== LIENS DE NAVIGATION ===== */
+/* ===== LIENS ===== */
 .navbar__links {
   display: flex;
   align-items: center;
-
-  gap: 8px;
+  gap: 6px;
 }
 
+/* Chaque lien : icone + texte, en majuscules, avec espace pour le soulignement */
 .navbar__link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
   color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 
-  font-size: 15px;
-  font-weight: 500;
+  padding: 8px 14px;
 
-  padding: 8px 16px;
+  /* Soulignement invisible par defaut, pret a apparaitre */
+  border-bottom: 2px solid transparent;
 
-  border-radius: var(--radius-sm);
-
-  /* Transition douce sur le changement de couleur/fond au survol */
-  transition: color 0.2s, background 0.2s;
+  transition: color 0.2s, border-color 0.2s;
 }
 
 .navbar__link:hover {
   color: var(--text-primary);
-
-  background: var(--bg-gray);
 }
 
-/* Bouton "Contact" : mis en avant, different des autres liens */
-.navbar__cta {
-  display: inline-flex;
-
-  margin-left: 12px;
-
-  padding: 10px 24px;
-
-  background: var(--brand-dark);
-  color: #FFF;
-
-  font-size: 14px;
-  font-weight: 600;
-
-  border-radius: var(--radius-sm);
-
-  transition: background 0.2s, transform 0.2s;
+/* Lien actif : texte en couleur primaire + soulignement visible */
+.navbar__link--active {
+  color: var(--text-primary);
+  border-bottom-color: var(--text-primary);
 }
 
-.navbar__cta:hover {
-  background: #333;
-
-  /* Leger effet de soulevement au survol */
-  transform: translateY(-1px);
+/* Mode sombre : le soulignement actif est blanc */
+[data-theme="dark"] .navbar__link--active {
+  color: #FFFFFF;
+  border-bottom-color: #FFFFFF;
 }
 
-/* En mode sombre, on inverse les couleurs du bouton CTA pour qu'il reste visible */
-[data-theme="dark"] .navbar__cta {
-  background: #F1F5F9;
-  color: #0F172A;
+/* ===== SEPARATEUR VERTICAL ===== */
+/* Petit trait vertical entre les liens et les boutons theme/langue */
+.navbar__separator {
+  width: 1px;
+  height: 20px;
+  background: var(--card-border);
+  margin: 0 8px;
+}
+
+/* ===== BOUTON THEME (cercle) ===== */
+.navbar__theme-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+  border: 1px solid var(--card-border);
+
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.navbar__theme-btn:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+/* ===== BOUTONS FR | EN ===== */
+/* Le groupe qui contient FR, le separateur, et EN */
+.navbar__lang-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 4px 12px;
+}
+
+/* Chaque bouton FR ou EN */
+.navbar__lang-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+
+  /* Par defaut, texte gris (langue inactive) */
+  color: var(--text-light);
+
+  transition: color 0.2s;
+}
+
+/* Langue active : texte en couleur primaire (noir ou blanc en dark mode) */
+.navbar__lang-btn--active {
+  color: var(--text-primary);
+}
+
+/* Le petit trait | entre FR et EN */
+.navbar__lang-sep {
+  color: var(--card-border);
+  font-size: 12px;
+  user-select: none;
 }
 
 /* ===== BOUTON BURGER (mobile) ===== */
-/* Cache par defaut sur desktop, affiche seulement en dessous de 768px (voir media query) */
 .navbar__burger {
   display: none;
-
   background: none;
   border: none;
-
   cursor: pointer;
-
   color: var(--text-primary);
-
   z-index: 1001;
-
   padding: 4px;
 }
 
-
-/* ===== RESPONSIVE — ecrans mobiles/tablettes ===== */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
 
-  /* Le burger devient visible */
   .navbar__burger {
     display: flex;
     align-items: center;
   }
 
-  /* Les liens deviennent un menu plein ecran, cache par defaut */
+  /* Menu plein ecran, cache par defaut */
   .navbar__links {
     position: fixed;
     inset: 0;
-
     background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px);
-
-    /* Liens empiles verticalement, centres */
     flex-direction: column;
     justify-content: center;
-
-    gap: 12px;
-
-    /* Cache tant que le burger n'est pas clique */
+    gap: 16px;
     opacity: 0;
     visibility: hidden;
-
     transition: opacity 0.3s, visibility 0.3s;
   }
 
@@ -183,70 +215,35 @@
     background: rgba(15, 23, 42, 0.98);
   }
 
-  /* Classe ajoutee en JS quand menuOpen === true */
+  /* Menu ouvert */
   .navbar__links--open {
     opacity: 1;
     visibility: visible;
   }
 
   .navbar__link {
-    font-size: 22px;
-
+    font-size: 18px;
     padding: 14px 32px;
   }
 
-  .navbar__cta {
-    margin-left: 0;
-    margin-top: 8px;
-
-    padding: 14px 40px;
-
-    font-size: 16px;
+  /* Le separateur devient horizontal sur mobile */
+  .navbar__separator {
+    width: 60px;
+    height: 1px;
+    margin: 8px 0;
   }
 
-}
+  /* Les boutons theme et langue sont centres */
+  .navbar__theme-btn {
+    width: 44px;
+    height: 44px;
+  }
 
-/* ===== ZONE DES BOUTONS THEME + LANGUE ===== */
-/* Regroupe le bouton theme sombre/clair et le bouton FR/EN cote a cote */
-.navbar__toggles {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+  .navbar__lang-group {
+    padding: 8px 20px;
+  }
 
-/* Style commun aux deux boutons (theme et langue) : petit cadre avec bordure */
-.navbar__toggle-btn {
-  background: none;
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-sm);
-  padding: 6px 12px;
-  cursor: pointer;
-  color: var(--text-primary);
-  font-family: var(--font-main);
-  font-size: 13px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  transition: border-color 0.2s, color 0.2s;
-}
-
-.navbar__toggle-btn:hover {
-  border-color: var(--text-primary);
-}
-
-/* ===== TOGGLE LANGUE FR/EN (version simple, pas de drapeaux) =====
-   Ce bouton reutilise .navbar__toggle-btn pour le cadre,
-   et ajoute juste ici le style du texte (FR ou EN) */
-.navbar__lang-btn {
-  font-family: var(--font-main);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-
-  /* Largeur minimale fixe pour eviter que le bouton ne "saute"
-     quand le texte passe de FR (2 lettres) a EN (2 lettres) */
-  min-width: 38px;
-
-  /* Centre le texte a l'interieur du bouton */
-  justify-content: center;
+  .navbar__lang-btn {
+    font-size: 14px;
+  }
 }
