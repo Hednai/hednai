@@ -30,7 +30,6 @@ export function Navbar() {
   // Detecte quelle section est visible a l'ecran (pour souligner le bon lien)
   const activeSection = useScrollSpy(
     NAV_LINKS.map((link) => link.href.replace("#", "")),
-    72
   );
 
   // Detecter si l'utilisateur a scrolle

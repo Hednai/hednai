@@ -52,14 +52,17 @@ describe("Contact", () => {
   });
 
   // --- Cliquer sur l'onglet WhatsApp affiche le champ telephone ---
-  it("affiche le champ telephone quand on clique sur l'onglet WhatsApp", () => {
+  it("affiche le champ telephone quand on clique sur l'onglet WhatsApp", async () => {
     renderContact();
 
     const ongletWhatsapp = screen.getByRole("button", { name: /whatsapp/i });
     fireEvent.click(ongletWhatsapp);
 
     // Le champ email disparait, le champ telephone apparait
-    expect(screen.queryByLabelText(/^email$/i)).not.toBeInTheDocument();
+    // (on attend car AnimatePresence anime la sortie avant de retirer l'element du DOM)
+    await waitFor(() => {
+      expect(screen.queryByLabelText(/^email$/i)).not.toBeInTheDocument();
+    });
     expect(screen.getByLabelText(/telephone|phone/i)).toBeInTheDocument();
   });
 

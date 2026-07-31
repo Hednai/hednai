@@ -3,6 +3,7 @@
 // Section portfolio : filtres par categorie + grille de projets
 // ============================================
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { projects, CATEGORIES } from "../../data/projects";
@@ -56,7 +57,7 @@ export function Portfolio() {
               <div className="proj__body">
                 <h3>
                   {/* Lien vers la page detail du projet (/project/slug) */}
-                  <a href={`/project/${p.slug}`}>{t(p.titleKey)}</a>
+                  <Link to={`/project/${p.slug}`}>{t(p.titleKey)}</Link>
                 </h3>
                 <p>{t(p.descriptionKey)}</p>
                 <div className="proj__techs">
