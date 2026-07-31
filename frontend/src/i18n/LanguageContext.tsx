@@ -25,7 +25,11 @@ const translations: Record<string, Record<string, string>> = { fr, en };
 // a la langue et a la fonction de traduction partout
 export function LanguageProvider({ children }: { children: ReactNode }) {
   // Langue par defaut au chargement du site : francais
-  const [lang, setLang] = useState<"fr" | "en">("fr");
+  // Lire la langue sauvegardee dans localStorage (sinon "fr" par defaut)
+  const [lang, setLang] = useState<"fr" | "en">(() => {
+    const saved = localStorage.getItem("hednai-lang");
+    return saved === "en" ? "en" : "fr";
+  });
 
   // Fonction de traduction : on lui donne une cle, elle retourne le texte
   // Si la cle n'existe pas, on affiche la cle elle-meme (utile pour debugger)
@@ -34,8 +38,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   };
 
   // Fonction pour basculer entre francais et anglais
+  // Basculer la langue et sauvegarder dans localStorage
   const toggleLang = () => {
-    setLang((prev) => (prev === "fr" ? "en" : "fr"));
+    setLang((prev) => {
+      const next = prev === "fr" ? "en" : "fr";
+      localStorage.setItem("hednai-lang", next);
+      return next;
+    });
   };
 
   return (
