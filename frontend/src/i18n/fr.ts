@@ -120,4 +120,12 @@ export const fr: Record<string, string> = {
 
   // Bouton retour en haut (boussole maritime)
   "scrollToTop": "Retour en haut",
+
+  // Page detail d'un projet
+  "project.notFound": "Projet non trouve",
+  "project.backHome": "Retour a l'accueil",
+  "project.back": "Retour",
+  "project.features": "Fonctionnalites",
+  "project.viewLive": "Voir le projet",
+  "project.viewCode": "Code source",
 };
