@@ -120,4 +120,10 @@ export const en: Record<string, string> = {
   "project.features": "Features",
   "project.viewLive": "View project",
   "project.viewCode": "Source code",
+
+  // Navbar — accessibility
+  "nav.openMenu": "Open menu",
+  "nav.closeMenu": "Close menu",
+  "nav.lightMode": "Light mode",
+  "nav.darkMode": "Dark mode",
 };
