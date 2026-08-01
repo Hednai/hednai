@@ -71,20 +71,26 @@ export async function invalidateCache(
   const jsonOriginal = res.json.bind(res);
 
   res.json = function (data: unknown) {
-    // Extraire le nom de l'entite depuis l'URL
     const entite = req.baseUrl.replace("/api/", "");
 
-    // Chercher et supprimer les cles de cache liees
-    redis!
-      .keys(`cache:*${entite}*`)
-      .then((cles) => {
-        if (cles.length > 0) {
-          return redis!.del(cles);
-        }
-      })
-      .catch(() => {
+    // Invalidation async (non-bloquante pour la reponse)
+    (async () => {
+      try {
+        let cursor = "0";
+        do {
+          const result = await redis!.scan(cursor, {
+            MATCH: `cache:*${entite}*`,
+            COUNT: 100,
+          });
+          cursor = result.cursor;
+          if (result.keys.length > 0) {
+            await redis!.del(result.keys);
+          }
+        } while (cursor !== "0");
+      } catch {
         // Silencieux
-      });
+      }
+    })();
 
     return jsonOriginal(data);
   } as typeof res.json;

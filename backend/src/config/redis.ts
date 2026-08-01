@@ -7,6 +7,7 @@
 import { createClient } from "redis";
 import type { RedisClientType } from "redis";
 import { env } from "./env";
+import { logger } from "../lib/logger";
 
 // null = Redis non disponible, le serveur tourne sans
 export let redis: RedisClientType | null = null;
@@ -15,7 +16,7 @@ export let redis: RedisClientType | null = null;
 export const connectRedis = async () => {
   // Si pas d'URL Redis configuree, on skip
   if (!env.REDIS_URL) {
-    console.warn("REDIS_URL non definie. Cache desactive.");
+    logger.warn("REDIS_URL non definie. Cache desactive.");
     return;
   }
 
@@ -25,15 +26,15 @@ export const connectRedis = async () => {
 
     // Gerer les erreurs sans planter le serveur
     redis.on("error", () => {
-      console.warn("Redis non disponible, cache desactive.");
+      logger.warn("Redis non disponible, cache desactive.");
       redis = null;
     });
 
     // Connecter
     await redis.connect();
-    console.log("Redis connecte (cache actif).");
+    logger.info("Redis connecte (cache actif).");
   } catch {
-    console.warn("Redis non disponible. Le serveur fonctionne sans.");
+    logger.warn("Redis non disponible. Le serveur fonctionne sans.");
     redis = null;
   }
 };

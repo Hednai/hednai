@@ -1,0 +1,51 @@
+/* ============================================
+   ApiStatus.css
+   Petit badge inline qui montre le statut de l'API backend
+   ============================================ */
+
+.api-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: var(--bg-gray);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Pastille de couleur */
+.api-status__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-circle);
+  flex-shrink: 0;
+}
+
+.api-status__dot--loading {
+  background: #F59E0B;
+  animation: pulse-dot 1.5s infinite;
+}
+
+.api-status__dot--online {
+  background: #10B981;
+}
+
+.api-status__dot--offline {
+  background: #EF4444;
+}
+
+.api-status__text {
+  color: var(--text-secondary);
+}
+
+.api-status__time {
+  color: var(--text-light);
+  font-size: 11px;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

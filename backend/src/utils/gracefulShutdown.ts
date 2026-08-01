@@ -7,13 +7,14 @@
 // ============================================
 import { prisma } from "../lib/prisma";
 import { disconnectRedis } from "../config/redis";
+import { logger } from "../lib/logger";
 
 const gracefulShutdown = async (signal: string) => {
-  console.log(`${signal} recu, fermeture propre...`);
+  logger.info(`${signal} recu, fermeture propre...`);
 
   // Timeout de securite : forcer l'arret apres 5 secondes
   const forceExit = setTimeout(() => {
-    console.error("Timeout fermeture, arret force.");
+    logger.error("Timeout fermeture, arret force.");
     process.exit(1);
   }, 5000);
 
@@ -25,6 +26,7 @@ const gracefulShutdown = async (signal: string) => {
 
   // Annuler le timeout et quitter
   clearTimeout(forceExit);
+  logger.info("Serveur arrete proprement.");
   process.exit(0);
 };
 

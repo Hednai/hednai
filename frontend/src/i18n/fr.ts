@@ -180,6 +180,15 @@ export const fr: Record<string, string> = {
   "footer.tech.title": "Technologies",
   "footer.tech.text": "React, TypeScript, Node.js, Express, PostgreSQL, Python, TensorFlow",
   "footer.contact.title": "Contact",
+
+  // SEO meta
+  "seo.home.title": "Hednai — Logiciels IA pour le Maritime",
+  "seo.home.desc": "Hednai developpe des solutions logicielles sur mesure pour les ports, armateurs et compagnies maritimes. Gestion de flotte, maintenance predictive, IA.",
+
+  // Widget statut API
+  "apiStatus.loading": "Connexion API...",
+  "apiStatus.online": "API en ligne",
+  "apiStatus.offline": "API hors ligne",
 };
 
 // Type derive automatiquement des cles du fichier francais

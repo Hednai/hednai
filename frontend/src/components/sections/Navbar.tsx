@@ -6,7 +6,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Sun, Moon, Home, Target, User, LayoutGrid, Briefcase, Mail } from "lucide-react";
 import { useTheme } from "../../hooks/useTheme";
-import { useLanguage } from "../../i18n/LanguageContext";
+import { useLanguage } from "../../i18n/useLanguage";
 import { useScrollSpy } from "../../hooks/useScrollSpy";
 import { NAV_LINKS } from "../../data/navLinks";
 import "./Navbar.css";
