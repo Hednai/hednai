@@ -6,12 +6,13 @@
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 import { fr } from "./fr";
+import type { TranslationKey } from "./fr";
 import { en } from "./en";
 
 // Type du contexte : ce qu'on peut utiliser depuis n'importe quel composant
 interface LanguageContextType {
   lang: "fr" | "en";
-  t: (key: string) => string;
+  t: (key: TranslationKey) => string;
   toggleLang: () => void;
 }
 
@@ -37,7 +38,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   // Fonction de traduction : on lui donne une cle, elle retourne le texte
   // Si la cle n'existe pas, on affiche la cle elle-meme (utile pour debugger)
-  const t = (key: string): string => {
+  const t = (key: TranslationKey): string => {
     return translations[lang][key] || key;
   };
 

@@ -1,0 +1,43 @@
+/* ============================================
+   NotFound.css
+   Page 404 centree verticalement avec icone maritime
+   ============================================ */
+
+.not-found {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.not-found__inner {
+  text-align: center;
+  max-width: 480px;
+}
+
+.not-found__icon {
+  color: var(--text-light);
+  margin-bottom: 24px;
+}
+
+.not-found__code {
+  font-size: clamp(72px, 15vw, 120px);
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.not-found__text {
+  font-size: 18px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.not-found__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
