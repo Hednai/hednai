@@ -5,8 +5,9 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 import { projects } from "../data/projects";
-import { useLanguage } from "../i18n/LanguageContext";
+import { useLanguage } from "../i18n/useLanguage";
 import "./ProjectDetail.css";
 
 export function ProjectDetail() {
@@ -35,6 +36,10 @@ export function ProjectDetail() {
 
   return (
     <div className="pd">
+      <Helmet>
+        <title>{t(project.titleKey)} — Hednai</title>
+        <meta name="description" content={t(project.descriptionKey)} />
+      </Helmet>
       <div className="container">
 
         {/* Lien retour vers l'accueil */}

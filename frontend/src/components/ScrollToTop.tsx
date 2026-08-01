@@ -5,7 +5,7 @@
 // ============================================
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLanguage } from "../i18n/LanguageContext";
+import { useLanguage } from "../i18n/useLanguage";
 import "./ScrollToTop.css";
 
 export function ScrollToTop() {

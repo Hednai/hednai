@@ -5,7 +5,7 @@
 import { Anchor, Code, Brain, ArrowRight } from "lucide-react";
 import { Button } from "../ui/Button";
 import { RadarAnimation } from "../RadarAnimation";
-import { useLanguage } from "../../i18n/LanguageContext";
+import { useLanguage } from "../../i18n/useLanguage";
 import "./Hero.css";
 
 export function Hero() {

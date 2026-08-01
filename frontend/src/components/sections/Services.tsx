@@ -7,7 +7,7 @@ import { services } from "../../data/services";
 import { SectionWrapper } from "../ui/SectionWrapper";
 import { Card } from "../ui/Card";
 import { FadeIn } from "../FadeIn";
-import { useLanguage } from "../../i18n/LanguageContext";
+import { useLanguage } from "../../i18n/useLanguage";
 import "./Services.css";
 
 // Table de correspondance entre le nom d'icone (string) et le vrai composant icone

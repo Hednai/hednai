@@ -5,6 +5,7 @@
 // Prisma gere la reconnexion automatiquement
 // ============================================
 import { prisma } from "../lib/prisma";
+import { logger } from "../lib/logger";
 
 // Verifier que la base est accessible au demarrage
 export const connectDatabase = async () => {
@@ -12,9 +13,9 @@ export const connectDatabase = async () => {
     // Prisma se connecte automatiquement a la premiere requete
     // On force une connexion pour verifier au demarrage
     await prisma.$connect();
-    console.log("PostgreSQL connecte via Prisma.");
+    logger.info("PostgreSQL connecte via Prisma.");
   } catch (error) {
-    console.error("Impossible de connecter a PostgreSQL :", (error as Error).message);
+    logger.error({ err: error }, "Impossible de connecter a PostgreSQL");
     process.exit(1);
   }
 };

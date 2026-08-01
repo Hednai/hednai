@@ -2,14 +2,11 @@
 // providers/InstalledDateProvider.tsx
 // Gere la date de fermeture de la banniere d'installation PWA
 // Stocke dans localStorage pour ne pas re-afficher trop vite
-// Pattern identique a LanguageContext (Context + hook)
+// Ce fichier ne contient QUE le composant Provider
+// Le contexte et le hook sont dans useInstalledDate.ts
 // ============================================
-import { createContext, useContext, useState } from "react";
-
-// Le contexte stocke un tuple : [dateEpoch, fonctionDeMiseAJour]
-type InstalledDateContextValue = [number, (date: number) => void];
-
-const InstalledDateContext = createContext<InstalledDateContextValue | null>(null);
+import { useState } from "react";
+import { InstalledDateContext } from "./useInstalledDate";
 
 const STORAGE_KEY = "hednai-install-dismissed";
 
@@ -35,13 +32,4 @@ export function InstalledDateProvider({ children }: { children: React.ReactNode 
       {children}
     </InstalledDateContext.Provider>
   );
-}
-
-// Hook personnalise : acces unique pour lire/ecrire la date
-export function useInstalledDate() {
-  const context = useContext(InstalledDateContext);
-  if (!context) {
-    throw new Error("useInstalledDate doit etre utilise dans InstalledDateProvider");
-  }
-  return context;
 }

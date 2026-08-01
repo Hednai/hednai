@@ -2,9 +2,10 @@
 // components/sections/Footer.tsx
 // Pied de page : logo, navigation, copyright
 // ============================================
-import { useLanguage } from "../../i18n/LanguageContext";
+import { useLanguage } from "../../i18n/useLanguage";
 import { NAV_LINKS } from "../../data/navLinks";
 import { SITE_CONFIG } from "../../config/site";
+import { ApiStatus } from "../ApiStatus";
 import "./Footer.css";
 
 export function Footer() {
@@ -43,6 +44,11 @@ export function Footer() {
             <p>{SITE_CONFIG.contact.email}</p>
             <p>{SITE_CONFIG.contact.location}</p>
           </div>
+        </div>
+
+        {/* Statut de l'API backend */}
+        <div style={{ width: "100%", textAlign: "center", marginTop: "8px" }}>
+          <ApiStatus />
         </div>
 
         <p>&copy; {new Date().getFullYear()} Hednai. {t("footer.rights")}</p>

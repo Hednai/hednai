@@ -5,29 +5,31 @@
 // En production : pas de stack trace pour la securite
 // ============================================
 import type { Request, Response, NextFunction } from "express";
-
-interface AppError extends Error {
-  statusCode?: number;
-  code?: string;
-  meta?: { target?: string[] };
-}
+import { AppError } from "../utils/errors";
+import { logger } from "../lib/logger";
 
 const errorHandler = (
-  err: AppError,
+  err: AppError & { code?: string; meta?: { target?: string[] }; name?: string },
   req: Request,
   res: Response,
   _next: NextFunction,
 ) => {
   // 1. Log pour le debogage serveur
   if (process.env.NODE_ENV === "development") {
-    console.error("Erreur :", err);
+    logger.error({ err }, "Erreur");
   } else {
-    console.error("Erreur :", err.message);
+    logger.error({ err }, "Erreur serveur");
   }
 
   // 2. Code HTTP et message par defaut
   let statusCode = err.statusCode || 500;
   let message = err.message || "Erreur interne du serveur.";
+
+  // Erreurs personnalisees AppError (ValidationError, NotFoundError, etc.)
+  if (err instanceof AppError) {
+    statusCode = err.statusCode;
+    message = err.message;
+  }
 
   // 3. Erreurs Prisma specifiques
 

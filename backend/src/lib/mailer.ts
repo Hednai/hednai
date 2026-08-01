@@ -7,6 +7,7 @@
 // ============================================
 import nodemailer from "nodemailer";
 import { env } from "../config/env";
+import { logger } from "./logger";
 
 // Verifier si l'email est configure
 const isMailConfigured =
@@ -41,7 +42,7 @@ export const sendContactNotification = async (
 ): Promise<boolean> => {
   // Si l'email n'est pas configure cote serveur, on skip
   if (!transporter) {
-    console.warn("SMTP non configure. Email non envoye.");
+    logger.warn("SMTP non configure. Email non envoye.");
     return false;
   }
 
@@ -69,7 +70,7 @@ export const sendContactNotification = async (
 
     return true;
   } catch (error) {
-    console.error("Erreur envoi email :", (error as Error).message);
+    logger.error({ err: error }, "Erreur envoi email");
     return false;
   }
 };

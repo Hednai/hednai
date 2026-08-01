@@ -11,6 +11,7 @@
 import type { Request } from "express";
 import type { ActionType, Prisma } from "../generated/prisma/client";
 import { prisma } from "../lib/prisma";
+import { logger } from "../lib/logger";
 
 // Journaliser une action
 export const logAction = async (
@@ -35,6 +36,6 @@ export const logAction = async (
   } catch (error) {
     // Ne pas bloquer la requete si le log echoue
     // Le log est important mais pas critique pour l'utilisateur
-    console.error("Erreur auditLog :", (error as Error).message);
+    logger.error({ err: error }, "Erreur auditLog");
   }
 };

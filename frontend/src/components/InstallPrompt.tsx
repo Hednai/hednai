@@ -6,8 +6,8 @@
 // ============================================
 import { useEffect, useState } from "react";
 import { Download, X } from "lucide-react";
-import { useLanguage } from "../i18n/LanguageContext";
-import { useInstalledDate } from "../providers/InstalledDateProvider";
+import { useLanguage } from "../i18n/useLanguage";
+import { useInstalledDate } from "../providers/useInstalledDate";
 import "./InstallPrompt.css";
 
 // Type de l'evenement beforeinstallprompt (non standard dans les libs DOM)

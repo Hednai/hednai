@@ -30,6 +30,10 @@
   --success-text: #059669;
   --error-bg: #FEF2F2;
   --error-text: #DC2626;
+  --accent-cyan: hsl(184 100% 45%);
+  --accent-warm: hsl(25 95% 55%);
+  --radius-pill: 20px;
+  --radius-circle: 50%;
 
   --nav-height: 72px;
   --max-width: 1200px;
@@ -67,6 +71,8 @@
   --success-text: #6EE7B7;
   --error-bg: #450A0A;
   --error-text: #FCA5A5;
+  --accent-cyan: hsl(184 100% 55%);
+  --accent-warm: hsl(25 95% 60%);
 
 }
 

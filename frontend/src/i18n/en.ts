@@ -172,4 +172,13 @@ export const en: Record<string, string> = {
   "footer.tech.title": "Technologies",
   "footer.tech.text": "React, TypeScript, Node.js, Express, PostgreSQL, Python, TensorFlow",
   "footer.contact.title": "Contact",
+
+  // SEO meta
+  "seo.home.title": "Hednai — AI Software for Maritime",
+  "seo.home.desc": "Hednai builds custom software solutions for ports, shipowners and maritime companies. Fleet management, predictive maintenance, AI.",
+
+  // API status widget
+  "apiStatus.loading": "Connecting to API...",
+  "apiStatus.online": "API online",
+  "apiStatus.offline": "API offline",
 };
