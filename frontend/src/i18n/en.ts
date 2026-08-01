@@ -14,10 +14,10 @@ export const en: Record<string, string> = {
   "nav.lightMode": "Light mode",
   "nav.darkMode": "Dark mode",
 
-  "hero.title": "Digital Solutions for the Maritime Industry",
-  "hero.subtitle": "Freelance developer specialized in maritime software, web development and AI solutions.",
-  "hero.cta1": "Start a project",
-  "hero.cta2": "Discover my services",
+  "hero.title": "AI Software to Digitize Maritime Operations",
+  "hero.subtitle": "Hednai builds custom solutions for ports, shipowners and maritime companies — fleet management, predictive maintenance and operations optimization powered by artificial intelligence.",
+  "hero.cta1": "Let's discuss your project",
+  "hero.cta2": "See our solutions",
 
   "services.title": "My Services",
   "services.subtitle": "Complete expertise to transform your projects into digital solutions",
@@ -137,4 +137,16 @@ export const en: Record<string, string> = {
   // 404 page
   "notFound.message": "This page doesn't exist or has been moved.",
   "notFound.back": "Back to home",
+
+  // Why Hednai section
+  "why.title": "Why Hednai?",
+  "why.subtitle": "A startup born from field experience to tackle modern maritime challenges",
+  "why.mission.title": "Our mission",
+  "why.mission.desc": "Digitize maritime operations in Africa and worldwide through custom, accessible and high-performance software.",
+  "why.vision.title": "Our vision",
+  "why.vision.desc": "Become the go-to technology partner for ports, shipowners and maritime companies undergoing digital transformation.",
+  "why.values.title": "Our values",
+  "why.values.desc": "Reliability, innovation and field proximity. Every solution is built by a developer who understands maritime realities.",
+  "why.edge.title": "Our edge",
+  "why.edge.desc": "Over 10 years of experience at sea combined with software development and artificial intelligence expertise.",
 };
