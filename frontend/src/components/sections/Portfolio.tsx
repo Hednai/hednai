@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
+import { AnimatePresence, motion } from "framer-motion";
 import { projects, CATEGORIES } from "../../data/projects";
 import { SectionWrapper } from "../ui/SectionWrapper";
 import { Card } from "../ui/Card";
@@ -46,38 +47,47 @@ export function Portfolio() {
       </div>
 
       {/* Grille des projets filtres */}
-      <div className="portfolio-grid">
-        {filtered.map((p, index) => (
-          <FadeIn key={p.id} delay={index * 0.1}>
-            <Card>
-              <div className="proj__img">
-                <img src={p.image} alt={t(p.titleKey)} width={600} height={400} loading="lazy" />
-                <span className="proj__badge">{t(p.categoryKey)}</span>
-              </div>
-              <div className="proj__body">
-                <h3>
-                  {/* Lien vers la page detail du projet (/project/slug) */}
-                  <Link to={`/project/${p.slug}`}>{t(p.titleKey)}</Link>
-                </h3>
-                <p>{t(p.descriptionKey)}</p>
-                <div className="proj__techs">
-                  {p.technologies.map((tech) => (
-                    <span className="tech-tag" key={tech}>{tech}</span>
-                  ))}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeFilter}
+          className="portfolio-grid"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -12 }}
+          transition={{ duration: 0.25 }}
+        >
+          {filtered.map((p, index) => (
+            <FadeIn key={p.id} delay={index * 0.08}>
+              <Card>
+                <div className="proj__img">
+                  <img src={p.image} alt={t(p.titleKey)} width={600} height={400} loading="lazy" />
+                  <span className="proj__badge">{t(p.categoryKey)}</span>
                 </div>
-                <div className="proj__links">
-                  <a href={p.liveUrl} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink size={16} /> {t("portfolio.view")}
-                  </a>
-                  <a href={p.githubUrl} target="_blank" rel="noopener noreferrer">
-                    <FaGithub size={16} /> {t("portfolio.code")}
-                  </a>
+                <div className="proj__body">
+                  <h3>
+                    {/* Lien vers la page detail du projet (/project/slug) */}
+                    <Link to={`/project/${p.slug}`}>{t(p.titleKey)}</Link>
+                  </h3>
+                  <p>{t(p.descriptionKey)}</p>
+                  <div className="proj__techs">
+                    {p.technologies.map((tech) => (
+                      <span className="tech-tag" key={tech}>{tech}</span>
+                    ))}
+                  </div>
+                  <div className="proj__links">
+                    <a href={p.liveUrl} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink size={16} /> {t("portfolio.view")}
+                    </a>
+                    <a href={p.githubUrl} target="_blank" rel="noopener noreferrer">
+                      <FaGithub size={16} /> {t("portfolio.code")}
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </Card>
-          </FadeIn>
-        ))}
-      </div>
+              </Card>
+            </FadeIn>
+          ))}
+        </motion.div>
+      </AnimatePresence>
     </SectionWrapper> 
   );
 }

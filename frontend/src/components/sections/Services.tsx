@@ -2,7 +2,7 @@
 // components/sections/Services.tsx
 // Section services : grille generee depuis data/services.ts
 // ============================================
-import { Ship, Globe, Brain, Database, Cloud, Zap } from "lucide-react";
+import { Ship, Anchor, Brain, ClipboardCheck, Building, Code } from "lucide-react";
 import { services } from "../../data/services";
 import { SectionWrapper } from "../ui/SectionWrapper";
 import { Card } from "../ui/Card";
@@ -12,7 +12,7 @@ import "./Services.css";
 
 // Table de correspondance entre le nom d'icone (string) et le vrai composant icone
 const icons: Record<string, React.ElementType> = {
-  Ship, Globe, Brain, Database, Cloud, Zap,
+  Ship, Anchor, Brain, ClipboardCheck, Building, Code,
 };
 
 export function Services() {

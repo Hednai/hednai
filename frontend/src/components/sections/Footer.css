@@ -48,6 +48,31 @@
   color: var(--text-primary);
 }
 
+/* ===== GRILLE D'INFOS STARTUP ===== */
+.footer__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  width: 100%;
+  padding: 24px 0;
+  border-top: 1px solid var(--card-border);
+  margin-top: 16px;
+}
+
+.footer__col h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.footer__col p {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
 /* ===== COPYRIGHT ===== */
 .footer__inner > p {
   color: var(--text-light);
@@ -57,13 +82,10 @@
   margin-top: 16px;
 }
 
-/* ===== LIEN PROPULSE PAR ===== */
-.footer__powered {
-  color: var(--text-secondary);
-  text-decoration: underline;
-  transition: color 0.2s;
-}
-
-.footer__powered:hover {
-  color: var(--text-primary);
+@media (max-width: 768px) {
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    text-align: center;
+  }
 }
