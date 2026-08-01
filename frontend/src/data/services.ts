@@ -20,7 +20,7 @@ export const services: Service[] = [
   },
   {
     id: 2,
-    icon: "Globe",
+    icon: "Anchor",
     titleKey: "services.web.title",
     descriptionKey: "services.web.desc",
     featureKeys: [
@@ -44,7 +44,7 @@ export const services: Service[] = [
   },
   {
     id: 4,
-    icon: "Database",
+    icon: "ClipboardCheck",
     titleKey: "services.data.title",
     descriptionKey: "services.data.desc",
     featureKeys: [
@@ -56,7 +56,7 @@ export const services: Service[] = [
   },
   {
     id: 5,
-    icon: "Cloud",
+    icon: "Building",
     titleKey: "services.cloud.title",
     descriptionKey: "services.cloud.desc",
     featureKeys: [
@@ -68,7 +68,7 @@ export const services: Service[] = [
   },
   {
     id: 6,
-    icon: "Zap",
+    icon: "Code",
     titleKey: "services.auto.title",
     descriptionKey: "services.auto.desc",
     featureKeys: [

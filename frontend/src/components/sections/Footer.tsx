@@ -4,6 +4,7 @@
 // ============================================
 import { useLanguage } from "../../i18n/LanguageContext";
 import { NAV_LINKS } from "../../data/navLinks";
+import { SITE_CONFIG } from "../../config/site";
 import "./Footer.css";
 
 export function Footer() {
@@ -25,15 +26,26 @@ export function Footer() {
           ))}
         </nav>
 
-        {/* Annee generee automatiquement + lien Propulse par Hednai */}
-        <p>
-          &copy; {new Date().getFullYear()} Hednai. {t("footer.rights")}
-          &nbsp;|&nbsp;
-          {t("footer.poweredBy")}{" "}
-          <a href="https://hednai.com" target="_blank" rel="noopener noreferrer" className="footer__powered">
-            Hednai
-          </a>
-        </p>
+        {/* Bloc d'infos startup — 3 colonnes */}
+        <div className="footer__grid">
+          <div className="footer__col">
+            <h4>{t("footer.mission.title")}</h4>
+            <p>{t("footer.mission.text")}</p>
+          </div>
+
+          <div className="footer__col">
+            <h4>{t("footer.tech.title")}</h4>
+            <p>{t("footer.tech.text")}</p>
+          </div>
+
+          <div className="footer__col">
+            <h4>{t("footer.contact.title")}</h4>
+            <p>{SITE_CONFIG.contact.email}</p>
+            <p>{SITE_CONFIG.contact.location}</p>
+          </div>
+        </div>
+
+        <p>&copy; {new Date().getFullYear()} Hednai. {t("footer.rights")}</p>
       </div>
     </footer>
   ); 

@@ -4,6 +4,7 @@
 // ============================================
 import { Hero } from "../components/sections/Hero";
 import { WhyHednai } from "../components/sections/WhyHednai";
+import { About } from "../components/sections/About";
 import { Services } from "../components/sections/Services";
 import { Portfolio } from "../components/sections/Portfolio";
 import { Contact } from "../components/sections/Contact";
@@ -14,6 +15,7 @@ export function Home() {
     <>
       <Hero />
       <WhyHednai />
+      <About />
       <Services />
       <Portfolio />
 
