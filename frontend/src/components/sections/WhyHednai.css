@@ -1,0 +1,47 @@
+/* ============================================
+   WhyHednai.css
+   Grille 4 colonnes pour les piliers identitaires
+   ============================================ */
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.why-pillar {
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.why-pillar__icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 20px;
+  background: var(--bg-gray);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+}
+
+.why-pillar h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.why-pillar p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .why-grid { grid-template-columns: 1fr; }
+}

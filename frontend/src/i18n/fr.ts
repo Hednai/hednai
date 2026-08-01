@@ -17,10 +17,10 @@ export const fr: Record<string, string> = {
   "nav.darkMode": "Mode sombre",
 
   // Hero (section d'introduction en haut de page)
-  "hero.title": "Solutions Digitales pour le Maritime",
-  "hero.subtitle": "Developpeur freelance specialise en applications logicielles maritimes, developpement web et solutions d'intelligence artificielle.",
-  "hero.cta1": "Demarrer un projet",
-  "hero.cta2": "Decouvrir mes services",
+  "hero.title": "Logiciels IA pour digitaliser le maritime",
+  "hero.subtitle": "Hednai developpe des solutions sur mesure pour les ports, armateurs et compagnies maritimes — gestion de flotte, maintenance predictive et optimisation des operations grace a l'intelligence artificielle.",
+  "hero.cta1": "Discutons de votre projet",
+  "hero.cta2": "Voir nos solutions",
 
   // Section Services
   "services.title": "Mes Services",
@@ -145,6 +145,18 @@ export const fr: Record<string, string> = {
   // Page 404
   "notFound.message": "Cette page n'existe pas ou a ete deplacee.",
   "notFound.back": "Retour a l'accueil",
+
+  // Section Pourquoi Hednai
+  "why.title": "Pourquoi Hednai ?",
+  "why.subtitle": "Une startup nee de l'experience terrain pour repondre aux defis du maritime moderne",
+  "why.mission.title": "Notre mission",
+  "why.mission.desc": "Digitaliser les operations maritimes en Afrique et dans le monde grace a des logiciels sur mesure, accessibles et performants.",
+  "why.vision.title": "Notre vision",
+  "why.vision.desc": "Devenir le partenaire technologique de reference pour les ports, armateurs et compagnies maritimes en pleine transformation numerique.",
+  "why.values.title": "Nos valeurs",
+  "why.values.desc": "Fiabilite, innovation et proximite terrain. Chaque solution est concue par un developpeur qui comprend la realite du metier maritime.",
+  "why.edge.title": "Notre avantage",
+  "why.edge.desc": "Plus de 10 ans d'experience en mer combines a une expertise en developpement logiciel et intelligence artificielle.",
 };
 
 // Type derive automatiquement des cles du fichier francais
