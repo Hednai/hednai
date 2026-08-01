@@ -10,6 +10,12 @@ export const fr: Record<string, string> = {
   "nav.portfolio": "Portfolio",
   "nav.contact": "Contact",
 
+  // Accessibilite Navbar (aria-labels)
+  "nav.openMenu": "Ouvrir le menu",
+  "nav.closeMenu": "Fermer le menu",
+  "nav.lightMode": "Mode clair",
+  "nav.darkMode": "Mode sombre",
+
   // Hero (section d'introduction en haut de page)
   "hero.title": "Solutions Digitales pour le Maritime",
   "hero.subtitle": "Developpeur freelance specialise en applications logicielles maritimes, developpement web et solutions d'intelligence artificielle.",
@@ -135,4 +141,13 @@ export const fr: Record<string, string> = {
   // PWA — banniere d'installation
   "pwa.install": "Installer l'application Hednai",
   "pwa.close": "Fermer",
+
+  // Page 404
+  "notFound.message": "Cette page n'existe pas ou a ete deplacee.",
+  "notFound.back": "Retour a l'accueil",
 };
+
+// Type derive automatiquement des cles du fichier francais
+// Utilise dans LanguageContext.tsx pour empecher les fautes de frappe
+// Si tu ajoutes une cle ici, elle sera automatiquement disponible partout
+export type TranslationKey = keyof typeof fr;

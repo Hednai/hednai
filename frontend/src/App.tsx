@@ -3,13 +3,17 @@
 // Assemble : ErrorBoundary → LanguageProvider → BrowserRouter → MainLayout
 // ============================================
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import { LanguageProvider } from "./i18n/LanguageContext";
 import { ErrorBoundary } from "./components/ui/ErrorBoundary";
 import { MainLayout } from "./layouts/MainLayout";
 import { Home } from "./pages/Home";
-import { ProjectDetail } from "./pages/ProjectDetail";
+const ProjectDetail = lazy(() =>
+  import("./pages/ProjectDetail").then((m) => ({ default: m.ProjectDetail }))
+);
 import { InstalledDateProvider } from "./providers/InstalledDateProvider";
 import { InstallPrompt } from "./components/InstallPrompt";
+import { NotFound } from "./pages/NotFound";
 
 export default function App() {
   return (
@@ -27,7 +31,15 @@ export default function App() {
             <MainLayout>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/project/:slug" element={<ProjectDetail />} />
+                <Route
+                  path="/project/:slug"
+                  element={
+                    <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
+                      <ProjectDetail />
+                    </Suspense>
+                  }
+                />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </MainLayout>
           </BrowserRouter>

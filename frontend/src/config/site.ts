@@ -10,7 +10,7 @@ export const SITE_CONFIG = {
   contact: {
     email: "contact@hednai.com",
     phone: "+225 01 02 91 90 65",
-    location: "Canada / A distance",
+    location: "Canada",
     // Numero WhatsApp Business, sans le "+" (format attendu par wa.me)
     whatsappNumber: "2250102919065",
   },
