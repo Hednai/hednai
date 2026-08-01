@@ -26,10 +26,6 @@
   --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.1);
 
   --tag-bg: #F3F4F6;
-  --success-bg: #ECFDF5;
-  --success-text: #059669;
-  --error-bg: #FEF2F2;
-  --error-text: #DC2626;
 
   --nav-height: 72px;
   --max-width: 1200px;
@@ -63,10 +59,6 @@
   --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.4);
 
   --tag-bg: #334155;
-  --success-bg: #064E3B;
-  --success-text: #6EE7B7;
-  --error-bg: #450A0A;
-  --error-text: #FCA5A5;
 
 }
 

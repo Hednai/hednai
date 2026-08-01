@@ -66,10 +66,10 @@ export function Portfolio() {
                   ))}
                 </div>
                 <div className="proj__links">
-                  <a href={p.liveUrl} target="_blank" rel="noopener noreferrer">
+                  <a href={p.liveUrl}>
                     <ExternalLink size={16} /> {t("portfolio.view")}
                   </a>
-                  <a href={p.githubUrl} target="_blank" rel="noopener noreferrer">
+                  <a href={p.githubUrl}>
                     <FaGithub size={16} /> {t("portfolio.code")}
                   </a>
                 </div>
@@ -78,6 +78,6 @@ export function Portfolio() {
           </FadeIn>
         ))}
       </div>
-    </SectionWrapper> 
+    </SectionWrapper>
   );
 }

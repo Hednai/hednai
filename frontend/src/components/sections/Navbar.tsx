@@ -56,7 +56,7 @@ export function Navbar() {
         <button
           className="navbar__burger"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? t("nav.closeMenu") : t("nav.openMenu")}
+          aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -91,7 +91,7 @@ export function Navbar() {
             <button
               onClick={toggleTheme}
               className="navbar__theme-btn"
-              aria-label={isDark ? t("nav.lightMode") : t("nav.darkMode")}
+              aria-label={isDark ? "Mode clair" : "Mode sombre"}
             >
               {isDark ? <Sun size={16} /> : <Moon size={16} />}
             </button>

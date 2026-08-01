@@ -213,13 +213,13 @@
 }
 
 .form-msg--ok {
-  background: var(--success-bg);
-  color: var(--success-text);
+  background: #ECFDF5;
+  color: #059669;
 }
 
 .form-msg--err {
-  background: var(--error-bg);
-  color: var(--error-text);
+  background: #FEF2F2;
+  color: #DC2626;
 }
 
 /* ===== RESPONSIVE : une seule colonne sur mobile ===== */
@@ -241,12 +241,12 @@
 
 /* ===== ERREURS DE CHAMP (bordure rouge + message) ===== */
 .field-error {
-  color: var(--error-text);
+  color: #DC2626;
   font-size: 13px;
   margin-top: 4px;
   display: block;
 }
 
 .input--error {
-  border-color: var(--error-text) !important;
+  border-color: #DC2626 !important;
 }
