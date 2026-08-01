@@ -8,6 +8,12 @@ export const en: Record<string, string> = {
   "nav.portfolio": "Portfolio",
   "nav.contact": "Contact",
 
+  // Navbar accessibility (aria-labels)
+  "nav.openMenu": "Open menu",
+  "nav.closeMenu": "Close menu",
+  "nav.lightMode": "Light mode",
+  "nav.darkMode": "Dark mode",
+
   "hero.title": "Digital Solutions for the Maritime Industry",
   "hero.subtitle": "Freelance developer specialized in maritime software, web development and AI solutions.",
   "hero.cta1": "Start a project",
