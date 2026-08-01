@@ -74,10 +74,10 @@ export function Contact() {
 
           <p className="ci__social-title">{t("contact.info.follow")}</p>
           <div className="ci__social">
-            <a href={SITE_CONFIG.socials.linkedin} className="social-btn">
+            <a href={SITE_CONFIG.socials.linkedin} className="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
               <FaLinkedin size={18} />
             </a>
-            <a href={SITE_CONFIG.socials.github} className="social-btn">
+            <a href={SITE_CONFIG.socials.github} className="social-btn" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
               <FaGithub size={18} />
             </a>
           </div>

@@ -134,4 +134,10 @@ export const fr: Record<string, string> = {
   "nav.closeMenu": "Fermer le menu",
   "nav.lightMode": "Mode clair",
   "nav.darkMode": "Mode sombre",
+  // Footer — credit
+  "footer.poweredBy": "Propulse par",
+
+  // PWA — banniere d'installation
+  "pwa.install": "Installer l'application Hednai",
+  "pwa.close": "Fermer",
 };
