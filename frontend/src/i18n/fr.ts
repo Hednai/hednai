@@ -129,6 +129,11 @@ export const fr: Record<string, string> = {
   "project.viewLive": "Voir le projet",
   "project.viewCode": "Code source",
 
+   // Navbar — accessibilite
+  "nav.openMenu": "Ouvrir le menu",
+  "nav.closeMenu": "Fermer le menu",
+  "nav.lightMode": "Mode clair",
+  "nav.darkMode": "Mode sombre",
   // Footer — credit
   "footer.poweredBy": "Propulse par",
 
