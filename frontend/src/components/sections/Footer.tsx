@@ -25,9 +25,16 @@ export function Footer() {
           ))}
         </nav>
 
-        {/* Annee generee automatiquement, jamais a mettre a jour a la main */}
-        <p>&copy; {new Date().getFullYear()} Hednai. {t("footer.rights")}</p>
+        {/* Annee generee automatiquement + lien Propulse par Hednai */}
+        <p>
+          &copy; {new Date().getFullYear()} Hednai. {t("footer.rights")}
+          &nbsp;|&nbsp;
+          {t("footer.poweredBy")}{" "}
+          <a href="https://hednai.com" target="_blank" rel="noopener noreferrer" className="footer__powered">
+            Hednai
+          </a>
+        </p>
       </div>
     </footer>
-  );
+  ); 
 }

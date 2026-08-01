@@ -10,14 +10,14 @@ export const SITE_CONFIG = {
   contact: {
     email: "contact@hednai.com",
     phone: "+225 01 02 91 90 65",
-    location: "Côte d'Ivoire",
+    location: "Canada / A distance",
     // Numero WhatsApp Business, sans le "+" (format attendu par wa.me)
     whatsappNumber: "2250102919065",
   },
 
   // Liens reseaux sociaux
   socials: {
-    github: "https://github.com/Darenmcs",
+    github: "https://github.com/Hednai",
     linkedin: "https://linkedin.com/in/tonprofil",
   },
 

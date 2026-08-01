@@ -72,6 +72,7 @@ export interface NavLink {
   key: string;
   href: string;
   labelKey: string;
+  icon: string;
 }
 
 // Reponse API generique

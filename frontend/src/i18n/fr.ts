@@ -117,5 +117,22 @@ export const fr: Record<string, string> = {
 
   // Footer (pied de page)
   "footer.rights": "Tous droits reserves.",
+
+  // Bouton retour en haut (boussole maritime)
   "scrollToTop": "Retour en haut",
+
+  // Page detail d'un projet
+  "project.notFound": "Projet non trouve",
+  "project.backHome": "Retour a l'accueil",
+  "project.back": "Retour",
+  "project.features": "Fonctionnalites",
+  "project.viewLive": "Voir le projet",
+  "project.viewCode": "Code source",
+
+  // Footer — credit
+  "footer.poweredBy": "Propulse par",
+
+  // PWA — banniere d'installation
+  "pwa.install": "Installer l'application Hednai",
+  "pwa.close": "Fermer",
 };

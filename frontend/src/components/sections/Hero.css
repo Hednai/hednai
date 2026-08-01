@@ -1,66 +1,159 @@
-/* Hero.css */
+/* ============================================
+   Hero.css
+   Section d'introduction : image de fond + 2 colonnes
+   ============================================ */
 
+/* Le conteneur principal du Hero */
 .hero {
+  position: relative;
   min-height: 100vh;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  text-align: center;
-
   padding: 120px 24px 80px;
+  overflow: hidden;
+
+  /* Image de fond (pont de bateau) */
+  background-image: url("/hednai_bridge.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
+/* Voile sombre par-dessus l'image, pour que le texte reste lisible */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.88) 0%,
+    rgba(15, 23, 42, 0.72) 50%,
+    rgba(15, 23, 42, 0.60) 100%
+  );
+}
+
+/* Conteneur interne : 2 colonnes (texte + radar), au-dessus du voile */
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+/* Colonne de gauche : le texte */
 .hero__content {
-  max-width: 750px;
+  max-width: 600px;
+  text-align: left;
 }
 
 .hero__icons {
   display: flex;
-  justify-content: center;
-
   gap: 20px;
-
   margin-bottom: 36px;
-
-  color: var(--text-primary);
+  color: hsl(184 100% 50%);
 }
 
+/* Le Hero est toujours sur un fond sombre, donc le texte est force en blanc */
 .hero h1 {
   font-size: clamp(36px, 5.5vw, 60px);
   font-weight: 900;
-
   line-height: 1.1;
   letter-spacing: -1.5px;
-
   margin-bottom: 24px;
+  color: #FFFFFF;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
 }
 
 .hero p {
-  font-size: 17px;
-  color: var(--text-secondary);
-
-  max-width: 600px;
-
-  margin: 0 auto 40px;
-
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 520px;
+  margin-bottom: 40px;
   line-height: 1.7;
 }
 
 .hero__buttons {
   display: flex;
-
   gap: 16px;
-
-  justify-content: center;
   flex-wrap: wrap;
 }
 
+.hero__buttons .btn {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 28px;
+}
 
-/* ── Responsive ── */
+/* Bouton principal : fond blanc, texte fonce */
+.hero__buttons .btn--primary {
+  background: #FFFFFF;
+  color: #0F172A;
+  border: 2px solid #FFFFFF;
+}
+
+.hero__buttons .btn--primary:hover {
+  background: transparent;
+  color: #FFFFFF;
+}
+
+/* Bouton secondaire : transparent, bordure blanche */
+.hero__buttons .btn--secondary {
+  background: transparent;
+  color: #FFFFFF;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.hero__buttons .btn--secondary:hover {
+  border-color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Colonne de droite : le radar */
+.hero__radar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Responsive : sous 960px, on empile texte puis radar ── */
+@media (max-width: 960px) {
+  .hero__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero__content {
+    text-align: center;
+    max-width: 650px;
+  }
+
+  .hero__icons {
+    justify-content: center;
+  }
+
+  .hero p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero__buttons {
+    justify-content: center;
+  }
+}
+
+/* ── Responsive : sur mobile, boutons empiles pleine largeur ── */
 @media (max-width: 480px) {
-
   .hero__buttons {
     flex-direction: column;
     align-items: center;
@@ -69,5 +162,4 @@
   .hero__buttons .btn {
     width: 100%;
   }
-
 }

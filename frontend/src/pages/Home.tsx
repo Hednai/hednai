@@ -6,6 +6,7 @@ import { Hero } from "../components/sections/Hero";
 import { Services } from "../components/sections/Services";
 import { Portfolio } from "../components/sections/Portfolio";
 import { Contact } from "../components/sections/Contact";
+import WaveAnimation from "../components/WaveAnimation";
 
 export function Home() {
   return (
@@ -13,7 +14,11 @@ export function Home() {
       <Hero />
       <Services />
       <Portfolio />
-      <Contact />
+
+      {/* Contact est enveloppe dans les vagues animees */}
+      <WaveAnimation>
+        <Contact />
+      </WaveAnimation>
     </>
   );
 }

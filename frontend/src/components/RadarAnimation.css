@@ -1,0 +1,137 @@
+/* ============================================
+   RadarAnimation.css
+   Styles pour le radar sonar
+   ============================================ */
+
+/* Le conteneur du radar */
+.radar {
+  position: relative;
+  width: 288px;
+  height: 288px;
+}
+
+/* Anneaux concentriques */
+.radar__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid hsl(184 100% 50% / 0.2);
+  animation: radar-pulse 4s ease-out infinite;
+}
+
+@keyframes radar-pulse {
+  0%   { opacity: 0.6; }
+  50%  { opacity: 0.3; }
+  100% { opacity: 0.6; }
+}
+
+/* Ligne de sweep qui tourne */
+.radar__sweep {
+  position: absolute;
+  inset: 0;
+  animation: radar-sweep 8s linear infinite;
+}
+
+@keyframes radar-sweep {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.radar__sweep-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 2px;
+  transform-origin: left center;
+  background: linear-gradient(
+    90deg,
+    hsl(184 100% 50% / 0.8),
+    transparent
+  );
+}
+
+.radar__sweep-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 40%;
+  margin-top: -20%;
+  transform-origin: left center;
+  background: conic-gradient(
+    from -30deg,
+    hsl(140 100% 45% / 0.08),
+    transparent 30deg
+  );
+  border-radius: 0 50% 50% 0;
+}
+
+/* Point central du radar */
+.radar__center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: hsl(184 100% 50%);
+  box-shadow:
+    0 0 8px hsl(184 100% 50% / 0.6),
+    0 0 20px hsl(184 100% 50% / 0.3);
+}
+
+/* Les blips echo detectes sur le radar */
+.radar__echo {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.radar__blip {
+  position: relative;
+}
+
+.radar__blip-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: hsl(140 100% 45%);
+  box-shadow:
+    0 0 8px hsl(140 100% 45% / 0.8),
+    0 0 20px hsl(140 100% 45% / 0.4);
+}
+
+.radar__blip-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid hsl(140 100% 45% / 0.5);
+}
+
+/* Le texte au-dessus de chaque blip */
+.radar__label {
+  font-size: 9px;
+  font-family: var(--font-main);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: hsl(140 100% 55%);
+  text-shadow: 0 0 6px hsl(140 100% 45% / 0.6);
+}
+
+/* Sur ecran plus grand, le radar est plus gros */
+@media (min-width: 768px) {
+  .radar {
+    width: 384px;
+    height: 384px;
+  }
+
+  .radar__label {
+    font-size: 10px;
+  }
+}

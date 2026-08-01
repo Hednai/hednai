@@ -23,10 +23,10 @@ export function ProjectDetail() {
     return (
       <div className="pd">
         <div className="container">
-          <h1>Projet non trouve</h1>
+          <h1>{t("project.notFound")}</h1>
 
           <Link to="/">
-            <ArrowLeft size={18} /> Retour a l'accueil
+            <ArrowLeft size={18} /> {t("project.backHome")}
           </Link>
         </div>
       </div>
@@ -39,7 +39,7 @@ export function ProjectDetail() {
 
         {/* Lien retour vers l'accueil */}
         <Link to="/" className="pd__back">
-          <ArrowLeft size={18} /> Retour
+          <ArrowLeft size={18} /> {t("project.back")}
         </Link>
 
         {/* Categorie du projet (traduite via i18n) */}
@@ -74,7 +74,7 @@ export function ProjectDetail() {
         {/* Liste des fonctionnalites, seulement si le projet en a */}
         {project.featureKeys && (
           <div className="pd__features">
-            <h3>Fonctionnalites</h3>
+            <h3>{t("project.features")}</h3>
 
             <ul>
               {project.featureKeys.map((fk) => (
@@ -88,11 +88,11 @@ export function ProjectDetail() {
         <div className="pd__actions">
 
           <a href={project.liveUrl} className="btn btn--primary">
-            <ExternalLink size={18} /> Voir le projet
+            <ExternalLink size={18} /> {t("project.viewLive")}
           </a>
 
           <a href={project.githubUrl} className="btn btn--secondary">
-            <FaGithub size={18} /> Code source
+            <FaGithub size={18} /> {t("project.viewCode")}
           </a>
 
         </div>
