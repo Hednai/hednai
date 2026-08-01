@@ -10,6 +10,12 @@ export const fr: Record<string, string> = {
   "nav.portfolio": "Portfolio",
   "nav.contact": "Contact",
 
+  // Accessibilite Navbar (aria-labels)
+  "nav.openMenu": "Ouvrir le menu",
+  "nav.closeMenu": "Fermer le menu",
+  "nav.lightMode": "Mode clair",
+  "nav.darkMode": "Mode sombre",
+
   // Hero (section d'introduction en haut de page)
   "hero.title": "Solutions Digitales pour le Maritime",
   "hero.subtitle": "Developpeur freelance specialise en applications logicielles maritimes, developpement web et solutions d'intelligence artificielle.",
