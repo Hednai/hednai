@@ -135,15 +135,19 @@ export const fr: Record<string, string> = {
   "project.viewLive": "Voir le projet",
   "project.viewCode": "Code source",
 
-   // Navbar — accessibilite
-  "nav.openMenu": "Ouvrir le menu",
-  "nav.closeMenu": "Fermer le menu",
-  "nav.lightMode": "Mode clair",
-  "nav.darkMode": "Mode sombre",
   // Footer — credit
   "footer.poweredBy": "Propulse par",
 
   // PWA — banniere d'installation
   "pwa.install": "Installer l'application Hednai",
   "pwa.close": "Fermer",
+
+  // Page 404
+  "notFound.message": "Cette page n'existe pas ou a ete deplacee.",
+  "notFound.back": "Retour a l'accueil",
 };
+
+// Type derive automatiquement des cles du fichier francais
+// Utilise dans LanguageContext.tsx pour empecher les fautes de frappe
+// Si tu ajoutes une cle ici, elle sera automatiquement disponible partout
+export type TranslationKey = keyof typeof fr;

@@ -127,15 +127,14 @@ export const en: Record<string, string> = {
   "project.viewLive": "View project",
   "project.viewCode": "Source code",
 
-  // Navbar — accessibility
-  "nav.openMenu": "Open menu",
-  "nav.closeMenu": "Close menu",
-  "nav.lightMode": "Light mode",
-  "nav.darkMode": "Dark mode",
   // Footer — credit
   "footer.poweredBy": "Powered by",
 
   // PWA — install banner
   "pwa.install": "Install Hednai app",
   "pwa.close": "Close",
+
+  // 404 page
+  "notFound.message": "This page doesn't exist or has been moved.",
+  "notFound.back": "Back to home",
 };

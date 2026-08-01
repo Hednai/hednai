@@ -108,8 +108,8 @@ export function Contact() {
 
           <div className="fg">
             <label htmlFor="name">{t("contact.form.name")}</label>
-            <input id="name" placeholder={t("contact.form.name.placeholder")} value={form.name} onChange={change} className={fieldErrors.name ? "input--error" : ""} />
-            {fieldErrors.name && <span ref={errorRef} className="field-error">{t(fieldErrors.name)}</span>}
+            <input id="name" placeholder={t("contact.form.name.placeholder")} value={form.name} onChange={change} className={fieldErrors.name ? "input--error" : ""} aria-describedby={fieldErrors.name ? "error-name" : undefined} />
+            {fieldErrors.name && <span ref={errorRef} id="error-name" className="field-error" role="alert">{t(fieldErrors.name)}</span>}
           </div>
 
           {/* ===== CHAMP QUI CHANGE SELON L'ONGLET ACTIF ===== */}
@@ -124,8 +124,8 @@ export function Contact() {
                 transition={{ duration: 0.2 }}
               >
                 <label htmlFor="email">{t("contact.form.email")}</label>
-                <input id="email" type="email" placeholder={t("contact.form.email.placeholder")} value={form.email} onChange={change} className={fieldErrors.email ? "input--error" : ""} />
-                {fieldErrors.email && <span className="field-error">{t(fieldErrors.email)}</span>}
+                <input id="email" type="email" placeholder={t("contact.form.email.placeholder")} value={form.email} onChange={change} className={fieldErrors.email ? "input--error" : ""} aria-describedby={fieldErrors.email ? "error-email" : undefined} />
+                {fieldErrors.email && <span id="error-email" className="field-error" role="alert">{t(fieldErrors.email)}</span>}
               </motion.div>
             ) : (
               <motion.div
@@ -158,23 +158,24 @@ export function Contact() {
                     value={form.phone}
                     onChange={change}
                     className={fieldErrors.phone ? "input--error" : ""}
+                    aria-describedby={fieldErrors.phone ? "error-phone" : undefined}
                   />
                 </div>
-                {fieldErrors.phone && <span className="field-error">{t(fieldErrors.phone)}</span>}
+                {fieldErrors.phone && <span id="error-phone" className="field-error" role="alert">{t(fieldErrors.phone)}</span>}
               </motion.div>
             )}
           </AnimatePresence>
 
           <div className="fg">
             <label htmlFor="subject">{t("contact.form.subject")}</label>
-            <input id="subject" placeholder={t("contact.form.subject.placeholder")} value={form.subject} onChange={change} className={fieldErrors.subject ? "input--error" : ""} />
-            {fieldErrors.subject && <span className="field-error">{t(fieldErrors.subject)}</span>}
+            <input id="subject" placeholder={t("contact.form.subject.placeholder")} value={form.subject} onChange={change} className={fieldErrors.subject ? "input--error" : ""} aria-describedby={fieldErrors.subject ? "error-subject" : undefined} />
+            {fieldErrors.subject && <span id="error-subject" className="field-error" role="alert">{t(fieldErrors.subject)}</span>}
           </div>
 
           <div className="fg">
             <label htmlFor="message">{t("contact.form.message")}</label>
-            <textarea id="message" placeholder={t("contact.form.message.placeholder")} value={form.message} onChange={change} className={fieldErrors.message ? "input--error" : ""} />
-            {fieldErrors.message && <span className="field-error">{t(fieldErrors.message)}</span>}
+            <textarea id="message" placeholder={t("contact.form.message.placeholder")} value={form.message} onChange={change} className={fieldErrors.message ? "input--error" : ""} aria-describedby={fieldErrors.message ? "error-message" : undefined} />
+            {fieldErrors.message && <span id="error-message" className="field-error" role="alert">{t(fieldErrors.message)}</span>}
           </div>
 
           {/* Honeypot : champ invisible pour les humains, sert a piéger les robots spammeurs */}
