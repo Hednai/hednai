@@ -51,7 +51,7 @@ export function Portfolio() {
           <FadeIn key={p.id} delay={index * 0.1}>
             <Card>
               <div className="proj__img">
-                <img src={p.image} alt={t(p.titleKey)} />
+                <img src={p.image} alt={t(p.titleKey)} width={600} height={400} loading="lazy" />
                 <span className="proj__badge">{t(p.categoryKey)}</span>
               </div>
               <div className="proj__body">

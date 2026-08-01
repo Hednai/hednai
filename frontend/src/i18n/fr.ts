@@ -128,4 +128,11 @@ export const fr: Record<string, string> = {
   "project.features": "Fonctionnalites",
   "project.viewLive": "Voir le projet",
   "project.viewCode": "Code source",
+
+  // Footer — credit
+  "footer.poweredBy": "Propulse par",
+
+  // PWA — banniere d'installation
+  "pwa.install": "Installer l'application Hednai",
+  "pwa.close": "Fermer",
 };

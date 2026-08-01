@@ -1,0 +1,26 @@
+{
+  "name": "Hednai — Solutions Digitales pour le Maritime",
+  "short_name": "Hednai",
+  "description": "Portfolio et vitrine startup — developpement web et IA pour le secteur maritime.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "lang": "fr-FR",
+  "theme_color": "#1A1A1A",
+  "background_color": "#FFFFFF",
+  "icons": [
+    {
+      "src": "/logo-anchor.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo-anchor.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

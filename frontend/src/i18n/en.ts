@@ -120,4 +120,11 @@ export const en: Record<string, string> = {
   "project.features": "Features",
   "project.viewLive": "View project",
   "project.viewCode": "Source code",
+
+  // Footer — credit
+  "footer.poweredBy": "Powered by",
+
+  // PWA — install banner
+  "pwa.install": "Install Hednai app",
+  "pwa.close": "Close",
 };
