@@ -1,0 +1,54 @@
+/* ============================================
+   CtaBanner.css
+   Bandeau double CTA avant le Footer
+   ============================================ */
+
+.cta-banner {
+  padding: 80px 0;
+}
+
+.cta-banner__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.cta-banner__card {
+  padding: 40px 32px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Carte client — fond accentue */
+.cta-banner__card--client {
+  background: var(--bg-gray);
+  border: 1px solid var(--card-border);
+}
+
+/* Carte recruteur — fond plus clair */
+.cta-banner__card--recruiter {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+}
+
+.cta-banner__card h3 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.cta-banner__card p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+@media (max-width: 768px) {
+  .cta-banner__grid {
+    grid-template-columns: 1fr;
+  }
+}

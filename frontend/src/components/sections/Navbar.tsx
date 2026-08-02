@@ -4,11 +4,12 @@
 // Toggle theme en cercle, FR | EN separes
 // ============================================
 import { useState, useEffect } from "react";
-import { Menu, X, Sun, Moon, Home, Target, User, LayoutGrid, Briefcase, Mail } from "lucide-react";
+import { Menu, X, Sun, Moon, Home, Target, User, LayoutGrid, Briefcase, Mail, BookOpen } from "lucide-react";
 import { useTheme } from "../../hooks/useTheme";
 import { useLanguage } from "../../i18n/useLanguage";
 import { useScrollSpy } from "../../hooks/useScrollSpy";
 import { NAV_LINKS } from "../../data/navLinks";
+import { ViewModeToggle } from "../ViewModeToggle";
 import "./Navbar.css";
 
 // Associe chaque nom d'icone (string) a son composant Lucide
@@ -19,6 +20,7 @@ const iconMap: Record<string, React.ReactNode> = {
   LayoutGrid: <LayoutGrid size={18} />,
   Briefcase: <Briefcase size={18} />,
   Mail: <Mail size={18} />,
+  BookOpen: <BookOpen size={18} />,
 };
 
 export function Navbar() {
@@ -87,6 +89,11 @@ export function Navbar() {
 
           {/* Separateur vertical entre les liens et les boutons */}
           <li className="navbar__separator" />
+
+          {/* Toggle vue (grille / ligne) */}
+          <li>
+            <ViewModeToggle />
+          </li>
 
           {/* Bouton theme sombre/clair en forme de cercle */}
           <li>

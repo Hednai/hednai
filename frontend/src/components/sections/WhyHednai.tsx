@@ -8,7 +8,7 @@ import { Target, Eye, Heart, Zap } from "lucide-react";
 import { SectionWrapper } from "../ui/SectionWrapper";
 import { Card } from "../ui/Card";
 import { FadeIn } from "../FadeIn";
-import { useLanguage } from "../../i18n/LanguageContext";
+import { useLanguage } from "../../i18n/useLanguage";
 import "./WhyHednai.css";
 
 // Donnees des piliers (mission, vision, valeurs, avantage)

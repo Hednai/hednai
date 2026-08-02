@@ -5,11 +5,14 @@
 import { Anchor, Code, Brain, ArrowRight } from "lucide-react";
 import { Button } from "../ui/Button";
 import { RadarAnimation } from "../RadarAnimation";
+import { AvailabilityBadge } from "../AvailabilityBadge";
 import { useLanguage } from "../../i18n/useLanguage";
+import { useViewMode } from "../../context/ViewModeContext";
 import "./Hero.css";
 
 export function Hero() {
   const { t } = useLanguage();
+  const { isRecruiter } = useViewMode();
 
   return (
     <section className="hero" id="accueil">
@@ -22,16 +25,30 @@ export function Hero() {
             <Brain size={32} strokeWidth={1.5} />
           </div>
 
-          <h1>{t("hero.title")}</h1>
-          <p>{t("hero.subtitle")}</p>
+          <AvailabilityBadge />
+          <h1>{isRecruiter ? t("hero.title.recruiter") : t("hero.title")}</h1>
+          <p>{isRecruiter ? t("hero.subtitle.recruiter") : t("hero.subtitle")}</p>
 
           <div className="hero__buttons">
-            <Button href="#contact">
-              {t("hero.cta1")} <ArrowRight size={18} />
-            </Button>
-            <Button href="#services" variant="secondary">
-              {t("hero.cta2")}
-            </Button>
+            {isRecruiter ? (
+              <>
+                <Button href="/recruiter">
+                  {t("hero.cta1.recruiter")} <ArrowRight size={18} />
+                </Button>
+                <Button href="#portfolio" variant="secondary">
+                  {t("hero.cta2.recruiter")}
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button href="#contact">
+                  {t("hero.cta1")} <ArrowRight size={18} />
+                </Button>
+                <Button href="#services" variant="secondary">
+                  {t("hero.cta2")}
+                </Button>
+              </>
+            )}
           </div>
         </div>
 

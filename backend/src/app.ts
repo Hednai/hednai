@@ -15,6 +15,7 @@ import { invalidateCache } from "./middleware/cache";
 import notFound from "./middleware/notFound";
 import errorHandler from "./middleware/errorHandler";
 import { contactRouter } from "./features/contact/contact.route";
+import { dashboardRouter } from "./features/dashboard/dashboard.route";
 
 // Creer l'application Express
 const app = express();
@@ -61,6 +62,9 @@ app.get("/api/health", (_req, res) => {
 
 // Contact — avec rate limiting
 app.use("/api/contact", contactLimiter, contactRouter);
+
+// Dashboard admin — sans rate limiting (usage interne)
+app.use("/api/dashboard", dashboardRouter);
 
 // ---- Gestion des erreurs (en dernier) ----
 app.use(notFound);

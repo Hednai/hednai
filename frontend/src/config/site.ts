@@ -26,6 +26,11 @@ export const SITE_CONFIG = {
     baseUrl: import.meta.env.VITE_API_URL || "http://localhost:3000",
   },
 
+  // Calendrier de prise de rendez-vous (Cal.com)
+  calendar: {
+    url: "https://cal.com/hednai-gekyal/15min",
+  },
+
   // Meta SEO
   meta: {
     title: "Hednai — Solutions Digitales Maritime & IA",

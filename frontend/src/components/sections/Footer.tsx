@@ -54,5 +54,5 @@ export function Footer() {
         <p>&copy; {new Date().getFullYear()} Hednai. {t("footer.rights")}</p>
       </div>
     </footer>
-  ); 
+  );
 }
