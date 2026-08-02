@@ -4,7 +4,7 @@
 // Montre que le site a une vraie infrastructure (pas juste du HTML)
 // ============================================
 import { useState, useEffect } from "react";
-import { useLanguage } from "../i18n/LanguageContext";
+import { useLanguage } from "../i18n/useLanguage";
 import { SITE_CONFIG } from "../config/site";
 import "./ApiStatus.css";
 

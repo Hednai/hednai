@@ -7,7 +7,7 @@
 import { Anchor, GraduationCap, Rocket } from "lucide-react";
 import { SectionWrapper } from "../ui/SectionWrapper";
 import { FadeIn } from "../FadeIn";
-import { useLanguage } from "../../i18n/LanguageContext";
+import { useLanguage } from "../../i18n/useLanguage";
 import "./About.css";
 
 // Etapes de la timeline — chaque etape a une icone, une periode et un texte

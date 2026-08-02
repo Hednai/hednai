@@ -2,12 +2,14 @@
 // components/sections/Services.tsx
 // Section services : grille generee depuis data/services.ts
 // ============================================
+import { Link } from "react-router-dom";
 import { Ship, Anchor, Brain, ClipboardCheck, Building, Code } from "lucide-react";
 import { services } from "../../data/services";
 import { SectionWrapper } from "../ui/SectionWrapper";
 import { Card } from "../ui/Card";
 import { FadeIn } from "../FadeIn";
 import { useLanguage } from "../../i18n/useLanguage";
+import { useViewMode } from "../../context/ViewModeContext";
 import "./Services.css";
 
 // Table de correspondance entre le nom d'icone (string) et le vrai composant icone
@@ -17,12 +19,13 @@ const icons: Record<string, React.ElementType> = {
 
 export function Services() {
   const { t } = useLanguage();
+  const { isRecruiter } = useViewMode();
 
   return (
     <SectionWrapper
       id="services"
-      title={t("services.title")}
-      subtitle={t("services.subtitle")}
+      title={isRecruiter ? t("services.title.recruiter") : t("services.title")}
+      subtitle={isRecruiter ? t("services.subtitle.recruiter") : t("services.subtitle")}
       gray
     >
       <div className="services-grid">
@@ -49,6 +52,11 @@ export function Services() {
           );
         })}
       </div>
+      {isRecruiter && (
+        <div className="services__recruiter-link">
+          <Link to="/recruiter">{t("services.recruiterLink")}</Link>
+        </div>
+      )}
     </SectionWrapper>
   );
 }

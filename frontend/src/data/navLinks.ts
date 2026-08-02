@@ -13,4 +13,5 @@ export const NAV_LINKS: NavLink[] = [
   { key: "services", href: "#services", labelKey: "nav.services", icon: "LayoutGrid" },
   { key: "portfolio", href: "#portfolio", labelKey: "nav.portfolio", icon: "Briefcase" },
   { key: "contact", href: "#contact", labelKey: "nav.contact", icon: "Mail" },
+  { key: "blog", href: "/blog", labelKey: "nav.blog", icon: "BookOpen" },
 ];

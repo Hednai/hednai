@@ -7,6 +7,7 @@ export const en: Record<string, string> = {
   "nav.services": "Services",
   "nav.portfolio": "Portfolio",
   "nav.contact": "Contact",
+  "nav.blog": "Blog",
 
   // Navbar accessibility (aria-labels)
   "nav.openMenu": "Open menu",
@@ -181,4 +182,92 @@ export const en: Record<string, string> = {
   "apiStatus.loading": "Connecting to API...",
   "apiStatus.online": "API online",
   "apiStatus.offline": "API offline",
+
+  // Double CTA banner
+  "cta.client.title": "Are you a shipowner or port operator?",
+  "cta.client.desc": "Contact Hednai for a custom software solution tailored to your maritime operations.",
+  "cta.client.btn": "Let's discuss your project",
+  "cta.recruiter.title": "Looking for a developer?",
+  "cta.recruiter.desc": "Explore my background, projects and technical skills. Available for internship or full-time.",
+  "cta.recruiter.btn": "View my profile",
+
+  // Availability badge
+  "availability.text": "Available for internship and freelance projects",
+
+  // View mode toggle
+  "viewMode.toggle": "Switch view mode",
+  "viewMode.client": "Client Mode",
+  "viewMode.recruiter": "Recruiter Mode",
+  "viewMode.switchRecruiter": "Switch to recruiter mode",
+  "viewMode.switchClient": "Switch to client mode",
+
+  // Admin dashboard
+  "dashboard.title": "Dashboard",
+  "dashboard.loading": "Loading data...",
+  "dashboard.error": "Unable to load dashboard data.",
+  "dashboard.retry": "Retry",
+  "dashboard.refresh": "Refresh",
+  "dashboard.totalMessages": "Messages received",
+  "dashboard.totalLogs": "Audit logs",
+  "dashboard.lastMessage": "Last message",
+  "dashboard.messagesTitle": "Messages",
+  "dashboard.noMessages": "No messages received yet.",
+  "dashboard.col.date": "Date",
+  "dashboard.col.name": "Name",
+  "dashboard.col.method": "Method",
+  "dashboard.col.subject": "Subject",
+  "dashboard.col.message": "Message",
+
+  // Blog
+  "blog.title": "Blog",
+  "blog.subtitle": "Technical articles on development, maritime and AI",
+  "blog.readMore": "Read article",
+  "blog.notFound": "Article not found.",
+  "blog.backToList": "Back to blog",
+  "blog.seo.title": "Blog — Hednai",
+  "blog.seo.desc": "Technical articles on web development, artificial intelligence and the maritime industry.",
+  "blog.article1.title": "Why digitize maritime in 2025?",
+  "blog.article1.summary": "The maritime industry is one of the least digitized in the world. Here's why that needs to change and how Hednai contributes.",
+  "blog.article1.content": "The maritime industry represents 90% of global trade, yet remains one of the least digitized. Paper processes, radio communications and legacy systems slow down ports and shipping companies. At Hednai, we believe technology can transform this sector — not by replacing human expertise, but by augmenting it. Our AI solutions optimize routes, predict failures and digitize inspections. The question is no longer whether maritime will digitize, but when — and with whom.",
+  "blog.article2.title": "React + TypeScript architecture for professional projects",
+  "blog.article2.summary": "How to structure a React project with TypeScript, reusable components and a scalable architecture.",
+  "blog.article2.content": "When starting a professional React project, code structure is as important as the code itself. At Hednai, we use a feature-based architecture with reusable UI components, a typed i18n system, and clear separation between pages, data and business logic. TypeScript isn't just a bonus — it's quality insurance that catches errors before they reach production. In this article, I share the patterns I use daily.",
+  "blog.article3.title": "AI and predictive maintenance for vessels",
+  "blog.article3.summary": "How artificial intelligence can predict engine failures and reduce maintenance costs at sea.",
+  "blog.article3.content": "Unplanned maintenance at sea costs shipping companies millions each year. Modern IoT sensors generate terabytes of data — engine temperature, vibrations, fuel consumption — but without intelligent analysis, this data remains useless. Predictive maintenance AI analyzes these streams in real-time to detect anomalies before they become failures. Result: fewer immobilizations, lower costs, more safety. This is exactly the type of solution Hednai develops for the maritime industry.",
+
+  // Hero — recruiter mode variant
+  "hero.title.recruiter": "Full Stack Developer passionate about maritime and AI",
+  "hero.subtitle.recruiter": "Former marine officer turned React, Node.js and TypeScript developer. Founder of Hednai, an AI software startup for the maritime industry.",
+  "hero.cta1.recruiter": "View my full profile",
+  "hero.cta2.recruiter": "See my projects",
+
+  // Services — recruiter mode variant
+  "services.title.recruiter": "What I build",
+  "services.subtitle.recruiter": "A glimpse of my skills through the Hednai solutions",
+  "services.recruiterLink": "See all my technical skills →",
+
+  // Appointment calendar
+  "calendar.title": "Book a slot",
+  "calendar.desc": "Pick a time that works for you for a free 15-minute consultation.",
+
+  // Quote calculator
+  "quote.title": "Estimate your project",
+  "quote.subtitle": "Select your needs for an indicative estimate",
+  "quote.step1": "Project type",
+  "quote.step2": "Additional options",
+  "quote.from": "From",
+  "quote.estimate": "Indicative estimate",
+  "quote.note": "Final price determined after discussing project details.",
+  "quote.cta": "Request a detailed quote",
+  "quote.type.website": "Business website",
+  "quote.type.webapp": "Web application",
+  "quote.type.maritime": "Maritime solution",
+  "quote.type.ia": "AI solution",
+  "quote.addon.responsive": "Responsive design",
+  "quote.addon.i18n": "Multilingual (FR/EN)",
+  "quote.addon.auth": "User authentication",
+  "quote.addon.api": "REST API",
+  "quote.addon.dashboard": "Admin dashboard",
+  "quote.addon.ia_module": "Artificial intelligence module",
 };

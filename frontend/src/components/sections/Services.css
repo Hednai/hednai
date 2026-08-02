@@ -97,3 +97,15 @@
   }
 
 }
+
+.services__recruiter-link {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.services__recruiter-link a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: underline;
+}

@@ -5,7 +5,7 @@
 // ============================================
 import { Link } from "react-router-dom";
 import { Anchor, ArrowLeft } from "lucide-react";
-import { useLanguage } from "../i18n/LanguageContext";
+import { useLanguage } from "../i18n/useLanguage";
 import "./NotFound.css";
 
 export function NotFound() {

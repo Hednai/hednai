@@ -3,13 +3,15 @@
 // Page d'accueil — assemble les sections dans l'ordre d'affichage
 // ============================================
 import { Helmet } from "react-helmet-async";
-import { useLanguage } from "../i18n/LanguageContext";
+import { useLanguage } from "../i18n/useLanguage";
 import { Hero } from "../components/sections/Hero";
 import { WhyHednai } from "../components/sections/WhyHednai";
 import { About } from "../components/sections/About";
 import { Services } from "../components/sections/Services";
 import { Portfolio } from "../components/sections/Portfolio";
+import { QuoteCalculator } from "../components/sections/QuoteCalculator";
 import { Contact } from "../components/sections/Contact";
+import { CtaBanner } from "../components/sections/CtaBanner";
 import WaveAnimation from "../components/WaveAnimation";
 
 export function Home() {
@@ -26,11 +28,13 @@ export function Home() {
       <About />
       <Services />
       <Portfolio />
+      <QuoteCalculator />
 
       {/* Contact est enveloppe dans les vagues animees */}
       <WaveAnimation>
         <Contact />
       </WaveAnimation>
+      <CtaBanner />
     </>
   );
 }

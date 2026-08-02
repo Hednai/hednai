@@ -10,6 +10,7 @@ import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-reac
 import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { SectionWrapper } from "../ui/SectionWrapper";
 import { Button } from "../ui/Button";
+import { CalendlyEmbed } from "../CalendlyEmbed";
 import { useLanguage } from "../../i18n/useLanguage";
 import { useContactForm } from "../../hooks/useContactForm";
 import { SITE_CONFIG } from "../../config/site";
@@ -195,6 +196,7 @@ export function Contact() {
           </Button>
         </form>
       </div>
+      <CalendlyEmbed />
     </SectionWrapper>
   );
 }
