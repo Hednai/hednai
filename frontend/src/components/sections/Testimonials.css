@@ -1,0 +1,62 @@
+/* ============================================
+   Testimonials.css
+   Grille de temoignages en 3 colonnes
+   ============================================ */
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.testimonial {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.testimonial__icon {
+  color: var(--text-light);
+}
+
+.testimonial__quote {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.testimonial__author {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: auto;
+}
+
+.testimonial__name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.testimonial__role {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.testimonial__context {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+@media (max-width: 1024px) {
+  .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .testimonials-grid { grid-template-columns: 1fr; }
+}

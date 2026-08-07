@@ -4,7 +4,7 @@
 // Toggle theme en cercle, FR | EN separes
 // ============================================
 import { useState, useEffect } from "react";
-import { Menu, X, Sun, Moon, Home, Target, User, LayoutGrid, Briefcase, Mail, BookOpen } from "lucide-react";
+import { Menu, X, Sun, Moon, Home, Target, User, Map, LayoutGrid, Briefcase, Mail, BookOpen } from "lucide-react";
 import { useTheme } from "../../hooks/useTheme";
 import { useLanguage } from "../../i18n/useLanguage";
 import { useScrollSpy } from "../../hooks/useScrollSpy";
@@ -17,6 +17,7 @@ const iconMap: Record<string, React.ReactNode> = {
   Home: <Home size={18} />,
   Target: <Target size={18} />,
   User: <User size={18} />,
+  Map: <Map size={18} />,
   LayoutGrid: <LayoutGrid size={18} />,
   Briefcase: <Briefcase size={18} />,
   Mail: <Mail size={18} />,

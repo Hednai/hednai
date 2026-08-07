@@ -4,8 +4,8 @@
 // Accessible via /admin (pas dans la nav publique)
 // Prouve que le backend est fonctionnel et exploite Prisma
 // ============================================
-import { useState, useEffect } from "react";
-import { RefreshCw, MessageSquare, Activity, Clock } from "lucide-react";
+import { useState } from "react";
+import { RefreshCw, MessageSquare, Activity, Clock, LogIn } from "lucide-react";
 import { Card } from "../components/ui/Card";
 import { useLanguage } from "../i18n/useLanguage";
 import { SITE_CONFIG } from "../config/site";
@@ -34,25 +34,39 @@ interface Message {
 export function Dashboard() {
   const { t } = useLanguage();
 
-  // Etats pour les statistiques et les messages
+  // Etats pour l'authentification
+  const [password, setPassword] = useState("");
+  const [token, setToken] = useState<string | null>(null);
+  const [authError, setAuthError] = useState(false);
+
+  // Etats pour les donnees
   const [stats, setStats] = useState<Stats | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Charger les donnees au montage du composant
-  const fetchData = async () => {
+  // ---- Charger les donnees avec le token ----
+  const fetchData = async (authToken: string) => {
     setLoading(true);
     setError(null);
 
     try {
       const baseUrl = SITE_CONFIG.api.baseUrl;
+      const headers = { Authorization: `Bearer ${authToken}` };
 
       // Charger stats et messages en parallele
       const [statsRes, msgsRes] = await Promise.all([
-        fetch(`${baseUrl}/api/dashboard/stats`),
-        fetch(`${baseUrl}/api/dashboard/messages?limit=20`),
+        fetch(`${baseUrl}/api/dashboard/stats`, { headers }),
+        fetch(`${baseUrl}/api/dashboard/messages?limit=20`, { headers }),
       ]);
+
+      // Si 401, le mot de passe est incorrect
+      if (statsRes.status === 401 || msgsRes.status === 401) {
+        setToken(null);
+        setAuthError(true);
+        setLoading(false);
+        return;
+      }
 
       if (!statsRes.ok || !msgsRes.ok) {
         throw new Error("Erreur API");
@@ -70,9 +84,51 @@ export function Dashboard() {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // ---- Se connecter avec le mot de passe ----
+  const handleLogin = () => {
+    setAuthError(false);
+    setToken(password);
+    fetchData(password);
+  };
+
+  // ---- Rafraichir les donnees ----
+  const handleRefresh = () => {
+    if (token) fetchData(token);
+  };
+
+  // ---- Ecran de connexion ----
+  if (!token) {
+    return (
+      <div className="dashboard">
+        <div className="container">
+          <div className="dashboard__login">
+            <LogIn size={32} strokeWidth={1.5} />
+            <h1>{t("dashboard.title")}</h1>
+            <p>{t("dashboard.loginPrompt")}</p>
+
+            <div className="dashboard__login-form">
+              <input
+                type="password"
+                placeholder={t("dashboard.passwordPlaceholder")}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleLogin()}
+              />
+              <button className="btn btn--primary" onClick={handleLogin}>
+                {t("dashboard.loginBtn")}
+              </button>
+            </div>
+
+            {authError && (
+              <p className="dashboard__auth-error">
+                {t("dashboard.authError")}
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // Affichage pendant le chargement
   if (loading) {
@@ -91,7 +147,7 @@ export function Dashboard() {
       <div className="dashboard">
         <div className="container">
           <p className="dashboard__error">{error}</p>
-          <button className="btn btn--secondary" onClick={fetchData}>
+          <button className="btn btn--secondary" onClick={handleRefresh}>
             {t("dashboard.retry")}
           </button>
         </div>
@@ -105,7 +161,7 @@ export function Dashboard() {
         {/* En-tete avec bouton de rafraichissement */}
         <div className="dashboard__header">
           <h1>{t("dashboard.title")}</h1>
-          <button className="btn btn--ghost" onClick={fetchData}>
+          <button className="btn btn--ghost" onClick={handleRefresh}>
             <RefreshCw size={16} /> {t("dashboard.refresh")}
           </button>
         </div>

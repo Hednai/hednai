@@ -9,6 +9,7 @@ import { Calculator, Send } from "lucide-react";
 import { SectionWrapper } from "../ui/SectionWrapper";
 import { Card } from "../ui/Card";
 import { useLanguage } from "../../i18n/useLanguage";
+import { SITE_CONFIG } from "../../config/site";
 import "./QuoteCalculator.css";
 
 // Options de type de projet avec leur prix de base
@@ -79,7 +80,7 @@ export function QuoteCalculator() {
               >
                 <span>{t(`quote.type.${type.key}`)}</span>
                 <span className="quote-calc__option-price">
-                  {t("quote.from")} {type.priceBase.toLocaleString()} $
+                  {t("quote.from")} {type.priceBase.toLocaleString()} {SITE_CONFIG.currency.symbol}
                 </span>
               </button>
             ))}
@@ -107,7 +108,7 @@ export function QuoteCalculator() {
                   />
                   <span>{t(`quote.addon.${addon.key}`)}</span>
                   <span className="quote-calc__addon-price">
-                    +{addon.price.toLocaleString()} $
+                    +{addon.price.toLocaleString()} {SITE_CONFIG.currency.symbol}
                   </span>
                 </label>
               ))}
@@ -124,7 +125,7 @@ export function QuoteCalculator() {
                   {t("quote.estimate")}
                 </p>
                 <p className="quote-calc__result-price">
-                  {totalPrice.toLocaleString()} $
+                  {totalPrice.toLocaleString()} {SITE_CONFIG.currency.symbol}
                 </p>
                 <p className="quote-calc__result-note">{t("quote.note")}</p>
               </div>

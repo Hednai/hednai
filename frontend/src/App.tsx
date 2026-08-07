@@ -9,6 +9,10 @@ import { ViewModeProvider } from "./context/ViewModeContext";
 import { ErrorBoundary } from "./components/ui/ErrorBoundary";
 import { MainLayout } from "./layouts/MainLayout";
 import { Home } from "./pages/Home";
+
+// ---- Lazy loading ----
+// Les pages sont chargees a la demande (code splitting)
+// Cela reduit le temps de chargement initial
 const ProjectDetail = lazy(() =>
   import("./pages/ProjectDetail").then((m) => ({ default: m.ProjectDetail }))
 );
@@ -21,6 +25,13 @@ const Blog = lazy(() =>
 const BlogArticle = lazy(() =>
   import("./pages/BlogArticle").then((m) => ({ default: m.BlogArticle }))
 );
+const Solutions = lazy(() =>
+  import("./pages/Solutions").then((m) => ({ default: m.Solutions }))
+);
+const Recruiter = lazy(() =>
+  import("./pages/Recruiter").then((m) => ({ default: m.Recruiter }))
+);
+
 import { InstalledDateProvider } from "./providers/InstalledDateProvider";
 import { InstallPrompt } from "./components/InstallPrompt";
 import { NotFound } from "./pages/NotFound";
@@ -41,7 +52,10 @@ export default function App() {
               {/* Navbar + Footer autour du contenu de chaque page */}
               <MainLayout>
                 <Routes>
+                  {/* Page d'accueil */}
                   <Route path="/" element={<Home />} />
+
+                  {/* Page projet (detail) - chargee a la demande */}
                   <Route
                     path="/project/:slug"
                     element={
@@ -50,6 +64,8 @@ export default function App() {
                       </Suspense>
                     }
                   />
+
+                  {/* Dashboard admin - charge a la demande */}
                   <Route
                     path="/admin"
                     element={
@@ -58,6 +74,8 @@ export default function App() {
                       </Suspense>
                     }
                   />
+
+                  {/* Blog - liste des articles */}
                   <Route
                     path="/blog"
                     element={
@@ -66,6 +84,8 @@ export default function App() {
                       </Suspense>
                     }
                   />
+
+                  {/* Blog - article individuel */}
                   <Route
                     path="/blog/:slug"
                     element={
@@ -74,6 +94,28 @@ export default function App() {
                       </Suspense>
                     }
                   />
+
+                  {/* Page Solutions - chargee a la demande */}
+                  <Route
+                    path="/solutions"
+                    element={
+                      <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
+                        <Solutions />
+                      </Suspense>
+                    }
+                  />
+
+                  {/* Page Recruiter - chargee a la demande */}
+                  <Route
+                    path="/recruiter"
+                    element={
+                      <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
+                        <Recruiter />
+                      </Suspense>
+                    }
+                  />
+
+                  {/* Route 404 - capture toutes les URLs inconnues */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </MainLayout>

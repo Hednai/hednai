@@ -7,8 +7,10 @@ import { useLanguage } from "../i18n/useLanguage";
 import { Hero } from "../components/sections/Hero";
 import { WhyHednai } from "../components/sections/WhyHednai";
 import { About } from "../components/sections/About";
+import { Roadmap } from "../components/sections/Roadmap";
 import { Services } from "../components/sections/Services";
 import { Portfolio } from "../components/sections/Portfolio";
+import { Testimonials } from "../components/sections/Testimonials";
 import { QuoteCalculator } from "../components/sections/QuoteCalculator";
 import { Contact } from "../components/sections/Contact";
 import { CtaBanner } from "../components/sections/CtaBanner";
@@ -26,8 +28,10 @@ export function Home() {
       <Hero />
       <WhyHednai />
       <About />
+      <Roadmap />
       <Services />
       <Portfolio />
+      <Testimonials />
       <QuoteCalculator />
 
       {/* Contact est enveloppe dans les vagues animees */}

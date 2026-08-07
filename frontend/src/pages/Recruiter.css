@@ -1,0 +1,109 @@
+/* ============================================
+   Recruiter.css
+   Page dediee aux recruteurs
+   ============================================ */
+
+.recruiter-page {
+  min-height: 100vh;
+  padding: 100px 0 60px;
+}
+
+.recruiter-page__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+}
+
+.recruiter-page__header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.recruiter-page__header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.recruiter-page__tagline {
+  color: var(--text-secondary);
+  font-size: 16px;
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+
+.recruiter-page__links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.recruiter-section {
+  padding: 28px;
+}
+
+.recruiter-section h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.recruiter-section p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.recruiter-page__section-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 32px 0 16px;
+}
+
+/* Grille de competences */
+.recruiter-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.recruiter-skill-cat {
+  padding: 20px;
+}
+
+.recruiter-skill-cat h3 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+
+.recruiter-skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.recruiter-skill-tag {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--tag-bg);
+  color: var(--text-secondary);
+}
+
+.recruiter-page__cta {
+  text-align: center;
+  margin-top: 40px;
+}
+
+@media (max-width: 640px) {
+  .recruiter-skills-grid { grid-template-columns: 1fr; }
+}
