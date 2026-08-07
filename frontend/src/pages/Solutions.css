@@ -1,0 +1,132 @@
+/* ============================================
+   Solutions.css
+   Page dediee aux solutions Hednai
+   ============================================ */
+
+.solutions-page {
+  min-height: 100vh;
+  padding: 100px 0 60px;
+}
+
+.solutions-page__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.solutions-page__header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.solutions-page__header p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.solutions-page__list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.solution-detail {
+  padding: 32px;
+}
+
+.solution-detail__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.solution-detail__icon {
+  width: 56px;
+  height: 56px;
+  background: var(--bg-gray);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.solution-detail__header h2 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.solution-detail__status {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  margin-top: 4px;
+}
+
+.solution-detail__status--available {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.solution-detail__status--development {
+  background: var(--bg-gray);
+  color: var(--text-primary);
+}
+
+.solution-detail__status--planned {
+  background: var(--bg-gray);
+  color: var(--text-light);
+}
+
+.solution-detail__section {
+  margin-bottom: 20px;
+}
+
+.solution-detail__section h4 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+
+.solution-detail__section p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.solution-detail__section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.solution-detail__section li {
+  color: var(--text-secondary);
+  font-size: 14px;
+  padding: 4px 0 4px 20px;
+  position: relative;
+}
+
+.solution-detail__section li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  color: var(--success-text);
+  font-weight: 700;
+}
+
+.solutions-page__cta {
+  text-align: center;
+  margin-top: 48px;
+}

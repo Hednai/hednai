@@ -31,6 +31,12 @@ export const SITE_CONFIG = {
     url: "https://cal.com/hednai-gekyal/15min",
   },
 
+  // Devise pour le calculateur de devis
+  currency: {
+    symbol: "$",
+    code: "CAD",
+  },
+
   // Meta SEO
   meta: {
     title: "Hednai — Solutions Digitales Maritime & IA",

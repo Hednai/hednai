@@ -10,6 +10,7 @@ import type { Request } from "express";
 import { createMessage } from "./contact.model";
 import { logAction } from "../../utils/auditLog";
 import { sendContactNotification } from "../../lib/mailer";
+import { sendDiscordNotification } from "../../lib/discord";
 
 // Type pour les donnees validees qui arrivent du controller
 interface ValidatedContactData {
@@ -82,6 +83,13 @@ export const processContactMessage = async (
     const action = emailSent ? "CONTACT_EMAIL_SENT" : "CONTACT_EMAIL_FAILED";
     await logAction(req, action, "Message", String(msg.id));
   }
+
+  // 7. Notifier via Discord (optionnel, non-bloquant)
+  await sendDiscordNotification({
+    name: data.name,
+    contactMethod: data.contactMethod,
+    subject: data.subject,
+  });
 
   return {
     isBot: false,

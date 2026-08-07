@@ -1,0 +1,94 @@
+/* ============================================
+   Roadmap.css
+   Timeline verticale avec statuts (fait, en cours, prevu)
+   ============================================ */
+
+.roadmap {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.roadmap__item {
+  display: flex;
+  gap: 20px;
+}
+
+.roadmap__marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.roadmap__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* Couleurs selon le statut */
+.roadmap__item--done .roadmap__icon {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.roadmap__item--current .roadmap__icon {
+  background: var(--bg-gray);
+  color: var(--text-primary);
+  border: 2px solid var(--text-primary);
+  animation: pulse-roadmap 2s infinite;
+}
+
+.roadmap__item--planned .roadmap__icon {
+  background: var(--bg-gray);
+  color: var(--text-light);
+  border: 2px solid var(--card-border);
+}
+
+.roadmap__line {
+  width: 2px;
+  flex: 1;
+  background: var(--card-border);
+  min-height: 24px;
+}
+
+.roadmap__content {
+  padding-bottom: 32px;
+}
+
+.roadmap__year {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.roadmap__content h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 4px 0 6px;
+}
+
+.roadmap__content p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Etapes prevues en opacite reduite */
+.roadmap__item--planned .roadmap__content h3,
+.roadmap__item--planned .roadmap__content p {
+  opacity: 0.6;
+}
+
+@keyframes pulse-roadmap {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(100, 100, 100, 0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(100, 100, 100, 0); }
+}
