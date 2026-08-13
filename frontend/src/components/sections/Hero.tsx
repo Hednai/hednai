@@ -7,7 +7,7 @@ import { Button } from "../ui/Button";
 import { RadarAnimation } from "../RadarAnimation";
 import { AvailabilityBadge } from "../AvailabilityBadge";
 import { useLanguage } from "../../i18n/useLanguage";
-import { useViewMode } from "../../context/ViewModeContext";
+import { useViewMode } from "../../context/useViewMode";
 import "./Hero.css";
 
 export function Hero() {

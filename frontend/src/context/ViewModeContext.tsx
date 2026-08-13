@@ -5,7 +5,7 @@
 // "recruiter" = ton portfolio (je, competences, CV)
 // Le toggle est dans la Navbar
 // ============================================
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 import type { ReactNode } from "react";
 
 // Les deux modes possibles
@@ -18,7 +18,8 @@ interface ViewModeContextType {
   isRecruiter: boolean;
 }
 
-const ViewModeContext = createContext<ViewModeContextType | undefined>(undefined);
+// eslint-disable-next-line react-refresh/only-export-components
+export const ViewModeContext = createContext<ViewModeContextType | undefined>(undefined);
 
 // Provider qui enveloppe l'application
 export function ViewModeProvider({ children }: { children: ReactNode }) {
@@ -38,15 +39,4 @@ export function ViewModeProvider({ children }: { children: ReactNode }) {
       {children}
     </ViewModeContext.Provider>
   );
-}
-
-// Hook pour acceder au mode depuis n'importe quel composant
-export function useViewMode() {
-  const context = useContext(ViewModeContext);
-
-  if (!context) {
-    throw new Error("useViewMode doit etre utilise dans un ViewModeProvider");
-  }
-
-  return context;
 }

@@ -4,7 +4,7 @@
 // Change le contexte global quand on clique
 // ============================================
 import { Briefcase, Building2 } from "lucide-react";
-import { useViewMode } from "../context/ViewModeContext";
+import { useViewMode } from "../context/useViewMode";
 import { useLanguage } from "../i18n/useLanguage";
 import "./ViewModeToggle.css";
 

@@ -225,10 +225,6 @@ export const fr: Record<string, string> = {
   "dashboard.col.method": "Methode",
   "dashboard.col.subject": "Sujet",
   "dashboard.col.message": "Message",
-  "dashboard.loginPrompt": "Entrez le mot de passe administrateur pour acceder au tableau de bord.",
-  "dashboard.passwordPlaceholder": "Mot de passe",
-  "dashboard.loginBtn": "Se connecter",
-  "dashboard.authError": "Mot de passe incorrect.",
 
   // Blog
   "blog.title": "Blog",
@@ -377,6 +373,12 @@ export const fr: Record<string, string> = {
   "testimonials.t3.role": "Developpeur senior",
   "testimonials.t3.context": "Mentorat technique",
   "testimonials.t3.quote": "Le niveau d'architecture de Hednai est impressionnant pour un projet etudiant. Prisma, Zod, Express 5, tests, CI/CD — c'est du niveau professionnel.",
+
+  // Dashboard — authentification
+  "dashboard.loginPrompt": "Entrez le mot de passe administrateur pour acceder au tableau de bord.",
+  "dashboard.passwordPlaceholder": "Mot de passe",
+  "dashboard.loginBtn": "Se connecter",
+  "dashboard.authError": "Mot de passe incorrect.",
 };
 
 // Type derive automatiquement des cles du fichier francais

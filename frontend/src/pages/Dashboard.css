@@ -151,3 +151,45 @@
   color: var(--error-text);
   font-size: 13px;
 }
+
+/* ===== ECRAN DE LOGIN ===== */
+.dashboard__login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  gap: 16px;
+}
+
+.dashboard__login h1 {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.dashboard__login p {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.dashboard__login-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.dashboard__login-form input {
+  padding: 10px 16px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  width: 240px;
+}
+
+.dashboard__auth-error {
+  color: var(--error-text);
+  font-size: 13px;
+}

@@ -9,7 +9,7 @@ import { SectionWrapper } from "../ui/SectionWrapper";
 import { Card } from "../ui/Card";
 import { FadeIn } from "../FadeIn";
 import { useLanguage } from "../../i18n/useLanguage";
-import { useViewMode } from "../../context/ViewModeContext";
+import { useViewMode } from "../../context/useViewMode";
 import "./Services.css";
 
 // Table de correspondance entre le nom d'icone (string) et le vrai composant icone

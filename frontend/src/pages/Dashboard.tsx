@@ -39,7 +39,7 @@ export function Dashboard() {
   const [token, setToken] = useState<string | null>(null);
   const [authError, setAuthError] = useState(false);
 
-  // Etats pour les donnees
+  // Etats pour les statistiques et les messages
   const [stats, setStats] = useState<Stats | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
@@ -105,7 +105,6 @@ export function Dashboard() {
             <LogIn size={32} strokeWidth={1.5} />
             <h1>{t("dashboard.title")}</h1>
             <p>{t("dashboard.loginPrompt")}</p>
-
             <div className="dashboard__login-form">
               <input
                 type="password"
@@ -118,7 +117,6 @@ export function Dashboard() {
                 {t("dashboard.loginBtn")}
               </button>
             </div>
-
             {authError && (
               <p className="dashboard__auth-error">
                 {t("dashboard.authError")}
