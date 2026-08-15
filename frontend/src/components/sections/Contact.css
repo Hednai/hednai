@@ -138,6 +138,13 @@
   color: #0F172A;
 }
 
+/* ===== LIGNE NOM + EMAIL COTE A COTE ===== */
+.contact-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
 /* Groupe = label + input + message d'erreur eventuel */
 .fg {
   margin-bottom: 22px;
@@ -227,6 +234,12 @@
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+
+  /* Sur mobile, Nom et Email repassent en colonne */
+  .contact-form__row {
+    grid-template-columns: 1fr;
+    gap: 0;
   }
 
   .contact-form {

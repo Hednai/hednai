@@ -7,6 +7,7 @@
 .hero {
   position: relative;
   min-height: 100vh;
+  max-height: 100vh;
 
   display: flex;
   align-items: center;
@@ -15,10 +16,10 @@
   padding: 120px 24px 80px;
   overflow: hidden;
 
-  /* Image de fond (pont de bateau) */
+  /* Image de fond (pont de bateau) — position haute pour cadrer mieux */
   background-image: url("/hednai_bridge.png");
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
 }
 
@@ -72,6 +73,26 @@
   margin-bottom: 24px;
   color: #FFFFFF;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Signature de marque "From Sea to Code." — petite, discrete, permanente */
+.hero__tagline {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: hsl(184 100% 50%);
+  margin-bottom: 16px;
+}
+
+/* Accroche courte selon le mode — typographie plus grande, plus legere */
+.hero__punchline {
+  font-size: 20px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 16px;
+  line-height: 1.4;
+  max-width: 520px;
 }
 
 .hero p {

@@ -3,7 +3,8 @@
 // Barre de navigation — style icones + soulignement actif
 // Toggle theme en cercle, FR | EN separes
 // ============================================
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, Sun, Moon, Home, Target, User, Map, LayoutGrid, Briefcase, Mail, BookOpen } from "lucide-react";
 import { useTheme } from "../../hooks/useTheme";
 import { useLanguage } from "../../i18n/useLanguage";
@@ -32,6 +33,32 @@ export function Navbar() {
   const { isDark, toggleTheme } = useTheme();
   const { lang, t, toggleLang } = useLanguage();
 
+  // Navigation SPA : si on est sur /blog ou /solutions, revenir à "/" avant de scroller
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Fermer le menu mobile quand on clique sur un lien
+  const close = () => setMenuOpen(false);
+
+  // Gere le clic sur un lien ancre (#section) depuis n'importe quelle page
+  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Lien vers une page (ex: /blog) — laisser React Router gerer
+    if (!href.startsWith("#")) return;
+
+    e.preventDefault();
+    close();
+    const sectionId = href.replace("#", "");
+
+    // Si on est deja sur la page d'accueil, scroller directement
+    if (location.pathname === "/") {
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // Sinon, naviguer vers "/" puis scroller apres le chargement
+      navigate("/", { state: { scrollTo: sectionId } });
+    }
+  }, [location.pathname, navigate]);
+
   // Detecte quelle section est visible a l'ecran (pour souligner le bon lien)
   const activeSection = useScrollSpy(
     NAV_LINKS.map((link) => link.href.replace("#", "")),
@@ -44,17 +71,17 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Fermer le menu mobile quand on clique sur un lien
-  const close = () => setMenuOpen(false);
-
   return (
     <nav className={`navbar ${scrolled ? "navbar--scrolled" : ""}`}>
       <div className="navbar__inner">
 
-        {/* Logo */}
-        <a href="#accueil" className="navbar__logo">
+        {/* Logo + badge identitaire */}
+        <a href="#accueil" className="navbar__logo" onClick={(e) => handleNavClick(e, "#accueil")}>
           <img src="/logo-anchor.png" alt="Hednai" />
-          <span>Hed<span style={{ color: "hsl(195 100% 45%)" }}>nai</span></span>
+          <div className="navbar__logo-text">
+            <span>Hed<span style={{ color: "hsl(195 100% 45%)" }}>nai</span></span>
+            <span className="navbar__badge">{t("nav.badge")}</span>
+          </div>
         </a>
 
         {/* Bouton burger pour mobile */}
@@ -78,7 +105,7 @@ export function Navbar() {
                 <a
                   href={link.href}
                   className={`navbar__link ${isActive ? "navbar__link--active" : ""}`}
-                  onClick={close}
+                  onClick={(e) => handleNavClick(e, link.href)}
                 >
                   {/* Icone a cote du texte */}
                   {iconMap[link.icon]}

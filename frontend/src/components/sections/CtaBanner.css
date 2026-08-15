@@ -7,10 +7,22 @@
   padding: 80px 0;
 }
 
+/* 3 colonnes : client, recruteur, calendrier — meme hauteur */
 .cta-banner__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* Les wrappers FadeIn doivent prendre toute la hauteur de la cellule */
+.cta-banner__grid > * {
+  height: 100%;
+}
+
+/* Les cartes aussi — pour que le contenu remplisse le wrapper */
+.cta-banner__grid > * > .cta-banner__card {
+  height: 100%;
 }
 
 .cta-banner__card {
@@ -45,6 +57,36 @@
   font-size: 14px;
   line-height: 1.6;
   max-width: 320px;
+}
+
+/* Carte calendrier — le CalendlyEmbed a deja ses propres styles internes */
+.cta-banner__card--calendar {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 24px 16px;
+  text-align: center;
+}
+
+/* Supprimer le margin-top du CalendlyEmbed quand il est dans le CTA */
+.cta-banner__card--calendar .cal-embed {
+  margin-top: 0;
+}
+
+/* Reduire la hauteur de l'iframe dans le CTA */
+.cta-banner__card--calendar .cal-embed__frame iframe {
+  height: 350px;
+}
+
+@media (max-width: 1024px) {
+  /* Tablette : 2 colonnes + calendrier pleine largeur en dessous */
+  .cta-banner__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cta-banner__card--calendar {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 768px) {

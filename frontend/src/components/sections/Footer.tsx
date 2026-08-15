@@ -14,11 +14,13 @@ export function Footer() {
   return (
     <footer className="footer">
       <div className="container footer__inner">
-        {/* Logo (meme image que la Navbar) */}
+        {/* Logo + tagline de marque */}
         <div className="footer__logo">
           <img src="/logo-anchor.png" alt="Hednai" />
           <span>Hednai</span>
         </div>
+        <p className="footer__tagline">{t("footer.tagline")}</p>
+        <p className="footer__identity">{t("footer.identity")}</p>
 
         {/* Meme navigation que la Navbar, reutilisee ici */}
         <nav className="footer__links">

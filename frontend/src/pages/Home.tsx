@@ -2,6 +2,8 @@
 // pages/Home.tsx
 // Page d'accueil — assemble les sections dans l'ordre d'affichage
 // ============================================
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useLanguage } from "../i18n/useLanguage";
 import { Hero } from "../components/sections/Hero";
@@ -18,6 +20,21 @@ import WaveAnimation from "../components/WaveAnimation";
 
 export function Home() {
   const { t } = useLanguage();
+  const location = useLocation();
+
+  // Si on arrive depuis une autre page avec un scrollTo, scroller vers la section
+  useEffect(() => {
+    const scrollTo = (location.state as { scrollTo?: string })?.scrollTo;
+    if (scrollTo) {
+      // Petit delai pour laisser le DOM se charger
+      setTimeout(() => {
+        const el = document.getElementById(scrollTo);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+      // Nettoyer le state pour eviter de re-scroller
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
 
   return (
     <>
@@ -27,8 +44,19 @@ export function Home() {
       </Helmet>
       <Hero />
       <WhyHednai />
-      <About />
-      <Roadmap />
+
+      {/* About et Roadmap cote a cote sur grand ecran */}
+      <section className="about-roadmap-row">
+        <div className="container about-roadmap-row__inner">
+          <div className="about-roadmap-row__left">
+            <About />
+          </div>
+          <div className="about-roadmap-row__right">
+            <Roadmap />
+          </div>
+        </div>
+      </section>
+
       <Services />
       <Portfolio />
       <Testimonials />

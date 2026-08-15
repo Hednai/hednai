@@ -26,7 +26,17 @@ export function Hero() {
           </div>
 
           <AvailabilityBadge />
+
+          {/* Signature de marque — toujours visible, independante du mode */}
+          <p className="hero__tagline">{t("hero.tagline")}</p>
+
           <h1>{isRecruiter ? t("hero.title.recruiter") : t("hero.title")}</h1>
+
+          {/* Accroche courte selon le mode — juste sous le titre */}
+          <p className="hero__punchline">
+            {isRecruiter ? t("hero.punchline.recruiter") : t("hero.punchline.client")}
+          </p>
+
           <p>{isRecruiter ? t("hero.subtitle.recruiter") : t("hero.subtitle")}</p>
 
           <div className="hero__buttons">

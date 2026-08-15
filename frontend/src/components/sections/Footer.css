@@ -82,6 +82,27 @@
   margin-top: 16px;
 }
 
+/* Tagline "From Sea to Code." sous le logo */
+.footer__tagline {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-top: -8px;
+  margin-bottom: 4px;
+}
+
+/* Phrase identitaire — double nature portfolio + startup */
+.footer__identity {
+  font-size: 13px;
+  color: var(--text-light);
+  max-width: 420px;
+  margin: 0 auto 24px;
+  text-align: center;
+  line-height: 1.5;
+}
+
 @media (max-width: 768px) {
   .footer__grid {
     grid-template-columns: 1fr;

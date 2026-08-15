@@ -14,8 +14,8 @@
   --bg-gray: #F5F5F5;
 
   --text-primary: #1A1A1A;
-  --text-secondary: #6B7280;
-  --text-light: #9CA3AF;
+  --text-secondary: #5F6775;
+  --text-light: #6B7280;
 
   --brand-dark: #1A1A1A;
 
@@ -27,9 +27,9 @@
 
   --tag-bg: #F3F4F6;
   --success-bg: #ECFDF5;
-  --success-text: #059669;
+  --success-text: #047857;
   --error-bg: #FEF2F2;
-  --error-text: #DC2626;
+  --error-text: #B91C1C;
   --accent-cyan: hsl(184 100% 45%);
   --accent-warm: hsl(25 95% 55%);
   --radius-pill: 20px;
@@ -56,7 +56,7 @@
 
   --text-primary: #F1F5F9;
   --text-secondary: #94A3B8;
-  --text-light: #64748B;
+  --text-light: #8494AA;
 
   --brand-dark: #F1F5F9;
 
@@ -126,4 +126,72 @@ img {
     --section-padding: 60px;
   }
 
+}
+
+/* ===== ABOUT + ROADMAP COTE A COTE ===== */
+/* Enveloppe les deux sections sur grand ecran pour un layout 2 colonnes */
+.about-roadmap-row {
+  padding: var(--section-padding) 0;
+  background: var(--bg-gray);
+}
+
+.about-roadmap-row__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* Quand About et Roadmap sont cote a cote, retirer leur padding de section */
+.about-roadmap-row .section {
+  padding: 0;
+  background: transparent;
+}
+
+/* Retirer le max-width des timelines pour qu'elles utilisent l'espace disponible */
+.about-roadmap-row .about-timeline,
+.about-roadmap-row .roadmap {
+  max-width: none;
+}
+
+/* Le titre et sous-titre des sections s'alignent a gauche dans leur colonne */
+.about-roadmap-row .section__title {
+  text-align: left;
+}
+
+.about-roadmap-row .section__subtitle {
+  text-align: left;
+  margin-left: 0;
+}
+
+/* L'intro du About passe aussi a gauche */
+.about-roadmap-row .about__intro {
+  text-align: left;
+  margin-left: 0;
+}
+
+/* Sur mobile, revenir en colonne unique */
+@media (max-width: 900px) {
+  .about-roadmap-row__inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  /* Remettre le padding des sections en mobile */
+  .about-roadmap-row .section {
+    padding: 60px 0;
+  }
+
+  .about-roadmap-row .section__title {
+    text-align: center;
+  }
+
+  .about-roadmap-row .section__subtitle {
+    text-align: center;
+  }
+
+  .about-roadmap-row .about__intro {
+    text-align: center;
+    margin: 0 auto 48px;
+  }
 }

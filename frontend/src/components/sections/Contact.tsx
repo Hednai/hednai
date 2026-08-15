@@ -10,7 +10,6 @@ import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-reac
 import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { SectionWrapper } from "../ui/SectionWrapper";
 import { Button } from "../ui/Button";
-import { CalendlyEmbed } from "../CalendlyEmbed";
 import { useLanguage } from "../../i18n/useLanguage";
 import { useContactForm } from "../../hooks/useContactForm";
 import { SITE_CONFIG } from "../../config/site";
@@ -107,65 +106,68 @@ export function Contact() {
             </button>
           </div>
 
-          <div className="fg">
-            <label htmlFor="name">{t("contact.form.name")}</label>
-            <input id="name" placeholder={t("contact.form.name.placeholder")} value={form.name} onChange={change} className={fieldErrors.name ? "input--error" : ""} aria-describedby={fieldErrors.name ? "error-name" : undefined} />
-            {fieldErrors.name && <span ref={errorRef} id="error-name" className="field-error" role="alert">{t(fieldErrors.name)}</span>}
-          </div>
+          {/* ===== LIGNE NOM + EMAIL/TELEPHONE COTE A COTE ===== */}
+          <div className="contact-form__row">
+            <div className="fg">
+              <label htmlFor="name">{t("contact.form.name")}</label>
+              <input id="name" placeholder={t("contact.form.name.placeholder")} value={form.name} onChange={change} className={fieldErrors.name ? "input--error" : ""} aria-describedby={fieldErrors.name ? "error-name" : undefined} />
+              {fieldErrors.name && <span ref={errorRef} id="error-name" className="field-error" role="alert">{t(fieldErrors.name)}</span>}
+            </div>
 
-          {/* ===== CHAMP QUI CHANGE SELON L'ONGLET ACTIF ===== */}
-          <AnimatePresence mode="wait">
-            {form.contactMethod === "email" ? (
-              <motion.div
-                key="email-field"
-                className="fg"
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.2 }}
-              >
-                <label htmlFor="email">{t("contact.form.email")}</label>
-                <input id="email" type="email" placeholder={t("contact.form.email.placeholder")} value={form.email} onChange={change} className={fieldErrors.email ? "input--error" : ""} aria-describedby={fieldErrors.email ? "error-email" : undefined} />
-                {fieldErrors.email && <span id="error-email" className="field-error" role="alert">{t(fieldErrors.email)}</span>}
-              </motion.div>
-            ) : (
-              <motion.div
-                key="phone-field"
-                className="fg"
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.2 }}
-              >
-                <label htmlFor="phone">{t("contact.form.phone")}</label>
-                <div className="phone-field">
-                  <select
-                    id="dialCode"
-                    value={form.dialCode}
-                    onChange={change}
-                    className="phone-field__code"
-                    aria-label={t("contact.form.dialCode")}
-                  >
-                    {countryCodes.map((c) => (
-                      <option key={c.iso} value={c.code}>
-                        {c.flag} {c.code}
-                      </option>
-                    ))}
-                  </select>
-                  <input
-                    id="phone"
-                    type="tel"
-                    placeholder={t("contact.form.phone.placeholder")}
-                    value={form.phone}
-                    onChange={change}
-                    className={fieldErrors.phone ? "input--error" : ""}
-                    aria-describedby={fieldErrors.phone ? "error-phone" : undefined}
-                  />
-                </div>
-                {fieldErrors.phone && <span id="error-phone" className="field-error" role="alert">{t(fieldErrors.phone)}</span>}
-              </motion.div>
-            )}
-          </AnimatePresence>
+            {/* ===== CHAMP QUI CHANGE SELON L'ONGLET ACTIF ===== */}
+            <AnimatePresence mode="wait">
+              {form.contactMethod === "email" ? (
+                <motion.div
+                  key="email-field"
+                  className="fg"
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <label htmlFor="email">{t("contact.form.email")}</label>
+                  <input id="email" type="email" placeholder={t("contact.form.email.placeholder")} value={form.email} onChange={change} className={fieldErrors.email ? "input--error" : ""} aria-describedby={fieldErrors.email ? "error-email" : undefined} />
+                  {fieldErrors.email && <span id="error-email" className="field-error" role="alert">{t(fieldErrors.email)}</span>}
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="phone-field"
+                  className="fg"
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <label htmlFor="phone">{t("contact.form.phone")}</label>
+                  <div className="phone-field">
+                    <select
+                      id="dialCode"
+                      value={form.dialCode}
+                      onChange={change}
+                      className="phone-field__code"
+                      aria-label={t("contact.form.dialCode")}
+                    >
+                      {countryCodes.map((c) => (
+                        <option key={c.iso} value={c.code}>
+                          {c.flag} {c.code}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      id="phone"
+                      type="tel"
+                      placeholder={t("contact.form.phone.placeholder")}
+                      value={form.phone}
+                      onChange={change}
+                      className={fieldErrors.phone ? "input--error" : ""}
+                      aria-describedby={fieldErrors.phone ? "error-phone" : undefined}
+                    />
+                  </div>
+                  {fieldErrors.phone && <span id="error-phone" className="field-error" role="alert">{t(fieldErrors.phone)}</span>}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
           <div className="fg">
             <label htmlFor="subject">{t("contact.form.subject")}</label>
@@ -196,7 +198,6 @@ export function Contact() {
           </Button>
         </form>
       </div>
-      <CalendlyEmbed />
     </SectionWrapper>
   );
 }

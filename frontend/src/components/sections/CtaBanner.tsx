@@ -6,6 +6,7 @@
 // ============================================
 import { Ship, FileUser } from "lucide-react";
 import { FadeIn } from "../FadeIn";
+import { CalendlyEmbed } from "../CalendlyEmbed";
 import { useLanguage } from "../../i18n/useLanguage";
 import "./CtaBanner.css";
 
@@ -37,6 +38,13 @@ export function CtaBanner() {
               <a href="#contact" className="btn btn--secondary">
                 {t("cta.recruiter.btn")}
               </a>
+            </div>
+          </FadeIn>
+
+          {/* Prise de rendez-vous Cal.com */}
+          <FadeIn delay={0.3}>
+            <div className="cta-banner__card cta-banner__card--calendar">
+              <CalendlyEmbed />
             </div>
           </FadeIn>
         </div>

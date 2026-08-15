@@ -43,22 +43,41 @@
 }
 
 /* ===== LOGO ===== */
+/* Le logo doit rester compact et separe des liens */
 .navbar__logo {
   display: flex;
   align-items: center;
   gap: 10px;
   z-index: 1001;
+  flex-shrink: 0;
+  margin-right: 16px;
 }
 
 .navbar__logo img {
   height: 36px;
 }
 
+/* Le texte du logo et le badge sont empiles verticalement */
+.navbar__logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
 /* Texte du logo dans la couleur normale du texte (fond navbar toujours clair) */
-.navbar__logo span {
+.navbar__logo-text > span:first-child {
   font-size: 20px;
   font-weight: 700;
   color: var(--text-primary);
+}
+
+/* Badge identitaire sous le nom — petite ligne de contexte */
+.navbar__badge {
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--text-light);
+  letter-spacing: 0.05em;
+  margin-top: 2px;
 }
 
 /* ===== LIENS ===== */
@@ -75,12 +94,13 @@
   gap: 6px;
 
   color: var(--text-secondary);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 
-  padding: 8px 14px;
+  padding: 8px 10px;
+  white-space: nowrap;
 
   /* Soulignement invisible par defaut, pret a apparaitre */
   border-bottom: 2px solid transparent;

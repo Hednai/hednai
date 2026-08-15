@@ -5,6 +5,9 @@
 // ============================================
 export const fr: Record<string, string> = {
   // Navigation
+  "nav.badge": "Developpeur Full Stack · Maritime",
+  "breadcrumb.solutions": "Solutions",
+  "breadcrumb.recruiter": "Profil recruteur",
   "nav.home": "Accueil",
   "nav.services": "Services",
   "nav.portfolio": "Portfolio",
@@ -24,6 +27,9 @@ export const fr: Record<string, string> = {
   "hero.subtitle": "Hednai developpe des solutions sur mesure pour les ports, armateurs et compagnies maritimes — gestion de flotte, maintenance predictive et optimisation des operations grace a l'intelligence artificielle.",
   "hero.cta1": "Discutons de votre projet",
   "hero.cta2": "Voir nos solutions",
+  "hero.tagline": "From Sea to Code.",
+  "hero.punchline.client": "On connait la mer. On construit pour elle.",
+  "hero.punchline.recruiter": "De la mer au code.",
 
   // Section Services
   "services.title": "Nos Solutions",
@@ -176,6 +182,8 @@ export const fr: Record<string, string> = {
   "about.step3.desc": "Creation d'une startup de solutions logicielles IA pour le maritime. Chaque produit est concu par quelqu'un qui a vecu les problemes qu'il resout.",
 
   // Footer enrichi
+  "footer.tagline": "From Sea to Code.",
+  "footer.identity": "Portfolio de Daren, fondateur et developpeur Full Stack, et vitrine de Hednai, startup de logiciels IA pour le maritime.",
   "footer.mission.title": "Mission",
   "footer.mission.text": "Digitaliser le maritime grace a l'intelligence artificielle et au developpement logiciel sur mesure.",
   "footer.tech.title": "Technologies",
@@ -280,7 +288,7 @@ export const fr: Record<string, string> = {
   "quote.addon.ia_module": "Module intelligence artificielle",
 
   // Navigation — Roadmap
-  "nav.roadmap": "Roadmap",
+  "nav.roadmap": "Feuille de route",
 
   // Roadmap publique
   "roadmap.title": "Feuille de route",

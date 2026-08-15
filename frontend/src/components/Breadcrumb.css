@@ -1,0 +1,43 @@
+/* ============================================
+   Breadcrumb.css
+   Fil d'Ariane pour les pages interieures
+   Petit, discret, utile
+   ============================================ */
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 24px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  font-size: 13px;
+}
+
+.breadcrumb__link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-light);
+  transition: color 0.2s;
+}
+
+.breadcrumb__link:hover {
+  color: var(--text-primary);
+}
+
+.breadcrumb__item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.breadcrumb__sep {
+  color: var(--text-light);
+}
+
+/* Le dernier element (page actuelle) n'est pas cliquable */
+.breadcrumb__current {
+  color: var(--text-primary);
+  font-weight: 600;
+}

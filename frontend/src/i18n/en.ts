@@ -10,6 +10,9 @@ export const en: Record<string, string> = {
   "nav.blog": "Blog",
 
   // Navbar accessibility (aria-labels)
+  "nav.badge": "Full Stack Dev · Maritime",
+  "breadcrumb.solutions": "Solutions",
+  "breadcrumb.recruiter": "Recruiter Profile",
   "nav.openMenu": "Open menu",
   "nav.closeMenu": "Close menu",
   "nav.lightMode": "Light mode",
@@ -21,6 +24,9 @@ export const en: Record<string, string> = {
   "hero.subtitle": "Hednai builds custom solutions for ports, shipowners and maritime companies — fleet management, predictive maintenance and operations optimization powered by artificial intelligence.",
   "hero.cta1": "Let's discuss your project",
   "hero.cta2": "See our solutions",
+  "hero.tagline": "From Sea to Code.",
+  "hero.punchline.client": "We've sailed it. Now we build for it.",
+  "hero.punchline.recruiter": "From Sea to Code.",
 
   "services.title": "Our Solutions",
   "services.subtitle": "Software built for real maritime industry needs",
@@ -168,6 +174,8 @@ export const en: Record<string, string> = {
   "about.step3.desc": "Building an AI software startup for the maritime industry. Every product is designed by someone who has lived the problems it solves.",
 
   // Enriched footer
+  "footer.tagline": "From Sea to Code.",
+  "footer.identity": "Portfolio of Daren, founder and Full Stack developer, and showcase of Hednai, an AI software startup for the maritime industry.",
   "footer.mission.title": "Mission",
   "footer.mission.text": "Digitize maritime operations through artificial intelligence and custom software development.",
   "footer.tech.title": "Technologies",
