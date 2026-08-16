@@ -32,14 +32,15 @@
 }
 
 /* Conteneur interieur : logo a gauche, liens a droite */
+/* Max-width elargi pour eviter l'entassement des liens */
 .navbar__inner {
-  max-width: var(--max-width);
+  max-width: 1320px;
   margin: 0 auto;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
+  padding: 0 32px;
 }
 
 /* ===== LOGO ===== */
@@ -81,31 +82,37 @@
 }
 
 /* ===== LIENS ===== */
+/* Gap reduit entre les liens, le separateur fait la coupure visuelle */
 .navbar__links {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 2px;
 }
 
-/* Chaque lien : icone + texte, en majuscules, avec espace pour le soulignement */
+/* Chaque lien : texte seul en desktop, icone + texte en mobile */
 .navbar__link {
   display: flex;
   align-items: center;
   gap: 6px;
 
   color: var(--text-secondary);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
 
-  padding: 8px 10px;
+  padding: 8px 12px;
   white-space: nowrap;
 
   /* Soulignement invisible par defaut, pret a apparaitre */
   border-bottom: 2px solid transparent;
 
   transition: color 0.2s, border-color 0.2s;
+}
+
+/* Icones cachees en desktop — visibles uniquement sur mobile */
+.navbar__link-icon {
+  display: none;
 }
 
 .navbar__link:hover {
@@ -125,12 +132,12 @@
 }
 
 /* ===== SEPARATEUR VERTICAL ===== */
-/* Petit trait vertical entre les liens et les boutons theme/langue */
+/* Trait vertical net entre les liens et les controles */
 .navbar__separator {
   width: 1px;
   height: 20px;
   background: var(--card-border);
-  margin: 0 8px;
+  margin: 0 12px;
 }
 
 /* ===== BOUTON THEME (cercle) ===== */
@@ -244,6 +251,11 @@
   .navbar__link {
     font-size: 18px;
     padding: 14px 32px;
+  }
+
+  /* Sur mobile (menu plein ecran), les icones reapparaissent */
+  .navbar__link-icon {
+    display: flex;
   }
 
   /* Le separateur devient horizontal sur mobile */

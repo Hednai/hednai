@@ -3,12 +3,13 @@
    Bouton toggle compact pour la Navbar
    ============================================ */
 
+/* Style aligne avec le bouton theme et le groupe FR/EN */
 .view-toggle {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
-  background: var(--bg-gray);
+  padding: 6px 14px;
+  background: none;
   border: 1px solid var(--card-border);
   border-radius: var(--radius-pill);
   font-size: 12px;

@@ -107,8 +107,8 @@ export function Navbar() {
                   className={`navbar__link ${isActive ? "navbar__link--active" : ""}`}
                   onClick={(e) => handleNavClick(e, link.href)}
                 >
-                  {/* Icone a cote du texte */}
-                  {iconMap[link.icon]}
+                  {/* Icone visible uniquement sur mobile (cachee en desktop via CSS) */}
+                  <span className="navbar__link-icon">{iconMap[link.icon]}</span>
                   {t(link.labelKey)}
                 </a>
               </li>

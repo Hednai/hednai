@@ -3,21 +3,24 @@
    Grille 4 colonnes pour les piliers identitaires
    ============================================ */
 
+/* Grille 4 colonnes avec gap uniforme */
 .why-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 20px;
 }
 
+/* Padding uniforme sur toutes les cartes */
 .why-pillar {
-  padding: 32px 24px;
+  padding: 28px 24px;
   text-align: center;
 }
 
+/* Icone 48×48 — meme taille que les icones Services */
 .why-pillar__icon {
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 20px;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 16px;
   background: var(--bg-gray);
   border-radius: var(--radius-md);
   display: flex;

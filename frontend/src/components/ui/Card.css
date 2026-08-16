@@ -1,14 +1,17 @@
 /* Card.css */
 
+/* Carte generique — radius et ombre uniformes partout */
 .card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   height: 100%;
 }
+
+/* Hover subtil — 3px au lieu de 4px, plus pro */
 .card--hoverable:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   box-shadow: var(--card-shadow-hover);
 }
