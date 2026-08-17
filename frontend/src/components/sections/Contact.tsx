@@ -13,7 +13,9 @@ import { Button } from "../ui/Button";
 import { useLanguage } from "../../i18n/useLanguage";
 import { useContactForm } from "../../hooks/useContactForm";
 import { SITE_CONFIG } from "../../config/site";
+import { NAV_LINKS } from "../../data/navLinks";
 import { countryCodes } from "../../data/countryDialCodes";
+import { ApiStatus } from "../ApiStatus";
 import "./Contact.css";
 
 export function Contact() {
@@ -198,6 +200,56 @@ export function Contact() {
           </Button>
         </form>
       </div>
+
+      {/* ===== SECTION FOOTER INTEGREE ===== */}
+      <div className="contact-footer">
+        <div className="contact-footer__top">
+          <div className="contact-footer__brand">
+            <div className="contact-footer__logo">
+              <img src="/logo-anchor.png" alt="Hednai" />
+              <span>Hednai</span>
+            </div>
+            <p className="contact-footer__tagline">{t("footer.tagline")}</p>
+            <p className="contact-footer__identity">{t("footer.identity")}</p>
+            {/* Liens sociaux */}
+            <div className="contact-footer__socials">
+              <a href={SITE_CONFIG.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-btn">
+                <FaLinkedin size={18} />
+              </a>
+              <a href={SITE_CONFIG.socials.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="social-btn">
+                <FaGithub size={18} />
+              </a>
+            </div>
+          </div>
+
+          {/* Colonnes de liens — style TechGlock / kosachov */}
+          <div className="contact-footer__columns">
+            <div className="contact-footer__col">
+              <h4>{t("footer.mission.title")}</h4>
+              <p>{t("footer.mission.text")}</p>
+            </div>
+            <div className="contact-footer__col">
+              <h4>{t("footer.tech.title")}</h4>
+              <p>{t("footer.tech.text")}</p>
+            </div>
+            <div className="contact-footer__col">
+              <h4>Navigation</h4>
+              <nav className="contact-footer__nav">
+                {NAV_LINKS.map((link) => (
+                  <a key={link.key} href={link.href}>{t(link.labelKey)}</a>
+                ))}
+              </nav>
+            </div>
+          </div>
+        </div>
+
+        {/* Ligne du bas : API + copyright */}
+        <div className="contact-footer__bottom">
+          <ApiStatus />
+          <p>&copy; {new Date().getFullYear()} Hednai. {t("footer.rights")}</p>
+        </div>
+      </div>
+
     </SectionWrapper>
   );
 }

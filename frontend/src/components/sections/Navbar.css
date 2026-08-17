@@ -96,9 +96,9 @@
   gap: 6px;
 
   color: var(--text-secondary);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
-  text-transform: uppercase;
+  text-transform: capitalize;
   letter-spacing: 0.06em;
 
   padding: 8px 12px;

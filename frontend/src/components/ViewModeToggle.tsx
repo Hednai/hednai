@@ -3,7 +3,6 @@
 // Toggle visuel Client / Recruteur dans la Navbar
 // Change le contexte global quand on clique
 // ============================================
-import { Briefcase, Building2 } from "lucide-react";
 import { useViewMode } from "../context/useViewMode";
 import { useLanguage } from "../i18n/useLanguage";
 import "./ViewModeToggle.css";
@@ -19,13 +18,6 @@ export function ViewModeToggle() {
       aria-label={t("viewMode.toggle")}
       title={mode === "client" ? t("viewMode.switchRecruiter") : t("viewMode.switchClient")}
     >
-      {/* Icone qui change selon le mode */}
-      {mode === "client" ? (
-        <Building2 size={16} strokeWidth={1.5} />
-      ) : (
-        <Briefcase size={16} strokeWidth={1.5} />
-      )}
-
       {/* Texte court */}
       <span className="view-toggle__label">
         {mode === "client" ? t("viewMode.client") : t("viewMode.recruiter")}

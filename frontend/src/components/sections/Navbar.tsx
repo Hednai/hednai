@@ -40,11 +40,17 @@ export function Navbar() {
   // Fermer le menu mobile quand on clique sur un lien
   const close = () => setMenuOpen(false);
 
-  // Gere le clic sur un lien ancre (#section) depuis n'importe quelle page
+  // Gere le clic sur un lien — ancre (#section) ou route interne (/blog)
   const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    // Lien vers une page (ex: /blog) — laisser React Router gerer
-    if (!href.startsWith("#")) return;
+    // Lien vers une route interne (ex: /blog, /solutions) — navigation SPA
+    if (!href.startsWith("#")) {
+      e.preventDefault();
+      close();
+      navigate(href);
+      return;
+    }
 
+    // Lien ancre (#section) — scroll smooth
     e.preventDefault();
     close();
     const sectionId = href.replace("#", "");
@@ -118,11 +124,6 @@ export function Navbar() {
           {/* Separateur vertical entre les liens et les boutons */}
           <li className="navbar__separator" />
 
-          {/* Toggle vue (grille / ligne) */}
-          <li>
-            <ViewModeToggle />
-          </li>
-
           {/* Bouton theme sombre/clair en forme de cercle */}
           <li>
             <button
@@ -151,6 +152,11 @@ export function Navbar() {
                 EN
               </button>
             </div>
+          </li>
+
+          {/* Mode Client/Recruteur — extreme droite */}
+          <li>
+            <ViewModeToggle />
           </li>
         </ul>
       </div>

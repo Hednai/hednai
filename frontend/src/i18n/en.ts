@@ -10,7 +10,7 @@ export const en: Record<string, string> = {
   "nav.blog": "Blog",
 
   // Navbar accessibility (aria-labels)
-  "nav.badge": "Full Stack Dev · Maritime",
+  "nav.badge": "From Sea to Code.",
   "breadcrumb.solutions": "Solutions",
   "breadcrumb.recruiter": "Recruiter Profile",
   "nav.openMenu": "Open menu",
@@ -20,13 +20,13 @@ export const en: Record<string, string> = {
   "nav.why": "Why",
   "nav.about": "About",
 
-  "hero.title": "AI Software to Digitize Maritime Operations",
-  "hero.subtitle": "Hednai builds custom solutions for ports, shipowners and maritime companies — fleet management, predictive maintenance and operations optimization powered by artificial intelligence.",
+  "hero.title": "Web and software solutions tailored to your needs",
+  "hero.subtitle": "I design websites, applications and custom software solutions, combining Full Stack development, mobile apps and artificial intelligence. My maritime experience also gives me a deep understanding of this sector's challenges.",
   "hero.cta1": "Let's discuss your project",
-  "hero.cta2": "See our solutions",
+  "hero.cta2": "See my projects",
   "hero.tagline": "From Sea to Code.",
   "hero.punchline.client": "We've sailed it. Now we build for it.",
-  "hero.punchline.recruiter": "From Sea to Code.",
+  "hero.punchline.recruiter": "",
 
   "services.title": "Our Solutions",
   "services.subtitle": "Software built for real maritime industry needs",
@@ -200,7 +200,7 @@ export const en: Record<string, string> = {
   "cta.recruiter.btn": "View my profile",
 
   // Availability badge
-  "availability.text": "Available for internship and freelance projects",
+  "availability.text": "Available for freelance projects",
 
   // View mode toggle
   "viewMode.toggle": "Switch view mode",
@@ -249,9 +249,9 @@ export const en: Record<string, string> = {
   "blog.article3.content": "Unplanned maintenance at sea costs shipping companies millions each year. Modern IoT sensors generate terabytes of data — engine temperature, vibrations, fuel consumption — but without intelligent analysis, this data remains useless. Predictive maintenance AI analyzes these streams in real-time to detect anomalies before they become failures. Result: fewer immobilizations, lower costs, more safety. This is exactly the type of solution Hednai develops for the maritime industry.",
 
   // Hero — recruiter mode variant
-  "hero.title.recruiter": "Full Stack Developer passionate about maritime and AI",
-  "hero.subtitle.recruiter": "Former marine officer turned React, Node.js and TypeScript developer. Founder of Hednai, an AI software startup for the maritime industry.",
-  "hero.cta1.recruiter": "View my full profile",
+  "hero.title.recruiter": "Full Stack Developer between technology, maritime and AI",
+  "hero.subtitle.recruiter": "Merchant Marine Officer and Full Stack Developer, I turn my maritime experience into modern software solutions, from web to applications and AI. I'm building HEDNAI, where technology meets the maritime world.",
+  "hero.cta1.recruiter": "Explore my background",
   "hero.cta2.recruiter": "See my projects",
 
   // Services — recruiter mode variant
@@ -377,4 +377,9 @@ export const en: Record<string, string> = {
   "testimonials.t3.role": "Senior developer",
   "testimonials.t3.context": "Technical mentoring",
   "testimonials.t3.quote": "Hednai's architecture level is impressive for a student project. Prisma, Zod, Express 5, tests, CI/CD — this is professional-grade work.",
+
+  // Calendly integration
+  "cta.calendar.title": "Book a slot",
+  "cta.calendar.desc": "Free 15-minute consultation",
+  "cta.calendar.btn": "See availability",  
 };

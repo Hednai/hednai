@@ -2,7 +2,7 @@
 
 /* Espacement vertical identique pour TOUTES les sections */
 .section {
-  padding: var(--section-padding) 0;
+  padding: 20px 0 var(--section-padding);
 }
 
 /* Scroll-margin pour compenser la navbar fixe */
