@@ -5,8 +5,9 @@
 import type { ReactNode } from "react";
 import { Navbar } from "../components/sections/Navbar";
 import { Breadcrumb } from "../components/Breadcrumb";
-import { Footer } from "../components/sections/Footer";
+import { Contact } from "../components/sections/Contact";
 import { ScrollToTop } from "../components/ScrollToTop";
+import WaveAnimation from "../components/WaveAnimation";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -19,7 +20,10 @@ export function MainLayout({ children }: MainLayoutProps) {
       {/* Fil d'Ariane — visible uniquement sur les pages interieures */}
       <Breadcrumb />
       <main>{children}</main>
-      <Footer />
+      {/* Footer unifie : vagues + bateau + contact + infos */}
+      <WaveAnimation>
+        <Contact />
+      </WaveAnimation>
       {/* Bouton boussole, visible seulement apres avoir scrolle */}
       <ScrollToTop />
     </>

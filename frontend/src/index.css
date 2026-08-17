@@ -37,7 +37,7 @@
 
   --nav-height: 72px;
   --max-width: 1200px;
-  --section-padding: 100px;
+  --section-padding: 64px;
 
   --font-main: 'Outfit', sans-serif;
 
@@ -123,7 +123,7 @@ img {
 @media (max-width: 768px) {
 
   :root {
-    --section-padding: 60px;
+    --section-padding: 40px;
   }
 
 }

@@ -1,25 +1,30 @@
 // ============================================
 // components/sections/CtaBanner.tsx
-// Bandeau double CTA — cote client maritime + cote recruteur
-// Positionne juste avant le Footer dans Home.tsx
-// Repond au probleme : le visiteur doit savoir quoi faire ensuite
+// Bento grid : client, recruteur, devis (modal), calendrier
+// Inspire de sertica.com — 4 blocs dans une grille asymetrique
 // ============================================
-import { Ship, FileUser } from "lucide-react";
+import { useState } from "react";
+import { Ship, FileUser, Calculator, Calendar, X } from "lucide-react";
 import { FadeIn } from "../FadeIn";
 import { CalendlyEmbed } from "../CalendlyEmbed";
+import { QuoteCalculator } from "./QuoteCalculator";
 import { useLanguage } from "../../i18n/useLanguage";
 import "./CtaBanner.css";
 
 export function CtaBanner() {
   const { t } = useLanguage();
+  // Modal du calculateur de devis
+  const [quoteOpen, setQuoteOpen] = useState(false);
+  const [calendarOpen, setCalendarOpen] = useState(false);
 
   return (
-    <section className="cta-banner">
+    <section className="cta-bento">
       <div className="container">
-        <div className="cta-banner__grid">
-          {/* Cote client maritime */}
+        <div className="cta-bento__grid">
+
+          {/* Carte client maritime — grande, occupe 1 colonne + 2 lignes */}
           <FadeIn delay={0}>
-            <div className="cta-banner__card cta-banner__card--client">
+            <div className="cta-bento__card cta-bento__card--client">
               <Ship size={32} strokeWidth={1.5} />
               <h3>{t("cta.client.title")}</h3>
               <p>{t("cta.client.desc")}</p>
@@ -29,9 +34,9 @@ export function CtaBanner() {
             </div>
           </FadeIn>
 
-          {/* Cote recruteur */}
-          <FadeIn delay={0.15}>
-            <div className="cta-banner__card cta-banner__card--recruiter">
+          {/* Carte recruteur */}
+          <FadeIn delay={0.1}>
+            <div className="cta-bento__card cta-bento__card--recruiter">
               <FileUser size={32} strokeWidth={1.5} />
               <h3>{t("cta.recruiter.title")}</h3>
               <p>{t("cta.recruiter.desc")}</p>
@@ -41,14 +46,65 @@ export function CtaBanner() {
             </div>
           </FadeIn>
 
-          {/* Prise de rendez-vous Cal.com */}
+          {/* Carte devis — ouvre le calculateur en modal */}
+          <FadeIn delay={0.2}>
+            <button
+              className="cta-bento__card cta-bento__card--quote"
+              onClick={() => setQuoteOpen(true)}
+            >
+              <Calculator size={32} strokeWidth={1.5} />
+              <h3>{t("quote.title")}</h3>
+              <p>{t("quote.subtitle")}</p>
+              <span className="btn btn--primary">{t("quote.cta")}</span>
+            </button>
+          </FadeIn>
+
+          {/* Carte calendrier — ouvre le calendrier en modal */}
           <FadeIn delay={0.3}>
-            <div className="cta-banner__card cta-banner__card--calendar">
-              <CalendlyEmbed />
-            </div>
+            <button
+              className="cta-bento__card cta-bento__card--calendar"
+              onClick={() => setCalendarOpen(true)}
+            >
+              <Calendar size={32} strokeWidth={1.5} />
+              <h3>{t("cta.calendar.title")}</h3>
+              <p>{t("cta.calendar.desc")}</p>
+              <span className="btn btn--secondary">{t("cta.calendar.btn")}</span>
+            </button>
           </FadeIn>
         </div>
       </div>
+
+      {/* ===== MODAL CALENDRIER ===== */}
+      {calendarOpen && (
+        <div className="quote-modal__overlay" onClick={() => setCalendarOpen(false)}>
+          <div className="quote-modal__content" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="quote-modal__close"
+              onClick={() => setCalendarOpen(false)}
+              aria-label="Fermer"
+            >
+              <X size={24} />
+            </button>
+            <CalendlyEmbed />
+          </div>
+        </div>
+      )}
+
+      {/* ===== MODAL CALCULATEUR DE DEVIS ===== */}
+      {quoteOpen && (
+        <div className="quote-modal__overlay" onClick={() => setQuoteOpen(false)}>
+          <div className="quote-modal__content" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="quote-modal__close"
+              onClick={() => setQuoteOpen(false)}
+              aria-label="Fermer"
+            >
+              <X size={24} />
+            </button>
+            <QuoteCalculator />
+          </div>
+        </div>
+      )}
     </section>
   );
 }

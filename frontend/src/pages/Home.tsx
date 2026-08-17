@@ -13,10 +13,7 @@ import { Roadmap } from "../components/sections/Roadmap";
 import { Services } from "../components/sections/Services";
 import { Portfolio } from "../components/sections/Portfolio";
 import { Testimonials } from "../components/sections/Testimonials";
-import { QuoteCalculator } from "../components/sections/QuoteCalculator";
-import { Contact } from "../components/sections/Contact";
 import { CtaBanner } from "../components/sections/CtaBanner";
-import WaveAnimation from "../components/WaveAnimation";
 
 export function Home() {
   const { t } = useLanguage();
@@ -60,12 +57,6 @@ export function Home() {
       <Services />
       <Portfolio />
       <Testimonials />
-      <QuoteCalculator />
-
-      {/* Contact est enveloppe dans les vagues animees */}
-      <WaveAnimation>
-        <Contact />
-      </WaveAnimation>
       <CtaBanner />
     </>
   );

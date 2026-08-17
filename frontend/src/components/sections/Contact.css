@@ -77,11 +77,12 @@
 }
 
 /* ===== FORMULAIRE ===== */
+/* Formulaire plus compact */
 .contact-form {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-lg);
-  padding: 36px;
+  padding: 24px;
 }
 
 /* ===== ONGLETS EMAIL / WHATSAPP =====
@@ -146,7 +147,11 @@
 }
 
 /* Groupe = label + input + message d'erreur eventuel */
+/* Espacement reduit entre label et champ */
 .fg {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   margin-bottom: 22px;
 }
 
@@ -154,17 +159,18 @@
   display: block;
   font-size: 14px;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 0;
 }
 
-.fg input,
-.fg textarea,
-.fg select {
+/* Champs plus compacts */
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
   width: 100%;
   background: var(--bg-gray);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-sm);
-  padding: 14px 16px;
+  padding: 10px 14px;
   font-family: var(--font-main);
   font-size: 14px;
   color: var(--text-primary);
@@ -172,19 +178,20 @@
   transition: border-color 0.2s;
 }
 
-.fg input::placeholder,
-.fg textarea::placeholder {
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
   color: var(--text-light);
 }
 
-.fg input:focus,
-.fg textarea:focus,
-.fg select:focus {
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
   border-color: var(--text-primary);
 }
 
-.fg textarea {
-  min-height: 130px;
+/* Textarea reduit en hauteur */
+.contact-form textarea {
+  min-height: 80px;
   resize: vertical;
 }
 
@@ -200,7 +207,7 @@
   flex: 0 0 92px;
 
   /* On reduit le padding par rapport aux autres champs (select plus compact) */
-  padding: 14px 8px;
+  padding: 10px 8px;
 }
 
 .phone-field input {
@@ -262,4 +269,130 @@
 
 .input--error {
   border-color: var(--error-text) !important;
+}
+
+/* ============================================
+   FOOTER INTEGRE DANS CONTACT
+   ============================================ */
+
+.contact-footer {
+  margin-top: 64px;
+  padding-top: 40px;
+  border-top: 1px solid var(--card-border);
+}
+
+/* Partie haute : brand a gauche + colonnes a droite */
+.contact-footer__top {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 48px;
+  margin-bottom: 32px;
+}
+
+/* Logo + tagline + socials */
+.contact-footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-footer__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-footer__logo img {
+  height: 28px;
+}
+
+.contact-footer__logo span {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.contact-footer__tagline {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+}
+
+.contact-footer__identity {
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+.contact-footer__socials {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* Colonnes mission / tech / navigation */
+.contact-footer__columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.contact-footer__col h4 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.contact-footer__col p {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Liens de navigation en colonne */
+.contact-footer__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-footer__nav a {
+  color: var(--text-secondary);
+  font-size: 13px;
+  transition: color 0.2s;
+}
+
+.contact-footer__nav a:hover {
+  color: var(--text-primary);
+}
+
+/* Ligne du bas : API + copyright centres */
+.contact-footer__bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding-top: 24px;
+  border-top: 1px solid var(--card-border);
+}
+
+.contact-footer__bottom p {
+  color: var(--text-light);
+  font-size: 13px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .contact-footer__top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .contact-footer__columns {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }

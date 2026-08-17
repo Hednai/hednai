@@ -2,7 +2,7 @@
 // components/sections/Hero.tsx
 // Section d'introduction en haut de la page
 // ============================================
-import { Anchor, Code, Brain, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/Button";
 import { RadarAnimation } from "../RadarAnimation";
 import { AvailabilityBadge } from "../AvailabilityBadge";
@@ -19,16 +19,10 @@ export function Hero() {
       {/* Conteneur en 2 colonnes : texte a gauche, radar a droite */}
       <div className="hero__inner">
         <div className="hero__content">
-          <div className="hero__icons">
-            <Anchor size={32} strokeWidth={1.5} />
-            <Code size={32} strokeWidth={1.5} />
-            <Brain size={32} strokeWidth={1.5} />
-          </div>
-
           <AvailabilityBadge />
 
           {/* Signature de marque — toujours visible, independante du mode */}
-          <p className="hero__tagline">{t("hero.tagline")}</p>
+          {/* Tagline retiree du Hero — deja presente sous le logo */}
 
           <h1>{isRecruiter ? t("hero.title.recruiter") : t("hero.title")}</h1>
 

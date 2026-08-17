@@ -5,7 +5,7 @@
 // ============================================
 export const fr: Record<string, string> = {
   // Navigation
-  "nav.badge": "Developpeur Full Stack · Maritime",
+  "nav.badge": "From Sea to Code.",
   "breadcrumb.solutions": "Solutions",
   "breadcrumb.recruiter": "Profil recruteur",
   "nav.home": "Accueil",
@@ -23,13 +23,13 @@ export const fr: Record<string, string> = {
   "nav.about": "A propos",
 
   // Hero (section d'introduction en haut de page)
-  "hero.title": "Logiciels IA pour digitaliser le maritime",
-  "hero.subtitle": "Hednai developpe des solutions sur mesure pour les ports, armateurs et compagnies maritimes — gestion de flotte, maintenance predictive et optimisation des operations grace a l'intelligence artificielle.",
+  "hero.title": "Des solutions web et logicielles adaptees a vos besoins",
+  "hero.subtitle": "Je concois des sites web, applications et solutions logicielles sur mesure, en combinant developpement Full Stack, applications mobiles et intelligence artificielle. Mon experience maritime me permet egalement de comprendre les enjeux propres a ce secteur.",
   "hero.cta1": "Discutons de votre projet",
-  "hero.cta2": "Voir nos solutions",
+  "hero.cta2": "Voir mes projets",
   "hero.tagline": "From Sea to Code.",
   "hero.punchline.client": "On connait la mer. On construit pour elle.",
-  "hero.punchline.recruiter": "De la mer au code.",
+  "hero.punchline.recruiter": "",
 
   // Section Services
   "services.title": "Nos Solutions",
@@ -208,7 +208,7 @@ export const fr: Record<string, string> = {
   "cta.recruiter.btn": "Voir mon profil",
 
   // Badge de disponibilite
-  "availability.text": "Disponible pour stage et missions freelance",
+  "availability.text": "Disponible pour missions freelance",
 
   // Toggle mode client / recruteur
   "viewMode.toggle": "Changer le mode d'affichage",
@@ -253,9 +253,9 @@ export const fr: Record<string, string> = {
   "blog.article3.content": "La maintenance non planifiee en mer coute des millions chaque annee aux compagnies maritimes. Les capteurs IoT modernes generent des teraoctets de donnees — temperature moteur, vibrations, consommation de carburant — mais sans analyse intelligente, ces donnees restent inutiles. L'IA de maintenance predictive analyse ces flux en temps reel pour detecter les anomalies avant qu'elles deviennent des pannes. Resultat : moins d'immobilisations, moins de couts, plus de securite. C'est exactement le type de solution que Hednai developpe pour le secteur maritime.",
 
   // Hero — variante mode recruteur
-  "hero.title.recruiter": "Developpeur Full Stack passionne par le maritime et l'IA",
-  "hero.subtitle.recruiter": "Ancien officier de marine reconverti en developpeur React, Node.js et TypeScript. Fondateur de Hednai, une startup de logiciels IA pour le maritime.",
-  "hero.cta1.recruiter": "Voir mon profil complet",
+  "hero.title.recruiter": "Developpeur Full Stack entre technologie, maritime et IA",
+  "hero.subtitle.recruiter": "Officier de la marine marchande et developpeur Full Stack, je transforme mon experience maritime en solutions logicielles modernes, du web aux applications et a l'IA. Je construis HEDNAI, a la croisee du numerique et du maritime.",
+  "hero.cta1.recruiter": "Decouvrir mon parcours",
   "hero.cta2.recruiter": "Voir mes projets",
 
   // Services — variante mode recruteur
@@ -387,6 +387,11 @@ export const fr: Record<string, string> = {
   "dashboard.passwordPlaceholder": "Mot de passe",
   "dashboard.loginBtn": "Se connecter",
   "dashboard.authError": "Mot de passe incorrect.",
+  
+  // Calendrier de rendez-vous
+  "cta.calendar.title": "Reservez un creneau",
+  "cta.calendar.desc": "Consultation gratuite de 15 minutes",
+  "cta.calendar.btn": "Voir les disponibilites",
 };
 
 // Type derive automatiquement des cles du fichier francais
