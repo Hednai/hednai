@@ -5,7 +5,8 @@
 // Un recruteur qui recoit ce lien voit immediatement le profil
 // ============================================
 import { Link } from "react-router-dom";
-import { Github, Linkedin, Mail, ArrowLeft } from "lucide-react";
+import { Mail, ArrowLeft } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import { Card } from "../components/ui/Card";
 import { FadeIn } from "../components/FadeIn";
@@ -63,7 +64,7 @@ export function Recruiter() {
                 rel="noopener noreferrer"
                 className="btn btn--secondary"
               >
-                <Github size={16} /> GitHub
+                <FaGithub size={16} /> GitHub
               </a>
               <a
                 href={SITE_CONFIG.socials.linkedin}
@@ -71,7 +72,7 @@ export function Recruiter() {
                 rel="noopener noreferrer"
                 className="btn btn--secondary"
               >
-                <Linkedin size={16} /> LinkedIn
+                <FaLinkedin size={16} /> LinkedIn
               </a>
               <a
                 href={`mailto:${SITE_CONFIG.contact.email}`}
