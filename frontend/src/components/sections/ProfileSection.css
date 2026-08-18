@@ -1,0 +1,128 @@
+/* ============================================
+   ProfileSection.css
+   Section profil recruteur — photo + timeline
+   Layout : photo a gauche, timeline a droite (empile sur mobile)
+   Couleurs : variables CSS uniquement, compatible dark mode
+   ============================================ */
+
+/* Conteneur principal — photo a gauche, timeline a droite */
+.profile {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ── Photo professionnelle ── */
+.profile__photo-wrapper {
+  position: sticky;
+  top: calc(var(--nav-height) + 24px);
+}
+
+.profile__photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 3px solid var(--card-border);
+}
+
+/* ── Timeline ── */
+.profile__timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Chaque etape = marker a gauche + contenu a droite */
+.profile__step {
+  display: flex;
+  gap: 16px;
+}
+
+/* Colonne gauche : icone + ligne verticale */
+.profile__step-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Icone ronde */
+.profile__step-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-circle);
+  background: var(--accent-cyan);
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Ligne verticale entre les etapes */
+.profile__step-line {
+  width: 2px;
+  flex: 1;
+  min-height: 24px;
+  background: var(--card-border);
+}
+
+/* Contenu textuel de chaque etape */
+.profile__step-content {
+  padding-bottom: 32px;
+}
+
+/* Periode (ex: 2010 — 2022) */
+.profile__step-period {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.profile__step-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 4px 0 8px;
+  color: var(--text-primary);
+}
+
+.profile__step-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+
+/* ── Bouton toggle CV ── */
+.profile__cv-toggle {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.profile__cv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile__cv-btn--close {
+  margin-top: 32px;
+}
+
+/* ── Responsive — empiler sur mobile ── */
+@media (max-width: 768px) {
+  .profile {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .profile__photo-wrapper {
+    position: static;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+}

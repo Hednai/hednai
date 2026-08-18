@@ -145,6 +145,28 @@
   color: var(--text-primary);
 }
 
+
+/* ── Mode recruteur : badges role et duree sous la description ── */
+.proj__meta {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.proj__meta-item {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  background: rgba(0, 200, 200, 0.08);
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+/* Dark mode : fond du badge legerement plus visible */
+[data-theme="dark"] .proj__meta-item {
+  background: rgba(0, 200, 200, 0.15);
+}
 /* ── Responsive : on reduit le nombre de colonnes sur petit ecran ── */
 @media (max-width: 1024px) {
   .portfolio-grid {

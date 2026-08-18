@@ -102,9 +102,13 @@ export function Navbar() {
         {/* Liste des liens */}
         <ul className={`navbar__links ${menuOpen ? "navbar__links--open" : ""}`}>
           {NAV_LINKS.map((link) => {
-            // Verifier si ce lien correspond a la section visible
-            const sectionId = link.href.replace("#", "");
-            const isActive = activeSection === sectionId;
+            // Sur une page interne (/blog, /recruiter...), seul le lien route est actif
+            // Sur la page d'accueil, le scroll spy gere les ancres
+            const isRoute = !link.href.startsWith("#");
+            const onHomePage = location.pathname === "/";
+            const isActive = isRoute
+              ? location.pathname === link.href
+              : onHomePage && activeSection === link.href.replace("#", "");
 
             return (
               <li key={link.key}>
