@@ -2,13 +2,16 @@
 
 /* Espacement vertical identique pour TOUTES les sections */
 .section {
-  padding: 20px 0 var(--section-padding);
+  padding: 8px 0 var(--section-padding);
+  animation: sectionFadeIn var(--mode-transition);
 }
 
-/* Scroll-margin pour compenser la navbar fixe */
-.section[id] {
-  scroll-margin-top: var(--nav-height);
+@keyframes sectionFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
+
+/* scroll-padding-top sur html (index.css) gere deja le decalage navbar */
 
 .section--gray {
   background: var(--bg-gray);

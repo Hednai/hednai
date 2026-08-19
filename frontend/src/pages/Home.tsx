@@ -6,17 +6,19 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useLanguage } from "../i18n/useLanguage";
+import { useViewMode } from "../context/useViewMode";
 import { Hero } from "../components/sections/Hero";
 import { WhyHednai } from "../components/sections/WhyHednai";
 import { About } from "../components/sections/About";
-import { Roadmap } from "../components/sections/Roadmap";
 import { Services } from "../components/sections/Services";
 import { Portfolio } from "../components/sections/Portfolio";
 import { Testimonials } from "../components/sections/Testimonials";
 import { CtaBanner } from "../components/sections/CtaBanner";
+import { ProfileSection } from "../components/sections/ProfileSection";
 
 export function Home() {
   const { t } = useLanguage();
+  const { isRecruiter } = useViewMode();
   const location = useLocation();
 
   // Si on arrive depuis une autre page avec un scrollTo, scroller vers la section
@@ -42,21 +44,20 @@ export function Home() {
       <Hero />
       <WhyHednai />
 
-      {/* About et Roadmap cote a cote sur grand ecran */}
-      <section className="about-roadmap-row">
-        <div className="container about-roadmap-row__inner">
-          <div className="about-roadmap-row__left">
-            <About />
-          </div>
-          <div className="about-roadmap-row__right">
-            <Roadmap />
-          </div>
-        </div>
-      </section>
+      {/* Mode client : About avec onglets (parcours + roadmap) */}
+      {/* Mode recruteur : ProfileSection (photo + timeline parcours) */}
+      {!isRecruiter ? (
+        <About />
+      ) : (
+        <ProfileSection />
+      )}
 
       <Services />
       <Portfolio />
-      <Testimonials />
+
+      {/* Temoignages — mode client uniquement */}
+      {!isRecruiter && <Testimonials />}
+
       <CtaBanner />
     </>
   );

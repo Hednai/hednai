@@ -1,0 +1,33 @@
+// ============================================
+// i18n/en/about.ts — About section (tabs: journey + roadmap)
+// ============================================
+export const about = {
+  "about.title": "About",
+  "about.subtitle": "From maritime experience to digital solutions.",
+  "about.intro": "My name is Daren, founder of Hednai. After more than ten years in the merchant navy, I chose to develop new expertise in software development. Hednai was born from the intersection of my maritime field experience and my path in software development: a project open to many horizons, with a maritime focus naturally rooted in my background.",
+  "about.tab.parcours": "My journey",
+  "about.tab.roadmap": "Roadmap",
+  "about.step1.period": "2012 – 2024",
+  "about.step1.title": "Merchant navy officer",
+  "about.step1.desc": "Over ten years aboard ships: navigation, crew management, port operations. A deep understanding of daily maritime realities, and the drive to help address them through technology.",
+  "about.step2.period": "2025 – 2026",
+  "about.step2.title": "Software development training",
+  "about.step2.desc": "Career transition at La Cité College (Ottawa) in Computer Programming. Hands-on practice through personal and academic Full Stack development projects.",
+  "about.step3.period": "2025 – Present",
+  "about.step3.title": "Founder of Hednai",
+  "about.step3.desc": "Building Hednai, a software development project at the intersection of maritime and digital. The goal: turning real-world challenges into useful solutions, with a focus naturally oriented toward the industry I know best.",
+  "roadmap.title": "Roadmap",
+  "roadmap.subtitle": "Building Hednai, step by step.",
+  "roadmap.m1.title": "Birth of Hednai",
+  "roadmap.m1.desc": "Creation of the project and its identity. A bridge between maritime experience and software development.",
+  "roadmap.m2.title": "Technical foundations",
+  "roadmap.m2.desc": "Building the first technical foundations through various projects: Express, PostgreSQL, Redis, testing and CI/CD. Showcase website with 2-in-1 positioning: startup and portfolio.",
+  "roadmap.m3.title": "Personal and academic projects",
+  "roadmap.m3.desc": "Full Stack development projects through training and in parallel. Each project is a step toward building Hednai.",
+  "roadmap.m4.title": "AI specialization",
+  "roadmap.m4.desc": "Artificial Intelligence Software Development program at Algonquin College. Deepening AI knowledge to progressively explore its integration into Hednai's future projects and solutions.",
+  "roadmap.m5.title": "Maritime digital solutions",
+  "roadmap.m5.desc": "From smart ports to fleet management, port operations to crew tracking, route optimization to predictive maintenance: exploring, designing and building digital solutions to address the realities of the sector.",
+  "roadmap.m6.title": "International expansion",
+  "roadmap.m6.desc": "Building digital solutions from Canada to address maritime realities around the world.",
+};

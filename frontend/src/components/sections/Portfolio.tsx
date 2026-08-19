@@ -12,10 +12,19 @@ import { SectionWrapper } from "../ui/SectionWrapper";
 import { Card } from "../ui/Card";
 import { FadeIn } from "../FadeIn";
 import { useLanguage } from "../../i18n/useLanguage";
+import { useViewMode } from "../../context/useViewMode";
 import "./Portfolio.css";
+
+// Table de correspondance slug → cles i18n pour role/duree (mode recruteur)
+const PROJECT_META: Record<string, { roleKey: string; durationKey: string }> = {
+  "fleetmanager-pro": { roleKey: "projects.fleet.role", durationKey: "projects.fleet.duration" },
+  "routeoptimizer-ai": { roleKey: "projects.route.role", durationKey: "projects.route.duration" },
+  "portalweb-maritime": { roleKey: "projects.portal.role", durationKey: "projects.portal.duration" },
+};
 
 export function Portfolio() {
   const { t } = useLanguage();
+  const { isRecruiter } = useViewMode();
 
   // Filtre actuellement selectionne (cle i18n de la categorie)
   const [activeFilter, setActiveFilter] = useState(CATEGORIES[0]);
@@ -31,7 +40,7 @@ export function Portfolio() {
     <SectionWrapper
       id="portfolio"
       title={t("portfolio.title")}
-      subtitle={t("portfolio.subtitle")}
+      subtitle={isRecruiter ? t("portfolio.subtitle.recruiter") : t("portfolio.subtitle")}
     >
       {/* Boutons de filtre par categorie */}
       <div className="portfolio-filters">
@@ -69,6 +78,19 @@ export function Portfolio() {
                     <Link to={`/project/${p.slug}`}>{t(p.titleKey)}</Link>
                   </h3>
                   <p>{t(p.descriptionKey)}</p>
+
+                  {/* Mode recruteur : afficher role et duree du projet */}
+                  {isRecruiter && PROJECT_META[p.slug] && (
+                    <div className="proj__meta">
+                      <span className="proj__meta-item">
+                        {t("portfolio.role")}: {t(PROJECT_META[p.slug].roleKey)}
+                      </span>
+                      <span className="proj__meta-item">
+                        {t("portfolio.duration")}: {t(PROJECT_META[p.slug].durationKey)}
+                      </span>
+                    </div>
+                  )}
+
                   <div className="proj__techs">
                     {p.technologies.map((tech) => (
                       <span className="tech-tag" key={tech}>{tech}</span>

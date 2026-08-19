@@ -38,6 +38,7 @@
   --nav-height: 72px;
   --max-width: 1200px;
   --section-padding: 64px;
+  --mode-transition: 0.3s ease;
 
   --font-main: 'Outfit', sans-serif;
 

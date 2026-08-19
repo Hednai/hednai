@@ -9,10 +9,12 @@ import { FadeIn } from "../FadeIn";
 import { CalendlyEmbed } from "../CalendlyEmbed";
 import { QuoteCalculator } from "./QuoteCalculator";
 import { useLanguage } from "../../i18n/useLanguage";
+import { useViewMode } from "../../context/useViewMode";
 import "./CtaBanner.css";
 
 export function CtaBanner() {
   const { t } = useLanguage();
+  const { isRecruiter } = useViewMode();
   // Modal du calculateur de devis
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
@@ -20,57 +22,75 @@ export function CtaBanner() {
   return (
     <section className="cta-bento">
       <div className="container">
-        <div className="cta-bento__grid">
+        <div className={`cta-bento__grid ${isRecruiter ? "cta-bento__grid--recruiter" : ""}`}>
 
-          {/* Carte client maritime — grande, occupe 1 colonne + 2 lignes */}
-          <FadeIn delay={0}>
-            <div className="cta-bento__card cta-bento__card--client">
-              <Ship size={32} strokeWidth={1.5} />
-              <h3>{t("cta.client.title")}</h3>
-              <p>{t("cta.client.desc")}</p>
-              <a href="#contact" className="btn btn--primary">
-                {t("cta.client.btn")}
-              </a>
-            </div>
-          </FadeIn>
+          {/* ===== MODE RECRUTEUR : CTA simplifie ===== */}
+          {isRecruiter ? (
+            <FadeIn delay={0}>
+              <div className="cta-bento__card cta-bento__card--recruiter-mode">
+                <FileUser size={32} strokeWidth={1.5} />
+                <h3>{t("cta.recruiter.title.mode")}</h3>
+                <p>{t("cta.recruiter.desc.mode")}</p>
+                <a href="#contact" className="btn btn--primary">
+                  {t("cta.recruiter.btn.mode")}
+                </a>
+              </div>
+            </FadeIn>
+          ) : (
+            <>
+              {/* ===== MODE CLIENT : bento complet ===== */}
 
-          {/* Carte recruteur */}
-          <FadeIn delay={0.1}>
-            <div className="cta-bento__card cta-bento__card--recruiter">
-              <FileUser size={32} strokeWidth={1.5} />
-              <h3>{t("cta.recruiter.title")}</h3>
-              <p>{t("cta.recruiter.desc")}</p>
-              <a href="#contact" className="btn btn--secondary">
-                {t("cta.recruiter.btn")}
-              </a>
-            </div>
-          </FadeIn>
+              {/* Carte client maritime */}
+              <FadeIn delay={0}>
+                <div className="cta-bento__card cta-bento__card--client">
+                  <Ship size={32} strokeWidth={1.5} />
+                  <h3>{t("cta.client.title")}</h3>
+                  <p>{t("cta.client.desc")}</p>
+                  <a href="#contact" className="btn btn--primary">
+                    {t("cta.client.btn")}
+                  </a>
+                </div>
+              </FadeIn>
 
-          {/* Carte devis — ouvre le calculateur en modal */}
-          <FadeIn delay={0.2}>
-            <button
-              className="cta-bento__card cta-bento__card--quote"
-              onClick={() => setQuoteOpen(true)}
-            >
-              <Calculator size={32} strokeWidth={1.5} />
-              <h3>{t("quote.title")}</h3>
-              <p>{t("quote.subtitle")}</p>
-              <span className="btn btn--primary">{t("quote.cta")}</span>
-            </button>
-          </FadeIn>
+              {/* Carte recruteur */}
+              <FadeIn delay={0.1}>
+                <div className="cta-bento__card cta-bento__card--recruiter">
+                  <FileUser size={32} strokeWidth={1.5} />
+                  <h3>{t("cta.recruiter.title")}</h3>
+                  <p>{t("cta.recruiter.desc")}</p>
+                  <a href="#contact" className="btn btn--secondary">
+                    {t("cta.recruiter.btn")}
+                  </a>
+                </div>
+              </FadeIn>
 
-          {/* Carte calendrier — ouvre le calendrier en modal */}
-          <FadeIn delay={0.3}>
-            <button
-              className="cta-bento__card cta-bento__card--calendar"
-              onClick={() => setCalendarOpen(true)}
-            >
-              <Calendar size={32} strokeWidth={1.5} />
-              <h3>{t("cta.calendar.title")}</h3>
-              <p>{t("cta.calendar.desc")}</p>
-              <span className="btn btn--secondary">{t("cta.calendar.btn")}</span>
-            </button>
-          </FadeIn>
+              {/* Carte devis — ouvre le calculateur en modal */}
+              <FadeIn delay={0.2}>
+                <button
+                  className="cta-bento__card cta-bento__card--quote"
+                  onClick={() => setQuoteOpen(true)}
+                >
+                  <Calculator size={32} strokeWidth={1.5} />
+                  <h3>{t("quote.title")}</h3>
+                  <p>{t("quote.subtitle")}</p>
+                  <span className="btn btn--primary">{t("quote.cta")}</span>
+                </button>
+              </FadeIn>
+
+              {/* Carte calendrier — ouvre le calendrier en modal */}
+              <FadeIn delay={0.3}>
+                <button
+                  className="cta-bento__card cta-bento__card--calendar"
+                  onClick={() => setCalendarOpen(true)}
+                >
+                  <Calendar size={32} strokeWidth={1.5} />
+                  <h3>{t("cta.calendar.title")}</h3>
+                  <p>{t("cta.calendar.desc")}</p>
+                  <span className="btn btn--secondary">{t("cta.calendar.btn")}</span>
+                </button>
+              </FadeIn>
+            </>
+          )}
         </div>
       </div>
 

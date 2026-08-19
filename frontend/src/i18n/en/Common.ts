@@ -1,0 +1,30 @@
+// ============================================
+// i18n/en/common.ts — Shared elements (footer, SEO, PWA, scroll, API status, modes)
+// ============================================
+export const common = {
+  "footer.rights": "All rights reserved.",
+  "footer.poweredBy": "Powered by",
+  "footer.tagline": "From Sea to Code.",
+  "footer.identity": "Portfolio of Daren, founder and Full Stack developer, and showcase of Hednai, an AI software startup for the maritime industry.",
+  "footer.mission.title": "Mission",
+  "footer.mission.text": "Digitize maritime operations through artificial intelligence and custom software development.",
+  "footer.tech.title": "Technologies",
+  "footer.tech.text": "React, TypeScript, Node.js, Express, PostgreSQL, Python, TensorFlow",
+  "footer.contact.title": "Contact",
+  "scrollToTop": "Back to top",
+  "seo.home.title": "Hednai — AI Software for Maritime",
+  "seo.home.desc": "Hednai builds custom software solutions for ports, shipowners and maritime companies. Fleet management, predictive maintenance, AI.",
+  "apiStatus.loading": "Connecting to API...",
+  "apiStatus.online": "API online",
+  "apiStatus.offline": "API offline",
+  "pwa.install": "Install Hednai app",
+  "pwa.close": "Close",
+  "notFound.message": "This page doesn't exist or has been moved.",
+  "notFound.back": "Back to home",
+  "availability.text": "Available for freelance projects",
+  "viewMode.toggle": "Switch view mode",
+  "viewMode.client": "Client Mode",
+  "viewMode.recruiter": "Recruiter Mode",
+  "viewMode.switchRecruiter": "Switch to recruiter mode",
+  "viewMode.switchClient": "Switch to client mode",
+};

@@ -1,0 +1,30 @@
+// ============================================
+// i18n/fr/common.ts — Elements partages (footer, SEO, PWA, scroll, API status, modes)
+// ============================================
+export const common = {
+  "footer.rights": "Tous droits reserves.",
+  "footer.poweredBy": "Propulse par",
+  "footer.tagline": "From Sea to Code.",
+  "footer.identity": "Portfolio de Daren, fondateur et developpeur Full Stack, et vitrine de Hednai, startup de logiciels IA pour le maritime.",
+  "footer.mission.title": "Mission",
+  "footer.mission.text": "Digitaliser le maritime grace a l'intelligence artificielle et au developpement logiciel sur mesure.",
+  "footer.tech.title": "Technologies",
+  "footer.tech.text": "React, TypeScript, Node.js, Express, PostgreSQL, Python, TensorFlow",
+  "footer.contact.title": "Contact",
+  "scrollToTop": "Retour en haut",
+  "seo.home.title": "Hednai — Logiciels IA pour le Maritime",
+  "seo.home.desc": "Hednai developpe des solutions logicielles sur mesure pour les ports, armateurs et compagnies maritimes. Gestion de flotte, maintenance predictive, IA.",
+  "apiStatus.loading": "Connexion API...",
+  "apiStatus.online": "API en ligne",
+  "apiStatus.offline": "API hors ligne",
+  "pwa.install": "Installer l'application Hednai",
+  "pwa.close": "Fermer",
+  "notFound.message": "Cette page n'existe pas ou a ete deplacee.",
+  "notFound.back": "Retour a l'accueil",
+  "availability.text": "Disponible pour missions freelance",
+  "viewMode.toggle": "Changer le mode d'affichage",
+  "viewMode.client": "Mode Client",
+  "viewMode.recruiter": "Mode Recruteur",
+  "viewMode.switchRecruiter": "Passer en mode recruteur",
+  "viewMode.switchClient": "Passer en mode client",
+};

@@ -1,0 +1,33 @@
+// ============================================
+// i18n/fr/about.ts — Section À propos (onglets parcours + roadmap)
+// ============================================
+export const about = {
+  "about.title": "À propos",
+  "about.subtitle": "De l'expérience maritime aux solutions numériques.",
+  "about.intro": "Je m'appelle Daren, fondateur de Hednai. Après plus de dix ans dans la marine marchande, j'ai choisi de développer une nouvelle expertise dans le développement logiciel. Hednai est né de cette rencontre entre mon expérience du terrain maritime et mon parcours dans le développement logiciel : un projet ouvert à différents horizons, avec un positionnement maritime naturellement issu de mon parcours.",
+  "about.tab.parcours": "Mon parcours",
+  "about.tab.roadmap": "Feuille de route",
+  "about.step1.period": "2012 – 2024",
+  "about.step1.title": "Officier de la marine marchande",
+  "about.step1.desc": "Plus de dix ans à bord de navires : navigation, gestion d'équipage, opérations portuaires. Une connaissance profonde des réalités du maritime au quotidien, et l'envie de contribuer à y apporter des réponses par la technologie.",
+  "about.step2.period": "2025 – 2026",
+  "about.step2.title": "Formation en développement logiciel",
+  "about.step2.desc": "Reconversion au Collège La Cité (Ottawa) en Programmation informatique. Mise en pratique à travers des projets personnels et académiques en développement Full Stack.",
+  "about.step3.period": "2025 – Aujourd'hui",
+  "about.step3.title": "Fondateur de Hednai",
+  "about.step3.desc": "Création de Hednai, un projet de développement logiciel au croisement du maritime et du numérique. L'objectif : transformer des problématiques concrètes en solutions utiles, avec un positionnement naturellement orienté vers le secteur que je connais le mieux.",
+  "roadmap.title": "Feuille de route",
+  "roadmap.subtitle": "Construire Hednai, étape par étape.",
+  "roadmap.m1.title": "Naissance de Hednai",
+  "roadmap.m1.desc": "Création du projet et de son identité. Un pont entre l'expérience maritime et le développement logiciel.",
+  "roadmap.m2.title": "Fondations techniques",
+  "roadmap.m2.desc": "Développement des premières fondations techniques à travers différents projets : Express, PostgreSQL, Redis, tests et CI/CD. Site vitrine avec positionnement 2-en-1 : startup et portfolio.",
+  "roadmap.m3.title": "Projets personnels et académiques",
+  "roadmap.m3.desc": "Développement de projets Full Stack dans le cadre de la formation et en parallèle. Chaque projet est une étape vers la construction de Hednai.",
+  "roadmap.m4.title": "Spécialisation IA",
+  "roadmap.m4.desc": "Programme Artificial Intelligence Software Development à Algonquin College. Approfondir l'intelligence artificielle pour explorer progressivement son intégration aux futurs projets et solutions de Hednai.",
+  "roadmap.m5.title": "Solutions numériques maritimes",
+  "roadmap.m5.desc": "Du smart port à la gestion de flotte, des opérations portuaires au suivi d'équipage, de l'optimisation des routes à la maintenance prédictive : explorer, concevoir et développer des solutions numériques pour répondre aux réalités du secteur.",
+  "roadmap.m6.title": "Expansion internationale",
+  "roadmap.m6.desc": "Construire depuis le Canada des solutions numériques pour répondre aux réalités du maritime à travers le monde.",
+};
