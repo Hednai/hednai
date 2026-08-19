@@ -44,7 +44,7 @@ export function Home() {
       <Hero />
       <WhyHednai />
 
-      {/* Mode client : About avec onglets (parcours + roadmap) */}
+      {/* Mode client : About avec cartes expandables (parcours + roadmap) */}
       {/* Mode recruteur : ProfileSection (photo + timeline parcours) */}
       {!isRecruiter ? (
         <About />

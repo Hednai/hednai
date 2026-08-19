@@ -1,14 +1,16 @@
 // ============================================
 // components/sections/About.tsx
-// Section À propos avec onglets : Mon parcours + Feuille de route
-// Fusionne About et Roadmap en une seule section a onglets
+// Section A propos avec cartes expandables en overlay
+// Deux cartes : Mon parcours + Feuille de route
+// Animation framer-motion (layoutId + AnimatePresence)
 // Mode client uniquement (masque en mode recruteur via Home.tsx)
 // ============================================
-import { useState } from "react";
-import { Anchor, GraduationCap, Rocket, Check, Loader, Clock } from "lucide-react";
+import { useEffect, useId, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Anchor, GraduationCap, Rocket, Check, Loader, Clock, Compass, X } from "lucide-react";
 import { SectionWrapper } from "../ui/SectionWrapper";
-import { FadeIn } from "../FadeIn";
 import { useLanguage } from "../../i18n/useLanguage";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
 import "./About.css";
 import "./Roadmap.css";
 
@@ -62,12 +64,53 @@ const STATUS_ICON: Record<MilestoneStatus, React.ReactNode> = {
   planned: <Clock size={16} />,
 };
 
-// Identifiants des onglets
-type TabId = "parcours" | "roadmap";
+// Definition des deux cartes expandables
+interface AboutCard {
+  id: string;
+  titleKey: string;
+  descKey: string;
+  icon: React.ElementType;
+}
+
+const ABOUT_CARDS: AboutCard[] = [
+  {
+    id: "parcours",
+    titleKey: "about.tab.parcours",
+    descKey: "about.subtitle",
+    icon: Anchor,
+  },
+  {
+    id: "roadmap",
+    titleKey: "about.tab.roadmap",
+    descKey: "roadmap.subtitle",
+    icon: Compass,
+  },
+];
 
 export function About() {
   const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState<TabId>("parcours");
+  const [activeCard, setActiveCard] = useState<AboutCard | null>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const id = useId();
+
+  // Fermeture avec Escape + blocage du scroll
+  useEffect(() => {
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setActiveCard(null);
+    }
+
+    if (activeCard) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [activeCard]);
+
+  // Fermeture au clic exterieur
+  useOutsideClick(overlayRef, () => setActiveCard(null));
 
   return (
     <SectionWrapper
@@ -79,83 +122,139 @@ export function About() {
       {/* Introduction personnelle */}
       <p className="about__intro">{t("about.intro")}</p>
 
-      {/* Onglets Mon parcours / Feuille de route */}
-      <div className="about-tabs">
-        <button
-          className={`about-tabs__btn ${activeTab === "parcours" ? "about-tabs__btn--active" : ""}`}
-          onClick={() => setActiveTab("parcours")}
-          type="button"
-        >
-          {t("about.tab.parcours")}
-        </button>
-        <button
-          className={`about-tabs__btn ${activeTab === "roadmap" ? "about-tabs__btn--active" : ""}`}
-          onClick={() => setActiveTab("roadmap")}
-          type="button"
-        >
-          {t("about.tab.roadmap")}
-        </button>
-      </div>
+      {/* Overlay sombre derriere la carte expandee */}
+      <AnimatePresence>
+        {activeCard && (
+          <motion.div
+            className="about-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          />
+        )}
+      </AnimatePresence>
 
-      {/* Contenu de l'onglet Mon parcours */}
-      {activeTab === "parcours" && (
-        <div className="about-timeline">
-          {TIMELINE_STEPS.map((step, index) => {
-            const Icon = step.icon;
-            return (
-              <FadeIn key={step.titleKey} delay={index * 0.15}>
-                <div className="timeline-step">
-                  {/* Marqueur : icone + ligne de connexion */}
-                  <div className="timeline-step__marker">
-                    <div className="timeline-step__icon">
-                      <Icon size={24} strokeWidth={1.5} />
-                    </div>
-                    {/* Ligne entre les etapes (sauf la derniere) */}
-                    {index < TIMELINE_STEPS.length - 1 && (
-                      <div className="timeline-step__line" />
-                    )}
-                  </div>
-                  {/* Contenu texte */}
-                  <div className="timeline-step__content">
-                    <span className="timeline-step__period">
-                      {t(step.periodKey)}
-                    </span>
-                    <h3>{t(step.titleKey)}</h3>
-                    <p>{t(step.descKey)}</p>
-                  </div>
+      {/* Carte expandee en overlay */}
+      <AnimatePresence>
+        {activeCard && (
+          <div className="about-overlay__container">
+            <motion.div
+              layoutId={`about-card-${activeCard.id}-${id}`}
+              ref={overlayRef}
+              className="about-expanded"
+            >
+              {/* En-tete de la carte expandee */}
+              <div className="about-expanded__header">
+                <div className="about-expanded__header-text">
+                  <motion.h3 layoutId={`about-card-title-${activeCard.id}-${id}`}>
+                    {t(activeCard.titleKey)}
+                  </motion.h3>
+                  <motion.p layoutId={`about-card-desc-${activeCard.id}-${id}`}>
+                    {t(activeCard.descKey)}
+                  </motion.p>
                 </div>
-              </FadeIn>
-            );
-          })}
-        </div>
-      )}
-
-      {/* Contenu de l'onglet Feuille de route */}
-      {activeTab === "roadmap" && (
-        <div className="roadmap">
-          {MILESTONES.map((milestone, index) => (
-            <FadeIn key={milestone.titleKey} delay={index * 0.1}>
-              <div className={`roadmap__item roadmap__item--${milestone.status}`}>
-                {/* Marqueur de statut */}
-                <div className="roadmap__marker">
-                  <div className="roadmap__icon">
-                    {STATUS_ICON[milestone.status]}
-                  </div>
-                  {index < MILESTONES.length - 1 && (
-                    <div className="roadmap__line" />
-                  )}
-                </div>
-                {/* Contenu */}
-                <div className="roadmap__content">
-                  <span className="roadmap__year">{milestone.year}</span>
-                  <h3>{t(milestone.titleKey)}</h3>
-                  <p>{t(milestone.descKey)}</p>
-                </div>
+                {/* Bouton fermer */}
+                <button
+                  className="about-expanded__close"
+                  onClick={() => setActiveCard(null)}
+                  aria-label="Fermer"
+                  type="button"
+                >
+                  <X size={20} />
+                </button>
               </div>
-            </FadeIn>
-          ))}
-        </div>
-      )}
+
+              {/* Contenu de la carte : timeline parcours ou roadmap */}
+              <motion.div
+                className="about-expanded__body"
+                layout
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                {activeCard.id === "parcours" && (
+                  <div className="about-timeline">
+                    {TIMELINE_STEPS.map((step, index) => {
+                      const Icon = step.icon;
+                      return (
+                        <div className="timeline-step" key={step.titleKey}>
+                          <div className="timeline-step__marker">
+                            <div className="timeline-step__icon">
+                              <Icon size={24} strokeWidth={1.5} />
+                            </div>
+                            {index < TIMELINE_STEPS.length - 1 && (
+                              <div className="timeline-step__line" />
+                            )}
+                          </div>
+                          <div className="timeline-step__content">
+                            <span className="timeline-step__period">
+                              {t(step.periodKey)}
+                            </span>
+                            <h3>{t(step.titleKey)}</h3>
+                            <p>{t(step.descKey)}</p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {activeCard.id === "roadmap" && (
+                  <div className="roadmap">
+                    {MILESTONES.map((milestone, index) => (
+                      <div
+                        className={`roadmap__item roadmap__item--${milestone.status}`}
+                        key={milestone.titleKey}
+                      >
+                        <div className="roadmap__marker">
+                          <div className="roadmap__icon">
+                            {STATUS_ICON[milestone.status]}
+                          </div>
+                          {index < MILESTONES.length - 1 && (
+                            <div className="roadmap__line" />
+                          )}
+                        </div>
+                        <div className="roadmap__content">
+                          <span className="roadmap__year">{milestone.year}</span>
+                          <h3>{t(milestone.titleKey)}</h3>
+                          <p>{t(milestone.descKey)}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </motion.div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Les deux cartes compactes cliquables */}
+      <div className="about-cards">
+        {ABOUT_CARDS.map((card) => {
+          const Icon = card.icon;
+          return (
+            <motion.div
+              layoutId={`about-card-${card.id}-${id}`}
+              key={card.id}
+              className="about-card"
+              onClick={() => setActiveCard(card)}
+            >
+              <div className="about-card__icon">
+                <Icon size={28} strokeWidth={1.5} />
+              </div>
+              <div className="about-card__text">
+                <motion.h3 layoutId={`about-card-title-${card.id}-${id}`}>
+                  {t(card.titleKey)}
+                </motion.h3>
+                <motion.p layoutId={`about-card-desc-${card.id}-${id}`}>
+                  {t(card.descKey)}
+                </motion.p>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
     </SectionWrapper>
   );
 }
