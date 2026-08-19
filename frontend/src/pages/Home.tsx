@@ -10,7 +10,6 @@ import { useViewMode } from "../context/useViewMode";
 import { Hero } from "../components/sections/Hero";
 import { WhyHednai } from "../components/sections/WhyHednai";
 import { About } from "../components/sections/About";
-import { Roadmap } from "../components/sections/Roadmap";
 import { Services } from "../components/sections/Services";
 import { Portfolio } from "../components/sections/Portfolio";
 import { Testimonials } from "../components/sections/Testimonials";
@@ -45,19 +44,10 @@ export function Home() {
       <Hero />
       <WhyHednai />
 
-      {/* Mode client : About + Roadmap cote a cote */}
+      {/* Mode client : About avec onglets (parcours + roadmap) */}
       {/* Mode recruteur : ProfileSection (photo + timeline parcours) */}
       {!isRecruiter ? (
-        <section className="about-roadmap-row">
-          <div className="container about-roadmap-row__inner">
-            <div className="about-roadmap-row__left">
-              <About />
-            </div>
-            <div className="about-roadmap-row__right">
-              <Roadmap />
-            </div>
-          </div>
-        </section>
+        <About />
       ) : (
         <ProfileSection />
       )}

@@ -10,7 +10,6 @@ export const NAV_LINKS: NavLink[] = [
   { key: "home", href: "#accueil", labelKey: "nav.home", icon: "Home" },
   { key: "why", href: "#pourquoi", labelKey: "nav.why", icon: "Target" },
   { key: "about", href: "#apropos", labelKey: "nav.about", icon: "User" },
-  { key: "roadmap", href: "#roadmap", labelKey: "nav.roadmap", icon: "Map" },
   { key: "services", href: "#services", labelKey: "nav.services", icon: "LayoutGrid" },
   { key: "portfolio", href: "#portfolio", labelKey: "nav.portfolio", icon: "Briefcase" },
   { key: "contact", href: "#contact", labelKey: "nav.contact", icon: "Mail" },

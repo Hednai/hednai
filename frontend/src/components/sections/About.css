@@ -1,8 +1,9 @@
 /* ============================================
    About.css
-   Timeline verticale avec marqueurs et lignes de connexion
+   Section A propos avec onglets et timelines
    ============================================ */
 
+/* Introduction */
 .about__intro {
   max-width: 700px;
   margin: 0 auto 48px;
@@ -12,6 +13,38 @@
   line-height: 1.7;
 }
 
+/* Onglets Mon parcours / Feuille de route */
+.about-tabs {
+  display: flex;
+  gap: 0;
+  justify-content: center;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.about-tabs__btn {
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  font-family: inherit;
+}
+
+.about-tabs__btn:hover {
+  color: var(--text-primary);
+}
+
+.about-tabs__btn--active {
+  color: var(--accent-cyan);
+  border-bottom-color: var(--accent-cyan);
+}
+
+/* Timeline du parcours */
 .about-timeline {
   max-width: 700px;
   margin: 0 auto;
@@ -80,4 +113,5 @@
 @media (max-width: 640px) {
   .timeline-step { gap: 16px; }
   .timeline-step__icon { width: 44px; height: 44px; }
+  .about-tabs__btn { padding: 10px 16px; font-size: 14px; }
 }
