@@ -57,7 +57,6 @@ export function Services() {
       id="services"
       title={isRecruiter ? t("services.title.recruiter") : t("services.title")}
       subtitle={isRecruiter ? t("services.subtitle.recruiter") : t("services.subtitle")}
-      gray
     >
       {/* Overlay sombre derriere la carte expandee */}
       <AnimatePresence>

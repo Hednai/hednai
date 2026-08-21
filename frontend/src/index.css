@@ -172,6 +172,116 @@ img {
   margin-left: 0;
 }
 
+/* Fond bleu marine avec feuilles d'erable en filigrane (Retours + CTA) */
+.maple-section {
+  position: relative;
+  background: #0c2340;
+  overflow: hidden;
+}
+
+.maple-section__leaf {
+  position: absolute;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.05);
+}
+
+.maple-section__leaf--right {
+  width: 500px;
+  height: 500px;
+  right: -60px;
+  top: 10%;
+  transform: rotate(15deg);
+}
+
+.maple-section__leaf--left {
+  width: 300px;
+  height: 300px;
+  left: -40px;
+  bottom: 5%;
+  transform: rotate(-25deg);
+  color: rgba(255, 255, 255, 0.03);
+}
+
+/* Les sections enfants doivent avoir un fond transparent */
+.maple-section .section {
+  background: transparent;
+}
+
+.maple-section .section--gray {
+  background: transparent;
+}
+
+/* Textes en blanc sur fond bleu marine */
+.maple-section .section__title {
+  color: #ffffff;
+}
+
+.maple-section .section__subtitle {
+  color: #b0bec5;
+}
+
+/* Cartes temoignages : fond semi-transparent */
+.maple-section .card {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.maple-section .card h4,
+.maple-section .card strong {
+  color: #ffffff;
+}
+
+.maple-section .card p,
+.maple-section .card span {
+  color: #b0bec5;
+}
+
+.maple-section .card blockquote {
+  color: #d0d8e0;
+}
+
+.maple-section .card svg {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Noms et roles des temoignages en blanc sur fond bleu marine */
+.maple-section .testimonial__name {
+  color: #ffffff;
+}
+
+.maple-section .testimonial__role {
+  color: #b0bec5;
+}
+
+.maple-section .testimonial__context {
+  color: var(--accent-cyan);
+}
+
+.maple-section .testimonial__quote {
+  color: #d0d8e0;
+  font-style: italic;
+}
+
+/* Bento CTA : cartes claires restent visibles */
+.maple-section .cta-bento__card--calendar {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.maple-section .cta-bento__card--recruiter {
+  background: #e0f4f4;
+}
+
+@media (max-width: 768px) {
+  .maple-section__leaf--right {
+    width: 300px;
+    height: 300px;
+  }
+
+  .maple-section__leaf--left {
+    display: none;
+  }
+}
+
 /* Sur mobile, revenir en colonne unique */
 @media (max-width: 900px) {
   .about-roadmap-row__inner {

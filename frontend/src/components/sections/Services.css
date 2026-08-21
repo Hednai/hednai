@@ -3,6 +3,11 @@
    Grille de cartes expandables en overlay
    ============================================ */
 
+/* Fond de la section */
+#services {
+  background: #dfe4ed;
+}
+
 /* Grille des cartes compactes */
 .services-grid {
   display: grid;

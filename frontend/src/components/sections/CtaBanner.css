@@ -76,10 +76,10 @@
 }
 
 /* ===== CLIENT — fond fixe sombre, texte blanc ===== */
-/* Fond #1a2332 reste sombre en light ET dark */
+/* Fond #0c2340 reste sombre en light ET dark */
 .cta-bento__card--client {
-  background: #1a2332;
-  border-color: #1a2332;
+  background: #0c2340;
+  border-color: #0c2340;
   color: #ffffff;
 }
 
@@ -98,7 +98,7 @@
 /* Bouton blanc sur carte sombre */
 .cta-bento__card--client .btn--primary {
   background: #ffffff;
-  color: #1a2332;
+  color: #0c2340;
   border-color: #ffffff;
 }
 
@@ -134,8 +134,8 @@
   cursor: pointer;
   width: 100%;
   font-family: inherit;
-  background: #1a2332;
-  border-color: #1a2332;
+  background: #0c2340;
+  border-color: #0c2340;
   color: #ffffff;
 }
 
@@ -154,7 +154,7 @@
 /* Bouton blanc sur carte sombre */
 .cta-bento__card--quote .btn--primary {
   background: #ffffff;
-  color: #1a2332;
+  color: #0c2340;
   border-color: #ffffff;
 }
 

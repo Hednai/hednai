@@ -23,7 +23,7 @@ export const cv = {
 
   // ── Full Stack — formation ──
   "cv.fs.edu1.period": "2023 — 2025",
-  "cv.fs.edu1.title": "Programmation Web Avancee",
+  "cv.fs.edu1.title": "Programmation Informatique",
   "cv.fs.edu1.school": "College La Cite, Ottawa",
   "cv.fs.edu2.period": "2025 — 2026",
   "cv.fs.edu2.title": "Specialisation Intelligence Artificielle",
