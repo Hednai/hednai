@@ -1,5 +1,5 @@
 // ============================================
-// i18n/en/about.ts — About section (tabs: journey + roadmap)
+// i18n/en/about.ts — About section (expandable cards: journey + roadmap)
 // ============================================
 export const about = {
   "about.title": "About",

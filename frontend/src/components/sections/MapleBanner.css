@@ -1,0 +1,66 @@
+/* ============================================
+   MapleBanner.css
+   Bandeau decoratif bleu marine avec feuilles d'erable en filigrane
+   Fond fixe en light et dark mode
+   ============================================ */
+
+.maple-banner {
+  position: relative;
+  height: 220px;
+  background: #0c2340;
+  overflow: hidden;
+}
+
+/* Feuille d'erable en SVG semi-transparent */
+.maple-banner__leaf {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+/* Grande feuille a droite, decentree et depassante */
+.maple-banner__leaf--right {
+  width: 400px;
+  height: 400px;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%) rotate(15deg);
+}
+
+/* Petite feuille a gauche */
+.maple-banner__leaf--left {
+  width: 200px;
+  height: 200px;
+  left: 5%;
+  bottom: -20px;
+  transform: rotate(-25deg);
+  color: rgba(255, 255, 255, 0.04);
+}
+
+/* Responsive : reduire la taille sur mobile */
+@media (max-width: 768px) {
+  .maple-banner {
+    height: 160px;
+  }
+
+  .maple-banner__leaf--right {
+    width: 250px;
+    height: 250px;
+    right: -30px;
+  }
+
+  .maple-banner__leaf--left {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .maple-banner {
+    height: 120px;
+  }
+
+  .maple-banner__leaf--left {
+    display: none;
+  }
+}

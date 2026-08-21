@@ -1,5 +1,5 @@
 // ============================================
-// i18n/fr/about.ts — Section À propos (onglets parcours + roadmap)
+// i18n/fr/about.ts — Section À propos (cartes expandables parcours + roadmap)
 // ============================================
 export const about = {
   "about.title": "À propos",
