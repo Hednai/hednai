@@ -50,6 +50,14 @@ export function Navbar() {
       return;
     }
 
+    // Contact ouvre le modal au lieu de scroller vers une ancre
+    if (href === "#contact") {
+      e.preventDefault();
+      close();
+      window.dispatchEvent(new Event("open-contact-modal"));
+      return;
+    }
+
     // Lien ancre (#section) — scroll smooth
     e.preventDefault();
     close();

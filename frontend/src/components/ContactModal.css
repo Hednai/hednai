@@ -1,0 +1,158 @@
+/* ============================================
+   ContactModal.css
+   Formulaire de contact en modal — styles complets
+   ============================================ */
+
+.cm__title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.cm__subtitle {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin-bottom: 28px;
+}
+
+/* ===== Onglets Email / WhatsApp ===== */
+.cm__tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.cm__tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* Email actif : bleu marine */
+.cm__tab--active {
+  background: #0c2340;
+  color: #ffffff;
+  border-color: #0c2340;
+}
+
+/* WhatsApp actif : vert WhatsApp */
+.cm__tab--active.cm__tab--whatsapp {
+  background: #1d9d4c;
+  color: #ffffff;
+  border-color: #1d9d4c;
+}
+
+/* ===== Champs ===== */
+.cm__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.cm__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.cm__field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.cm__field input,
+.cm__field textarea,
+.cm__field select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-white);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-size: 14px;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.cm__field input:focus,
+.cm__field textarea:focus,
+.cm__field select:focus {
+  outline: none;
+  border-color: var(--accent-cyan);
+}
+
+.cm__field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.cm__input--error {
+  border-color: #ef4444 !important;
+}
+
+/* ===== Telephone avec indicatif ===== */
+.cm__phone {
+  display: flex;
+  gap: 8px;
+  min-width: 0;
+}
+
+.cm__phone-code {
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.cm__phone input {
+  flex: 1;
+  min-width: 0;
+  width: 0;
+}
+
+/* ===== Messages de statut ===== */
+.cm__msg {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.cm__msg--ok {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.cm__msg--err {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+/* ===== Erreurs de champ ===== */
+.cm__error {
+  font-size: 12px;
+  color: #ef4444;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .cm__row {
+    grid-template-columns: 1fr;
+  }
+}
