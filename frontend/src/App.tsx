@@ -31,6 +31,12 @@ const Solutions = lazy(() =>
 const Recruiter = lazy(() =>
   import("./pages/Recruiter").then((m) => ({ default: m.Recruiter }))
 );
+const LegalNotice = lazy(() =>
+  import("./pages/LegalNotice").then((m) => ({ default: m.LegalNotice }))
+);
+const PrivacyPolicy = lazy(() =>
+  import("./pages/PrivacyPolicy").then((m) => ({ default: m.PrivacyPolicy }))
+);
 
 import { InstalledDateProvider } from "./providers/InstalledDateProvider";
 import { InstallPrompt } from "./components/InstallPrompt";
@@ -111,6 +117,26 @@ export default function App() {
                     element={
                       <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
                         <Recruiter />
+                      </Suspense>
+                    }
+                  />
+
+                  {/* Page Mentions legales */}
+                  <Route
+                    path="/mentions-legales"
+                    element={
+                      <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
+                        <LegalNotice />
+                      </Suspense>
+                    }
+                  />
+
+                  {/* Page Politique de confidentialite */}
+                  <Route
+                    path="/confidentialite"
+                    element={
+                      <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
+                        <PrivacyPolicy />
                       </Suspense>
                     }
                   />

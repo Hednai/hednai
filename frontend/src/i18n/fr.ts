@@ -19,6 +19,7 @@ import { solutions } from "./fr/solutions";
 import { recruiter, profile, whyRecruiter, profileCv } from "./fr/recruiter";
 import { dashboard } from "./fr/dashboard";
 import { cv } from "./fr/Cv";
+import { legal } from "./fr/Legal";
 
 export const fr: Record<string, string> = {
   ...nav,
@@ -42,6 +43,7 @@ export const fr: Record<string, string> = {
   ...cv,
   ...portfolioRecruiter,
   ...ctaRecruiter,
+  ...legal,
 };
 
 // Type derive automatiquement des cles du fichier francais

@@ -1,0 +1,45 @@
+/* ============================================
+   Legal.css
+   Styles partages pour les pages Mentions legales et Confidentialite
+   Mise en page sobre et lisible, style editorial
+   ============================================ */
+
+.legal-page {
+  padding: calc(var(--nav-height) + 48px) 0 80px;
+  min-height: 100vh;
+}
+
+.legal-page__title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.legal-page__updated {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 48px;
+}
+
+/* ===== Contenu editorial ===== */
+.legal-page__content {
+  max-width: 720px;
+}
+
+.legal-page__content section {
+  margin-bottom: 40px;
+}
+
+.legal-page__content h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.legal-page__content p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  white-space: pre-line;
+}

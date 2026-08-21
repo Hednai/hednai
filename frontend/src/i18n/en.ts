@@ -19,6 +19,7 @@ import { solutions } from "./en/solutions";
 import { recruiter, profile, whyRecruiter, profileCv } from "./en/recruiter";
 import { dashboard } from "./en/dashboard";
 import { cv } from "./en/Cv";
+import { legal } from "./en/Legal";
 
 export const en: Record<string, string> = {
   ...nav,
@@ -42,4 +43,5 @@ export const en: Record<string, string> = {
   ...cv,
   ...portfolioRecruiter,
   ...ctaRecruiter,
+  ...legal,
 };

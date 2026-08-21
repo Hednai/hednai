@@ -14,7 +14,7 @@ import "./CtaBanner.css";
 
 export function CtaBanner() {
   const { t } = useLanguage();
-  const { isRecruiter } = useViewMode();
+  const { isRecruiter, setMode } = useViewMode();
   // Modal du calculateur de devis
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
@@ -52,15 +52,18 @@ export function CtaBanner() {
                 </div>
               </FadeIn>
 
-              {/* Carte recruteur */}
+              {/* Carte recruteur — bascule en mode recruteur au clic */}
               <FadeIn delay={0.1}>
                 <div className="cta-bento__card cta-bento__card--recruiter">
                   <FileUser size={32} strokeWidth={1.5} />
                   <h3>{t("cta.recruiter.title")}</h3>
                   <p>{t("cta.recruiter.desc")}</p>
-                  <a href="#contact" className="btn btn--secondary">
+                  <button
+                    className="btn btn--secondary"
+                    onClick={() => setMode("recruiter")}
+                  >
                     {t("cta.recruiter.btn")}
-                  </a>
+                  </button>
                 </div>
               </FadeIn>
 
