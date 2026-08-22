@@ -80,8 +80,15 @@ export function ProfileSection() {
         </div>
       </div>
 
-      {/* Bouton pour afficher/masquer le CV complet */}
+      {/* Transition vers le CV — Le parcours continue */}
       <div className="profile__cv-toggle">
+        <FadeIn>
+          <div className="profile__next">
+            <h3 className="profile__next-title">{t("profile.next.title")}</h3>
+            <p className="profile__next-text">{t("profile.next.text")}</p>
+          </div>
+        </FadeIn>
+
         {!showCv ? (
           <FadeIn>
             <button className="btn btn--secondary profile__cv-btn" onClick={() => setShowCv(true)}>

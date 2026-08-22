@@ -9,7 +9,7 @@ export const nav = {
   "nav.services": "Services",
   "nav.portfolio": "Portfolio",
   "nav.contact": "Contact",
-  "nav.blog": "Blog",
+  "nav.blog": "Insights",
   "nav.openMenu": "Open menu",
   "nav.closeMenu": "Close menu",
   "nav.lightMode": "Light mode",

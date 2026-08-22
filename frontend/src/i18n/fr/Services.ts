@@ -41,6 +41,7 @@ export const services = {
   "services.auto.f3": "API et intégrations",
   "services.auto.f4": "Outils métier",
   "services.title.recruiter": "Ce que je développe",
-  "services.subtitle.recruiter": "Un aperçu de mes compétences à travers les solutions Hednai",
-  "services.recruiterLink": "Voir toutes mes compétences techniques →",
+  "services.subtitle.recruiter": "Des solutions numériques pensées à partir du terrain, puis construites avec le code.",
+  "services.recruiterQuestion": "Vous voulez voir comment je construis ces solutions ?",
+  "services.recruiterLink": "Voir mes compétences techniques →",
 };

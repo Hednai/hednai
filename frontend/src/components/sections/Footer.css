@@ -1,15 +1,15 @@
 /* ============================================
    Footer.css
-   Pied de page autonome — fond bleu marine (#0c2340)
-   Textes en blanc/gris sur fond fixe sombre
+   Pied de page autonome — immergé dans le WaveAnimation
+   Textes bien visibles (noir/blanc selon thème)
    ============================================ */
 
 /* Pas de fond propre : le footer vit dans le WaveAnimation */
-/* padding-top pousse le contenu dans la zone des vagues */
+/* padding-top minimal : le flex du wave-container gère le positionnement vertical */
 .footer {
   position: relative;
   overflow: hidden;
-  padding-top: 340px;
+  padding-top: 60px;
 }
 
 /* ===== GRILLE PRINCIPALE — 4 colonnes ===== */
@@ -55,17 +55,47 @@
   color: var(--accent-cyan);
 }
 
+/* Description identitaire — texte bien visible */
 .footer__identity {
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   line-height: 1.6;
   max-width: 280px;
+}
+
+/* Localisation et disponibilité — sous la description */
+.footer__location {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.footer__location-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-primary);
+}
+
+.footer__location-item svg {
+  color: var(--accent-cyan);
+  flex-shrink: 0;
+}
+
+/* Accroche au-dessus des icônes sociales */
+.footer__socials-label {
+  font-size: 12px;
+  color: var(--text-primary);
+  margin-top: 8px;
+  margin-bottom: 0;
 }
 
 .footer__socials {
   display: flex;
   gap: 10px;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .footer__social-btn {
@@ -76,7 +106,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   transition: border-color 0.2s, color 0.2s;
 }
 
@@ -99,10 +129,22 @@
   margin-top: 24px;
 }
 
+/* Texte des colonnes — bien visible */
 .footer__col p {
-  color: var(--text-secondary);
+  color: var(--text-primary);
   font-size: 13px;
   line-height: 1.6;
+}
+
+/* Accroche "Pourquoi HEDNAI" en italique pour la distinguer */
+.footer__why-headline {
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+/* Texte d'accroche CTA */
+.footer__cta-text {
+  margin-bottom: 12px;
 }
 
 /* ===== NAVIGATION EN COLONNE ===== */
@@ -113,13 +155,13 @@
 }
 
 .footer__nav a {
-  color: var(--text-secondary);
+  color: var(--text-primary);
   font-size: 13px;
   transition: color 0.2s;
 }
 
 .footer__nav a:hover {
-  color: var(--text-primary);
+  color: var(--accent-cyan);
 }
 
 /* ===== COMPETENCES (mode recruteur) ===== */
@@ -132,7 +174,7 @@
 }
 
 .footer__skills li {
-  color: var(--text-secondary);
+  color: var(--text-primary);
   font-size: 13px;
   line-height: 1.5;
 }
@@ -149,7 +191,7 @@
   padding: 3px 10px;
   border-radius: 20px;
   border: 1px solid var(--card-border);
-  color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 /* ===== COLONNE CONTACT ===== */
@@ -163,13 +205,24 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   font-size: 13px;
 }
 
 .footer__contact-item svg {
   color: var(--accent-cyan);
   flex-shrink: 0;
+}
+
+/* Lien email cliquable — ouvre le client mail */
+.footer__email-link {
+  color: var(--text-primary);
+  font-size: 13px;
+  transition: color 0.2s;
+}
+
+.footer__email-link:hover {
+  color: var(--accent-cyan);
 }
 
 /* Bouton CTA contact dans le footer */
@@ -209,7 +262,7 @@
 }
 
 .footer__bottom p {
-  color: var(--text-light);
+  color: var(--text-primary);
   font-size: 12px;
 }
 
@@ -221,22 +274,21 @@
 }
 
 .footer__legal a {
-  color: var(--text-light);
+  color: var(--text-primary);
   font-size: 12px;
   transition: color 0.2s;
 }
 
 .footer__legal a:hover {
-  color: var(--text-primary);
+  color: var(--accent-cyan);
 }
 
 .footer__legal-sep {
-  color: var(--text-light);
+  color: var(--text-primary);
   font-size: 12px;
 }
 
 /* ===== MODAL CONTACT ===== */
-/* Fond quasi transparent — le site reste lisible derriere, comme les expandables */
 .contact-modal__overlay {
   position: fixed;
   top: var(--nav-height);
@@ -305,6 +357,10 @@
 
   .footer__identity {
     max-width: none;
+  }
+
+  .footer__location {
+    align-items: center;
   }
 
   .footer__socials {
