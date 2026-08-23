@@ -149,6 +149,7 @@ export function Services() {
 
       {isRecruiter && (
         <div className="services__recruiter-link">
+          <p className="services__recruiter-question">{t("services.recruiterQuestion")}</p>
           <Link to="/recruiter">{t("services.recruiterLink")}</Link>
         </div>
       )}

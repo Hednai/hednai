@@ -32,8 +32,11 @@ const SKILL_CATEGORIES = [
     titleKey: "recruiter.skills.other",
     skills: ["Zod", "i18n", "Helmet", "SEO", "Accessibilite", "SOLID"],
   },
+  {
+    titleKey: "recruiter.skills.methods",
+    skills: ["Agile", "Scrum", "Jira", "Git / GitHub", "Travail en équipe", "Gestion du backlog"],
+  },
 ];
-
 export function Recruiter() {
   const { t } = useLanguage();
 

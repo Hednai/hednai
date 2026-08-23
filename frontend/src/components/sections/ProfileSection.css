@@ -103,6 +103,24 @@
   margin-top: 40px;
 }
 
+/* Transition "La suite du parcours / Le parcours continue." */
+.profile__next {
+  margin-bottom: 24px;
+}
+
+.profile__next-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.profile__next-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
 .profile__cv-btn {
   display: inline-flex;
   align-items: center;

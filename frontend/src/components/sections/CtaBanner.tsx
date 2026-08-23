@@ -31,9 +31,12 @@ export function CtaBanner() {
                 <FileUser size={32} strokeWidth={1.5} />
                 <h3>{t("cta.recruiter.title.mode")}</h3>
                 <p>{t("cta.recruiter.desc.mode")}</p>
-                <a href="#contact" className="btn btn--primary">
+                <button
+                  className="btn btn--primary"
+                  onClick={() => window.dispatchEvent(new Event("open-contact-modal"))}
+                >
                   {t("cta.recruiter.btn.mode")}
-                </a>
+                </button>
               </div>
             </FadeIn>
           ) : (
@@ -46,9 +49,12 @@ export function CtaBanner() {
                   <Ship size={32} strokeWidth={1.5} />
                   <h3>{t("cta.client.title")}</h3>
                   <p>{t("cta.client.desc")}</p>
-                  <a href="#contact" className="btn btn--primary">
+                  <button
+                    className="btn btn--primary"
+                    onClick={() => window.dispatchEvent(new Event("open-contact-modal"))}
+                  >
                     {t("cta.client.btn")}
-                  </a>
+                  </button>
                 </div>
               </FadeIn>
 

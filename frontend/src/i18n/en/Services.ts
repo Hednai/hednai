@@ -41,6 +41,7 @@ export const services = {
   "services.auto.f3": "APIs and integrations",
   "services.auto.f4": "Business tools",
   "services.title.recruiter": "What I build",
-  "services.subtitle.recruiter": "A glimpse of my skills through the Hednai solutions",
-  "services.recruiterLink": "See all my technical skills →",
+  "services.subtitle.recruiter": "Digital solutions designed from the field, then built with code.",
+  "services.recruiterQuestion": "Want to see how I build these solutions?",
+  "services.recruiterLink": "See my technical skills →",
 };

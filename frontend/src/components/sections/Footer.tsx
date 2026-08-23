@@ -7,7 +7,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { Mail, X } from "lucide-react";
+import { Mail, MapPin, Globe, X } from "lucide-react";
 import { useLanguage } from "../../i18n/useLanguage";
 import { useViewMode } from "../../context/useViewMode";
 import { NAV_LINKS } from "../../data/navLinks";
@@ -68,7 +68,27 @@ export function Footer() {
               </span>
             </div>
             <p className="footer__tagline">{t("footer.tagline")}</p>
-            <p className="footer__identity">{t("footer.identity")}</p>
+            {/* Description conditionnelle selon le mode */}
+            <p className="footer__identity">
+              {isRecruiter
+                ? t("footer.identity.recruiter")
+                : t("footer.identity")}
+            </p>
+
+            {/* Localisation et disponibilite */}
+            <div className="footer__location">
+              <span className="footer__location-item">
+                <MapPin size={14} />
+                {t("footer.location")}
+              </span>
+              <span className="footer__location-item">
+                <Globe size={14} />
+                {t("footer.remote")}
+              </span>
+            </div>
+
+            {/* Accroche reseaux sociaux */}
+            <p className="footer__socials-label">{t("footer.socials.label")}</p>
 
             {/* Liens sociaux */}
             <div className="footer__socials">
@@ -109,7 +129,7 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* ===== Colonne contextuelle : Mission (client) ou Competences (recruteur) ===== */}
+          {/* ===== Colonne contextuelle : Pourquoi HEDNAI (client) ou Competences + Technologies (recruteur) ===== */}
           <div className="footer__col">
             {isRecruiter ? (
               <>
@@ -121,11 +141,27 @@ export function Footer() {
                   <li>{t("footer.skills.webmobile")}</li>
                   <li>{t("footer.skills.architecture")}</li>
                 </ul>
+                {/* Technologies aussi visibles en mode recruteur */}
+                <h4 className="footer__col-subtitle">
+                  {t("footer.tech.title")}
+                </h4>
+                <div className="footer__tech-tags">
+                  {t("footer.tech.text")
+                    .split(", ")
+                    .map((tech) => (
+                      <span key={tech} className="footer__tech-tag">
+                        {tech}
+                      </span>
+                    ))}
+                </div>
               </>
             ) : (
               <>
-                <h4>{t("footer.mission.title")}</h4>
-                <p>{t("footer.mission.text")}</p>
+                <h4>{t("footer.why.title")}</h4>
+                <p className="footer__why-headline">
+                  {t("footer.why.headline")}
+                </p>
+                <p>{t("footer.why.text")}</p>
                 <h4 className="footer__col-subtitle">
                   {t("footer.tech.title")}
                 </h4>
@@ -142,20 +178,33 @@ export function Footer() {
             )}
           </div>
 
-          {/* ===== Colonne contact ===== */}
+          {/* ===== Colonne appel a l'action ===== */}
           <div className="footer__col">
-            <h4>{t("footer.contact.title")}</h4>
+            <h4>
+              {isRecruiter
+                ? t("footer.recruiter.title")
+                : t("footer.cta.title")}
+            </h4>
+            <p className="footer__cta-text">
+              {isRecruiter
+                ? t("footer.recruiter.text")
+                : t("footer.cta.text")}
+            </p>
             <div className="footer__contact-items">
               <div className="footer__contact-item">
                 <Mail size={16} />
-                <span>{SITE_CONFIG.contact.email}</span>
+                <a href={`mailto:${SITE_CONFIG.contact.email}`} className="footer__email-link">
+                  {SITE_CONFIG.contact.email}
+                </a>
               </div>
               {/* Bouton qui ouvre le formulaire de contact en modal */}
               <button
                 className="footer__contact-btn"
                 onClick={() => setContactOpen(true)}
               >
-                {t("footer.contact.cta")}
+                {isRecruiter
+                  ? t("footer.recruiter.button")
+                  : t("footer.cta.button")}
               </button>
             </div>
           </div>

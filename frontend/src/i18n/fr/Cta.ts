@@ -1,5 +1,6 @@
 // ============================================
 // i18n/fr/cta.ts — Bandeau CTA, calendrier et calculateur de devis
+
 // ============================================
 export const cta = {
   "cta.client.title": "Vous avez un besoin dans vos opérations maritimes ?",
@@ -36,6 +37,6 @@ export const cta = {
 // Mode recruteur — CTA adapte
 export const ctaRecruiter = {
   "cta.recruiter.title.mode": "Ouvert aux opportunites",
-  "cta.recruiter.desc.mode": "Je ne cherche pas activement mais je suis ouvert aux belles rencontres. Parlons de ce que je peux apporter a votre equipe.",
+  "cta.recruiter.desc.mode": "Une équipe, un projet ou un défi à relever ? Parlons-en.",
   "cta.recruiter.btn.mode": "Me contacter",
 };

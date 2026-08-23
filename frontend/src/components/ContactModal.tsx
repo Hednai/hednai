@@ -96,7 +96,15 @@ export function ContactModal() {
 
         <div className="cm__field">
           <label htmlFor="subject">{t("contact.form.subject")}</label>
-          <input id="subject" placeholder={t("contact.form.subject.placeholder")} value={form.subject} onChange={change} className={fieldErrors.subject ? "cm__input--error" : ""} />
+          <select id="subject" value={form.subject} onChange={change} className={fieldErrors.subject ? "cm__input--error" : ""}>
+            <option value="">{t("contact.form.subject.placeholder")}</option>
+            <option value="application-maritime">{t("contact.form.subject.maritime")}</option>
+            <option value="solution-portuaire">{t("contact.form.subject.port")}</option>
+            <option value="projet-web-mobile">{t("contact.form.subject.webmobile")}</option>
+            <option value="ia-donnees">{t("contact.form.subject.ai")}</option>
+            <option value="collaboration">{t("contact.form.subject.collab")}</option>
+            <option value="autre">{t("contact.form.subject.other")}</option>
+          </select>
           {fieldErrors.subject && <span className="cm__error" role="alert">{t(fieldErrors.subject)}</span>}
         </div>
 
