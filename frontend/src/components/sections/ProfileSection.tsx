@@ -4,11 +4,10 @@
 // Visible uniquement en mode recruteur (remplace About+Roadmap visuellement)
 // Raconte l'histoire : Marine → Dev → Full Stack → IA → HEDNAI
 // ============================================
-import { useState } from "react";
-import { Anchor, GraduationCap, Code, Brain, Rocket, FileText, ArrowUp } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Anchor, GraduationCap, Code, Brain, Rocket, FileText } from "lucide-react";
 import { SectionWrapper } from "../ui/SectionWrapper";
 import { FadeIn } from "../FadeIn";
-import { CvInline } from "./CvInline";
 import { useLanguage } from "../../i18n/useLanguage";
 import "./ProfileSection.css";
 
@@ -23,16 +22,6 @@ const TIMELINE_STEPS = [
 
 export function ProfileSection() {
   const { t } = useLanguage();
-  const [showCv, setShowCv] = useState(false);
-
-  // Fermer le CV et remonter vers la section profil
-  const closeCv = () => {
-    setShowCv(false);
-    setTimeout(() => {
-      const el = document.getElementById("profil");
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    }, 100);
-  };
 
   return (
     <SectionWrapper id="profil" title={t("profile.title")} subtitle={t("profile.subtitle")}>
@@ -89,25 +78,12 @@ export function ProfileSection() {
           </div>
         </FadeIn>
 
-        {!showCv ? (
-          <FadeIn>
-            <button className="btn btn--secondary profile__cv-btn" onClick={() => setShowCv(true)}>
-              <FileText size={18} />
-              {t("profile.showCv")}
-            </button>
-          </FadeIn>
-        ) : (
-          <>
-            {/* CV inline deploye */}
-            <CvInline />
-
-            {/* Bouton retour pour fermer le CV */}
-            <button className="btn btn--secondary profile__cv-btn profile__cv-btn--close" onClick={closeCv}>
-              <ArrowUp size={18} />
-              {t("profile.hideCv")}
-            </button>
-          </>
-        )}
+        <FadeIn>
+          <Link to="/cv" className="btn btn--secondary profile__cv-btn">
+            <FileText size={18} />
+            {t("profile.showCv")}
+          </Link>
+        </FadeIn>
       </div>
     </SectionWrapper>
   );

@@ -31,6 +31,10 @@ const Solutions = lazy(() =>
 const Recruiter = lazy(() =>
   import("./pages/Recruiter").then((m) => ({ default: m.Recruiter }))
 );
+// Page CV dediee — URL partageable
+const CvPage = lazy(() =>
+  import("./pages/CvPage").then((m) => ({ default: m.CvPage }))
+);
 const LegalNotice = lazy(() =>
   import("./pages/LegalNotice").then((m) => ({ default: m.LegalNotice }))
 );
@@ -117,6 +121,16 @@ export default function App() {
                     element={
                       <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
                         <Recruiter />
+                      </Suspense>
+                    }
+                  />
+
+                  {/* Page CV dediee — URL partageable */}
+                  <Route
+                    path="/cv"
+                    element={
+                      <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
+                        <CvPage />
                       </Suspense>
                     }
                   />
