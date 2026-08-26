@@ -30,6 +30,7 @@ export const portfolio = {
   "projects.fleet.desc": "Fleet management software for small maritime companies. Desktop-first, offline-first, built for real-world constraints.",
   "projects.fleet.long": "Born from field experience: existing solutions are either 100% cloud (unusable at sea) or expensive legacy Windows software. Mini Fleet Log combines native offline-first, affordable pricing, bilingual FR/EN and modern UI. Architecture: Electron + Drizzle/SQLite locally, Prisma/PostgreSQL for server sync.",
   "projects.fleet.badge": "In design",
+  "projects.radio.badge": "In design",
   "projects.radio.title": "MaritimeRadio Trainer",
   "projects.radio.desc": "Maritime radio communication training simulator (SMCP) for officer cadets at maritime academies.",
   "projects.radio.long": "Training application for standardized maritime communication procedures (SMCP). Realistic scenarios, VHF radio effects, automatic SMCP compliance evaluation and multiplayer mode via WebRTC to simulate ship-to-ship or ship-to-port exchanges.",

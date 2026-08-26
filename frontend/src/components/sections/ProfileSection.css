@@ -121,10 +121,35 @@
   font-style: italic;
 }
 
+/* Conteneur des 2 boutons CV (Full Stack + Maritime) */
+.profile__cv-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 .profile__cv-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  text-decoration: none;
+}
+
+/* Boutons CV en bleu marine Hednai */
+.profile__cv-buttons .btn--primary {
+  background: #0c2340;
+  color: #ffffff;
+}
+
+.profile__cv-buttons .btn--secondary {
+  border-color: #0c2340;
+  color: #0c2340;
+}
+
+[data-theme="dark"] .profile__cv-buttons .btn--secondary {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
 }
 
 .profile__cv-btn--close {

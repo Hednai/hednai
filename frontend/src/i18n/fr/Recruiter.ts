@@ -41,8 +41,8 @@ export const profile = {
   "profile.step5.period": "2026 — Aujourd'hui",
   "profile.step5.title": "HEDNAI — Maritime AI Nexus",
   "profile.step5.desc": "HEDNAI est née de cette rencontre entre deux mondes : la mer que je connais et le code que j'apprends à construire. L'objectif est simple : développer des solutions numériques et des outils d'IA qui partent des réalités du terrain maritime, plutôt que de la technologie pour la technologie.",
-  "profile.next.title": "La suite du parcours",
-  "profile.next.text": "Le parcours continue.",
+  "profile.next.title": "Mon CV",
+  "profile.next.text": "Consultez mon parcours complet en PDF.",
 };
 
 // WhyHednai — variante recruteur ("Ce qui me différencie")

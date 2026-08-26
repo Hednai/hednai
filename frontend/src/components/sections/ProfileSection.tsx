@@ -5,7 +5,7 @@
 // Raconte l'histoire : Marine → Dev → Full Stack → IA → HEDNAI
 // ============================================
 import { Link } from "react-router-dom";
-import { Anchor, GraduationCap, Code, Brain, Rocket, FileText } from "lucide-react";
+import { Anchor, GraduationCap, Code, Brain, Rocket, Briefcase } from "lucide-react";
 import { SectionWrapper } from "../ui/SectionWrapper";
 import { FadeIn } from "../FadeIn";
 import { useLanguage } from "../../i18n/useLanguage";
@@ -79,10 +79,16 @@ export function ProfileSection() {
         </FadeIn>
 
         <FadeIn>
-          <Link to="/cv" className="btn btn--secondary profile__cv-btn">
-            <FileText size={18} />
-            {t("profile.showCv")}
-          </Link>
+          <div className="profile__cv-buttons">
+            <Link to="/cv" className="btn btn--primary profile__cv-btn">
+              <Briefcase size={18} />
+              {t("cv.tab.fullstack")}
+            </Link>
+            <Link to="/cv?tab=captain" className="btn btn--secondary profile__cv-btn">
+              <Anchor size={18} />
+              {t("cv.tab.captain")}
+            </Link>
+          </div>
         </FadeIn>
       </div>
     </SectionWrapper>

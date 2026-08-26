@@ -41,8 +41,8 @@ export const profile = {
   "profile.step5.period": "2026 — Present",
   "profile.step5.title": "HEDNAI — Maritime AI Nexus",
   "profile.step5.desc": "HEDNAI was born from the meeting of two worlds: the sea I know and the code I am learning to build. The goal is simple: develop digital solutions and AI tools that start from the realities of the maritime field, rather than technology for technology's sake.",
-  "profile.next.title": "What comes next",
-  "profile.next.text": "The journey continues.",
+  "profile.next.title": "My Resume",
+  "profile.next.text": "View my full background in PDF.",
 };
 
 // WhyHednai — recruiter variant ("What sets me apart")
@@ -61,6 +61,6 @@ export const whyRecruiter = {
 
 // CV toggle buttons in ProfileSection
 export const profileCv = {
-  "profile.showCv": "View my full CV",
-  "profile.hideCv": "Close CV",
+  "profile.showCv": "View my full resume",
+  "profile.hideCv": "Close resume",
 };

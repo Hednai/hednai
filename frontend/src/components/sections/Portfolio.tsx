@@ -34,8 +34,10 @@ const PROJECT_META: Record<string, { roleKey: string; durationKey: string }> = {
 };
 
 // Icone SVG du badge selon le type de projet
+// Wrench = en conception, Trophy = prix/distinction
+const WIP_SLUGS = ["fleetlog", "maritime-radio-trainer"];
 function BadgeIcon({ slug, size }: { slug: string; size: number }) {
-  if (slug === "fleetlog") return <Wrench size={size} />;
+  if (WIP_SLUGS.includes(slug)) return <Wrench size={size} />;
   return <Trophy size={size} />;
 }
 
@@ -135,7 +137,7 @@ export function Portfolio() {
                     <h3>{t(active.titleKey)}</h3>
                     {active.badgeKey && (
                       <span className="portfolio-expanded__badge">
-                        {active.slug === "fleetlog" ? <Wrench size={14} /> : <Trophy size={14} />}
+                        {WIP_SLUGS.includes(active.slug) ? <Wrench size={14} /> : <Trophy size={14} />}
                         {t(active.badgeKey)}
                       </span>
                     )}

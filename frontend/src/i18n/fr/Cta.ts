@@ -37,6 +37,6 @@ export const cta = {
 // Mode recruteur — CTA adapte
 export const ctaRecruiter = {
   "cta.recruiter.title.mode": "Ouvert aux opportunites",
-  "cta.recruiter.desc.mode": "Une équipe, un projet ou un défi à relever ? Parlons-en.",
-  "cta.recruiter.btn.mode": "Me contacter",
+  "cta.recruiter.desc.mode": "Une équipe, un projet ou un défi à relever ?",
+  "cta.recruiter.btn.mode": "Parlons-en",
 };
