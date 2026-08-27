@@ -196,7 +196,7 @@
 /* Langue active : fond cyan arrondi (comme le bouton Mode Client) */
 .navbar__lang-btn--active {
   background: var(--accent-cyan);
-  color: #1a1a1a;
+  color: #ffffff;
 }
 
 /* Le trait | masque — le fond arrondi fait la distinction */

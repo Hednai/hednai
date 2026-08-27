@@ -24,7 +24,7 @@ export function ProfileSection() {
   const { t } = useLanguage();
 
   return (
-    <SectionWrapper id="profil" title={t("profile.title")} subtitle={t("profile.subtitle")}>
+    <SectionWrapper id="apropos" title={t("profile.title")} subtitle={t("profile.subtitle")}>
       <div className="profile">
         {/* Photo professionnelle */}
         <FadeIn>

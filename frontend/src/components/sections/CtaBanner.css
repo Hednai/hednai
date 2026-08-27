@@ -75,11 +75,10 @@
   padding: 12px 28px;
 }
 
-/* ===== CLIENT — fond fixe sombre, texte blanc ===== */
-/* Fond #0c2340 reste sombre en light ET dark */
+/* ===== CLIENT — fond fixe cyan Hednai, texte blanc ===== */
 .cta-bento__card--client {
-  background: #0c2340;
-  border-color: #0c2340;
+  background: #0099cc;
+  border-color: #0099cc;
   color: #ffffff;
 }
 
@@ -88,17 +87,17 @@
 }
 
 .cta-bento__card--client p {
-  color: #b0bec5;
+  color: #ffffff;
 }
 
 .cta-bento__card--client svg {
   color: #ffffff;
 }
 
-/* Bouton blanc sur carte sombre */
+/* Bouton blanc sur carte cyan */
 .cta-bento__card--client .btn--primary {
   background: #ffffff;
-  color: #0c2340;
+  color: #0099cc;
   border-color: #ffffff;
 }
 
@@ -129,13 +128,13 @@
   background: none;
 }
 
-/* ===== DEVIS — fond fixe sombre, texte blanc ===== */
+/* ===== DEVIS — fond fixe cyan Hednai, texte blanc ===== */
 .cta-bento__card--quote {
   cursor: pointer;
   width: 100%;
   font-family: inherit;
-  background: #0c2340;
-  border-color: #0c2340;
+  background: #0099cc;
+  border-color: #0099cc;
   color: #ffffff;
 }
 
@@ -144,17 +143,17 @@
 }
 
 .cta-bento__card--quote p {
-  color: #b0bec5;
+  color: #ffffff;
 }
 
 .cta-bento__card--quote svg {
   color: #ffffff;
 }
 
-/* Bouton blanc sur carte sombre */
+/* Bouton blanc sur carte cyan */
 .cta-bento__card--quote .btn--primary {
   background: #ffffff;
-  color: #0c2340;
+  color: #0099cc;
   border-color: #ffffff;
 }
 
@@ -178,7 +177,7 @@
 /* Bouton cyan */
 .cta-bento__card .btn--secondary {
   border: none;
-  color: #1a1a1a;
+  color: #ffffff;
   background: var(--accent-cyan);
 }
 

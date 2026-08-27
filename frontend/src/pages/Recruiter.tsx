@@ -5,7 +5,7 @@
 // Un recruteur qui recoit ce lien voit immediatement le profil
 // ============================================
 import { Link } from "react-router-dom";
-import { Mail, ArrowLeft } from "lucide-react";
+import { Mail, ArrowLeft, Anchor, Code, Brain, Search } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import { Card } from "../components/ui/Card";
@@ -120,14 +120,35 @@ export function Recruiter() {
           </div>
         </FadeIn>
 
-        {/* Ce qui me differencie */}
+        {/* Ce qui me differencie — 4 cartes */}
         <FadeIn delay={0.3}>
-          <Card>
-            <div className="recruiter-section">
-              <h2>{t("recruiter.diff.title")}</h2>
-              <p>{t("recruiter.diff.text")}</p>
-            </div>
-          </Card>
+          <h2 className="recruiter-page__section-title">
+            {t("recruiter.diff.title")}
+          </h2>
+          <p className="recruiter-page__diff-intro">
+            {t("recruiter.diff.intro")}
+          </p>
+          <div className="recruiter-diff-grid">
+            {[
+              { icon: Anchor, num: 1 },
+              { icon: Code, num: 2 },
+              { icon: Brain, num: 3 },
+              { icon: Search, num: 4 },
+            ].map((card) => {
+              const Icon = card.icon;
+              return (
+                <Card key={card.num} hoverable={false}>
+                  <div className="recruiter-diff-card">
+                    <div className="recruiter-diff-card__icon">
+                      <Icon size={22} strokeWidth={1.5} />
+                    </div>
+                    <h3>{t(`recruiter.diff.card${card.num}.title`)}</h3>
+                    <p>{t(`recruiter.diff.card${card.num}.text`)}</p>
+                  </div>
+                </Card>
+              );
+            })}
+          </div>
         </FadeIn>
 
         {/* CTA final */}

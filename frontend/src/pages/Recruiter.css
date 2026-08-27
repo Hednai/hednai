@@ -104,6 +104,49 @@
   margin-top: 40px;
 }
 
+/* ── Intro diff (phrase avant les cartes) ── */
+.recruiter-page__diff-intro {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+/* ── Grille des 4 cartes "Ce qui me differencie" ── */
+.recruiter-diff-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.recruiter-diff-card {
+  padding: 20px;
+}
+
+.recruiter-diff-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #0099cc;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.recruiter-diff-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.recruiter-diff-card p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
 @media (max-width: 640px) {
   .recruiter-skills-grid { grid-template-columns: 1fr; }
+  .recruiter-diff-grid { grid-template-columns: 1fr; }
 }

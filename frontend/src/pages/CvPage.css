@@ -83,10 +83,10 @@
   border-color: var(--accent-cyan);
   color: var(--text-primary);
 }
-/* Onglet actif en bleu marine */
+/* Onglet actif en cyan Hednai */
 .cv-page__tab--active {
-  background: #0c2340;
-  border-color: #0c2340;
+  background: #0099cc;
+  border-color: #0099cc;
   color: #ffffff;
 }
 
@@ -100,7 +100,7 @@
   background: var(--accent-cyan);
   font-size: 13px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #ffffff;
   text-decoration: none;
   transition: opacity 0.2s;
   white-space: nowrap;

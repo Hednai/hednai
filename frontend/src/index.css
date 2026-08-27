@@ -30,7 +30,7 @@
   --success-text: #047857;
   --error-bg: #FEF2F2;
   --error-text: #B91C1C;
-  --accent-cyan: hsl(184 100% 45%);
+  --accent-cyan: #0099cc;
   --accent-warm: hsl(25 95% 55%);
   --radius-pill: 20px;
   --radius-circle: 50%;
@@ -72,7 +72,7 @@
   --success-text: #6EE7B7;
   --error-bg: #450A0A;
   --error-text: #FCA5A5;
-  --accent-cyan: hsl(184 100% 55%);
+  --accent-cyan: #00b0e6;
   --accent-warm: hsl(25 95% 60%);
 
 }
@@ -117,6 +117,25 @@ ul {
 img {
   max-width: 100%;
   display: block;
+}
+
+/* ── Scrollbar globale #0099cc ── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0099cc transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #0099cc;
+  border-radius: 3px;
 }
 
 

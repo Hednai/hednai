@@ -38,11 +38,11 @@
   transition: all 0.2s;
 }
 
-/* Email actif : bleu marine */
+/* Email actif : cyan Hednai */
 .cm__tab--active {
-  background: #0c2340;
+  background: #0099cc;
   color: #ffffff;
-  border-color: #0c2340;
+  border-color: #0099cc;
 }
 
 /* WhatsApp actif : vert WhatsApp */
@@ -110,7 +110,8 @@
   min-width: 0;
 }
 
-.cm__phone-code {
+/* Specificite augmentee pour ecraser .cm__field select { width: 100% } */
+.cm__field .cm__phone-code {
   width: 100px;
   flex-shrink: 0;
 }

@@ -14,14 +14,14 @@
   border-radius: var(--radius-pill);
   font-size: 12px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #ffffff;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 /* Etat actif — couleur Hednai */
 .view-toggle:hover {
-  background: hsl(195 100% 40%);
+  background: #0099cc;
   color: #ffffff;
 }
 

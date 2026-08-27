@@ -93,7 +93,7 @@ export function Navbar() {
         <a href="#accueil" className="navbar__logo" onClick={(e) => handleNavClick(e, "#accueil")}>
           <img src="/logo-anchor.png" alt="Hednai" />
           <div className="navbar__logo-text">
-            <span>Hed<span style={{ color: "hsl(195 100% 45%)" }}>nai</span></span>
+            <span>Hed<span style={{ color: "#0099cc" }}>nai</span></span>
             <span className="navbar__badge">{t("nav.badge")}</span>
           </div>
         </a>

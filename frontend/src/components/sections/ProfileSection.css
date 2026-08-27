@@ -14,9 +14,11 @@
 }
 
 /* ── Photo professionnelle ── */
+/* margin-top negatif pour remonter la photo au niveau du titre de section */
 .profile__photo-wrapper {
   position: sticky;
   top: calc(var(--nav-height) + 24px);
+  margin-top: -120px;
 }
 
 .profile__photo {
@@ -24,7 +26,7 @@
   aspect-ratio: 3 / 4;
   object-fit: cover;
   border-radius: var(--radius-lg);
-  border: 3px solid var(--card-border);
+  border: 3px solid #0099cc;
 }
 
 /* ── Timeline ── */
@@ -54,7 +56,7 @@
   height: 40px;
   border-radius: var(--radius-circle);
   background: var(--accent-cyan);
-  color: #1a1a1a;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -136,15 +138,15 @@
   text-decoration: none;
 }
 
-/* Boutons CV en bleu marine Hednai */
+/* Boutons CV en cyan Hednai */
 .profile__cv-buttons .btn--primary {
-  background: #0c2340;
+  background: #0099cc;
   color: #ffffff;
 }
 
 .profile__cv-buttons .btn--secondary {
-  border-color: #0c2340;
-  color: #0c2340;
+  border-color: #0099cc;
+  color: #0099cc;
 }
 
 [data-theme="dark"] .profile__cv-buttons .btn--secondary {
