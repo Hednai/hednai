@@ -7,6 +7,11 @@
   background: #dfe4ed;
 }
 
+/* Mode sombre : fond adapte pour que le texte reste visible */
+[data-theme="dark"] #apropos {
+  background: var(--bg-gray);
+}
+
 .about__intro {
   max-width: 900px;
   margin: 0 auto 48px;
@@ -94,11 +99,22 @@
   background: var(--card-bg);
   border-radius: 20px;
   overflow-y: auto;
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: #0099cc transparent;
 }
 
+/* Scrollbar Webkit (Chrome, Edge, Safari) */
 .about-expanded::-webkit-scrollbar {
-  display: none;
+  width: 6px;
+}
+
+.about-expanded::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.about-expanded::-webkit-scrollbar-thumb {
+  background: #0099cc;
+  border-radius: 3px;
 }
 
 /* En-tete de la carte expandee */
@@ -175,12 +191,12 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--bg-gray);
-  border: 2px solid var(--card-border);
+  background: #0099cc;
+  border: 2px solid #0099cc;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-primary);
+  color: #ffffff;
 }
 
 .timeline-step__line {

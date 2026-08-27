@@ -170,11 +170,11 @@
 .navbar__lang-group {
   display: flex;
   align-items: center;
-  gap: 4px;
-
+  gap: 0;
   border: 1px solid var(--card-border);
   border-radius: 20px;
-  padding: 4px 12px;
+  padding: 2px;
+  background: var(--bg-gray);
 }
 
 /* Chaque bouton FR ou EN */
@@ -187,23 +187,21 @@
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-
-  /* Par defaut, texte gris (langue inactive) */
   color: var(--text-light);
-
-  transition: color 0.2s;
+  padding: 4px 10px;
+  border-radius: 16px;
+  transition: color 0.2s, background 0.2s;
 }
 
-/* Langue active : texte en couleur primaire (noir ou blanc en dark mode) */
+/* Langue active : fond cyan arrondi (comme le bouton Mode Client) */
 .navbar__lang-btn--active {
-  color: var(--text-primary);
+  background: var(--accent-cyan);
+  color: #ffffff;
 }
 
-/* Le petit trait | entre FR et EN */
+/* Le trait | masque — le fond arrondi fait la distinction */
 .navbar__lang-sep {
-  color: var(--card-border);
-  font-size: 12px;
-  user-select: none;
+  display: none;
 }
 
 /* ===== BOUTON BURGER (mobile) ===== */
@@ -273,10 +271,11 @@
   }
 
   .navbar__lang-group {
-    padding: 8px 20px;
+    padding: 2px;
   }
 
   .navbar__lang-btn {
     font-size: 14px;
+    padding: 6px 14px;
   }
 }

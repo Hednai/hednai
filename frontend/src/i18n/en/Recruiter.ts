@@ -17,7 +17,15 @@ export const recruiter = {
   "recruiter.skills.other": "Quality and best practices",
   "recruiter.skills.methods": "Methods and collaboration",
   "recruiter.diff.title": "What sets me apart",
-  "recruiter.diff.text": "I am not just a developer who learned to code. I spent over 10 years at sea, at the heart of operations where misunderstood information, poor tracking or a late decision can have real consequences. This experience changes how I develop. When I design a tool for fleet management, port operations or document tracking, I do not start from technology alone: I start from the problem. I know the field constraints, the data that matters, the workflows that must be reliable and the users who will actually use the system. It is this dual experience — maritime and digital — that I bring to every project.",
+  "recruiter.diff.intro": "A career at the crossroads of maritime, software development and artificial intelligence.",
+  "recruiter.diff.card1.title": "Maritime experience",
+  "recruiter.diff.card1.text": "10+ years at sea. Rigor, precision, decision-making and adaptability in demanding environments.",
+  "recruiter.diff.card2.title": "Software development",
+  "recruiter.diff.card2.text": "Backend to frontend. Technical versatility, strong learning ability and understanding of the full application stack.",
+  "recruiter.diff.card3.title": "Artificial intelligence",
+  "recruiter.diff.card3.text": "Development + data + AI. Building skills to integrate AI into practical software solutions.",
+  "recruiter.diff.card4.title": "Analytical mindset",
+  "recruiter.diff.card4.text": "Understand before coding. Analyze the problem, its constraints and its users before choosing a technical solution.",
   "recruiter.cta": "Let's talk",
 };
 
@@ -41,26 +49,26 @@ export const profile = {
   "profile.step5.period": "2026 — Present",
   "profile.step5.title": "HEDNAI — Maritime AI Nexus",
   "profile.step5.desc": "HEDNAI was born from the meeting of two worlds: the sea I know and the code I am learning to build. The goal is simple: develop digital solutions and AI tools that start from the realities of the maritime field, rather than technology for technology's sake.",
-  "profile.next.title": "What comes next",
-  "profile.next.text": "The journey continues.",
+  "profile.next.title": "My Resume",
+  "profile.next.text": "View my full background in PDF.",
 };
 
 // WhyHednai — recruiter variant ("What sets me apart")
 export const whyRecruiter = {
   "why.title.recruiter": "What sets me apart",
-  "why.subtitle.recruiter": "A journey built between the maritime field and technology.",
+  "why.subtitle.recruiter": "A career at the crossroads of maritime, software development and artificial intelligence.",
   "why.mission.title.recruiter": "Maritime experience",
-  "why.mission.desc.recruiter": "Over 10 years in the merchant navy, including officer responsibilities. This experience taught me to work in demanding environments, analyze situations quickly and make decisions with sometimes incomplete information. It is this field experience that I bring to my digital projects today.",
+  "why.mission.desc.recruiter": "10+ years at sea. Rigor, precision, decision-making and adaptability in demanding environments.",
   "why.vision.title.recruiter": "Software development",
-  "why.vision.desc.recruiter": "I became a developer by building, experimenting and learning through projects. From frontend to backend, I work with React, TypeScript, Node.js, Express, PostgreSQL and other technologies as needed. I do not seek to limit myself to one stack: I seek to understand how to build a complete solution.",
+  "why.vision.desc.recruiter": "Backend to frontend. Technical versatility, strong learning ability and understanding of the full application stack.",
   "why.values.title.recruiter": "Artificial intelligence",
-  "why.values.desc.recruiter": "AI has become a new chapter in my journey. My training in artificial intelligence and machine learning now allows me to explore Python, data analysis and AI models, with a simple question: how to use these technologies when they bring real value?",
-  "why.edge.title.recruiter": "Understand before coding",
-  "why.edge.desc.recruiter": "This is probably what best summarizes how I work. Before thinking about technology, I seek to understand the problem, the people who will use it and the context in which the solution must operate. My maritime experience taught me that a tool is only useful if it genuinely responds to the situation on the ground.",
+  "why.values.desc.recruiter": "Development + data + AI. Building skills to integrate AI into practical software solutions.",
+  "why.edge.title.recruiter": "Analytical mindset",
+  "why.edge.desc.recruiter": "Understand before coding. Analyze the problem, its constraints and its users before choosing a technical solution.",
 };
 
 // CV toggle buttons in ProfileSection
 export const profileCv = {
-  "profile.showCv": "View my full CV",
-  "profile.hideCv": "Close CV",
+  "profile.showCv": "View my full resume",
+  "profile.hideCv": "Close resume",
 };

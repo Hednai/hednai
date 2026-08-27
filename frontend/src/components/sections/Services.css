@@ -8,6 +8,10 @@
   background: #dfe4ed;
 }
 
+[data-theme="dark"] #services {
+  background: var(--bg-gray);
+}
+
 /* Grille des cartes compactes */
 .services-grid {
   display: grid;

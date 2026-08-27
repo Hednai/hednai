@@ -64,7 +64,7 @@ export const projects: Project[] = [
     titleKey: "projects.radio.title", descriptionKey: "projects.radio.desc",
     image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop",
     technologies: ["JavaScript", "WebRTC", "Node.js", "HTML/CSS"],
-    liveUrl: "#", githubUrl: "#", longDescriptionKey: "projects.radio.long",
+    liveUrl: "#", githubUrl: "#", longDescriptionKey: "projects.radio.long", badgeKey: "projects.radio.badge",
     featured: true,
   },
   {

@@ -10,6 +10,7 @@ export const nav = {
   "nav.portfolio": "Portfolio",
   "nav.contact": "Contact",
   "nav.blog": "Insights",
+  "nav.cv": "Resume",
   "nav.openMenu": "Open menu",
   "nav.closeMenu": "Close menu",
   "nav.lightMode": "Light mode",

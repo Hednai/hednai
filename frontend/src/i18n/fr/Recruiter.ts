@@ -17,7 +17,15 @@ export const recruiter = {
   "recruiter.skills.other": "Qualité et bonnes pratiques",
   "recruiter.skills.methods": "Méthodes et collaboration",
   "recruiter.diff.title": "Ce qui me différencie",
-  "recruiter.diff.text": "Je ne suis pas juste un développeur qui a appris à coder. J'ai passé plus de 10 ans en mer, au coeur d'opérations où une information mal comprise, un mauvais suivi ou une décision prise trop tard peuvent avoir des conséquences concrètes. Cette expérience change ma façon de développer. Quand je conçois un outil pour la gestion de flotte, les opérations portuaires ou le suivi documentaire, je ne pars pas uniquement d'une technologie : je pars du problème. Je connais les contraintes du terrain, les informations qui comptent, les workflows qui doivent être fiables et les utilisateurs qui vont réellement s'en servir. C'est cette double expérience, maritime et numérique, que j'apporte à chaque projet.",
+  "recruiter.diff.intro": "Un parcours à la croisée du maritime, du développement logiciel et de l'intelligence artificielle.",
+  "recruiter.diff.card1.title": "Expérience maritime",
+  "recruiter.diff.card1.text": "10+ ans sur les océans. Rigueur, précision, décision et adaptation dans des environnements exigeants.",
+  "recruiter.diff.card2.title": "Développement logiciel",
+  "recruiter.diff.card2.text": "Du backend au frontend. Polyvalence technique, capacité d'apprentissage et compréhension de l'ensemble d'une application.",
+  "recruiter.diff.card3.title": "Intelligence artificielle",
+  "recruiter.diff.card3.text": "Développement + données + IA. Je développe mes compétences pour intégrer l'IA à des solutions logicielles concrètes.",
+  "recruiter.diff.card4.title": "Esprit d'analyse",
+  "recruiter.diff.card4.text": "Comprendre avant de coder. Analyser un problème, ses contraintes et ses utilisateurs avant de choisir une solution technique.",
   "recruiter.cta": "Discutons ensemble",
 };
 
@@ -41,22 +49,22 @@ export const profile = {
   "profile.step5.period": "2026 — Aujourd'hui",
   "profile.step5.title": "HEDNAI — Maritime AI Nexus",
   "profile.step5.desc": "HEDNAI est née de cette rencontre entre deux mondes : la mer que je connais et le code que j'apprends à construire. L'objectif est simple : développer des solutions numériques et des outils d'IA qui partent des réalités du terrain maritime, plutôt que de la technologie pour la technologie.",
-  "profile.next.title": "La suite du parcours",
-  "profile.next.text": "Le parcours continue.",
+  "profile.next.title": "Mon CV",
+  "profile.next.text": "Consultez mon parcours complet en PDF.",
 };
 
 // WhyHednai — variante recruteur ("Ce qui me différencie")
 export const whyRecruiter = {
   "why.title.recruiter": "Ce qui me différencie",
-  "why.subtitle.recruiter": "Un parcours construit entre le terrain maritime et le numérique.",
+  "why.subtitle.recruiter": "Un parcours à la croisée du maritime, du développement logiciel et de l'intelligence artificielle.",
   "why.mission.title.recruiter": "Expérience maritime",
-  "why.mission.desc.recruiter": "Plus de 10 ans dans la marine marchande, dont des responsabilités d'officier. Cette expérience m'a appris à travailler dans des environnements exigeants, à analyser une situation rapidement et à prendre des décisions avec des informations parfois incomplètes. C'est cette expérience du terrain que j'apporte aujourd'hui dans mes projets numériques.",
+  "why.mission.desc.recruiter": "10+ ans sur les océans. Rigueur, précision, décision et adaptation dans des environnements exigeants.",
   "why.vision.title.recruiter": "Développement logiciel",
-  "why.vision.desc.recruiter": "Je suis devenu développeur en construisant, en expérimentant et en apprenant au fil des projets. Du frontend au backend, je travaille avec React, TypeScript, Node.js, Express, PostgreSQL et d'autres technologies selon les besoins. Je ne cherche pas à me limiter à une stack : je cherche à comprendre comment construire une solution complète.",
+  "why.vision.desc.recruiter": "Du backend au frontend. Polyvalence technique, capacité d'apprentissage et compréhension de l'ensemble d'une application.",
   "why.values.title.recruiter": "Intelligence artificielle",
-  "why.values.desc.recruiter": "L'IA est devenue une nouvelle étape de mon parcours. Ma formation en intelligence artificielle et en machine learning me permet aujourd'hui d'explorer Python, l'analyse de données et les modèles d'IA, avec une question simple : comment utiliser ces technologies lorsqu'elles apportent une réelle valeur ?",
-  "why.edge.title.recruiter": "Comprendre avant de coder",
-  "why.edge.desc.recruiter": "C'est probablement ce qui résume le mieux ma façon de travailler. Avant de penser technologie, je cherche à comprendre le problème, les personnes qui l'utilisent et le contexte dans lequel la solution doit fonctionner. Mon expérience maritime m'a appris qu'un outil n'est utile que s'il répond réellement à la situation du terrain.",
+  "why.values.desc.recruiter": "Développement + données + IA. Je développe mes compétences pour intégrer l'IA à des solutions logicielles concrètes.",
+  "why.edge.title.recruiter": "Esprit d'analyse",
+  "why.edge.desc.recruiter": "Comprendre avant de coder. Analyser un problème, ses contraintes et ses utilisateurs avant de choisir une solution technique.",
 };
 
 // Boutons CV dans ProfileSection

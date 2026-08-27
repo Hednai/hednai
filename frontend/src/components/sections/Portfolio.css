@@ -42,9 +42,9 @@
 
 /* Style du bouton de filtre actuellement selectionne */
 .filter-btn--active {
-  background: #1a1a1a;
+  background: #09c;
   color: #ffffff !important;
-  border-color: #1a1a1a;
+  border-color: #09c;
 }
 
 .filter-btn--active:hover {

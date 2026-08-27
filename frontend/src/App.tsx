@@ -31,6 +31,10 @@ const Solutions = lazy(() =>
 const Recruiter = lazy(() =>
   import("./pages/Recruiter").then((m) => ({ default: m.Recruiter }))
 );
+// Page CV/Resume — viewer PDF intégré, dans MainLayout
+const CvPage = lazy(() =>
+  import("./pages/CvPage").then((m) => ({ default: m.CvPage }))
+);
 const LegalNotice = lazy(() =>
   import("./pages/LegalNotice").then((m) => ({ default: m.LegalNotice }))
 );
@@ -117,6 +121,24 @@ export default function App() {
                     element={
                       <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
                         <Recruiter />
+                      </Suspense>
+                    }
+                  />
+
+                  {/* Page CV/Resume — viewer PDF intégré */}
+                  <Route
+                    path="/cv"
+                    element={
+                      <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
+                        <CvPage />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="/resume"
+                    element={
+                      <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
+                        <CvPage />
                       </Suspense>
                     }
                   />

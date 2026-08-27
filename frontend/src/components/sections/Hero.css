@@ -62,7 +62,7 @@
   display: flex;
   gap: 20px;
   margin-bottom: 24px;
-  color: hsl(184 100% 50%);
+  color: #0099cc;
 }
 
 /* Titre principal — taille contenue pour equilibrer avec le radar */
@@ -82,7 +82,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: hsl(184 100% 50%);
+  color: #0099cc;
   margin-bottom: 20px;
 }
 
