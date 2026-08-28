@@ -11,13 +11,13 @@ import { FadeIn } from "../FadeIn";
 import { useLanguage } from "../../i18n/useLanguage";
 import "./ProfileSection.css";
 
-// Etapes du parcours — chaque etape a une icone, une periode et un texte i18n
+// Etapes du parcours — ordre antéchronologique (plus récent en haut)
 const TIMELINE_STEPS = [
-  { icon: Anchor, periodKey: "profile.step1.period", titleKey: "profile.step1.title", descKey: "profile.step1.desc" },
-  { icon: GraduationCap, periodKey: "profile.step2.period", titleKey: "profile.step2.title", descKey: "profile.step2.desc" },
-  { icon: Code, periodKey: "profile.step3.period", titleKey: "profile.step3.title", descKey: "profile.step3.desc" },
   { icon: Brain, periodKey: "profile.step4.period", titleKey: "profile.step4.title", descKey: "profile.step4.desc" },
   { icon: Rocket, periodKey: "profile.step5.period", titleKey: "profile.step5.title", descKey: "profile.step5.desc" },
+  { icon: Code, periodKey: "profile.step3.period", titleKey: "profile.step3.title", descKey: "profile.step3.desc" },
+  { icon: GraduationCap, periodKey: "profile.step2.period", titleKey: "profile.step2.title", descKey: "profile.step2.desc" },
+  { icon: Anchor, periodKey: "profile.step1.period", titleKey: "profile.step1.title", descKey: "profile.step1.desc" },
 ];
 
 export function ProfileSection() {
@@ -29,12 +29,17 @@ export function ProfileSection() {
         {/* Photo professionnelle */}
         <FadeIn>
           <div className="profile__photo-wrapper">
-            <img
-              src="/photo-daren.jpg"
-              alt={t("profile.photo.alt")}
-              className="profile__photo"
-              loading="lazy"
-            />
+            {/* Conteneur image + vignette (overflow hidden pour les coins arrondis) */}
+            <div className="profile__photo-inner">
+              <img
+                src="/photo-daren.webp"
+                alt={t("profile.photo.alt")}
+                className="profile__photo"
+                loading="lazy"
+              />
+            </div>
+            {/* Légende sous la photo — dans le wrapper sticky, hors du overflow */}
+            <p className="profile__photo-caption">{t("profile.photo.caption")}</p>
           </div>
         </FadeIn>
 

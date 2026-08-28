@@ -32,16 +32,16 @@
   z-index: 1;
 }
 
-/* Couleurs selon le statut */
+/* Couleurs selon le statut — même palette que le parcours recruteur */
 .roadmap__item--done .roadmap__icon {
-  background: var(--success-bg);
-  color: var(--success-text);
+  background: var(--accent-cyan);
+  color: #ffffff;
 }
 
 .roadmap__item--current .roadmap__icon {
   background: var(--bg-gray);
-  color: var(--text-primary);
-  border: 2px solid var(--text-primary);
+  color: var(--accent-cyan);
+  border: 2px solid var(--accent-cyan);
   animation: pulse-roadmap 2s infinite;
 }
 
@@ -89,6 +89,6 @@
 }
 
 @keyframes pulse-roadmap {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(100, 100, 100, 0.3); }
-  50% { box-shadow: 0 0 0 6px rgba(100, 100, 100, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 153, 204, 0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(0, 153, 204, 0); }
 }

@@ -8,7 +8,7 @@ export const hero = {
   "hero.cta2": "Voir mes projets",
   "hero.tagline": "From Sea to Code.",
   "hero.punchline.client": "De l’expérience maritime aux solutions numériques.",
-  "hero.punchline.recruiter": "",
+  "hero.punchline.recruiter": "De la passerelle de navigation à la ligne de code.",
   "hero.title.recruiter": "Developpeur Full Stack entre technologie, maritime et IA",
   "hero.subtitle.recruiter": "Officier de la marine marchande et developpeur Full Stack, je transforme mon experience maritime en solutions logicielles modernes, du web aux applications et a l'IA. Je construis HEDNAI, a la croisee du numerique et du maritime.",
   "hero.cta1.recruiter": "Decouvrir mon parcours",
