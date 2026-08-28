@@ -24,11 +24,10 @@ interface Milestone {
 // Donnees de la roadmap
 const MILESTONES: Milestone[] = [
   { year: "2025", titleKey: "roadmap.m1.title", descKey: "roadmap.m1.desc", status: "done" },
-  { year: "2025", titleKey: "roadmap.m2.title", descKey: "roadmap.m2.desc", status: "done" },
-  { year: "2025", titleKey: "roadmap.m3.title", descKey: "roadmap.m3.desc", status: "current" },
-  { year: "2026", titleKey: "roadmap.m4.title", descKey: "roadmap.m4.desc", status: "planned" },
-  { year: "2026", titleKey: "roadmap.m5.title", descKey: "roadmap.m5.desc", status: "planned" },
-  { year: "2027", titleKey: "roadmap.m6.title", descKey: "roadmap.m6.desc", status: "planned" },
+  { year: "2025 – 2026", titleKey: "roadmap.m2.title", descKey: "roadmap.m2.desc", status: "done" },
+  { year: "2026", titleKey: "roadmap.m3.title", descKey: "roadmap.m3.desc", status: "current" },
+  { year: "À VENIR", titleKey: "roadmap.m4.title", descKey: "roadmap.m4.desc", status: "planned" },
+  { year: "À VENIR", titleKey: "roadmap.m5.title", descKey: "roadmap.m5.desc", status: "planned" },
 ];
 
 // Icone selon le statut

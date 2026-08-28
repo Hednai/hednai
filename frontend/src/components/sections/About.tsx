@@ -47,14 +47,13 @@ interface Milestone {
   status: MilestoneStatus;
 }
 
-// Donnees de la roadmap
+// Donnees de la roadmap — 5 etapes, year vide = affiche t("roadmap.planned")
 const MILESTONES: Milestone[] = [
   { year: "2025", titleKey: "roadmap.m1.title", descKey: "roadmap.m1.desc", status: "done" },
-  { year: "2025", titleKey: "roadmap.m2.title", descKey: "roadmap.m2.desc", status: "done" },
-  { year: "2025 – 2026", titleKey: "roadmap.m3.title", descKey: "roadmap.m3.desc", status: "current" },
-  { year: "Sept. 2026", titleKey: "roadmap.m4.title", descKey: "roadmap.m4.desc", status: "planned" },
-  { year: "2027+", titleKey: "roadmap.m5.title", descKey: "roadmap.m5.desc", status: "planned" },
-  { year: "À venir", titleKey: "roadmap.m6.title", descKey: "roadmap.m6.desc", status: "planned" },
+  { year: "2025 – 2026", titleKey: "roadmap.m2.title", descKey: "roadmap.m2.desc", status: "done" },
+  { year: "SEPT. 2026", titleKey: "roadmap.m3.title", descKey: "roadmap.m3.desc", status: "current" },
+  { year: "", titleKey: "roadmap.m4.title", descKey: "roadmap.m4.desc", status: "planned" },
+  { year: "", titleKey: "roadmap.m5.title", descKey: "roadmap.m5.desc", status: "planned" },
 ];
 
 // Icone selon le statut de la roadmap
