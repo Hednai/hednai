@@ -1,101 +1,131 @@
 // ============================================
-// components/sections/ProfileSection.tsx
-// Section profil recruteur — photo pro + timeline parcours
-// Visible uniquement en mode recruteur (remplace About+Roadmap visuellement)
-// Raconte l'histoire : Marine → Dev → Full Stack → IA → HEDNAI
+// components/sections/Portfolio.tsx
+// Section projets — grille avec filtres et modal overlay
 // ============================================
-import { Link } from "react-router-dom";
-import { Anchor, GraduationCap, Code, Brain, Rocket, Briefcase } from "lucide-react";
+import { useState, useRef } from "react";
+import { X, ExternalLink, Github } from "lucide-react";
 import { SectionWrapper } from "../ui/SectionWrapper";
 import { FadeIn } from "../FadeIn";
 import { useLanguage } from "../../i18n/useLanguage";
-import "./ProfileSection.css";
+import "./Portfolio.css";
 
-// Etapes du parcours — ordre antéchronologique (plus récent en haut)
-const TIMELINE_STEPS = [
-  { icon: Brain, periodKey: "profile.step4.period", titleKey: "profile.step4.title", descKey: "profile.step4.desc" },
-  { icon: Rocket, periodKey: "profile.step5.period", titleKey: "profile.step5.title", descKey: "profile.step5.desc" },
-  { icon: Code, periodKey: "profile.step3.period", titleKey: "profile.step3.title", descKey: "profile.step3.desc" },
-  { icon: GraduationCap, periodKey: "profile.step2.period", titleKey: "profile.step2.title", descKey: "profile.step2.desc" },
-  { icon: Anchor, periodKey: "profile.step1.period", titleKey: "profile.step1.title", descKey: "profile.step1.desc" },
+// Categories de projets (clefs i18n)
+const CATEGORIES = ["portfolio.all", "portfolio.web", "portfolio.mobile", "portfolio.ai"];
+
+// Type pour un projet
+interface Project {
+  id: string;
+  titleKey: string;
+  descKey: string;
+  category: string;
+  image: string;
+  link?: string;
+  github?: string;
+}
+
+// Donnees des projets
+const PROJECTS: Project[] = [
+  {
+    id: "1",
+    titleKey: "portfolio.project1.title",
+    descKey: "portfolio.project1.desc",
+    category: "portfolio.web",
+    image: "/projects/project1.webp",
+    link: "https://example.com",
+    github: "https://github.com",
+  },
+  // ... autres projets
 ];
 
-export function ProfileSection() {
+export function Portfolio() {
   const { t } = useLanguage();
+  const [active, setActive] = useState<Project | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Ref vers les filtres pour scroller en haut a chaque changement de categorie
+  // Source : MDN Element.scrollIntoView()
+  const filtersRef = useRef<HTMLDivElement>(null);
+
+  // Filtre actuellement selectionne (cle i18n de la categorie)
+  const [activeFilter, setActiveFilter] = useState(CATEGORIES[0]);
+
+  // Filtrer les projets selon la categorie selectionnee
+  const filteredProjects =
+    activeFilter === CATEGORIES[0]
+      ? PROJECTS
+      : PROJECTS.filter((p) => p.category === activeFilter);
+
+  // Fermer le modal au clic sur l'overlay ou Escape
+  const handleClose = () => setActive(null);
 
   return (
-    <SectionWrapper id="apropos" title={t("profile.title")} subtitle={t("profile.subtitle")}>
-      <div className="profile">
-        {/* Photo professionnelle */}
-        <FadeIn>
-          <div className="profile__photo-wrapper">
-            {/* Conteneur image + vignette (overflow hidden pour les coins arrondis) */}
-            <div className="profile__photo-inner">
-              <img
-                src="/photo-daren.webp"
-                alt={t("profile.photo.alt")}
-                className="profile__photo"
-                loading="lazy"
-              />
+    <SectionWrapper id="portfolio" title={t("portfolio.title")} subtitle={t("portfolio.subtitle")}>
+      {/* Filtres */}
+      <div className="portfolio-filters" ref={filtersRef}>
+        {CATEGORIES.map((catKey) => (
+          <button
+            key={catKey}
+            className={`filter-btn ${activeFilter === catKey ? "filter-btn--active" : ""}`}
+            onClick={() => {
+              setActiveFilter(catKey);
+              filtersRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+          >
+            {t(catKey)}
+          </button>
+        ))}
+      </div>
+
+      {/* Grille de projets */}
+      <div className="portfolio-grid" ref={ref}>
+        {filteredProjects.map((project, index) => (
+          <FadeIn key={project.id} delay={index * 0.05}>
+            <div
+              className="portfolio-card"
+              onClick={() => setActive(project)}
+            >
+              <div className="portfolio-card__image">
+                <img src={project.image} alt={t(project.titleKey)} loading="lazy" />
+              </div>
+              <div className="portfolio-card__content">
+                <h3>{t(project.titleKey)}</h3>
+                <p>{t(project.descKey)}</p>
+                <span className="portfolio-card__category">{t(project.category)}</span>
+              </div>
             </div>
-            {/* Légende sous la photo — dans le wrapper sticky, hors du overflow */}
-            <p className="profile__photo-caption">{t("profile.photo.caption")}</p>
+          </FadeIn>
+        ))}
+      </div>
+
+      {/* Modal overlay — affiche les details du projet */}
+      {active && (
+        <div className="portfolio-modal-overlay" onClick={handleClose}>
+          <div className="portfolio-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="portfolio-modal__close" onClick={handleClose}>
+              <X size={24} />
+            </button>
+            <div className="portfolio-modal__image">
+              <img src={active.image} alt={t(active.titleKey)} />
+            </div>
+            <div className="portfolio-modal__content">
+              <h2>{t(active.titleKey)}</h2>
+              <p>{t(active.descKey)}</p>
+              <div className="portfolio-modal__links">
+                {active.link && (
+                  <a href={active.link} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink size={18} /> Voir le projet
+                  </a>
+                )}
+                {active.github && (
+                  <a href={active.github} target="_blank" rel="noopener noreferrer">
+                    <Github size={18} /> Code source
+                  </a>
+                )}
+              </div>
+            </div>
           </div>
-        </FadeIn>
-
-        {/* Timeline du parcours */}
-        <div className="profile__timeline">
-          {TIMELINE_STEPS.map((step, index) => {
-            const Icon = step.icon;
-
-            return (
-              <FadeIn key={step.titleKey} delay={index * 0.1}>
-                <div className="profile__step">
-                  {/* Ligne verticale + icone */}
-                  <div className="profile__step-marker">
-                    <div className="profile__step-icon">
-                      <Icon size={20} strokeWidth={1.5} />
-                    </div>
-                    {index < TIMELINE_STEPS.length - 1 && (
-                      <div className="profile__step-line" />
-                    )}
-                  </div>
-
-                  {/* Contenu de l'etape */}
-                  <div className="profile__step-content">
-                    <span className="profile__step-period">{t(step.periodKey)}</span>
-                    <h3 className="profile__step-title">{t(step.titleKey)}</h3>
-                    <p className="profile__step-desc">{t(step.descKey)}</p>
-                  </div>
-                </div>
-              </FadeIn>
-            );
-          })}
         </div>
-      </div>
-
-      {/* Transition vers le CV — Le parcours continue */}
-      <div className="profile__cv-toggle">
-        <FadeIn>
-          <div className="profile__next">
-            <h3 className="profile__next-title">{t("profile.next.title")}</h3>
-            <p className="profile__next-text">{t("profile.next.text")}</p>
-          </div>
-        </FadeIn>
-
-        <FadeIn>
-          <div className="profile__cv-buttons">
-            <Link to="/cv" className="btn btn--primary profile__cv-btn">
-              <Briefcase size={18} />
-              {t("cv.tab.fullstack")}
-            </Link>
-            <Link to="/cv?tab=captain" className="btn btn--secondary profile__cv-btn">
-              <Anchor size={18} />
-              {t("cv.tab.captain")}
-            </Link>
-          </div>
-        </FadeIn>
-      </div>
+      )}
     </SectionWrapper>
   );
 }

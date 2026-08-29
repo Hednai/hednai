@@ -30,8 +30,13 @@ export function Button({
   const classes = `btn btn--${variant} ${fullWidth ? "btn--full" : ""} ${className}`;
 
   // Si un lien (href) est fourni, on affiche un <a> qui ressemble a un bouton
+  // Si onClick est aussi fourni, il est execute au clic
   if (href) {
-    return <a href={href} className={classes}>{children}</a>;
+    return (
+      <a href={href} className={classes} onClick={onClick}>
+        {children}
+      </a>
+    );
   }
 
   // Sinon, on affiche un vrai <button>

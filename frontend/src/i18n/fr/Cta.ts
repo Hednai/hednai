@@ -12,7 +12,7 @@ export const cta = {
   "cta.calendar.title": "Vous préférez en parler directement ?",
   "cta.calendar.desc": "Un premier échange de 15 minutes pour comprendre votre besoin et voir comment je peux vous aider.",
   "cta.calendar.btn": "Réserver un échange",
-  "calendar.title": "Reservez un creneau",
+  "calendar.title": "Réservez un créneau",
   "calendar.desc": "Choisissez un moment qui vous convient pour une consultation gratuite de 15 minutes.",
   "quote.title": "Vous avez déjà une idée du projet ?",
   "quote.subtitle": "Décrivez votre besoin pour obtenir une première estimation et préparer notre échange.",

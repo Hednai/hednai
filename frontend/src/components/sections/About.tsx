@@ -156,7 +156,7 @@ export function About() {
                 <button
                   className="about-expanded__close"
                   onClick={() => setActiveCard(null)}
-                  aria-label="Fermer"
+                  aria-label={t("aria.close")}
                   type="button"
                 >
                   <X size={20} />

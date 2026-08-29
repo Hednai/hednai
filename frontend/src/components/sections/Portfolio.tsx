@@ -144,7 +144,7 @@ export function Portfolio() {
                   </div>
                   <p>{t(active.descriptionKey)}</p>
                 </div>
-                <button className="portfolio-expanded__close" onClick={() => setActive(null)} aria-label="Fermer">
+                <button className="portfolio-expanded__close" onClick={() => setActive(null)} aria-label={t("aria.close")}>
                   <X size={18} />
                 </button>
               </div>

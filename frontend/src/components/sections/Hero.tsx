@@ -41,7 +41,7 @@ export function Hero() {
           <div className="hero__buttons">
             {isRecruiter ? (
               <>
-                <Button href="/recruiter">
+                <Button href="/cv">
                   {t("hero.cta1.recruiter")} <ArrowRight size={18} />
                 </Button>
                 <Button href="#portfolio" variant="secondary">

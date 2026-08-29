@@ -98,7 +98,7 @@ export function Services() {
                 <button
                   className="svc-expanded__close"
                   onClick={() => setActiveId(null)}
-                  aria-label="Fermer"
+                  aria-label={t("aria.close")}
                   type="button"
                 >
                   <X size={20} />

@@ -110,7 +110,7 @@ export function CtaBanner() {
             <button
               className="quote-modal__close"
               onClick={() => setCalendarOpen(false)}
-              aria-label="Fermer"
+              aria-label={t("aria.close")}
             >
               <X size={24} />
             </button>
@@ -126,7 +126,7 @@ export function CtaBanner() {
             <button
               className="quote-modal__close"
               onClick={() => setQuoteOpen(false)}
-              aria-label="Fermer"
+              aria-label={t("aria.close")}
             >
               <X size={24} />
             </button>

@@ -11,6 +11,6 @@ export const hero = {
   "hero.punchline.recruiter": "From the bridge of a ship to the command line.",
   "hero.title.recruiter": "Full Stack Developer between technology, maritime and AI",
   "hero.subtitle.recruiter": "Merchant Marine Officer and Full Stack Developer, I turn my maritime experience into modern software solutions, from web to applications and AI. I'm building HEDNAI, where technology meets the maritime world.",
-  "hero.cta1.recruiter": "Explore my background",
+  "hero.cta1.recruiter": "View my CV",
   "hero.cta2.recruiter": "See my projects",
 };

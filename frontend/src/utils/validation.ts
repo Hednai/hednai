@@ -4,9 +4,11 @@
 // Utilisees par useContactForm pour valider avant l'envoi
 // ============================================
 
-// Verifier si un email est basiquement valide
+// Validation basique cote frontend (la validation stricte est cote backend avec Zod)
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
 export const isValidEmail = (email: string): boolean => {
-  return email.includes("@") && email.includes(".");
+  return EMAIL_REGEX.test(email.trim());
 };
 
 // Verifier la longueur minimale d'un texte

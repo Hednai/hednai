@@ -37,7 +37,7 @@ export function ProjectDetail() {
   return (
     <div className="pd">
       <Helmet>
-        <title>{t(project.titleKey)} — Hednai</title>
+        <title>{t(project.titleKey)} | Hednai</title>
         <meta name="description" content={t(project.descriptionKey)} />
       </Helmet>
       <div className="container">

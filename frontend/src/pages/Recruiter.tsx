@@ -5,7 +5,7 @@
 // Un recruteur qui recoit ce lien voit immediatement le profil
 // ============================================
 import { Link } from "react-router-dom";
-import { Mail, ArrowLeft, Anchor, Code, Brain, Search } from "lucide-react";
+import { Mail, ArrowLeft } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import { Card } from "../components/ui/Card";
@@ -37,6 +37,7 @@ const SKILL_CATEGORIES = [
     skills: ["Agile", "Scrum", "Jira", "Git / GitHub", "Travail en équipe", "Gestion du backlog"],
   },
 ];
+
 export function Recruiter() {
   const { t } = useLanguage();
 
@@ -87,15 +88,7 @@ export function Recruiter() {
           </div>
         </FadeIn>
 
-        {/* Resume parcours */}
-        <FadeIn delay={0.1}>
-          <Card>
-            <div className="recruiter-section">
-              <h2>{t("recruiter.about.title")}</h2>
-              <p>{t("recruiter.about.text")}</p>
-            </div>
-          </Card>
-        </FadeIn>
+        {/* Parcours retire : deja dans ProfileSection sur la page d'accueil */}
 
         {/* Competences techniques */}
         <FadeIn delay={0.2}>
@@ -120,36 +113,7 @@ export function Recruiter() {
           </div>
         </FadeIn>
 
-        {/* Ce qui me differencie — 4 cartes */}
-        <FadeIn delay={0.3}>
-          <h2 className="recruiter-page__section-title">
-            {t("recruiter.diff.title")}
-          </h2>
-          <p className="recruiter-page__diff-intro">
-            {t("recruiter.diff.intro")}
-          </p>
-          <div className="recruiter-diff-grid">
-            {[
-              { icon: Anchor, num: 1 },
-              { icon: Code, num: 2 },
-              { icon: Brain, num: 3 },
-              { icon: Search, num: 4 },
-            ].map((card) => {
-              const Icon = card.icon;
-              return (
-                <Card key={card.num} hoverable={false}>
-                  <div className="recruiter-diff-card">
-                    <div className="recruiter-diff-card__icon">
-                      <Icon size={22} strokeWidth={1.5} />
-                    </div>
-                    <h3>{t(`recruiter.diff.card${card.num}.title`)}</h3>
-                    <p>{t(`recruiter.diff.card${card.num}.text`)}</p>
-                  </div>
-                </Card>
-              );
-            })}
-          </div>
-        </FadeIn>
+        {/* "Ce qui me differencie" retire : deja dans WhyHednai mode recruteur */}
 
         {/* CTA final */}
         <div className="recruiter-page__cta">
