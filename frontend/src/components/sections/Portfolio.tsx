@@ -47,6 +47,10 @@ export function Portfolio() {
   const [active, setActive] = useState<Project | null>(null);
   const ref = useRef<HTMLDivElement>(null);
 
+  // Ref vers les filtres pour scroller en haut a chaque changement de categorie
+  // Source : MDN Element.scrollIntoView()
+  const filtersRef = useRef<HTMLDivElement>(null);
+
   // Filtre actuellement selectionne (cle i18n de la categorie)
   const [activeFilter, setActiveFilter] = useState(CATEGORIES[0]);
 
@@ -86,12 +90,16 @@ export function Portfolio() {
       subtitle={isRecruiter ? t("portfolio.subtitle.recruiter") : t("portfolio.subtitle")}
     >
       {/* Boutons de filtre par categorie */}
-      <div className="portfolio-filters">
+      <div className="portfolio-filters" ref={filtersRef}>
         {CATEGORIES.map((catKey) => (
           <button
             key={catKey}
             className={`filter-btn ${activeFilter === catKey ? "filter-btn--active" : ""}`}
-            onClick={() => setActiveFilter(catKey)}
+            onClick={() => {
+              setActiveFilter(catKey);
+              // Remonter la vue au niveau des filtres pour voir les cartes depuis le debut
+              filtersRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
           >
             {t(catKey)}
           </button>
