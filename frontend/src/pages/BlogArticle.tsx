@@ -47,7 +47,7 @@ export function BlogArticle() {
   return (
     <div className="blog-article">
       <Helmet>
-        <title>{t(article.titleKey)} — Hednai</title>
+        <title>{t(article.titleKey)} | Hednai</title>
         <meta name="description" content={t(article.summaryKey)} />
       </Helmet>
 

@@ -28,15 +28,22 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     return translations[lang][key] || key;
   };
 
-  // Fonction pour basculer entre francais et anglais
-  // Basculer la langue et sauvegarder dans localStorage
+  // Basculer la langue, sauvegarder dans localStorage et mettre a jour html lang
   const toggleLang = () => {
     setLang((prev) => {
       const next = prev === "fr" ? "en" : "fr";
-      try { localStorage.setItem("hednai-lang", next); } catch { /* tests */ }
+      try {
+        localStorage.setItem("hednai-lang", next);
+        document.documentElement.lang = next;
+      } catch (e) {
+        console.warn("Impossible de sauvegarder la langue :", e);
+      }
       return next;
     });
   };
+
+  // Synchroniser l'attribut lang du document au chargement initial
+  try { document.documentElement.lang = lang; } catch { /* SSR/test */ }
 
   return (
     <LanguageContext.Provider value={{ lang, t, toggleLang }}>

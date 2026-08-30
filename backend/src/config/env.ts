@@ -18,6 +18,7 @@ const envSchema = z.object({
   SMTP_USER: z.string().optional(),
   SMTP_PASS: z.string().optional(),
   CONTACT_EMAIL: z.string().default("contact@hednai.com"),
+  ADMIN_TOKEN: z.string().min(32, "ADMIN_TOKEN doit faire au moins 32 caracteres"),
 });
 
 // Valider au demarrage

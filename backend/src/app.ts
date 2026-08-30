@@ -10,6 +10,7 @@ import compression from "compression";
 import rateLimit from "express-rate-limit";
 
 import { corsMiddleware } from "./config/cors";
+import { env } from "./config/env";
 import xssClean from "./middleware/xssClean";
 import { invalidateCache } from "./middleware/cache";
 import notFound from "./middleware/notFound";
@@ -22,11 +23,31 @@ const app = express();
 
 // ---- Middlewares de securite (ordre important) ----
 
-// Trust proxy (pour Render / reverse proxy)
+// Trust proxy : 1 = fait confiance au premier proxy (Render, Nginx)
+// Necessaire pour que express-rate-limit voie la vraie IP du client
+// Si deploiement change (ex: 2 proxys), adapter la valeur
 app.set("trust proxy", 1);
 
-// Helmet : headers de securite
-app.use(helmet());
+// Helmet : headers de securite avec CSP configuree
+// Les defauts de Helmet sont conserves (default-src, font-src, style-src, img-src, etc.)
+// On surcharge seulement les sources externes necessaires au projet
+// Source : helmetjs.github.io
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        scriptSrc: ["'self'", "https://plausible.io"],
+        connectSrc: ["'self'", env.FRONTEND_URL],
+        frameSrc: ["'self'", "https://cal.com"],
+      },
+    },
+    // HSTS : forcer HTTPS (max-age 1 an)
+    strictTransportSecurity: {
+      maxAge: 31536000,
+      includeSubDomains: true,
+    },
+  })
+);
 
 // CORS : autoriser seulement le frontend
 app.use(corsMiddleware);
@@ -37,34 +58,81 @@ app.use(compression());
 // Parser le JSON (limite 10kb)
 app.use(express.json({ limit: "10kb" }));
 
-// Protection XSS
+// Empecher l'indexation des endpoints API par les moteurs de recherche
+// Source : Google Search Central (X-Robots-Tag)
+app.use("/api", (_req, res, next) => {
+  res.setHeader("X-Robots-Tag", "noindex, nofollow");
+  next();
+});
+
+// Protection XSS (sanitization des inputs)
 app.use(xssClean);
 
 // Invalidation du cache Redis
 app.use(invalidateCache);
 
 // ---- Rate limiting ----
+// Source : npmjs.com/package/express-rate-limit v8
+
+// Formulaire de contact : 10 requetes par 15 minutes
 const contactLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 10,
+  standardHeaders: "draft-8",
+  legacyHeaders: false,
   message: {
     success: false,
-    message: "Trop de messages. Reessayez dans 15 minutes.",
+    message: "Too many requests. Please try again in 15 minutes.",
   },
+});
+
+// Routes admin : 30 requetes par 15 minutes
+const adminLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  standardHeaders: "draft-8",
+  legacyHeaders: false,
+  message: { success: false, message: "Too many requests." },
 });
 
 // ---- Routes API ----
 
-// Health check
-app.get("/api/health", (_req, res) => {
-  res.json({ success: true, status: "ok", time: new Date() });
+// Health check ameliore — verifie la connexion aux services
+app.get("/api/health", async (_req, res) => {
+  const checks: Record<string, boolean> = {};
+
+  // Verifier PostgreSQL
+  try {
+    const { prisma } = await import("./lib/prisma");
+    await prisma.$queryRaw`SELECT 1`;
+    checks.database = true;
+  } catch {
+    checks.database = false;
+  }
+
+  // Verifier Redis (optionnel)
+  try {
+    const { redis } = await import("./config/redis");
+    checks.redis = redis !== null;
+  } catch {
+    checks.redis = false;
+  }
+
+  const healthy = checks.database;
+  res.status(healthy ? 200 : 503).json({
+    success: healthy,
+    status: healthy ? "ok" : "degraded",
+    checks,
+    uptime: Math.floor(process.uptime()),
+    time: new Date(),
+  });
 });
 
-// Contact — avec rate limiting
+// Contact : rate limiting
 app.use("/api/contact", contactLimiter, contactRouter);
 
-// Dashboard admin — sans rate limiting (usage interne)
-app.use("/api/dashboard", dashboardRouter);
+// Dashboard admin : rate limiting + auth (token Bearer dans dashboard.route.ts)
+app.use("/api/dashboard", adminLimiter, dashboardRouter);
 
 // ---- Gestion des erreurs (en dernier) ----
 app.use(notFound);

@@ -23,21 +23,31 @@
   />
 
   <!-- Titre affiche dans l'onglet du navigateur -->
-  <title>Hednai — Solutions Digitales & Intelligence Artificielle</title>
+  <title>Hednai | Maritime Software & AI</title>
 
   <!-- Description pour les moteurs de recherche -->
   <meta
     name="description"
-    content="Developpeur freelance specialise en solutions digitales, applications web et intelligence artificielle. Expertise maritime, logistique et tous secteurs."
+    content="Logiciels et solutions IA pour le secteur maritime. Gestion de flotte, opérations portuaires, maintenance prédictive."
   />
 
   <meta
     name="keywords"
-    content="developpeur freelance, IA, web, applications, maritime, logistique, automatisation"
+    content="logiciel maritime, IA, gestion de flotte, opérations portuaires, développement web, Hednai"
   />
 
   <!-- URL canonique du site -->
   <link rel="canonical" href="https://hednai.com" />
+  <!-- Variantes linguistiques : meme URL car la langue est geree cote client (localStorage) -->
+  <!-- LIMITE : Google recommande des URLs distinctes par langue pour un vrai SEO bilingue -->
+  <!-- V2 : passer a /fr/ et /en/ avec du SSR ou du pre-rendering -->
+  <link rel="alternate" hreflang="fr" href="https://hednai.com" />
+  <link rel="alternate" hreflang="en" href="https://hednai.com" />
+  <link rel="alternate" hreflang="x-default" href="https://hednai.com" />
+
+  <!-- Precharger l'image hero pour accelerer le LCP -->
+  <!-- Source : web.dev/articles/optimize-lcp -->
+  <link rel="preload" as="image" href="/hednai_bridge.webp" type="image/webp" fetchpriority="high" />
 
   <!-- Icone de l'onglet du navigateur -->
   <link rel="icon" type="image/png" href="/logo-anchor.png" />
@@ -45,8 +55,8 @@
   <link rel="manifest" href="/manifest.json" />
 
   <!-- Open Graph : previsualisation quand le lien est partage (Facebook, LinkedIn...) -->
-  <meta property="og:title" content="Hednai — Solutions Digitales & Intelligence Artificielle" />
-  <meta property="og:description" content="Solutions digitales, applications web et IA pour tous secteurs. Expertise maritime et au-dela." />
+  <meta property="og:title" content="Hednai | Maritime Software & AI" />
+  <meta property="og:description" content="Logiciels et solutions IA pour le secteur maritime." />
   <meta property="og:image" content="https://hednai.com/og-image.png" />
   <meta property="og:url" content="https://hednai.com" />
   <meta property="og:type" content="website" />
@@ -54,12 +64,11 @@
 
   <!-- Twitter Card : previsualisation quand le lien est partage sur Twitter/X -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Hednai — Solutions Digitales & Intelligence Artificielle" />
-  <meta name="twitter:description" content="Solutions digitales, applications web et IA pour tous secteurs. Expertise maritime et au-dela." />
+  <meta name="twitter:title" content="Hednai | Maritime Software & AI" />
+  <meta name="twitter:description" content="Logiciels et solutions IA pour le secteur maritime." />
   <meta name="twitter:image" content="https://hednai.com/og-image.png" />
 
   <!-- Donnees structurees pour les moteurs de recherche (fiche "Personne") -->
-  <!-- A FAIRE : remplacer TON-PROFIL par tes vrais liens LinkedIn/GitHub -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -67,10 +76,9 @@
     "name": "Hednai",
     "url": "https://hednai.com",
     "sameAs": [
-      "https://www.linkedin.com/in/TON-PROFIL",
       "https://github.com/Hednai"
     ],
-    "jobTitle": "Developpeur Freelance — Web & IA",
+    "jobTitle": "Software Developer - Maritime & AI",
     "worksFor": {
       "@type": "Organization",
       "name": "Hednai"
@@ -78,22 +86,20 @@
   }
   </script>
 
-  <!-- Google Analytics -->
-  <!-- A FAIRE : remplacer G-XXXXXXX par ton vrai identifiant Google Analytics -->
+  <!-- Google Analytics : decommenter et remplacer G-XXXXXXX une fois l'ID pret
   <link rel="preconnect" href="https://www.googletagmanager.com" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-XXXXXXX');
   </script>
+  -->
 
-  <!-- Analytics Plausible — respectueux de la vie privee (pas de cookies) -->
-  <!-- Remplacer data-domain par ton vrai domaine une fois deploye -->
-  <script defer data-domain="hednai.com" src="https://plausible.io/js/script.js"></script>
+  <!-- Plausible Analytics : statistiques de visite anonymes, sans cookies, conforme RGPD -->
+  <!-- Activer apres creation du compte sur plausible.io et ajout du domaine hednai.com -->
+  <!-- <script defer data-domain="hednai.com" src="https://plausible.io/js/script.js"></script> -->
 
 </head>
 

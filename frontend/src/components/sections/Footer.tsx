@@ -5,6 +5,7 @@
 // Responsabilite unique : afficher les informations de fin de page
 // ============================================
 import { useState, useCallback, useEffect } from "react";
+import { useEscapeKey } from "../../hooks/useEscapeKey";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { Mail, MapPin, Globe, X } from "lucide-react";
@@ -24,6 +25,12 @@ export function Footer() {
 
   // Etat du modal de contact
   const [contactOpen, setContactOpen] = useState(false);
+
+  // Fermer la modale contact avec Escape
+  const closeContact = useCallback(() => {
+    if (contactOpen) setContactOpen(false);
+  }, [contactOpen]);
+  useEscapeKey(closeContact);
 
   // Ecoute l'evenement global pour ouvrir le modal (depuis la navbar ou le CTA hero)
   useEffect(() => {
@@ -62,7 +69,7 @@ export function Footer() {
           {/* ===== Colonne gauche : marque + identite ===== */}
           <div className="footer__brand">
             <div className="footer__logo">
-              <img src="/logo-anchor.png" alt="Hednai" />
+              <img src="/logo-anchor.webp" alt="Hednai" width="36" height="36" />
               <span>
                 Hed<span className="footer__logo-accent">nai</span>
               </span>
@@ -197,15 +204,26 @@ export function Footer() {
                   {SITE_CONFIG.contact.email}
                 </a>
               </div>
-              {/* Bouton qui ouvre le formulaire de contact en modal */}
-              <button
-                className="footer__contact-btn"
-                onClick={() => setContactOpen(true)}
-              >
-                {isRecruiter
-                  ? t("footer.recruiter.button")
-                  : t("footer.cta.button")}
-              </button>
+              {/* Mode recruteur : lien vers le CV ; Mode client : ouvre le formulaire contact */}
+              {isRecruiter ? (
+                <a
+                  href="/cv"
+                  className="footer__contact-btn"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/cv");
+                  }}
+                >
+                  {t("footer.recruiter.button")}
+                </a>
+              ) : (
+                <button
+                  className="footer__contact-btn"
+                  onClick={() => setContactOpen(true)}
+                >
+                  {t("footer.cta.button")}
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -250,6 +268,9 @@ export function Footer() {
         >
           <div
             className="contact-modal__content"
+            role="dialog"
+            aria-modal="true"
+            aria-label={t("contact.title")}
             onClick={(e) => e.stopPropagation()}
           >
             <button

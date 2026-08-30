@@ -10,11 +10,12 @@ import xss from "xss";
 import type { Request, Response, NextFunction } from "express";
 
 // Configuration adaptee au francais
+// L'echappement HTML par defaut de la librairie est actif (defense en profondeur)
+// Source : github.com/leizongmin/js-xss
 const xssOptions = {
   whiteList: {},
   stripIgnoreTag: true,
   stripIgnoreTagBody: ["script", "style"],
-  escapeHtml: (html: string) => html,
 };
 
 // Fonction recursive qui nettoie toutes les strings d'un objet

@@ -47,6 +47,11 @@ export function Portfolio() {
   const [active, setActive] = useState<Project | null>(null);
   const ref = useRef<HTMLDivElement>(null);
 
+  // Ref vers les filtres pour scroller en haut a chaque changement de categorie
+  // On utilise la section parente plutot que les filtres eux-memes
+  // pour que le scroll tienne compte de la navbar fixe
+  const filtersRef = useRef<HTMLDivElement>(null);
+
   // Filtre actuellement selectionne (cle i18n de la categorie)
   const [activeFilter, setActiveFilter] = useState(CATEGORIES[0]);
 
@@ -86,12 +91,26 @@ export function Portfolio() {
       subtitle={isRecruiter ? t("portfolio.subtitle.recruiter") : t("portfolio.subtitle")}
     >
       {/* Boutons de filtre par categorie */}
-      <div className="portfolio-filters">
+      <div className="portfolio-filters" ref={filtersRef}>
         {CATEGORIES.map((catKey) => (
           <button
             key={catKey}
             className={`filter-btn ${activeFilter === catKey ? "filter-btn--active" : ""}`}
-            onClick={() => setActiveFilter(catKey)}
+            onClick={() => {
+              setActiveFilter(catKey);
+              // Remonter la vue au niveau des filtres en tenant compte de la navbar fixe
+              if (filtersRef.current) {
+                const navHeight = parseInt(
+                  getComputedStyle(document.documentElement)
+                    .getPropertyValue("--nav-height") || "72"
+                );
+                const top = filtersRef.current.getBoundingClientRect().top
+                  + window.scrollY
+                  - navHeight
+                  - 16; // marge supplementaire pour respirer
+                window.scrollTo({ top, behavior: "smooth" });
+              }
+            }}
           >
             {t(catKey)}
           </button>
@@ -144,7 +163,7 @@ export function Portfolio() {
                   </div>
                   <p>{t(active.descriptionKey)}</p>
                 </div>
-                <button className="portfolio-expanded__close" onClick={() => setActive(null)} aria-label="Fermer">
+                <button className="portfolio-expanded__close" onClick={() => setActive(null)} aria-label={t("aria.close")}>
                   <X size={18} />
                 </button>
               </div>

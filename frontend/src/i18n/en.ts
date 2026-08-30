@@ -11,7 +11,6 @@ import { contact } from "./en/contact";
 import { common } from "./en/common";
 import { whyHednai } from "./en/whyHednai";
 import { about } from "./en/about";
-import { roadmap } from "./en/roadmap";
 import { testimonials } from "./en/testimonials";
 import { cta, ctaRecruiter } from "./en/cta";
 import { blog } from "./en/blog";
@@ -30,7 +29,6 @@ export const en: Record<string, string> = {
   ...common,
   ...whyHednai,
   ...about,
-  ...roadmap,
   ...testimonials,
   ...cta,
   ...blog,

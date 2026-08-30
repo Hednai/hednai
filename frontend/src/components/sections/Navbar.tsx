@@ -91,7 +91,7 @@ export function Navbar() {
 
         {/* Logo + badge identitaire */}
         <a href="#accueil" className="navbar__logo" onClick={(e) => handleNavClick(e, "#accueil")}>
-          <img src="/logo-anchor.png" alt="Hednai" />
+          <img src="/logo-anchor.webp" alt="Hednai" width="36" height="36" />
           <div className="navbar__logo-text">
             <span>Hed<span style={{ color: "#0099cc" }}>nai</span></span>
             <span className="navbar__badge">{t("nav.badge")}</span>
@@ -107,8 +107,14 @@ export function Navbar() {
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
-        {/* Liste des liens */}
-        <ul className={`navbar__links ${menuOpen ? "navbar__links--open" : ""}`}>
+        {/* Liste des liens — ferme le menu au clic sur le fond (mobile) */}
+        <ul
+          className={`navbar__links ${menuOpen ? "navbar__links--open" : ""}`}
+          onClick={(e) => {
+            // Fermer le menu seulement si le clic est sur le fond, pas sur un lien
+            if (e.target === e.currentTarget) close();
+          }}
+        >
           {NAV_LINKS.map((link) => {
             // Sur une page interne (/blog, /recruiter...), seul le lien route est actif
             // Sur la page d'accueil, le scroll spy gere les ancres

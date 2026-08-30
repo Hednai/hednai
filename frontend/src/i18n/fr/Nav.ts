@@ -16,6 +16,6 @@ export const nav = {
   "nav.lightMode": "Mode clair",
   "nav.darkMode": "Mode sombre",
   "nav.why": "Pourquoi",
-  "nav.about": "A propos",
+  "nav.about": "À propos",
   "nav.roadmap": "Feuille de route",
 };

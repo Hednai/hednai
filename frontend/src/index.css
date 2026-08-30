@@ -290,6 +290,8 @@ img {
   background: #e0f4f4;
 }
 
+
+
 @media (max-width: 768px) {
   .maple-section__leaf--right {
     width: 300px;
@@ -325,4 +327,13 @@ img {
     text-align: center;
     margin: 0 auto 48px;
   }
+}
+
+/* ============================================
+   Focus visible global — accessibilite clavier
+   Source : WCAG 2.4.7 — Focus Visible (Level AA)
+   ============================================ */
+*:focus-visible {
+  outline: 3px solid var(--accent-cyan);
+  outline-offset: 2px;
 }

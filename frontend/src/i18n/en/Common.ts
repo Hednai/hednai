@@ -21,7 +21,7 @@ export const common = {
   "footer.cta.button": "Talk about my project",
   "footer.recruiter.title": "A profile to discover?",
   "footer.recruiter.text": "From merchant navy to software development, discover my journey and what I'm building with HEDNAI.",
-  "footer.recruiter.button": "See my profile",
+  "footer.recruiter.button": "View my resume",
   "footer.skills.title": "Skills",
   "footer.skills.fullstack": "Full Stack Development",
   "footer.skills.maritime": "Maritime Solutions",
@@ -31,7 +31,7 @@ export const common = {
   "footer.legal.terms": "Legal Notice",
   "footer.legal.privacy": "Privacy Policy",
   "scrollToTop": "Back to top",
-  "seo.home.title": "Hednai — AI Software for Maritime",
+  "seo.home.title": "Hednai | Maritime Software & AI",
   "seo.home.desc": "Hednai builds custom software solutions for ports, shipowners and maritime companies. Fleet management, predictive maintenance, AI.",
   "apiStatus.loading": "Connecting to API...",
   "apiStatus.online": "API online",
@@ -46,4 +46,5 @@ export const common = {
   "viewMode.recruiter": "Recruiter Mode",
   "viewMode.switchRecruiter": "Switch to recruiter mode",
   "viewMode.switchClient": "Switch to client mode",
+  "aria.close": "Close",
 };

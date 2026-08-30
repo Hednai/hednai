@@ -18,7 +18,8 @@ export const SITE_CONFIG = {
   // Liens reseaux sociaux
   socials: {
     github: "https://github.com/Hednai",
-    linkedin: "https://linkedin.com/in/tonprofil",
+    // TODO: Remplacer par le vrai lien LinkedIn
+    linkedin: "#",
   },
 
   // API backend
@@ -39,7 +40,7 @@ export const SITE_CONFIG = {
 
   // Meta SEO
   meta: {
-    title: "Hednai — Solutions Digitales Maritime & IA",
+    title: "Hednai | Maritime Software & AI",
     description:
       "Developpeur freelance specialise en applications maritimes, web et IA.",
     url: "https://hednai.com",

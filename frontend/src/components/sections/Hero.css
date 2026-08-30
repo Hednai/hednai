@@ -17,7 +17,7 @@
   overflow: hidden;
 
   /* Image de fond (pont de bateau) — position haute pour cadrer mieux */
-  background-image: url("/hednai_bridge.png");
+  background-image: url("/hednai_bridge.webp");
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;

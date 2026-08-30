@@ -1,8 +1,8 @@
 // ============================================
 // components/sections/ProfileSection.tsx
-// Section profil recruteur — photo pro + timeline parcours
+// Section profil recruteur - photo pro + timeline parcours
 // Visible uniquement en mode recruteur (remplace About+Roadmap visuellement)
-// Raconte l'histoire : Marine → Dev → Full Stack → IA → HEDNAI
+// Raconte l'histoire : Marine > Dev > Full Stack > IA > HEDNAI
 // ============================================
 import { Link } from "react-router-dom";
 import { Anchor, GraduationCap, Code, Brain, Rocket, Briefcase } from "lucide-react";
@@ -11,7 +11,7 @@ import { FadeIn } from "../FadeIn";
 import { useLanguage } from "../../i18n/useLanguage";
 import "./ProfileSection.css";
 
-// Etapes du parcours — ordre antéchronologique (plus récent en haut)
+// Etapes du parcours - ordre antechronologique (plus recent en haut)
 const TIMELINE_STEPS = [
   { icon: Brain, periodKey: "profile.step4.period", titleKey: "profile.step4.title", descKey: "profile.step4.desc" },
   { icon: Rocket, periodKey: "profile.step5.period", titleKey: "profile.step5.title", descKey: "profile.step5.desc" },
@@ -29,7 +29,6 @@ export function ProfileSection() {
         {/* Photo professionnelle */}
         <FadeIn>
           <div className="profile__photo-wrapper">
-            {/* Conteneur image + vignette (overflow hidden pour les coins arrondis) */}
             <div className="profile__photo-inner">
               <img
                 src="/photo-daren.webp"
@@ -38,7 +37,6 @@ export function ProfileSection() {
                 loading="lazy"
               />
             </div>
-            {/* Légende sous la photo — dans le wrapper sticky, hors du overflow */}
             <p className="profile__photo-caption">{t("profile.photo.caption")}</p>
           </div>
         </FadeIn>
@@ -74,7 +72,7 @@ export function ProfileSection() {
         </div>
       </div>
 
-      {/* Transition vers le CV — Le parcours continue */}
+      {/* Transition vers le CV */}
       <div className="profile__cv-toggle">
         <FadeIn>
           <div className="profile__next">
