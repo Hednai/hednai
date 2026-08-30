@@ -5,6 +5,7 @@
 // V2 : migrer vers JWT avec expiration + refresh token + endpoint login
 // Source : OWASP Authentication Cheat Sheet
 // ============================================
+import { timingSafeEqual } from "node:crypto";
 import type { Request, Response, NextFunction } from "express";
 import { env } from "../config/env";
 
@@ -24,9 +25,15 @@ const authAdmin = (req: Request, res: Response, next: NextFunction) => {
   // Récupère le token admin défini dans les variables d'environnement
   const expected = env.ADMIN_TOKEN;
 
-  // Compare le token reçu avec le token attendu
-  // V2 : utiliser timingSafeEqual de crypto pour éviter les attaques par timing
-  if (token.length !== expected.length || token !== expected) {
+  // Comparaison constante pour eviter les attaques par timing
+  // Source : Node.js crypto.timingSafeEqual (docs.nodejs.org)
+  const tokenBuffer = Buffer.from(token);
+  const expectedBuffer = Buffer.from(expected);
+  const isValid =
+    tokenBuffer.length === expectedBuffer.length &&
+    timingSafeEqual(tokenBuffer, expectedBuffer);
+
+  if (!isValid) {
     return res.status(403).json({ success: false, message: "Forbidden." });
   }
 

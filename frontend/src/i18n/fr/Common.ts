@@ -21,7 +21,7 @@ export const common = {
   "footer.cta.button": "Parler de mon projet",
   "footer.recruiter.title": "Un profil à découvrir ?",
   "footer.recruiter.text": "De la marine marchande au développement logiciel, découvrez mon parcours et ce que je construis avec HEDNAI.",
-  "footer.recruiter.button": "Voir mon profil",
+  "footer.recruiter.button": "Consulter mon CV",
   "footer.skills.title": "Compétences",
   "footer.skills.fullstack": "Développement Full Stack",
   "footer.skills.maritime": "Solutions maritimes",

@@ -97,9 +97,35 @@ const adminLimiter = rateLimit({
 
 // ---- Routes API ----
 
-// Health check
-app.get("/api/health", (_req, res) => {
-  res.json({ success: true, status: "ok", time: new Date() });
+// Health check ameliore — verifie la connexion aux services
+app.get("/api/health", async (_req, res) => {
+  const checks: Record<string, boolean> = {};
+
+  // Verifier PostgreSQL
+  try {
+    const { prisma } = await import("./lib/prisma");
+    await prisma.$queryRaw`SELECT 1`;
+    checks.database = true;
+  } catch {
+    checks.database = false;
+  }
+
+  // Verifier Redis (optionnel)
+  try {
+    const { redis } = await import("./config/redis");
+    checks.redis = redis !== null;
+  } catch {
+    checks.redis = false;
+  }
+
+  const healthy = checks.database;
+  res.status(healthy ? 200 : 503).json({
+    success: healthy,
+    status: healthy ? "ok" : "degraded",
+    checks,
+    uptime: Math.floor(process.uptime()),
+    time: new Date(),
+  });
 });
 
 // Contact : rate limiting

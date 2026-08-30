@@ -256,45 +256,16 @@
 }
 
 
-/* ── Mode recruteur : disposition pleine largeur style Kosachov ── */
+/* ── Mode recruteur : 2 cartes cote a cote, meme disposition que le mode client ── */
 .cta-bento__grid--recruiter {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 20px;
 }
 
-.cta-bento__card--recruiter-mode {
-  width: 100%;
-  max-width: 800px;
-  text-align: center;
-  padding: 64px 48px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-lg);
-}
-
-.cta-bento__card--recruiter-mode h3 {
-  font-size: 28px;
-  font-weight: 700;
-  margin: 16px 0 12px;
-  color: var(--text-primary);
-}
-
-.cta-bento__card--recruiter-mode p {
-  color: var(--text-secondary);
-  margin-bottom: 32px;
-  line-height: 1.7;
-  font-size: 16px;
-  max-width: 520px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media (max-width: 640px) {
-  .cta-bento__card--recruiter-mode {
-    padding: 40px 24px;
-  }
-
-  .cta-bento__card--recruiter-mode h3 {
-    font-size: 22px;
+/* En mobile, les cartes s'empilent */
+@media (max-width: 768px) {
+  .cta-bento__grid--recruiter {
+    grid-template-columns: 1fr;
   }
 }

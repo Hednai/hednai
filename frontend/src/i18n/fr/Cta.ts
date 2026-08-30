@@ -39,4 +39,7 @@ export const ctaRecruiter = {
   "cta.recruiter.title.mode": "Ouvert aux opportunites",
   "cta.recruiter.desc.mode": "Une équipe, un projet ou un défi à relever ?",
   "cta.recruiter.btn.mode": "Parlons-en",
+  "cta.discover.title": "De la mer au code",
+  "cta.discover.desc": "Mer, code, IA. Découvrez ce qui se construit chez Hednai.",
+  "cta.discover.btn": "Entrer dans l'univers",
 };

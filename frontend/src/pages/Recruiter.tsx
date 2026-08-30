@@ -78,12 +78,12 @@ export function Recruiter() {
               >
                 <FaLinkedin size={16} /> LinkedIn
               </a>
-              <a
-                href={`mailto:${SITE_CONFIG.contact.email}`}
+              <button
                 className="btn btn--primary"
+                onClick={() => window.dispatchEvent(new Event("open-contact-modal"))}
               >
                 <Mail size={16} /> {t("recruiter.contact")}
-              </a>
+              </button>
             </div>
           </div>
         </FadeIn>
@@ -117,9 +117,12 @@ export function Recruiter() {
 
         {/* CTA final */}
         <div className="recruiter-page__cta">
-          <a href={`mailto:${SITE_CONFIG.contact.email}`} className="btn btn--primary">
+          <button
+            className="btn btn--primary"
+            onClick={() => window.dispatchEvent(new Event("open-contact-modal"))}
+          >
             <Mail size={16} /> {t("recruiter.cta")}
-          </a>
+          </button>
         </div>
       </div>
     </div>

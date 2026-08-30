@@ -38,4 +38,7 @@ export const ctaRecruiter = {
   "cta.recruiter.title.mode": "Open to opportunities",
   "cta.recruiter.desc.mode":   "A team, a project or a challenge to take on?",
   "cta.recruiter.btn.mode": "Let's talk",
+  "cta.discover.title": "From sea to code",
+  "cta.discover.desc": "Sea, code, AI. Discover what's being built at Hednai.",
+  "cta.discover.btn": "Enter the universe",
 };

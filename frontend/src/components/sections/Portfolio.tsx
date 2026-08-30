@@ -48,7 +48,8 @@ export function Portfolio() {
   const ref = useRef<HTMLDivElement>(null);
 
   // Ref vers les filtres pour scroller en haut a chaque changement de categorie
-  // Source : MDN Element.scrollIntoView()
+  // On utilise la section parente plutot que les filtres eux-memes
+  // pour que le scroll tienne compte de la navbar fixe
   const filtersRef = useRef<HTMLDivElement>(null);
 
   // Filtre actuellement selectionne (cle i18n de la categorie)
@@ -97,8 +98,18 @@ export function Portfolio() {
             className={`filter-btn ${activeFilter === catKey ? "filter-btn--active" : ""}`}
             onClick={() => {
               setActiveFilter(catKey);
-              // Remonter la vue au niveau des filtres pour voir les cartes depuis le debut
-              filtersRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+              // Remonter la vue au niveau des filtres en tenant compte de la navbar fixe
+              if (filtersRef.current) {
+                const navHeight = parseInt(
+                  getComputedStyle(document.documentElement)
+                    .getPropertyValue("--nav-height") || "72"
+                );
+                const top = filtersRef.current.getBoundingClientRect().top
+                  + window.scrollY
+                  - navHeight
+                  - 16; // marge supplementaire pour respirer
+                window.scrollTo({ top, behavior: "smooth" });
+              }
             }}
           >
             {t(catKey)}

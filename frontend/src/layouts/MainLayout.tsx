@@ -6,6 +6,7 @@
 import { useEffect } from "react";
 import type { ReactNode } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { SkipLink } from "../components/ui/SkipLink";
 import { Navbar } from "../components/sections/Navbar";
 import { RouteScrollToTop } from "../components/RouteScrollToTop";
 import { Breadcrumb } from "../components/Breadcrumb";
@@ -37,11 +38,12 @@ export function MainLayout({ children }: MainLayoutProps) {
 
   return (
     <>
+      <SkipLink />
       <RouteScrollToTop />
       <Navbar />
       {/* Fil d'Ariane — visible uniquement sur les pages interieures */}
       <Breadcrumb />
-      <main>{children}</main>
+      <main id="main-content">{children}</main>
       {/* Vagues animees avec bateau — le footer vit a l'interieur */}
       <WaveAnimation>
         <Footer />
