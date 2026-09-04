@@ -4,7 +4,6 @@
 // Onglets Full Stack / Maritime, iframe PDF, bouton télécharger
 // La navbar du site gère la navigation (flèche retour fonctionne)
 // ============================================
-import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Download, Briefcase, Anchor, ArrowLeft } from "lucide-react";
@@ -32,18 +31,22 @@ type CvTabId = typeof CV_TABS[number]["id"];
 export function CvPage() {
   const { t, lang } = useLanguage();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  // Si ?tab=captain dans l'URL, ouvrir sur l'onglet maritime
-  const initialTab = searchParams.get("tab") === "captain" ? "captain" : "fullstack";
-  const [activeTab, setActiveTab] = useState<CvTabId>(initialTab);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  // Mettre à jour si le param change
-  useEffect(() => {
-    const tab = searchParams.get("tab");
-    if (tab === "captain" || tab === "fullstack") {
-      setActiveTab(tab);
-    }
-  }, [searchParams]);
+  // L'URL est la SOURCE DE VERITE de l'onglet actif : on la lit a chaque rendu
+  // au lieu de la recopier dans un etat local synchronise par un effet.
+  // L'ancienne version appelait setActiveTab() dans un useEffect, ce qui
+  // provoquait un rendu en cascade (React affichait le mauvais onglet une
+  // frame, puis le corrigeait) et declenchait la regle set-state-in-effect.
+  // Source : react.dev/learn/you-might-not-need-an-effect
+  const activeTab: CvTabId =
+    searchParams.get("tab") === "captain" ? "captain" : "fullstack";
+
+  // Changer d'onglet met a jour l'URL ; replace: true evite de polluer
+  // l'historique du navigateur a chaque clic
+  const setActiveTab = (tab: CvTabId) => {
+    setSearchParams({ tab }, { replace: true });
+  };
 
   // PDF selon onglet actif et langue du site
   const currentTab = CV_TABS.find((tab) => tab.id === activeTab)!;

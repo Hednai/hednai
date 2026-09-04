@@ -26,6 +26,20 @@
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
+/* ===== CORRECTIF MENU MOBILE INVISIBLE =====
+   Une valeur de backdrop-filter differente de "none" cree un BLOC CONTENEUR
+   pour tous les descendants en position: fixed (au meme titre que transform
+   ou filter). Consequence : .navbar__links { position: fixed; inset: 0 }
+   n'etait pas cale sur la fenetre mais sur la navbar de 72px de haut, donc
+   invisible et sans zone de fond cliquable.
+   Reference : W3C Filter Effects — "backdrop-filter" containing block.
+   On desactive donc le flou pendant que le menu est ouvert : le menu recouvre
+   deja tout l'ecran, le flou n'apporte plus rien visuellement. */
+.navbar--menu-open {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
 /* Mode sombre : fond fonce en permanence aussi */
 [data-theme="dark"] .navbar {
   background: rgba(15, 23, 42, 0.95);
@@ -70,6 +84,16 @@
   font-size: 20px;
   font-weight: 700;
   color: var(--text-primary);
+}
+
+/* Accent colore du logo ("nai") — remplace un style inline en dur dans le TSX */
+.navbar__logo-accent {
+  color: var(--accent-cyan);
+}
+
+/* Fond cliquable du menu mobile — masque en desktop */
+.navbar__backdrop {
+  display: none;
 }
 
 /* Badge identitaire sous le nom — petite ligne de contexte */
@@ -224,12 +248,26 @@
     align-items: center;
   }
 
+  /* Fond cliquable plein ecran, sous le panneau de liens */
+  .navbar__backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: transparent;
+  }
+
   /* Menu plein ecran, cache par defaut */
   /* z-index 9999 pour passer devant tout le contenu du site */
   .navbar__links {
     position: fixed;
     inset: 0;
     z-index: 9999;
+    /* Le menu ferme ne doit intercepter aucun clic */
+    pointer-events: none;
+    /* Defilement si la liste depasse sur un petit ecran (WCAG 1.4.10) */
+    overflow-y: auto;
+    padding: calc(var(--nav-height) + 16px) 0 32px;
     background: #ffffff;
     flex-direction: column;
     justify-content: center;
@@ -245,18 +283,11 @@
     background: #0f172a;
   }
 
-  /* Menu ouvert — cliquable pour fermer en touchant le fond */
+  /* Menu ouvert — les elements redeviennent cliquables */
   .navbar__links--open {
     opacity: 1;
     visibility: visible;
-    cursor: pointer;
-  }
-
-  /* Les liens eux-memes ne propagent pas le clic de fermeture */
-  .navbar__links--open li,
-  .navbar__links--open a,
-  .navbar__links--open button {
-    cursor: pointer;
+    pointer-events: auto;
   }
 
   .navbar__link {

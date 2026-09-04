@@ -45,6 +45,12 @@
   font-size: 11px;
 }
 
+/* Etat degrade : l'API repond mais une dependance (base de donnees) est KO.
+   Pastille orange, distincte du rouge "hors ligne". */
+.api-status__dot--degraded {
+  background: var(--accent-warm);
+}
+
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }

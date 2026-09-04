@@ -35,6 +35,7 @@ export const common = {
   "seo.home.desc": "Hednai développe des solutions logicielles sur mesure pour les ports, armateurs et compagnies maritimes. Gestion de flotte, maintenance prédictive, IA.",
   "apiStatus.loading": "Connexion API...",
   "apiStatus.online": "API en ligne",
+  "apiStatus.degraded": "API dégradée",
   "apiStatus.offline": "API hors ligne",
   "pwa.install": "Installer l'application Hednai",
   "pwa.close": "Fermer",

@@ -35,6 +35,7 @@ export const common = {
   "seo.home.desc": "Hednai builds custom software solutions for ports, shipowners and maritime companies. Fleet management, predictive maintenance, AI.",
   "apiStatus.loading": "Connecting to API...",
   "apiStatus.online": "API online",
+  "apiStatus.degraded": "API degraded",
   "apiStatus.offline": "API offline",
   "pwa.install": "Install Hednai app",
   "pwa.close": "Close",

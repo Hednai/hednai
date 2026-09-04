@@ -27,11 +27,11 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   // Utile pour logger l'erreur (ici juste dans la console)
-  componentDidCatch(error: Error, info: ErrorInfo) {
+  override componentDidCatch(error: Error, info: ErrorInfo) {
     console.error("ErrorBoundary :", error, info);
   }
 
-  render() {
+  override render() {
     // Si une erreur a ete attrapee, on affiche un message au lieu de planter
     if (this.state.hasError) {
       return (

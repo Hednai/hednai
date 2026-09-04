@@ -4,7 +4,7 @@
 // Au clic, la carte s'agrandit et revele le contenu (features)
 // Animation framer-motion (layoutId + AnimatePresence)
 // ============================================
-import { useState, useId, useRef, useEffect } from "react";
+import { useState, useId, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Ship, Anchor, Brain, ClipboardCheck, Building, Code, X } from "lucide-react";
@@ -14,6 +14,8 @@ import { FadeIn } from "../FadeIn";
 import { useLanguage } from "../../i18n/useLanguage";
 import { useViewMode } from "../../context/useViewMode";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
+import { useBodyScrollLock } from "../../hooks/useBodyScrollLock";
+import { useEscapeKey } from "../../hooks/useEscapeKey";
 import "./Services.css";
 
 // Table de correspondance entre le nom d'icone (string) et le vrai composant icone
@@ -28,21 +30,11 @@ export function Services() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const id = useId();
 
-  // Fermeture avec Escape + blocage du scroll
-  useEffect(() => {
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setActiveId(null);
-    }
+  // Fermeture avec Escape (hook partage)
+  useEscapeKey(useCallback(() => setActiveId(null), []));
 
-    if (activeId !== null) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [activeId]);
+  // Blocage du scroll pendant l'ouverture (hook partage a compteur)
+  useBodyScrollLock(activeId !== null);
 
   // Fermeture au clic exterieur
   useOutsideClick(overlayRef, () => setActiveId(null));

@@ -2,6 +2,7 @@
 // i18n/en/portfolio.ts — Portfolio section and projects (12 real projects)
 // ============================================
 export const portfolio = {
+  "portfolio.filters.label": "Filter projects by category",
   "portfolio.title": "Portfolio",
   "portfolio.subtitle": "Real projects, from competitions to maritime operations",
   "portfolio.view": "View project",

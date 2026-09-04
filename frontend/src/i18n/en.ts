@@ -3,20 +3,22 @@
 // Each module corresponds to a section or page of the site
 // To add translations, edit the relevant module file in en/
 // ============================================
-import { nav } from "./en/nav";
-import { hero } from "./en/hero";
-import { services } from "./en/services";
-import { portfolio, portfolioRecruiter } from "./en/portfolio";
-import { contact } from "./en/contact";
-import { common } from "./en/common";
-import { whyHednai } from "./en/whyHednai";
-import { about } from "./en/about";
-import { testimonials } from "./en/testimonials";
-import { cta, ctaRecruiter } from "./en/cta";
-import { blog } from "./en/blog";
-import { solutions } from "./en/solutions";
-import { recruiter, profile, whyRecruiter, profileCv } from "./en/recruiter";
-import { dashboard } from "./en/dashboard";
+// Meme regle que fr.ts : la casse doit correspondre au nom reel du fichier,
+// sous peine d'echec du build sur Linux (Vercel, GitHub Actions).
+import { nav } from "./en/Nav";
+import { hero } from "./en/Hero";
+import { services } from "./en/Services";
+import { portfolio, portfolioRecruiter } from "./en/Portfolio";
+import { contact } from "./en/Contact";
+import { common } from "./en/Common";
+import { whyHednai } from "./en/Whyhednai";
+import { about } from "./en/About";
+import { testimonials } from "./en/Testimonials";
+import { cta, ctaRecruiter } from "./en/Cta";
+import { blog } from "./en/Blog";
+import { solutions } from "./en/Solutions";
+import { recruiter, profile, whyRecruiter, profileCv } from "./en/Recruiter";
+import { dashboard } from "./en/Dashboard";
 import { cv } from "./en/Cv";
 import { legal } from "./en/Legal";
 

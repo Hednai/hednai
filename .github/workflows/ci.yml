@@ -1,7 +1,11 @@
 # ============================================
-# CI Pipeline — Hednai
-# Se declenche sur chaque push et pull request vers main
-# Installe, lint, teste et build frontend + backend
+# .github/workflows/ci.yml
+# Pipeline CI — lint, tests et build du frontend et du backend
+#
+# CORRECTIF : le fichier precedent contenait DEUX documents YAML colles bout a
+# bout (deux "name: CI", deux blocs "on:", deux jobs "frontend"/"backend").
+# Les cles dupliquees rendent le workflow impossible a analyser : GitHub
+# Actions refusait le fichier, donc aucune verification ne tournait.
 # ============================================
 name: CI
 
@@ -9,11 +13,21 @@ on:
   push:
     branches: [main, dev]
   pull_request:
-    branches: [main]
+    branches: [main, dev]
+
+# Annule les executions precedentes encore en cours sur la meme branche
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Permissions minimales (principe du moindre privilege)
+permissions:
+  contents: read
 
 jobs:
-  # ---- Frontend ----
+  # ---- Frontend : lint, tests unitaires, build de production ----
   frontend:
+    name: Frontend
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -21,99 +35,85 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Installation de Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # Aligne sur le .nvmrc du depot
+          node-version-file: .nvmrc
           cache: npm
           cache-dependency-path: frontend/package-lock.json
 
-      - name: Install dependencies
+      # Le binaire Cypress (~200 Mo) n'est pas necessaire pour lint/test/build
+      - name: Installation des dependances
         run: npm ci
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+
+      - name: Verification des types
+        run: npx tsc -b --force
 
       - name: Lint
         run: npm run lint
 
-      - name: Run tests
+      - name: Tests unitaires
         run: npm test
 
-      - name: Build
+      - name: Build de production
         run: npm run build
 
-  # ---- Backend ----
+  # ---- Backend : types, tests unitaires, build ----
   backend:
+    name: Backend
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: backend
-    # Variables d'environnement pour les tests CI et prisma generate
     env:
+      # Valeurs factices : les tests utilisent Supertest sans base reelle.
+      # Sans elles, config/env.ts fait process.exit(1) et le job echoue.
       DATABASE_URL: "postgresql://test:test@localhost:5432/testdb"
+      ADMIN_TOKEN: "ci-token-factice-de-plus-de-32-caracteres"
+      FRONTEND_URL: "http://localhost:5173"
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Installation de Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version-file: .nvmrc
           cache: npm
           cache-dependency-path: backend/package-lock.json
 
-      - name: Install dependencies
+      - name: Installation des dependances
         run: npm ci
 
-      # Generer le client Prisma (dans .gitignore, donc absent en CI)
-      - name: Generate Prisma client
+      # Le client Prisma est genere, donc absent du depot (voir .gitignore)
+      - name: Generation du client Prisma
         run: npx prisma generate
 
-      - name: Run tests
+      - name: Verification des types
+        run: npx tsc --noEmit
+
+      - name: Tests unitaires
         run: npm test
 
-      - name: Build
+      - name: Build de production
         run: npm run build
-        # ============================================
-# .github/workflows/ci.yml
-# Pipeline CI/CD — lint, test, build a chaque push/PR
-# ============================================
-name: CI
 
-on:
-  push:
-    branches: [main, dev]
-  pull_request:
-    branches: [main]
-
-jobs:
-  # --- Tests backend ---
-  backend:
+  # ---- Audit de securite des dependances ----
+  audit:
+    name: Audit des dependances
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend
+    strategy:
+      fail-fast: false
+      matrix:
+        dossier: [frontend, backend]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "npm"
-          cache-dependency-path: backend/package-lock.json
-      - run: npm ci
-      - run: npm test
-
-  # --- Tests frontend ---
-  frontend:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "npm"
-          cache-dependency-path: frontend/package-lock.json
-      - run: npm ci
-      - run: npm run lint
-      - run: npm test
-      - run: npm run build
+          node-version-file: .nvmrc
+      # Echoue seulement sur les vulnerabilites hautes ou critiques
+      - name: npm audit
+        working-directory: ${{ matrix.dossier }}
+        run: npm audit --audit-level=high

@@ -5,12 +5,14 @@
 // Animation framer-motion (layoutId + AnimatePresence)
 // Mode client uniquement (masque en mode recruteur via Home.tsx)
 // ============================================
-import { useEffect, useId, useRef, useState } from "react";
+import { useCallback, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Anchor, GraduationCap, Rocket, Check, Loader, Clock, Compass, X } from "lucide-react";
 import { SectionWrapper } from "../ui/SectionWrapper";
 import { useLanguage } from "../../i18n/useLanguage";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
+import { useBodyScrollLock } from "../../hooks/useBodyScrollLock";
+import { useEscapeKey } from "../../hooks/useEscapeKey";
 import "./About.css";
 import "./Roadmap.css";
 
@@ -92,21 +94,11 @@ export function About() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const id = useId();
 
-  // Fermeture avec Escape + blocage du scroll
-  useEffect(() => {
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setActiveCard(null);
-    }
+  // Fermeture avec Escape (hook partage)
+  useEscapeKey(useCallback(() => setActiveCard(null), []));
 
-    if (activeCard) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [activeCard]);
+  // Blocage du scroll pendant l'ouverture (hook partage a compteur)
+  useBodyScrollLock(activeCard !== null);
 
   // Fermeture au clic exterieur
   useOutsideClick(overlayRef, () => setActiveCard(null));

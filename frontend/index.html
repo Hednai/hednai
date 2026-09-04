@@ -10,16 +10,15 @@
   <!-- Police Google Fonts utilisee dans tout le site -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    rel="preload"
-    as="style"
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
-  />
+  <!-- Police chargee en feuille de style normale.
+       L'astuce media="print" + onload repoussait l'application de la police
+       apres le premier rendu : le texte s'affichait puis changeait de fonte,
+       ce qui degrade CLS dans Lighthouse. "display=swap" est deja present dans
+       l'URL, il suffit a eviter le texte invisible.
+       Source : web.dev/articles/font-best-practices -->
   <link
     href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
-    media="print"
-    onload="this.media='all'"
   />
 
   <!-- Titre affiche dans l'onglet du navigateur -->
@@ -49,10 +48,16 @@
   <!-- Source : web.dev/articles/optimize-lcp -->
   <link rel="preload" as="image" href="/hednai_bridge.webp" type="image/webp" fetchpriority="high" />
 
-  <!-- Icone de l'onglet du navigateur -->
-  <link rel="icon" type="image/png" href="/logo-anchor.png" />
-  <link rel="apple-touch-icon" href="/logo-anchor.png" />
-  <link rel="manifest" href="/manifest.json" />
+  <!-- Icone de l'onglet du navigateur.
+       CORRECTIF : les anciennes references pointaient vers /logo-anchor.png,
+       un fichier qui n'existe pas dans public/ (seul le .webp est present).
+       Les quatre references etaient donc en 404 : plus d'icone dans l'onglet,
+       et manifeste invalide donc PWA non installable.
+       La balise <link rel="manifest"> est maintenant injectee automatiquement
+       par vite-plugin-pwa : ne pas la remettre ici. -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#0c2340" />
 
   <!-- Open Graph : previsualisation quand le lien est partage (Facebook, LinkedIn...) -->
   <meta property="og:title" content="Hednai | Maritime Software & AI" />
@@ -104,6 +109,26 @@
 </head>
 
 <body>
+
+  <!-- Applique le theme AVANT le premier rendu.
+       Sans ce script, data-theme n'etait pose qu'apres le montage de React :
+       la page s'affichait une fraction de seconde en clair avant de basculer
+       en sombre (flash + decalage visuel penalise par Lighthouse).
+       Volontairement inline et synchrone : c'est le seul moyen de s'executer
+       avant la peinture. Source : web.dev/articles/building-a-theme-switch -->
+  <script>
+    (function () {
+      try {
+        var sauvegarde = localStorage.getItem("hednai-theme");
+        var sombre = sauvegarde
+          ? sauvegarde === "dark"
+          : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", sombre ? "dark" : "light");
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
 
   <!-- Point d'ancrage ou React va afficher toute l'application -->
   <div id="root"></div>

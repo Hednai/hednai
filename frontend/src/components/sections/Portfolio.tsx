@@ -3,7 +3,7 @@
 // Section portfolio : grille de cartes + overlay expandable au clic
 // Presentation en grille conservee, effet expandable au clic
 // ============================================
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ExternalLink, X, Trophy, Wrench } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
@@ -14,6 +14,8 @@ import { FadeIn } from "../FadeIn";
 import { useLanguage } from "../../i18n/useLanguage";
 import { useViewMode } from "../../context/useViewMode";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
+import { useBodyScrollLock } from "../../hooks/useBodyScrollLock";
+import { useEscapeKey } from "../../hooks/useEscapeKey";
 import type { Project } from "../../types";
 import "./Portfolio.css";
 
@@ -47,10 +49,14 @@ export function Portfolio() {
   const [active, setActive] = useState<Project | null>(null);
   const ref = useRef<HTMLDivElement>(null);
 
-  // Ref vers les filtres pour scroller en haut a chaque changement de categorie
-  // On utilise la section parente plutot que les filtres eux-memes
-  // pour que le scroll tienne compte de la navbar fixe
-  const filtersRef = useRef<HTMLDivElement>(null);
+  // Ancre NON sticky placee juste avant la barre de filtres.
+  // On ne mesure JAMAIS .portfolio-filters : cet element est en position sticky,
+  // donc getBoundingClientRect() renvoie sa position "collee" (= --nav-height)
+  // et non sa position reelle dans le document. C'etait la cause du scroll casse.
+  const scrollAnchorRef = useRef<HTMLDivElement>(null);
+
+  // Empeche le scroll automatique au tout premier rendu de la section
+  const isFirstRender = useRef(true);
 
   // Filtre actuellement selectionne (cle i18n de la categorie)
   const [activeFilter, setActiveFilter] = useState(CATEGORIES[0]);
@@ -65,24 +71,43 @@ export function Portfolio() {
       ? projects
       : projects.filter((p) => p.categoryKey === activeFilter);
 
-  // Fermer l'overlay avec Escape + bloquer le scroll
-  useEffect(() => {
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        setActive(null);
-      }
-    }
-    if (active) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [active]);
+  // Fermer l'overlay avec Escape (hook partage, plus de listener local)
+  useEscapeKey(useCallback(() => setActive(null), []));
+
+  // Bloquer le scroll de la page pendant que la carte est ouverte.
+  // Hook partage a compteur : l'ancien code remettait "auto" a la fermeture
+  // alors que la valeur d'origine du body est "" , et deux surfaces ouvertes
+  // en meme temps se deverrouillaient mutuellement.
+  useBodyScrollLock(active !== null);
 
   // Fermer au clic en dehors de la carte expandee
   useOutsideClick(ref, () => setActive(null));
+
+  // ---- Repositionnement apres changement de categorie ----
+  // useLayoutEffect : s'execute APRES que React a commite la nouvelle grille
+  // dans le DOM mais AVANT la peinture. La hauteur du document est donc deja
+  // celle de la nouvelle categorie : le navigateur ne peut plus tronquer
+  // (clamper) la cible de scroll comme le faisait l'ancien code.
+  // L'offset sous la navbar + la barre de filtres est gere en CSS via
+  // scroll-margin-top sur .portfolio-anchor : aucune valeur en dur ici.
+  useLayoutEffect(() => {
+    // Pas de saut au premier affichage de la page
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    const anchor = scrollAnchorRef.current;
+    if (!anchor) return;
+
+    // Respect de prefers-reduced-motion (WCAG 2.3.3)
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    anchor.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "start",
+    });
+  }, [activeFilter]);
 
   return (
     <SectionWrapper
@@ -90,27 +115,18 @@ export function Portfolio() {
       title={t("portfolio.title")}
       subtitle={isRecruiter ? t("portfolio.subtitle.recruiter") : t("portfolio.subtitle")}
     >
+      {/* Ancre de scroll : hauteur nulle, NON sticky, juste avant les filtres.
+          C'est elle qu'on cible au changement de categorie. */}
+      <div className="portfolio-anchor" ref={scrollAnchorRef} aria-hidden="true" />
+
       {/* Boutons de filtre par categorie */}
-      <div className="portfolio-filters" ref={filtersRef}>
+      <div className="portfolio-filters" role="group" aria-label={t("portfolio.filters.label")}>
         {CATEGORIES.map((catKey) => (
           <button
             key={catKey}
             className={`filter-btn ${activeFilter === catKey ? "filter-btn--active" : ""}`}
-            onClick={() => {
-              setActiveFilter(catKey);
-              // Remonter la vue au niveau des filtres en tenant compte de la navbar fixe
-              if (filtersRef.current) {
-                const navHeight = parseInt(
-                  getComputedStyle(document.documentElement)
-                    .getPropertyValue("--nav-height") || "72"
-                );
-                const top = filtersRef.current.getBoundingClientRect().top
-                  + window.scrollY
-                  - navHeight
-                  - 16; // marge supplementaire pour respirer
-                window.scrollTo({ top, behavior: "smooth" });
-              }
-            }}
+            onClick={() => setActiveFilter(catKey)}
+            aria-pressed={activeFilter === catKey}
           >
             {t(catKey)}
           </button>

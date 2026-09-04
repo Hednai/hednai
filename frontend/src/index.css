@@ -3,10 +3,6 @@
    Variables CSS pour le light/dark mode + reset de base
    ═══════════════════════════════════════════ */
 
-/* Tailwind v4 — cet import charge tous les utilitaires Tailwind */
-@import "tailwindcss";
-
-
 /* ── Mode clair (par defaut) ── */
 :root {
 
@@ -31,11 +27,19 @@
   --error-bg: #FEF2F2;
   --error-text: #B91C1C;
   --accent-cyan: #0099cc;
+  /* Couleur de texte lisible SUR un fond accent (contraste AA verifie) */
+  --on-accent: #FFFFFF;
   --accent-warm: hsl(25 95% 55%);
   --radius-pill: 20px;
   --radius-circle: 50%;
 
   --nav-height: 72px;
+
+  /* Barre de filtres du portfolio : padding interne et hauteur totale reservee.
+     Sert au calcul de scroll-margin-top de .portfolio-anchor (Portfolio.css). */
+  --portfolio-filters-padding: 16px;
+  --portfolio-filters-height: 74px;
+
   --max-width: 1200px;
   --section-padding: 64px;
   --mode-transition: 0.3s ease;
@@ -73,6 +77,7 @@
   --error-bg: #450A0A;
   --error-text: #FCA5A5;
   --accent-cyan: #00b0e6;
+  --on-accent: #0F172A;
   --accent-warm: hsl(25 95% 60%);
 
 }

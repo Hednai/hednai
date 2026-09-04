@@ -3,20 +3,24 @@
 // Chaque module correspond a une section ou une page du site
 // Pour ajouter des traductions, modifier le fichier du module concerne dans fr/
 // ============================================
-import { nav } from "./fr/Nav.ts";
-import { hero } from "./fr/hero";
-import { services } from "./fr/services";
-import { portfolio, portfolioRecruiter } from "./fr/portfolio";
-import { contact } from "./fr/contact";
-import { common } from "./fr/common";
-import { whyHednai } from "./fr/whyHednai";
-import { about } from "./fr/About.ts";
-import { testimonials } from "./fr/testimonials";
-import { cta, ctaRecruiter } from "./fr/cta";
-import { blog } from "./fr/blog";
-import { solutions } from "./fr/solutions";
-import { recruiter, profile, whyRecruiter, profileCv } from "./fr/recruiter";
-import { dashboard } from "./fr/dashboard";
+// Les chemins respectent EXACTEMENT la casse des fichiers sur disque.
+// Windows est insensible a la casse, Linux non : Vercel et GitHub Actions
+// compilent sur Linux, ou "./fr/nav" ne resout pas "Nav.ts".
+// Noter "Whyhednai" avec un h minuscule au milieu : c'est le nom reel du fichier.
+import { nav } from "./fr/Nav";
+import { hero } from "./fr/Hero";
+import { services } from "./fr/Services";
+import { portfolio, portfolioRecruiter } from "./fr/Portfolio";
+import { contact } from "./fr/Contact";
+import { common } from "./fr/Common";
+import { whyHednai } from "./fr/Whyhednai";
+import { about } from "./fr/About";
+import { testimonials } from "./fr/Testimonials";
+import { cta, ctaRecruiter } from "./fr/Cta";
+import { blog } from "./fr/Blog";
+import { solutions } from "./fr/Solutions";
+import { recruiter, profile, whyRecruiter, profileCv } from "./fr/Recruiter";
+import { dashboard } from "./fr/Dashboard";
 import { cv } from "./fr/Cv";
 import { legal } from "./fr/Legal";
 

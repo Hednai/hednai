@@ -11,8 +11,11 @@ export function useOutsideClick(
   ref: RefObject<HTMLDivElement | null>,
   callback: () => void
 ) {
-  // Timestamp du montage : ignore les clics trop proches de l'ouverture
-  const mountedAt = useRef(Date.now());
+  // Horodatage du montage : sert a ignorer les clics trop proches de l'ouverture.
+  // Initialise a 0 et non a Date.now() : appeler une fonction impure pendant le
+  // rendu viole les regles des composants React (regle react-hooks/purity).
+  // La vraie valeur est posee dans l'effet ci-dessous, qui lui a le droit.
+  const mountedAt = useRef(0);
 
   useEffect(() => {
     // Memorise le moment ou l'effet est (re)monte

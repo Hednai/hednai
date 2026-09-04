@@ -5,7 +5,7 @@
 // "recruiter" = portfolio (je, competences, CV)
 // Le toggle est dans la Navbar
 // ============================================
-import { createContext, useState, useCallback } from "react";
+import { createContext, useState, useCallback, useEffect, useMemo } from "react";
 import type { ReactNode } from "react";
 
 // Les deux modes possibles
@@ -25,12 +25,33 @@ interface ViewModeContextType {
 // eslint-disable-next-line react-refresh/only-export-components
 export const ViewModeContext = createContext<ViewModeContextType | undefined>(undefined);
 
+// Cle de stockage — declaree une seule fois (pas de chaine en dur repetee)
+const CLE_STOCKAGE = "hednai-mode";
+
 // Provider qui enveloppe l'application
 export function ViewModeProvider({ children }: { children: ReactNode }) {
-  // Mode par defaut : client (startup)
-  const [mode, setModeState] = useState<ViewMode>("client");
+  // Mode par defaut : client (startup).
+  // On relit le choix precedent : la politique de confidentialite annonce que
+  // le mode d'affichage est conserve en localStorage, ce qui n'etait pas le cas.
+  const [mode, setModeState] = useState<ViewMode>(() => {
+    try {
+      return localStorage.getItem(CLE_STOCKAGE) === "recruiter" ? "recruiter" : "client";
+    } catch {
+      return "client";
+    }
+  });
+
   // Callback optionnel pour reagir au changement de mode (ex: scroll to top)
   const [onModeChange, setOnModeChange] = useState<((newMode: ViewMode) => void) | null>(null);
+
+  // Sauvegarde du mode a chaque changement (effet, jamais pendant le rendu)
+  useEffect(() => {
+    try {
+      localStorage.setItem(CLE_STOCKAGE, mode);
+    } catch {
+      // Navigation privee Safari : le stockage peut lever une exception
+    }
+  }, [mode]);
 
   // Definir un mode specifique (utile pour le CTA recruteur)
   const setMode = useCallback((newMode: ViewMode) => {
@@ -50,8 +71,15 @@ export function ViewModeProvider({ children }: { children: ReactNode }) {
   // Raccourci pour savoir si on est en mode recruteur
   const isRecruiter = mode === "recruiter";
 
+  // useMemo : sans lui, un nouvel objet etait cree a chaque rendu du provider,
+  // ce qui forcait le re-rendu de tous les composants consommateurs
+  const valeur = useMemo(
+    () => ({ mode, toggleMode, setMode, isRecruiter, onModeChange, setOnModeChange }),
+    [mode, toggleMode, setMode, isRecruiter, onModeChange],
+  );
+
   return (
-    <ViewModeContext.Provider value={{ mode, toggleMode, setMode, isRecruiter, onModeChange, setOnModeChange }}>
+    <ViewModeContext.Provider value={valeur}>
       {children}
     </ViewModeContext.Provider>
   );
