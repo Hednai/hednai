@@ -8,7 +8,8 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "diag:db": "tsx scripts/diagnostic-db.ts"
   },
   "author": "Hednai",
   "dependencies": {

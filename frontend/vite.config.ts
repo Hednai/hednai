@@ -71,6 +71,20 @@ export default defineConfig({
         // Toute navigation retombe sur index.html (application monopage)
         navigateFallback: "/index.html",
 
+        // ...SAUF pour ces chemins, qui ne sont PAS des routes React.
+        // Sans cette liste, le service worker interceptait la navigation vers
+        // /cv-fullstack.pdf et renvoyait index.html a la place du PDF.
+        // C'est ce que signalait la console :
+        // "The navigation route /cv-fullstack.pdf is not being used, since the
+        //  URL being navigated to doesn't match the allowlist"
+        // Source : developer.chrome.com/docs/workbox/modules/workbox-routing
+        navigateFallbackDenylist: [
+          // Tout fichier avec une extension (.pdf, .png, .xml, .txt...)
+          /\/[^/?]+\.[^/]+$/,
+          // Les appels API ne doivent jamais retomber sur index.html
+          /^\/api\//,
+        ],
+
         // Le nouveau service worker prend la main immediatement
         skipWaiting: true,
         clientsClaim: true,
@@ -85,9 +99,18 @@ export default defineConfig({
         ],
       },
 
-      // Le service worker est desactive en dev pour ne pas servir de code
-      // obsolete pendant le developpement
-      devOptions: { enabled: false },
+      // Service worker actif AUSSI en developpement.
+      // Sans cela, "beforeinstallprompt" ne se declenche jamais sur
+      // localhost:5173 : la banniere d'installation reste invisible en dev,
+      // ce qui donne l'impression que la PWA ne marche pas.
+      // type: "module" est requis par le serveur de dev de Vite.
+      // Si le cache du service worker te gene pendant que tu codes :
+      // DevTools > Application > Service Workers > cocher "Update on reload".
+      devOptions: {
+        enabled: true,
+        type: "module",
+        navigateFallback: "index.html",
+      },
     }),
   ],
 

@@ -11,6 +11,7 @@ import rateLimit from "express-rate-limit";
 
 import { corsMiddleware } from "./config/cors";
 import { env } from "./config/env";
+import { logger } from "./lib/logger";
 import { RATE_LIMIT, REQUETE } from "./config/constants";
 import xssClean from "./middleware/xssClean";
 import { invalidateCache } from "./middleware/cache";
@@ -107,40 +108,72 @@ const adminLimiter = rateLimit({
 //   - readiness : peut-il servir du trafic metier ? (503 si la base est KO)
 // Source : kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes
 
-// Verifier l'etat des dependances externes
-const verifierDependances = async () => {
+// Resultat d'une verification de dependance
+interface EtatDependances {
+  checks: Record<string, boolean>;
+  // Message d'erreur de la base, expose UNIQUEMENT en developpement
+  erreurs: Record<string, string>;
+}
+
+// Verifier l'etat des dependances externes.
+//
+// IMPORTANT : le "catch" vide de la version precedente avalait l'erreur reelle.
+// On voyait "API degradee" sans jamais savoir pourquoi : mot de passe expire,
+// instance Render endormie, SSL manquant, DNS... impossible a diagnostiquer.
+// On journalise donc l'erreur cote serveur, et on la renvoie dans la reponse
+// en developpement seulement (jamais en production : un message d'erreur
+// PostgreSQL peut contenir un nom d'hote ou un nom d'utilisateur).
+const verifierDependances = async (): Promise<EtatDependances> => {
   const checks: Record<string, boolean> = {};
+  const erreurs: Record<string, string> = {};
 
   // PostgreSQL
   try {
     const { prisma } = await import("./lib/prisma");
     await prisma.$queryRaw`SELECT 1`;
     checks.database = true;
-  } catch {
+  } catch (err) {
     checks.database = false;
+    const message = err instanceof Error ? err.message : String(err);
+
+    // Journalisation systematique : c'est cette ligne qui te dira quoi corriger
+    logger.error({ err }, "Health check : PostgreSQL injoignable");
+
+    if (process.env.NODE_ENV !== "production") {
+      erreurs.database = message;
+    }
   }
 
   // Redis (optionnel : son absence ne rend pas l'API indisponible)
   try {
     const { redis } = await import("./config/redis");
     checks.redis = redis !== null;
-  } catch {
+    if (redis === null && process.env.NODE_ENV !== "production") {
+      erreurs.redis = "Client Redis non initialise (REDIS_URL absent ou connexion refusee)";
+    }
+  } catch (err) {
     checks.redis = false;
+    logger.warn({ err }, "Health check : Redis injoignable");
+    if (process.env.NODE_ENV !== "production") {
+      erreurs.redis = err instanceof Error ? err.message : String(err);
+    }
   }
 
-  return checks;
+  return { checks, erreurs };
 };
 
 // GET /api/health — liveness. Repond 200 tant que le processus est vivant.
 // "status" vaut "ok" ou "degraded" : le frontend peut afficher une pastille
 // orange sans pour autant annoncer que l'API est hors ligne.
 app.get("/api/health", async (_req, res) => {
-  const checks = await verifierDependances();
+  const { checks, erreurs } = await verifierDependances();
 
   res.status(200).json({
     success: true,
     status: checks.database ? "ok" : "degraded",
     checks,
+    // Present uniquement hors production : dit POURQUOI c'est degrade
+    ...(Object.keys(erreurs).length > 0 ? { erreurs } : {}),
     uptime: Math.floor(process.uptime()),
     time: new Date(),
   });
@@ -149,7 +182,7 @@ app.get("/api/health", async (_req, res) => {
 // GET /api/health/ready — readiness. 503 si la base est injoignable.
 // C'est cet endpoint que doit interroger un orchestrateur ou un load balancer.
 app.get("/api/health/ready", async (_req, res) => {
-  const checks = await verifierDependances();
+  const { checks } = await verifierDependances();
   const pret = checks.database;
 
   res.status(pret ? 200 : 503).json({

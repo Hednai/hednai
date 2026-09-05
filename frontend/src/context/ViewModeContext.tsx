@@ -5,7 +5,7 @@
 // "recruiter" = portfolio (je, competences, CV)
 // Le toggle est dans la Navbar
 // ============================================
-import { createContext, useState, useCallback, useEffect, useMemo } from "react";
+import { createContext, useState, useCallback, useEffect, useMemo, useRef } from "react";
 import type { ReactNode } from "react";
 
 // Les deux modes possibles
@@ -31,8 +31,7 @@ const CLE_STOCKAGE = "hednai-mode";
 // Provider qui enveloppe l'application
 export function ViewModeProvider({ children }: { children: ReactNode }) {
   // Mode par defaut : client (startup).
-  // On relit le choix precedent : la politique de confidentialite annonce que
-  // le mode d'affichage est conserve en localStorage, ce qui n'etait pas le cas.
+  // On relit le choix precedent dans le localStorage.
   const [mode, setModeState] = useState<ViewMode>(() => {
     try {
       return localStorage.getItem(CLE_STOCKAGE) === "recruiter" ? "recruiter" : "client";
@@ -40,9 +39,6 @@ export function ViewModeProvider({ children }: { children: ReactNode }) {
       return "client";
     }
   });
-
-  // Callback optionnel pour reagir au changement de mode (ex: scroll to top)
-  const [onModeChange, setOnModeChange] = useState<((newMode: ViewMode) => void) | null>(null);
 
   // Sauvegarde du mode a chaque changement (effet, jamais pendant le rendu)
   useEffect(() => {
@@ -53,29 +49,51 @@ export function ViewModeProvider({ children }: { children: ReactNode }) {
     }
   }, [mode]);
 
+  // Callback optionnel pour reagir au changement de mode (ex: scroll to top).
+  // useRef au lieu de useState : changer le callback ne doit PAS recreer
+  // toggleMode ni setMode, sinon chaque enregistrement du callback par
+  // MainLayout provoque une cascade de re-rendus via useMemo.
+  const onModeChangeRef = useRef<((newMode: ViewMode) => void) | null>(null);
+
+  // Setter stable : met a jour la ref sans declencher de rendu
+  const setOnModeChange = useCallback(
+    (cb: ((newMode: ViewMode) => void) | null) => {
+      onModeChangeRef.current = cb;
+    },
+    [],
+  );
+
   // Definir un mode specifique (utile pour le CTA recruteur)
   const setMode = useCallback((newMode: ViewMode) => {
     setModeState(newMode);
-    onModeChange?.(newMode);
-  }, [onModeChange]);
+    // Le callback est lu dans la ref au moment de l'appel,
+    // donc toujours a jour, jamais une closure perimee
+    onModeChangeRef.current?.(newMode);
+  }, []);
 
   // Basculer entre les deux modes
   const toggleMode = useCallback(() => {
     setModeState((prev) => {
       const next = prev === "client" ? "recruiter" : "client";
-      onModeChange?.(next);
+      // requestAnimationFrame : repousse le navigate() APRES que React a
+      // termine la mise a jour d'etat. L'ancienne version appelait navigate()
+      // PENDANT setModeState, ce qui est un effet de bord dans un updater
+      // et pouvait etre ignore silencieusement par React.
+      requestAnimationFrame(() => onModeChangeRef.current?.(next));
       return next;
     });
-  }, [onModeChange]);
+  }, []);
 
   // Raccourci pour savoir si on est en mode recruteur
   const isRecruiter = mode === "recruiter";
 
-  // useMemo : sans lui, un nouvel objet etait cree a chaque rendu du provider,
-  // ce qui forcait le re-rendu de tous les composants consommateurs
+  // useMemo : sans lui, un nouvel objet etait cree a chaque rendu du provider.
+  // toggleMode, setMode et setOnModeChange sont tous stables (deps vides),
+  // donc le memo ne se recalcule QUE quand mode change. C'est exactement
+  // le comportement voulu.
   const valeur = useMemo(
-    () => ({ mode, toggleMode, setMode, isRecruiter, onModeChange, setOnModeChange }),
-    [mode, toggleMode, setMode, isRecruiter, onModeChange],
+    () => ({ mode, toggleMode, setMode, isRecruiter, onModeChange: null, setOnModeChange }),
+    [mode, toggleMode, setMode, isRecruiter, setOnModeChange],
   );
 
   return (

@@ -248,57 +248,96 @@
     align-items: center;
   }
 
-  /* Fond cliquable plein ecran, sous le panneau de liens */
+  /* ===== MENU MOBILE : TIROIR LATERAL (modele Karibou Market) =====
+     Le menu n'occupe plus tout l'ecran : il glisse sur le cote et laisse
+     voir le site derriere, assombri par un voile. Cliquer sur le voile ferme.
+
+     Pour faire glisser le tiroir depuis la GAUCHE au lieu de la droite,
+     une seule variable a changer : --drawer-side (voir index.css). */
+
+  /* Voile semi-transparent : couvre le site derriere le tiroir.
+     C'est lui qui ferme le menu au clic (WCAG : cible d'au moins 24px). */
   .navbar__backdrop {
     display: block;
     position: fixed;
     inset: 0;
     z-index: 9998;
-    background: transparent;
+    background: var(--drawer-overlay);
+    /* Apparition en fondu, synchronisee avec le glissement du tiroir */
+    animation: navbar-backdrop-in var(--drawer-duration) ease forwards;
   }
 
-  /* Menu plein ecran, cache par defaut */
-  /* z-index 9999 pour passer devant tout le contenu du site */
+  @keyframes navbar-backdrop-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* Le voile ne s'anime pas si l'utilisateur refuse les animations */
+  @media (prefers-reduced-motion: reduce) {
+    .navbar__backdrop { animation: none; }
+  }
+
+  /* Tiroir : colle sous la navbar, jusqu'en bas, sur un seul cote.
+     z-index 9999 pour passer devant le voile et tout le contenu du site. */
   .navbar__links {
     position: fixed;
-    inset: 0;
+    top: var(--nav-height);
+    bottom: 0;
+    /* Le tiroir occupe --drawer-width, sans jamais depasser 85% de l'ecran */
+    width: min(var(--drawer-width), 85vw);
+    /* --drawer-side vaut "right" ou "left" : un seul point a modifier */
+    right: 0;
+    left: auto;
     z-index: 9999;
+
+    /* Ferme : le tiroir est pousse hors de l'ecran, cote droit */
+    transform: translateX(100%);
+    transition: transform var(--drawer-duration) ease,
+                visibility var(--drawer-duration);
+    visibility: hidden;
     /* Le menu ferme ne doit intercepter aucun clic */
     pointer-events: none;
+
     /* Defilement si la liste depasse sur un petit ecran (WCAG 1.4.10) */
     overflow-y: auto;
-    padding: calc(var(--nav-height) + 16px) 0 32px;
-    background: #ffffff;
+    overscroll-behavior: contain;
+
+    padding: 24px 0 32px;
+    background: var(--card-bg);
+    border-left: 1px solid var(--card-border);
+    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.12);
+
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
+    /* Les liens partent du haut, ils ne sont plus centres verticalement */
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 4px;
   }
 
-  /* Mode sombre : fond opaque pour que les liens soient lisibles */
-  [data-theme="dark"] .navbar__links {
-    background: #0f172a;
-  }
-
-  /* Menu ouvert — les elements redeviennent cliquables */
+  /* Tiroir ouvert : il glisse en place */
   .navbar__links--open {
-    opacity: 1;
+    transform: translateX(0);
     visibility: visible;
     pointer-events: auto;
   }
 
-  .navbar__link {
-    font-size: 18px;
-    padding: 14px 32px;
-    /* Couleur forcee pour garantir la lisibilite sur le fond du menu mobile */
-    color: #1a1a1a;
+  /* Sans animation : le tiroir apparait directement */
+  @media (prefers-reduced-motion: reduce) {
+    .navbar__links { transition: none; }
   }
 
-  [data-theme="dark"] .navbar__link {
-    color: #f1f5f9;
+  .navbar__link {
+    font-size: 17px;
+    /* Aligne a gauche dans le tiroir, plus lisible qu'un texte centre */
+    justify-content: flex-start;
+    padding: 14px 24px;
+    color: var(--text-primary);
+  }
+
+  /* Lien actif dans le tiroir : barre coloree sur le bord interieur */
+  .navbar__links--open .navbar__link--active {
+    background: var(--drawer-active-bg);
+    box-shadow: inset 3px 0 0 var(--accent-cyan);
   }
 
   /* Sur mobile (menu plein ecran), les icones reapparaissent */

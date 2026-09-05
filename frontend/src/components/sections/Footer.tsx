@@ -6,7 +6,7 @@
 // ============================================
 import { useState, useCallback, useEffect } from "react";
 import { useEscapeKey } from "../../hooks/useEscapeKey";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { Mail, MapPin, Globe, X } from "lucide-react";
 import { useLanguage } from "../../i18n/useLanguage";
@@ -206,16 +206,13 @@ export function Footer() {
               </div>
               {/* Mode recruteur : lien vers le CV ; Mode client : ouvre le formulaire contact */}
               {isRecruiter ? (
-                <a
-                  href="/cv"
-                  className="footer__contact-btn"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigate("/cv");
-                  }}
-                >
+                // <Link> de React Router : navigation cote client, sans
+                // rechargement complet de la page. L'ancien <a href> declenchait
+                // un aller-retour serveur (roue de chargement dans la barre
+                // d'adresse) avant que preventDefault ne l'annule.
+                <Link to="/cv" className="footer__contact-btn">
                   {t("footer.recruiter.button")}
-                </a>
+                </Link>
               ) : (
                 <button
                   className="footer__contact-btn"
@@ -240,21 +237,14 @@ export function Footer() {
             {import.meta.env.DEV && <ApiStatus />}
 
             <div className="footer__legal">
-              <a
-                href="/mentions-legales"
-                onClick={(e) => handleNavClick(e, "/mentions-legales")}
-              >
-                {t("footer.legal.terms")}
-              </a>
+              {/* Pages legales : routes React, donc <Link> et pas <a href>.
+                  Bonus : le clic milieu et le Ctrl+clic ouvrent correctement
+                  dans un nouvel onglet, ce que preventDefault empechait. */}
+              <Link to="/mentions-legales">{t("footer.legal.terms")}</Link>
               <span className="footer__legal-sep" aria-hidden="true">
                 ·
               </span>
-              <a
-                href="/confidentialite"
-                onClick={(e) => handleNavClick(e, "/confidentialite")}
-              >
-                {t("footer.legal.privacy")}
-              </a>
+              <Link to="/confidentialite">{t("footer.legal.privacy")}</Link>
             </div>
           </div>
         </div>

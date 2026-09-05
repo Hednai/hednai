@@ -3,6 +3,10 @@
    Variables CSS pour le light/dark mode + reset de base
    ═══════════════════════════════════════════ */
 
+/* Tailwind v4 — cet import charge tous les utilitaires Tailwind */
+/* Tailwind retire : aucune classe utilitaire n'etait utilisee dans le projet */
+
+
 /* ── Mode clair (par defaut) ── */
 :root {
 
@@ -40,6 +44,13 @@
   --portfolio-filters-padding: 16px;
   --portfolio-filters-height: 74px;
 
+  /* ---- Tiroir du menu mobile (modele Karibou Market) ----
+     Largeur du panneau, duree du glissement, opacite du voile.
+     Modifier ici et nulle part ailleurs. */
+  --drawer-width: 300px;
+  --drawer-duration: 0.28s;
+  --drawer-overlay: rgba(15, 23, 42, 0.45);
+  --drawer-active-bg: rgba(0, 153, 204, 0.10);
   --max-width: 1200px;
   --section-padding: 64px;
   --mode-transition: 0.3s ease;
@@ -78,6 +89,10 @@
   --error-text: #FCA5A5;
   --accent-cyan: #00b0e6;
   --on-accent: #0F172A;
+
+  /* Voile plus dense en sombre pour garder le contraste avec le tiroir */
+  --drawer-overlay: rgba(2, 6, 23, 0.62);
+  --drawer-active-bg: rgba(0, 176, 230, 0.14);
   --accent-warm: hsl(25 95% 60%);
 
 }
