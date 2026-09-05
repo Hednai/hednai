@@ -1,37 +1,70 @@
 // ============================================
 // utils/gracefulShutdown.ts
-// Fermeture propre du serveur sur SIGINT/SIGTERM
-// Pattern : Karibou Market config/db.js (section gracefulShutdown)
-// Ferme Prisma et Redis proprement
-// Timeout de 5s pour forcer l'arret si ca prend trop longtemps
+// Arret propre du serveur sur SIGINT / SIGTERM.
+// Sequence : arret des nouvelles connexions, attente des requetes en cours,
+// puis fermeture de Prisma et Redis. Un minuteur force la sortie si l'arret
+// depasse le delai autorise.
 // ============================================
+import type { Server } from "node:http";
 import { prisma } from "../lib/prisma";
 import { disconnectRedis } from "../config/redis";
 import { logger } from "../lib/logger";
+import { ARRET } from "../config/constants";
+
+// Serveur HTTP a fermer. Renseigne par server.ts une fois app.listen appele.
+let serveurHttp: Server | null = null;
+
+// Empeche deux arrets concurrents si SIGINT et SIGTERM arrivent ensemble
+let arretEnCours = false;
+
+// Enregistrer le serveur HTTP a fermer.
+// Sans cette etape, l'arret coupait la base pendant que des requetes etaient
+// encore en cours de traitement : le client recevait une erreur au lieu de
+// sa reponse. La plateforme d'hebergement envoie SIGTERM a chaque deploiement.
+export const enregistrerServeur = (serveur: Server) => {
+  serveurHttp = serveur;
+};
+
+// Fermer le serveur HTTP et attendre la fin des requetes en cours
+const fermerServeurHttp = (): Promise<void> =>
+  new Promise((resolve) => {
+    if (!serveurHttp) return resolve();
+    serveurHttp.close(() => resolve());
+  });
 
 const gracefulShutdown = async (signal: string) => {
+  if (arretEnCours) return;
+  arretEnCours = true;
+
   logger.info(`${signal} recu, fermeture propre...`);
 
-  // Timeout de securite : forcer l'arret apres 5 secondes
-  const forceExit = setTimeout(() => {
-    logger.error("Timeout fermeture, arret force.");
+  // Minuteur de securite : forcer l'arret si la fermeture s'eternise.
+  // unref() evite que ce minuteur maintienne le processus en vie a lui seul.
+  const sortieForcee = setTimeout(() => {
+    logger.error("Delai d'arret depasse, arret force.");
     process.exit(1);
-  }, 5000);
+  }, ARRET.DELAI_MAX_MS);
+  sortieForcee.unref();
 
-  // Fermer Prisma
-  await prisma.$disconnect();
+  try {
+    // 1. Ne plus accepter de nouvelles connexions, finir celles en cours
+    await fermerServeurHttp();
 
-  // Fermer Redis (si connecte)
-  await disconnectRedis();
+    // 2. Fermer les connexions aux services externes
+    await prisma.$disconnect();
+    await disconnectRedis();
 
-  // Annuler le timeout et quitter
-  clearTimeout(forceExit);
-  logger.info("Serveur arrete proprement.");
-  process.exit(0);
+    clearTimeout(sortieForcee);
+    logger.info("Serveur arrete proprement.");
+    process.exit(0);
+  } catch (err) {
+    logger.error({ err }, "Erreur pendant l'arret du serveur");
+    process.exit(1);
+  }
 };
 
 // Ecouter les signaux d'arret
-process.on("SIGINT", () => gracefulShutdown("SIGINT"));
-process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
+process.on("SIGINT", () => void gracefulShutdown("SIGINT"));
+process.on("SIGTERM", () => void gracefulShutdown("SIGTERM"));
 
 export default gracefulShutdown;

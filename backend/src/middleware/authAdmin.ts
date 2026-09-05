@@ -19,8 +19,10 @@ const authAdmin = (req: Request, res: Response, next: NextFunction) => {
     return res.status(401).json({ success: false, message: "Unauthorized." });
   }
 
-  // Récupère uniquement le token après "Bearer "
-  const token = authHeader.split(" ")[1];
+  // Récupère tout ce qui suit "Bearer ".
+  // slice plutôt que split : un token contenant un espace ne serait que
+  // partiellement lu par split(" ")[1], donc rejeté à tort.
+  const token = authHeader.slice("Bearer ".length);
 
   // Récupère le token admin défini dans les variables d'environnement
   const expected = env.ADMIN_TOKEN;

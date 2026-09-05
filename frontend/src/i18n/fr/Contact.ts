@@ -31,11 +31,14 @@ export const contact = {
   "contact.form.message.placeholder": "Decrivez votre projet...",
   "contact.form.send": "Envoyer le message",
   "contact.form.sending": "Envoi...",
-  "contact.form.success": "Message envoye !",
-  "contact.form.error.name": "Nom trop court (min 2 caracteres)",
+  "contact.form.success": "Message envoyé !",
+  "contact.form.error.name": "Nom trop court (min 2 caractères)",
   "contact.form.error.email": "Email invalide",
-  "contact.form.error.phone": "Numero de telephone invalide",
+  "contact.form.error.phone": "Numéro de téléphone invalide",
   "contact.form.error.subject": "Veuillez choisir un sujet",
-  "contact.form.error.message": "Message trop court (min 10 caracteres)",
-  "contact.form.error.network": "Erreur reseau — verifiez votre connexion.",
+  "contact.form.error.message": "Message trop court (min 10 caractères)",
+  "contact.form.error.network": "Erreur réseau, vérifiez votre connexion.",
+  // {name}, {subject} et {message} sont remplaces par les valeurs du formulaire
+  "contact.whatsapp.template":
+    "Bonjour,\n\nJe m'appelle {name}.\nJe vous contacte pour : {subject}\n\n{message}\n\nMerci.",
 };

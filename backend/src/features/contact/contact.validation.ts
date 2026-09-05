@@ -2,7 +2,6 @@
 // features/contact/contact.validation.ts
 // Schema de validation Zod pour le formulaire contact
 // Union discriminee : soit "email", soit "whatsapp" (jamais les deux)
-// Pattern : Karibou Market validators/authValidator.js
 // Messages d'erreur en francais
 // ============================================
 import { z } from "zod";
@@ -26,17 +25,19 @@ const baseFields = {
     .min(10, "Le message doit contenir au moins 10 caracteres.")
     .max(2000, "Le message ne peut pas depasser 2000 caracteres."),
 
-  // Honeypot : champ invisible pour pieger les bots
-  // Un humain ne le remplit jamais, un bot si
-  honeypot: z.string().max(0).optional(),
+  // Honeypot : champ invisible pour pieger les bots.
+  // Volontairement permissif : un champ rempli doit passer la validation pour
+  // que le service reponde un faux succes (voir contact.service.ts). Le rejeter
+  // ici renverrait une 400 qui apprend au bot que le piege existe.
+  honeypot: z.string().max(200).optional(),
 };
 
 // ── Variante 1 : contact par Email ──
 const emailContactSchema = z.object({
   contactMethod: z.literal("email"),
-  email: z
-    .string("L'email est requis.")
-    .email("Format d'email invalide."),
+  // z.email() remplace z.string().email(), deprecie en zod v4
+  // Source : zod.dev/v4/changelog
+  email: z.email("Format d'email invalide.").max(254),
   ...baseFields,
 });
 

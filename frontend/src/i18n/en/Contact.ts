@@ -37,5 +37,8 @@ export const contact = {
   "contact.form.error.phone": "Invalid phone number",
   "contact.form.error.subject": "Please choose a subject",
   "contact.form.error.message": "Message too short (min 10 characters)",
-  "contact.form.error.network": "Network error — check your connection.",
+  // {name}, {subject} and {message} are replaced with the form values
+  "contact.whatsapp.template":
+    "Hello,\n\nMy name is {name}.\nI am reaching out about: {subject}\n\n{message}\n\nThank you.",
+  "contact.form.error.network": "Network error, check your connection.",
 };

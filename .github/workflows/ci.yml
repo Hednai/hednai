@@ -1,11 +1,7 @@
 # ============================================
 # .github/workflows/ci.yml
-# Pipeline CI — lint, tests et build du frontend et du backend
-#
-# CORRECTIF : le fichier precedent contenait DEUX documents YAML colles bout a
-# bout (deux "name: CI", deux blocs "on:", deux jobs "frontend"/"backend").
-# Les cles dupliquees rendent le workflow impossible a analyser : GitHub
-# Actions refusait le fichier, donc aucune verification ne tournait.
+# Pipeline CI : types, lint, tests, build et audit de securite
+# pour le frontend et le backend.
 # ============================================
 name: CI
 
@@ -113,7 +109,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-      # Echoue seulement sur les vulnerabilites hautes ou critiques
-      - name: npm audit
+
+      # Bloquant : seules les dependances reellement livrees en production
+      # sont eliminatoires. --omit=optional est necessaire car le CLI Prisma
+      # est aussi une peerDependency optionnelle de @prisma/client : sans lui,
+      # npm le reintegre dans l'arbre audite malgre --omit=dev.
+      # Source : docs.npmjs.com/cli/commands/npm-audit (option --omit)
+      - name: npm audit (dependances de production)
         working-directory: ${{ matrix.dossier }}
-        run: npm audit --audit-level=high
+        run: npm audit --omit=dev --omit=optional --audit-level=high
+
+      # Informatif : donne la visibilite sur les outils de developpement
+      # (CLI Prisma, chaine de build) sans bloquer le deploiement.
+      - name: npm audit complet (informatif)
+        working-directory: ${{ matrix.dossier }}
+        continue-on-error: true
+        run: npm audit

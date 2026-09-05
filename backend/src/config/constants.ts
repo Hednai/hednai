@@ -1,12 +1,8 @@
 // ============================================
 // config/constants.ts
-// Constantes partagees du backend.
-//
-// Pourquoi ce fichier : app.ts contenait des valeurs magiques en dur
-// ("10kb", 15 * 60 * 1000 ecrit deux fois, 10, 30) et dashboard.controller.ts
-// une limite de pagination non bornee. Une valeur ecrite a deux endroits
-// finit toujours par diverger.
-// Meme pattern que src/config/constants.js de Karibou Market.
+// Constantes partagees du backend : limites de debit, pagination,
+// taille des requetes et delais des services externes.
+// Source unique de verite, aucune de ces valeurs n'est ecrite ailleurs.
 // ============================================
 
 // ---- Limitation du debit (rate limiting) ----
@@ -35,4 +31,18 @@ export const PAGINATION = {
 export const REQUETE = {
   // Taille maximale d'un corps JSON accepte par Express
   TAILLE_MAX_JSON: "10kb",
+} as const;
+
+// ---- Services externes optionnels (mail, Discord) ----
+export const NOTIFICATION = {
+  // Delai au-dela duquel un appel sortant est abandonne (millisecondes).
+  // Ces notifications sont accessoires : elles ne doivent jamais retarder
+  // la reponse envoyee au visiteur.
+  TIMEOUT_MS: 5000,
+} as const;
+
+// ---- Arret du serveur ----
+export const ARRET = {
+  // Delai laisse aux requetes en cours avant l'arret force (millisecondes)
+  DELAI_MAX_MS: 10000,
 } as const;

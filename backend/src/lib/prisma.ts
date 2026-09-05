@@ -1,19 +1,16 @@
 // ============================================
 // lib/prisma.ts
-// Client Prisma pour PostgreSQL
-// Pattern : Hednai v5.2 (simplifie)
-//
-// Amelioration future v7 : ajouter Prisma $extends pour
-// un audit automatique sur tous les modeles.
-// Voir ProfMatchAI prisma.js pour le pattern complet :
-// baseClient.$extends({ query: { $allModels: { create, update, delete } } })
+// Client Prisma unique pour PostgreSQL, partage par toute l'application.
 // ============================================
 import { PrismaClient } from "../generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
+import { env } from "../config/env";
 
-// Adaptateur PostgreSQL
+// Adaptateur PostgreSQL.
+// La chaine vient de config/env.ts : elle a deja ete validee au demarrage,
+// contrairement a une lecture directe de process.env.
 const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL!,
+  connectionString: env.DATABASE_URL,
 });
 
 // Client Prisma

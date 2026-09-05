@@ -93,9 +93,10 @@ describe("POST /api/contact", () => {
       .post("/api/contact")
       .send({ ...donneeEmailValide, honeypot: "je-suis-un-bot" });
 
-    // Le honeypot fait echouer la validation Zod (max 0 caracteres)
-    // Donc on attend un 400, pas un 200
-    expect(res.status).toBe(400);
+    // Le bot recoit un succes identique a celui d'un humain, mais rien n'est
+    // enregistre : il ne peut pas deduire l'existence du champ piege.
+    expect(res.status).toBe(200);
+    expect(res.body.success).toBe(true);
   });
 
   // --- Donnees vides ---
@@ -133,4 +134,3 @@ describe("GET /api/health/ready (readiness)", () => {
     expect(res.body.success).toBe(res.status === 200);
   });
 });
-

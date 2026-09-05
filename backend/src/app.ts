@@ -10,7 +10,7 @@ import compression from "compression";
 import rateLimit from "express-rate-limit";
 
 import { corsMiddleware } from "./config/cors";
-import { env } from "./config/env";
+import { env, ORIGINES_AUTORISEES } from "./config/env";
 import { logger } from "./lib/logger";
 import { RATE_LIMIT, REQUETE } from "./config/constants";
 import xssClean from "./middleware/xssClean";
@@ -39,7 +39,7 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         scriptSrc: ["'self'", "https://plausible.io"],
-        connectSrc: ["'self'", env.FRONTEND_URL],
+        connectSrc: ["'self'", ...ORIGINES_AUTORISEES],
         frameSrc: ["'self'", "https://cal.com"],
       },
     },
@@ -79,7 +79,8 @@ app.use(invalidateCache);
 // Formulaire de contact : 10 requetes par 15 minutes
 const contactLimiter = rateLimit({
   windowMs: RATE_LIMIT.FENETRE_MS,
-  max: RATE_LIMIT.CONTACT_MAX,
+  // "limit" remplace "max", deprecie depuis express-rate-limit v7
+  limit: RATE_LIMIT.CONTACT_MAX,
   standardHeaders: "draft-8",
   legacyHeaders: false,
   message: {
@@ -91,7 +92,7 @@ const contactLimiter = rateLimit({
 // Routes admin : 30 requetes par 15 minutes
 const adminLimiter = rateLimit({
   windowMs: RATE_LIMIT.FENETRE_MS,
-  max: RATE_LIMIT.ADMIN_MAX,
+  limit: RATE_LIMIT.ADMIN_MAX,
   standardHeaders: "draft-8",
   legacyHeaders: false,
   message: { success: false, message: "Too many requests." },
@@ -99,12 +100,9 @@ const adminLimiter = rateLimit({
 
 // ---- Routes API ----
 
-// ---- Health checks ----
-// CORRECTIF : l'ancien endpoint unique renvoyait 503 + success:false des que
-// PostgreSQL etait injoignable. Le widget ApiStatus du site affichait donc
-// "API hors ligne" alors que l'API repondait parfaitement.
-// On separe donc les deux notions, comme le fait Kubernetes :
-//   - liveness  : le processus repond-il ? (toujours 200 s'il repond)
+// ---- Sondes de sante ----
+// Deux sondes distinctes, selon la convention Kubernetes :
+//   - liveness  : le processus repond-il ? (200 tant qu'il repond)
 //   - readiness : peut-il servir du trafic metier ? (503 si la base est KO)
 // Source : kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes
 
@@ -116,13 +114,9 @@ interface EtatDependances {
 }
 
 // Verifier l'etat des dependances externes.
-//
-// IMPORTANT : le "catch" vide de la version precedente avalait l'erreur reelle.
-// On voyait "API degradee" sans jamais savoir pourquoi : mot de passe expire,
-// instance Render endormie, SSL manquant, DNS... impossible a diagnostiquer.
-// On journalise donc l'erreur cote serveur, et on la renvoie dans la reponse
-// en developpement seulement (jamais en production : un message d'erreur
-// PostgreSQL peut contenir un nom d'hote ou un nom d'utilisateur).
+// L'erreur est journalisee cote serveur, et renvoyee dans la reponse hors
+// production uniquement : un message PostgreSQL peut contenir un nom d'hote
+// ou un nom d'utilisateur.
 const verifierDependances = async (): Promise<EtatDependances> => {
   const checks: Record<string, boolean> = {};
   const erreurs: Record<string, string> = {};
@@ -136,10 +130,9 @@ const verifierDependances = async (): Promise<EtatDependances> => {
     checks.database = false;
     const message = err instanceof Error ? err.message : String(err);
 
-    // Journalisation systematique : c'est cette ligne qui te dira quoi corriger
-    logger.error({ err }, "Health check : PostgreSQL injoignable");
+    logger.error({ err }, "Sonde de sante : PostgreSQL injoignable");
 
-    if (process.env.NODE_ENV !== "production") {
+    if (env.NODE_ENV !== "production") {
       erreurs.database = message;
     }
   }
@@ -148,13 +141,13 @@ const verifierDependances = async (): Promise<EtatDependances> => {
   try {
     const { redis } = await import("./config/redis");
     checks.redis = redis !== null;
-    if (redis === null && process.env.NODE_ENV !== "production") {
+    if (redis === null && env.NODE_ENV !== "production") {
       erreurs.redis = "Client Redis non initialise (REDIS_URL absent ou connexion refusee)";
     }
   } catch (err) {
     checks.redis = false;
-    logger.warn({ err }, "Health check : Redis injoignable");
-    if (process.env.NODE_ENV !== "production") {
+    logger.warn({ err }, "Sonde de sante : Redis injoignable");
+    if (env.NODE_ENV !== "production") {
       erreurs.redis = err instanceof Error ? err.message : String(err);
     }
   }
@@ -162,9 +155,9 @@ const verifierDependances = async (): Promise<EtatDependances> => {
   return { checks, erreurs };
 };
 
-// GET /api/health — liveness. Repond 200 tant que le processus est vivant.
-// "status" vaut "ok" ou "degraded" : le frontend peut afficher une pastille
-// orange sans pour autant annoncer que l'API est hors ligne.
+// GET /api/health — sonde de vie. Repond 200 tant que le processus repond.
+// "status" vaut "ok" ou "degraded" : le frontend affiche une pastille orange
+// quand une dependance est KO, sans annoncer que l'API est hors ligne.
 app.get("/api/health", async (_req, res) => {
   const { checks, erreurs } = await verifierDependances();
 
@@ -172,15 +165,15 @@ app.get("/api/health", async (_req, res) => {
     success: true,
     status: checks.database ? "ok" : "degraded",
     checks,
-    // Present uniquement hors production : dit POURQUOI c'est degrade
+    // Present uniquement hors production : detaille la cause de la degradation
     ...(Object.keys(erreurs).length > 0 ? { erreurs } : {}),
     uptime: Math.floor(process.uptime()),
     time: new Date(),
   });
 });
 
-// GET /api/health/ready — readiness. 503 si la base est injoignable.
-// C'est cet endpoint que doit interroger un orchestrateur ou un load balancer.
+// GET /api/health/ready — sonde de disponibilite. 503 si la base est injoignable.
+// C'est cet endpoint que doit interroger un orchestrateur ou un repartiteur de charge.
 app.get("/api/health/ready", async (_req, res) => {
   const { checks } = await verifierDependances();
   const pret = checks.database;

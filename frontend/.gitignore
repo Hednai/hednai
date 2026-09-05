@@ -27,3 +27,8 @@ dist-ssr
 cypress/videos
 cypress/screenshots
 cypress/downloads
+
+# Service worker genere par vite-plugin-pwa en mode developpement.
+# Ce dossier ne doit jamais etre versionne : ESLint analysait le fichier
+# workbox genere et echouait sur des regles absentes de la configuration.
+dev-dist
