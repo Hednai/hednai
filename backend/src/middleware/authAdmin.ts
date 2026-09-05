@@ -7,7 +7,7 @@
 // ============================================
 import { timingSafeEqual } from "node:crypto";
 import type { Request, Response, NextFunction } from "express";
-import { env } from "../config/env";
+import { env } from "../config/env.js";
 
 // Middleware qui vérifie que la requête contient un token admin valide
 const authAdmin = (req: Request, res: Response, next: NextFunction) => {

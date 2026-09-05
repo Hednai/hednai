@@ -4,8 +4,8 @@
 // Pattern : Karibou Market config/db.js (adapte MongoDB → Prisma)
 // Prisma gere la reconnexion automatiquement
 // ============================================
-import { prisma } from "../lib/prisma";
-import { logger } from "../lib/logger";
+import { prisma } from "../lib/prisma.js";
+import { logger } from "../lib/logger.js";
 
 // Verifier que la base est accessible au demarrage
 export const connectDatabase = async () => {

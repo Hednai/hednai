@@ -6,7 +6,7 @@
 // ============================================
 import { describe, it, expect, vi } from "vitest";
 import request from "supertest";
-import { app } from "../app";
+import { app } from "../app.js";
 
 
 // Mock de Prisma pour ne pas toucher a la vraie base de donnees

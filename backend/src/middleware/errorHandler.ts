@@ -5,8 +5,8 @@
 // En production : pas de stack trace pour la securite
 // ============================================
 import type { Request, Response, NextFunction } from "express";
-import { AppError } from "../utils/errors";
-import { logger } from "../lib/logger";
+import { AppError } from "../utils/errors.js";
+import { logger } from "../lib/logger.js";
 
 const errorHandler = (
   err: AppError & { code?: string; meta?: { target?: string[] }; name?: string },

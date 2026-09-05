@@ -4,8 +4,8 @@
 // Protege par un mot de passe Bearer token simple
 // ============================================
 import type { Request, Response, NextFunction } from "express";
-import { getDashboardStats, getDashboardMessages } from "./dashboard.service";
-import { PAGINATION } from "../../config/constants";
+import { getDashboardStats, getDashboardMessages } from "./dashboard.service.js";
+import { PAGINATION } from "../../config/constants.js";
 
 // Authentification geree par le middleware authAdmin (dashboard.route.ts)
 // Aucune verification supplementaire necessaire ici

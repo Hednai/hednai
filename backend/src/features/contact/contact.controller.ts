@@ -6,8 +6,8 @@
 // ============================================
 import type { Request, Response, NextFunction } from "express";
 
-import { contactSchema } from "./contact.validation";
-import { processContactMessage } from "./contact.service";
+import { contactSchema } from "./contact.validation.js";
+import { processContactMessage } from "./contact.service.js";
 
 // ---- POST /api/contact ----
 // Recevoir un message de contact (Email ou WhatsApp)

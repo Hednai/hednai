@@ -9,16 +9,16 @@ import helmet from "helmet";
 import compression from "compression";
 import rateLimit from "express-rate-limit";
 
-import { corsMiddleware } from "./config/cors";
-import { env, ORIGINES_AUTORISEES } from "./config/env";
-import { logger } from "./lib/logger";
-import { RATE_LIMIT, REQUETE } from "./config/constants";
-import xssClean from "./middleware/xssClean";
-import { invalidateCache } from "./middleware/cache";
-import notFound from "./middleware/notFound";
-import errorHandler from "./middleware/errorHandler";
-import { contactRouter } from "./features/contact/contact.route";
-import { dashboardRouter } from "./features/dashboard/dashboard.route";
+import { corsMiddleware } from "./config/cors.js";
+import { env, ORIGINES_AUTORISEES } from "./config/env.js";
+import { logger } from "./lib/logger.js";
+import { RATE_LIMIT, REQUETE } from "./config/constants.js";
+import xssClean from "./middleware/xssClean.js";
+import { invalidateCache } from "./middleware/cache.js";
+import notFound from "./middleware/notFound.js";
+import errorHandler from "./middleware/errorHandler.js";
+import { contactRouter } from "./features/contact/contact.route.js";
+import { dashboardRouter } from "./features/dashboard/dashboard.route.js";
 
 // Creer l'application Express
 const app = express();
@@ -123,7 +123,7 @@ const verifierDependances = async (): Promise<EtatDependances> => {
 
   // PostgreSQL
   try {
-    const { prisma } = await import("./lib/prisma");
+    const { prisma } = await import("./lib/prisma.js");
     await prisma.$queryRaw`SELECT 1`;
     checks.database = true;
   } catch (err) {
@@ -139,7 +139,7 @@ const verifierDependances = async (): Promise<EtatDependances> => {
 
   // Redis (optionnel : son absence ne rend pas l'API indisponible)
   try {
-    const { redis } = await import("./config/redis");
+    const { redis } = await import("./config/redis.js");
     checks.redis = redis !== null;
     if (redis === null && env.NODE_ENV !== "production") {
       erreurs.redis = "Client Redis non initialise (REDIS_URL absent ou connexion refusee)";

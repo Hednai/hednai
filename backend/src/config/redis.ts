@@ -6,8 +6,8 @@
 // ============================================
 import { createClient } from "redis";
 import type { RedisClientType } from "redis";
-import { env } from "./env";
-import { logger } from "../lib/logger";
+import { env } from "./env.js";
+import { logger } from "../lib/logger.js";
 
 // null = Redis non disponible, le serveur tourne sans
 export let redis: RedisClientType | null = null;

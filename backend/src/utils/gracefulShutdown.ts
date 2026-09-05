@@ -6,10 +6,10 @@
 // depasse le delai autorise.
 // ============================================
 import type { Server } from "node:http";
-import { prisma } from "../lib/prisma";
-import { disconnectRedis } from "../config/redis";
-import { logger } from "../lib/logger";
-import { ARRET } from "../config/constants";
+import { prisma } from "../lib/prisma.js";
+import { disconnectRedis } from "../config/redis.js";
+import { logger } from "../lib/logger.js";
+import { ARRET } from "../config/constants.js";
 
 // Serveur HTTP a fermer. Renseigne par server.ts une fois app.listen appele.
 let serveurHttp: Server | null = null;

@@ -3,12 +3,12 @@
 // Point d'entree : ouvre les connexions puis demarre le serveur HTTP.
 // Toute la configuration Express est dans app.ts.
 // ============================================
-import { app } from "./app";
-import { env } from "./config/env";
-import { connectDatabase } from "./config/database";
-import { connectRedis } from "./config/redis";
-import { logger } from "./lib/logger";
-import { enregistrerServeur } from "./utils/gracefulShutdown";
+import { app } from "./app.js";
+import { env } from "./config/env.js";
+import { connectDatabase } from "./config/database.js";
+import { connectRedis } from "./config/redis.js";
+import { logger } from "./lib/logger.js";
+import { enregistrerServeur } from "./utils/gracefulShutdown.js";
 
 const demarrer = async () => {
   // Connecter a PostgreSQL (requis)

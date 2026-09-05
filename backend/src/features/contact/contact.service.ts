@@ -7,11 +7,11 @@
 import validator from "validator";
 import type { Request } from "express";
 
-import { createMessage } from "./contact.model";
-import { logAction } from "../../utils/auditLog";
-import { logger } from "../../lib/logger";
-import { sendContactNotification } from "../../lib/mailer";
-import { sendDiscordNotification } from "../../lib/discord";
+import { createMessage } from "./contact.model.js";
+import { logAction } from "../../utils/auditLog.js";
+import { logger } from "../../lib/logger.js";
+import { sendContactNotification } from "../../lib/mailer.js";
+import { sendDiscordNotification } from "../../lib/discord.js";
 
 // Type pour les donnees validees qui arrivent du controller
 interface ValidatedContactData {

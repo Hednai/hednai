@@ -3,7 +3,7 @@
 // Requetes Prisma pour les messages de contact
 // Pattern : ProfMatchAI (Model dans chaque feature)
 // ============================================
-import { prisma } from "../../lib/prisma";
+import { prisma } from "../../lib/prisma.js";
 
 // Sauvegarder un nouveau message de contact
 // email et phone sont optionnels : selon contactMethod,
