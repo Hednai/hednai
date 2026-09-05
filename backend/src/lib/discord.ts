@@ -3,9 +3,9 @@
 // Notification Discord via webhook lors d'un nouveau message de contact.
 // Fonctionnalite optionnelle : sans DISCORD_WEBHOOK_URL, la fonction ne fait rien.
 // ============================================
-import { env } from "../config/env";
-import { logger } from "./logger";
-import { NOTIFICATION } from "../config/constants";
+import { env } from "../config/env.js";
+import { logger } from "./logger.js";
+import { NOTIFICATION } from "../config/constants.js";
 
 // Type pour les donnees du message a notifier
 interface DiscordNotification {

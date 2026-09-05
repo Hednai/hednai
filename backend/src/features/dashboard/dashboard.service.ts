@@ -2,7 +2,7 @@
 // features/dashboard/dashboard.service.ts
 // Service dashboard — logique metier des statistiques
 // ============================================
-import { prisma } from "../../lib/prisma";
+import { prisma } from "../../lib/prisma.js";
 
 // ---- Statistiques globales ----
 export const getDashboardStats = async () => {

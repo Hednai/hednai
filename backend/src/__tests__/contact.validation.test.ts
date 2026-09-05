@@ -4,7 +4,7 @@
 // Verifie l'union discriminee email/whatsapp
 // ============================================
 import { describe, it, expect } from "vitest";
-import { contactSchema } from "../features/contact/contact.validation";
+import { contactSchema } from "../features/contact/contact.validation.js";
 
 // Donnees valides pour la methode Email
 const donneeEmailValide = {

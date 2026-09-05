@@ -5,8 +5,8 @@
 // GET /api/dashboard/messages — liste des messages
 // ============================================
 import { Router } from "express";
-import { getStats, getMessages } from "./dashboard.controller";
-import { authAdmin } from "../../middleware/authAdmin";
+import { getStats, getMessages } from "./dashboard.controller.js";
+import { authAdmin } from "../../middleware/authAdmin.js";
 
 const dashboardRouter = Router();
 

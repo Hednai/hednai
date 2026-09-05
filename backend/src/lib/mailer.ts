@@ -6,8 +6,8 @@
 // les emails ne sont pas envoyes mais le message est sauve en base
 // ============================================
 import nodemailer from "nodemailer";
-import { env } from "../config/env";
-import { logger } from "./logger";
+import { env } from "../config/env.js";
+import { logger } from "./logger.js";
 
 // Verifier si l'email est configure
 const isMailConfigured =

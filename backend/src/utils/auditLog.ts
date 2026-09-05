@@ -9,14 +9,15 @@
 // pour un audit automatique (voir ProfMatchAI prisma.js)
 // ============================================
 import type { Request } from "express";
-import type { ActionType, Prisma } from "../generated/prisma/client";
-import { prisma } from "../lib/prisma";
-import { logger } from "../lib/logger";
+import type { Prisma } from "../generated/prisma/client.js";
+import { $Enums } from "../generated/prisma/client.js";
+import { prisma } from "../lib/prisma.js";
+import { logger } from "../lib/logger.js";
 
 // Journaliser une action
 export const logAction = async (
   req: Request,
-  action: ActionType,
+  action: $Enums.ActionType,
   entityType: string,
   entityId?: string,
   payload?: Record<string, unknown>,

@@ -5,7 +5,7 @@
 // Si Redis est indisponible, le serveur fonctionne sans cache
 // ============================================
 import type { Request, Response, NextFunction } from "express";
-import { redis } from "../config/redis";
+import { redis } from "../config/redis.js";
 
 // Mettre en cache les reponses GET pendant ttl secondes
 export function cacheResponse(ttl = 60) {

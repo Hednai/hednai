@@ -5,7 +5,7 @@
 // plus l'en-tete Authorization utilise par le dashboard admin.
 // ============================================
 import cors from "cors";
-import { ORIGINES_AUTORISEES } from "./env";
+import { ORIGINES_AUTORISEES } from "./env.js";
 
 // Une liste plutot qu'une chaine unique : le site est joignable sur plusieurs
 // origines legitimes (apex, www, domaine de preproduction). Le paquet "cors"

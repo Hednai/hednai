@@ -4,7 +4,7 @@
 // Pattern : ProfMatchAI (Route dans chaque feature)
 // ============================================
 import { Router } from "express";
-import { submitContact } from "./contact.controller";
+import { submitContact } from "./contact.controller.js";
 
 const contactRouter = Router();
 
