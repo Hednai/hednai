@@ -75,11 +75,10 @@
   padding: 12px 28px;
 }
 
-/* ===== CLIENT — fond fixe sombre, texte blanc ===== */
-/* Fond #1a2332 reste sombre en light ET dark */
+/* ===== CLIENT — fond fixe cyan Hednai, texte blanc ===== */
 .cta-bento__card--client {
-  background: #1a2332;
-  border-color: #1a2332;
+  background: #0099cc;
+  border-color: #0099cc;
   color: #ffffff;
 }
 
@@ -88,17 +87,17 @@
 }
 
 .cta-bento__card--client p {
-  color: #b0bec5;
+  color: #ffffff;
 }
 
 .cta-bento__card--client svg {
   color: #ffffff;
 }
 
-/* Bouton blanc sur carte sombre */
+/* Bouton blanc sur carte cyan */
 .cta-bento__card--client .btn--primary {
   background: #ffffff;
-  color: #1a2332;
+  color: #0099cc;
   border-color: #ffffff;
 }
 
@@ -129,13 +128,13 @@
   background: none;
 }
 
-/* ===== DEVIS — fond fixe sombre, texte blanc ===== */
+/* ===== DEVIS — fond fixe cyan Hednai, texte blanc ===== */
 .cta-bento__card--quote {
   cursor: pointer;
   width: 100%;
   font-family: inherit;
-  background: #1a2332;
-  border-color: #1a2332;
+  background: #0099cc;
+  border-color: #0099cc;
   color: #ffffff;
 }
 
@@ -144,17 +143,17 @@
 }
 
 .cta-bento__card--quote p {
-  color: #b0bec5;
+  color: #ffffff;
 }
 
 .cta-bento__card--quote svg {
   color: #ffffff;
 }
 
-/* Bouton blanc sur carte sombre */
+/* Bouton blanc sur carte cyan */
 .cta-bento__card--quote .btn--primary {
   background: #ffffff;
-  color: #1a2332;
+  color: #0099cc;
   border-color: #ffffff;
 }
 
@@ -178,7 +177,7 @@
 /* Bouton cyan */
 .cta-bento__card .btn--secondary {
   border: none;
-  color: #1a1a1a;
+  color: #ffffff;
   background: var(--accent-cyan);
 }
 
@@ -253,5 +252,20 @@
   .quote-modal__content {
     padding: 20px;
     max-height: 85vh;
+  }
+}
+
+
+/* ── Mode recruteur : 2 cartes cote a cote, meme disposition que le mode client ── */
+.cta-bento__grid--recruiter {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 20px;
+}
+
+/* En mobile, les cartes s'empilent */
+@media (max-width: 768px) {
+  .cta-bento__grid--recruiter {
+    grid-template-columns: 1fr;
   }
 }

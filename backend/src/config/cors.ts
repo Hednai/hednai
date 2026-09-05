@@ -1,14 +1,20 @@
 // ============================================
 // config/cors.ts
-// Configuration CORS extraite du server.ts
-// Pattern : Hednai v5.2 (extrait pour lisibilite)
+// Configuration CORS de l'API.
+// Autorise uniquement les origines declarees dans FRONTEND_URL,
+// plus l'en-tete Authorization utilise par le dashboard admin.
 // ============================================
 import cors from "cors";
-import { env } from "./env";
+import { ORIGINES_AUTORISEES } from "./env";
 
-// Middleware CORS configure — autorise seulement le frontend
+// Une liste plutot qu'une chaine unique : le site est joignable sur plusieurs
+// origines legitimes (apex, www, domaine de preproduction). Le paquet "cors"
+// accepte un tableau et repond alors avec l'origine exacte de la requete.
+// Source : github.com/expressjs/cors#configuration-options
 export const corsMiddleware = cors({
-  origin: env.FRONTEND_URL,
+  origin: ORIGINES_AUTORISEES,
   methods: ["GET", "POST"],
-  allowedHeaders: ["Content-Type"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  // Duree de mise en cache du preflight par le navigateur (secondes)
+  maxAge: 86400,
 });

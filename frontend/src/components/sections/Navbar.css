@@ -26,6 +26,20 @@
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
+/* ===== CORRECTIF MENU MOBILE INVISIBLE =====
+   Une valeur de backdrop-filter differente de "none" cree un BLOC CONTENEUR
+   pour tous les descendants en position: fixed (au meme titre que transform
+   ou filter). Consequence : .navbar__links { position: fixed; inset: 0 }
+   n'etait pas cale sur la fenetre mais sur la navbar de 72px de haut, donc
+   invisible et sans zone de fond cliquable.
+   Reference : W3C Filter Effects — "backdrop-filter" containing block.
+   On desactive donc le flou pendant que le menu est ouvert : le menu recouvre
+   deja tout l'ecran, le flou n'apporte plus rien visuellement. */
+.navbar--menu-open {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
 /* Mode sombre : fond fonce en permanence aussi */
 [data-theme="dark"] .navbar {
   background: rgba(15, 23, 42, 0.95);
@@ -44,12 +58,12 @@
 }
 
 /* ===== LOGO ===== */
-/* Le logo doit rester compact et separe des liens */
+/* z-index 10000 pour rester visible quand le menu mobile est ouvert */
 .navbar__logo {
   display: flex;
   align-items: center;
   gap: 10px;
-  z-index: 1001;
+  z-index: 10000;
   flex-shrink: 0;
   margin-right: 16px;
 }
@@ -70,6 +84,16 @@
   font-size: 20px;
   font-weight: 700;
   color: var(--text-primary);
+}
+
+/* Accent colore du logo ("nai") — remplace un style inline en dur dans le TSX */
+.navbar__logo-accent {
+  color: var(--accent-cyan);
+}
+
+/* Fond cliquable du menu mobile — masque en desktop */
+.navbar__backdrop {
+  display: none;
 }
 
 /* Badge identitaire sous le nom — petite ligne de contexte */
@@ -133,11 +157,12 @@
 
 /* ===== SEPARATEUR VERTICAL ===== */
 /* Trait vertical net entre les liens et les controles */
+/* Espacement genereux pour separer navigation et controles */
 .navbar__separator {
   width: 1px;
   height: 20px;
   background: var(--card-border);
-  margin: 0 12px;
+  margin: 0 32px;
 }
 
 /* ===== BOUTON THEME (cercle) ===== */
@@ -169,11 +194,11 @@
 .navbar__lang-group {
   display: flex;
   align-items: center;
-  gap: 4px;
-
+  gap: 0;
   border: 1px solid var(--card-border);
   border-radius: 20px;
-  padding: 4px 12px;
+  padding: 2px;
+  background: var(--bg-gray);
 }
 
 /* Chaque bouton FR ou EN */
@@ -186,33 +211,32 @@
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-
-  /* Par defaut, texte gris (langue inactive) */
   color: var(--text-light);
-
-  transition: color 0.2s;
+  padding: 4px 10px;
+  border-radius: 16px;
+  transition: color 0.2s, background 0.2s;
 }
 
-/* Langue active : texte en couleur primaire (noir ou blanc en dark mode) */
+/* Langue active : fond cyan arrondi (comme le bouton Mode Client) */
 .navbar__lang-btn--active {
-  color: var(--text-primary);
+  background: var(--accent-cyan);
+  color: #ffffff;
 }
 
-/* Le petit trait | entre FR et EN */
+/* Le trait | masque — le fond arrondi fait la distinction */
 .navbar__lang-sep {
-  color: var(--card-border);
-  font-size: 12px;
-  user-select: none;
+  display: none;
 }
 
 /* ===== BOUTON BURGER (mobile) ===== */
+/* Bouton burger : z-index 10000 pour rester cliquable meme quand le menu est ouvert */
 .navbar__burger {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
   color: var(--text-primary);
-  z-index: 1001;
+  z-index: 10000;
   padding: 4px;
 }
 
@@ -224,33 +248,96 @@
     align-items: center;
   }
 
-  /* Menu plein ecran, cache par defaut */
-  .navbar__links {
+  /* ===== MENU MOBILE : TIROIR LATERAL (modele Karibou Market) =====
+     Le menu n'occupe plus tout l'ecran : il glisse sur le cote et laisse
+     voir le site derriere, assombri par un voile. Cliquer sur le voile ferme.
+
+     Pour faire glisser le tiroir depuis la GAUCHE au lieu de la droite,
+     une seule variable a changer : --drawer-side (voir index.css). */
+
+  /* Voile semi-transparent : couvre le site derriere le tiroir.
+     C'est lui qui ferme le menu au clic (WCAG : cible d'au moins 24px). */
+  .navbar__backdrop {
+    display: block;
     position: fixed;
     inset: 0;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(20px);
-    flex-direction: column;
-    justify-content: center;
-    gap: 16px;
-    opacity: 0;
+    z-index: 9998;
+    background: var(--drawer-overlay);
+    /* Apparition en fondu, synchronisee avec le glissement du tiroir */
+    animation: navbar-backdrop-in var(--drawer-duration) ease forwards;
+  }
+
+  @keyframes navbar-backdrop-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* Le voile ne s'anime pas si l'utilisateur refuse les animations */
+  @media (prefers-reduced-motion: reduce) {
+    .navbar__backdrop { animation: none; }
+  }
+
+  /* Tiroir : colle sous la navbar, jusqu'en bas, sur un seul cote.
+     z-index 9999 pour passer devant le voile et tout le contenu du site. */
+  .navbar__links {
+    position: fixed;
+    top: var(--nav-height);
+    bottom: 0;
+    /* Le tiroir occupe --drawer-width, sans jamais depasser 85% de l'ecran */
+    width: min(var(--drawer-width), 85vw);
+    /* --drawer-side vaut "right" ou "left" : un seul point a modifier */
+    right: 0;
+    left: auto;
+    z-index: 9999;
+
+    /* Ferme : le tiroir est pousse hors de l'ecran, cote droit */
+    transform: translateX(100%);
+    transition: transform var(--drawer-duration) ease,
+                visibility var(--drawer-duration);
     visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
+    /* Le menu ferme ne doit intercepter aucun clic */
+    pointer-events: none;
+
+    /* Defilement si la liste depasse sur un petit ecran (WCAG 1.4.10) */
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    padding: 24px 0 32px;
+    background: var(--card-bg);
+    border-left: 1px solid var(--card-border);
+    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.12);
+
+    flex-direction: column;
+    /* Les liens partent du haut, ils ne sont plus centres verticalement */
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 4px;
   }
 
-  [data-theme="dark"] .navbar__links {
-    background: rgba(15, 23, 42, 0.98);
-  }
-
-  /* Menu ouvert */
+  /* Tiroir ouvert : il glisse en place */
   .navbar__links--open {
-    opacity: 1;
+    transform: translateX(0);
     visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* Sans animation : le tiroir apparait directement */
+  @media (prefers-reduced-motion: reduce) {
+    .navbar__links { transition: none; }
   }
 
   .navbar__link {
-    font-size: 18px;
-    padding: 14px 32px;
+    font-size: 17px;
+    /* Aligne a gauche dans le tiroir, plus lisible qu'un texte centre */
+    justify-content: flex-start;
+    padding: 14px 24px;
+    color: var(--text-primary);
+  }
+
+  /* Lien actif dans le tiroir : barre coloree sur le bord interieur */
+  .navbar__links--open .navbar__link--active {
+    background: var(--drawer-active-bg);
+    box-shadow: inset 3px 0 0 var(--accent-cyan);
   }
 
   /* Sur mobile (menu plein ecran), les icones reapparaissent */
@@ -272,10 +359,11 @@
   }
 
   .navbar__lang-group {
-    padding: 8px 20px;
+    padding: 2px;
   }
 
   .navbar__lang-btn {
     font-size: 14px;
+    padding: 6px 14px;
   }
 }

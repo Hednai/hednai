@@ -60,8 +60,11 @@ export function Dashboard() {
         fetch(`${baseUrl}/api/dashboard/messages?limit=20`, { headers }),
       ]);
 
-      // Si 401, le mot de passe est incorrect
-      if (statsRes.status === 401 || msgsRes.status === 401) {
+      // Le backend renvoie 401 si l'en-tete Authorization est absent
+      // et 403 si le token est present mais invalide (middleware authAdmin).
+      // Les deux cas signifient la meme chose ici : mot de passe refuse.
+      const refuse = [401, 403];
+      if (refuse.includes(statsRes.status) || refuse.includes(msgsRes.status)) {
         setToken(null);
         setAuthError(true);
         setLoading(false);

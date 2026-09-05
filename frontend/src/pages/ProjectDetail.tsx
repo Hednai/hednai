@@ -37,7 +37,7 @@ export function ProjectDetail() {
   return (
     <div className="pd">
       <Helmet>
-        <title>{t(project.titleKey)} — Hednai</title>
+        <title>{t(project.titleKey)} | Hednai</title>
         <meta name="description" content={t(project.descriptionKey)} />
       </Helmet>
       <div className="container">
@@ -92,11 +92,25 @@ export function ProjectDetail() {
         {/* Boutons d'action : voir le projet en ligne / voir le code */}
         <div className="pd__actions">
 
-          <a href={project.liveUrl} className="btn btn--primary">
+          {/* Liens sortants : target="_blank" + rel="noopener noreferrer".
+              Sans "noopener", la page ouverte peut manipuler window.opener
+              et rediriger l'onglet d'origine (attaque dite "tabnabbing").
+              Source : owasp.org/www-community/attacks/Reverse_Tabnabbing */}
+          <a
+            href={project.liveUrl}
+            className="btn btn--primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <ExternalLink size={18} /> {t("project.viewLive")}
           </a>
 
-          <a href={project.githubUrl} className="btn btn--secondary">
+          <a
+            href={project.githubUrl}
+            className="btn btn--secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaGithub size={18} /> {t("project.viewCode")}
           </a>
 

@@ -10,9 +10,12 @@ dist/
 build/
 
 # Variables d'environnement (ne JAMAIS committer)
+# Le motif ".env*" attrape aussi .env.dev, .env.render, .env.backup, etc.
+# L'exception "!*.env.example" garde le modèle versionné.
 .env
-.env.local
-.env.production
+.env.*
+!.env.example
+!*.env.example
 
 # Prisma
 backend/prisma/migrations/
@@ -37,3 +40,8 @@ npm-debug.log*
 
 # Coverage tests
 coverage/
+
+# Cypress
+cypress/videos
+cypress/screenshots
+cypress/downloads

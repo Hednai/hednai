@@ -1,109 +1,97 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Encodage et responsive de base -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="index, follow" />
+    <!-- ==================== SEO de base ==================== -->
+    <title>Hednai | Logiciels maritimes et IA</title>
+    <meta
+      name="description"
+      content="Hednai conçoit des logiciels et solutions IA pour le secteur maritime. De la mer au code."
+    />
+    <meta name="keywords" content="logiciel maritime, IA maritime, développement logiciel, Hednai" />
+    <meta name="author" content="Hednai" />
+    <meta name="robots" content="index, follow" />
 
-  <!-- Police Google Fonts utilisee dans tout le site -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    rel="preload"
-    as="style"
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
-  />
-  <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-    media="print"
-    onload="this.media='all'"
-  />
+    <!-- ==================== Open Graph (LinkedIn, Facebook) ==================== -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hednai.com/" />
+    <meta property="og:title" content="Hednai | Logiciels maritimes et IA" />
+    <meta
+      property="og:description"
+      content="Hednai conçoit des logiciels et solutions IA pour le secteur maritime."
+    />
+    <meta property="og:image" content="https://hednai.com/og-image.png" />
+    <meta property="og:locale" content="fr_CA" />
 
-  <!-- Titre affiche dans l'onglet du navigateur -->
-  <title>Hednai — Solutions Digitales & Intelligence Artificielle</title>
+    <!-- ==================== Twitter / X ==================== -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://hednai.com/" />
+    <meta name="twitter:title" content="Hednai | Logiciels maritimes et IA" />
+    <meta
+      name="twitter:description"
+      content="Hednai conçoit des logiciels et solutions IA pour le secteur maritime."
+    />
+    <meta name="twitter:image" content="https://hednai.com/og-image.png" />
 
-  <!-- Description pour les moteurs de recherche -->
-  <meta
-    name="description"
-    content="Developpeur freelance specialise en solutions digitales, applications web et intelligence artificielle. Expertise maritime, logistique et tous secteurs."
-  />
+    <!-- Icone de l'onglet du navigateur.
+         CORRECTIF : les anciennes references pointaient vers /logo-anchor.png,
+         un fichier qui n'existe pas dans public/ (seul le .webp est present).
+         Les quatre references etaient donc en 404 : plus d'icone dans l'onglet,
+         et manifeste invalide donc PWA non installable.
+         La balise <link rel="manifest"> est maintenant injectee automatiquement
+         par vite-plugin-pwa : ne pas la remettre ici. -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0c2340" />
 
-  <meta
-    name="keywords"
-    content="developpeur freelance, IA, web, applications, maritime, logistique, automatisation"
-  />
+    <!-- Prechargement de l'image LCP (Largest Contentful Paint).
+         L'image de fond du Hero est l'element le plus grand du premier ecran.
+         Sans "preload", le navigateur ne la decouvre qu'apres avoir telecharge
+         et parse le CSS : il perd plusieurs centaines de millisecondes.
+         Avec "preload", le telechargement demarre en parallele du CSS.
+         fetchpriority="high" dit au navigateur de prioriser cette image par
+         rapport aux autres ressources (polices, icones).
+         Source : web.dev/articles/optimize-lcp#optimize_when_the_resource_is_discovered -->
+    <link rel="preload" as="image" href="/hednai_bridge.webp" type="image/webp" fetchpriority="high" />
 
-  <!-- URL canonique du site -->
-  <link rel="canonical" href="https://hednai.com" />
+    <!-- Police chargee en feuille de style normale.
+         L'astuce media="print" + onload repoussait l'application de la police
+         apres le premier rendu : le texte s'affichait puis changeait de fonte,
+         ce qui degrade CLS dans Lighthouse. "display=swap" est deja present dans
+         l'URL, il suffit a eviter le texte invisible.
+         Source : web.dev/articles/font-best-practices -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Applique le theme AVANT le premier rendu.
+         Sans ce script, data-theme n'etait pose qu'apres le montage de React :
+         la page s'affichait une fraction de seconde en clair avant de basculer
+         en sombre (flash + decalage visuel penalise par Lighthouse).
+         Volontairement inline et synchrone : c'est le seul moyen de s'executer
+         avant la peinture. Source : web.dev/articles/building-a-theme-switch -->
+    <script>
+      (function () {
+        try {
+          var sauvegarde = localStorage.getItem("hednai-theme");
+          var sombre = sauvegarde
+            ? sauvegarde === "dark"
+            : window.matchMedia("(prefers-color-scheme: dark)").matches;
+          document.documentElement.setAttribute("data-theme", sombre ? "dark" : "light");
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
 
-  <!-- Icone de l'onglet du navigateur -->
-  <link rel="icon" type="image/png" href="/logo-anchor.png" />
-  <link rel="apple-touch-icon" href="/logo-anchor.png" />
-  <link rel="manifest" href="/manifest.json" />
+    <!-- Point d'ancrage ou React va afficher toute l'application -->
+    <div id="root"></div>
 
-  <!-- Open Graph : previsualisation quand le lien est partage (Facebook, LinkedIn...) -->
-  <meta property="og:title" content="Hednai — Solutions Digitales & Intelligence Artificielle" />
-  <meta property="og:description" content="Solutions digitales, applications web et IA pour tous secteurs. Expertise maritime et au-dela." />
-  <meta property="og:image" content="https://hednai.com/og-image.png" />
-  <meta property="og:url" content="https://hednai.com" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Hednai" />
-
-  <!-- Twitter Card : previsualisation quand le lien est partage sur Twitter/X -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Hednai — Solutions Digitales & Intelligence Artificielle" />
-  <meta name="twitter:description" content="Solutions digitales, applications web et IA pour tous secteurs. Expertise maritime et au-dela." />
-  <meta name="twitter:image" content="https://hednai.com/og-image.png" />
-
-  <!-- Donnees structurees pour les moteurs de recherche (fiche "Personne") -->
-  <!-- A FAIRE : remplacer TON-PROFIL par tes vrais liens LinkedIn/GitHub -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Hednai",
-    "url": "https://hednai.com",
-    "sameAs": [
-      "https://www.linkedin.com/in/TON-PROFIL",
-      "https://github.com/Hednai"
-    ],
-    "jobTitle": "Developpeur Freelance — Web & IA",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Hednai"
-    }
-  }
-  </script>
-
-  <!-- Google Analytics -->
-  <!-- A FAIRE : remplacer G-XXXXXXX par ton vrai identifiant Google Analytics -->
-  <link rel="preconnect" href="https://www.googletagmanager.com" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXX');
-  </script>
-
-  <!-- Analytics Plausible — respectueux de la vie privee (pas de cookies) -->
-  <!-- Remplacer data-domain par ton vrai domaine une fois deploye -->
-  <script defer data-domain="hednai.com" src="https://plausible.io/js/script.js"></script>
-
-</head>
-
-<body>
-
-  <!-- Point d'ancrage ou React va afficher toute l'application -->
-  <div id="root"></div>
-
-  <!-- Script principal qui demarre React -->
-  <script type="module" src="/src/main.tsx"></script>
-
-</body>
+    <!-- Script principal qui demarre React -->
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

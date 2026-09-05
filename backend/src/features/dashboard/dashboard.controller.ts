@@ -5,37 +5,20 @@
 // ============================================
 import type { Request, Response, NextFunction } from "express";
 import { getDashboardStats, getDashboardMessages } from "./dashboard.service";
+import { PAGINATION } from "../../config/constants";
 
-// ---- Middleware d'authentification simple ----
-// Verifie le header Authorization: Bearer <mot-de-passe>
-// Le mot de passe est stocke dans la variable d'environnement ADMIN_PASSWORD
-const checkAdminAuth = (req: Request, res: Response): boolean => {
-  const authHeader = req.headers.authorization;
-  const expectedPassword = process.env.ADMIN_PASSWORD || "hednai2025";
-
-  // Verifier le format "Bearer <password>"
-  if (!authHeader || authHeader !== `Bearer ${expectedPassword}`) {
-    res.status(401).json({
-      success: false,
-      message: "Non autorise. Header Authorization requis.",
-    });
-    return false;
-  }
-
-  return true;
-};
+// Authentification geree par le middleware authAdmin (dashboard.route.ts)
+// Aucune verification supplementaire necessaire ici
 
 // ---- GET /api/dashboard/stats ----
 export const getStats = async (
-  req: Request,
+  _req: Request,
   res: Response,
   next: NextFunction,
 ) => {
   try {
-    // 1. Verifier l'authentification
-    if (!checkAdminAuth(req, res)) return;
-
-    // 2. Recuperer les statistiques
+    // Authentification deja verifiee par le middleware authAdmin
+    // Recuperer les statistiques
     const stats = await getDashboardStats();
     res.json({ success: true, data: stats });
   } catch (error) {
@@ -50,12 +33,17 @@ export const getMessages = async (
   next: NextFunction,
 ) => {
   try {
-    // 1. Verifier l'authentification
-    if (!checkAdminAuth(req, res)) return;
-
-    // 2. Pagination via query params
-    const page = Number(req.query.page) || 1;
-    const limit = Number(req.query.limit) || 10;
+    // Authentification deja verifiee par le middleware authAdmin
+    // Pagination via query params.
+    // SECURITE : les deux valeurs viennent du client et etaient utilisees
+    // telles quelles dans "take" et "skip" de Prisma. Un appel du type
+    // ?limit=999999 faisait charger toute la table en memoire (deni de service).
+    // On borne donc les deux valeurs.
+    const page = Math.max(1, Math.trunc(Number(req.query.page)) || 1);
+    const limit = Math.min(
+      PAGINATION.LIMITE_MAX,
+      Math.max(1, Math.trunc(Number(req.query.limit)) || PAGINATION.LIMITE_DEFAUT),
+    );
 
     const result = await getDashboardMessages(page, limit);
     res.json({ success: true, data: result });

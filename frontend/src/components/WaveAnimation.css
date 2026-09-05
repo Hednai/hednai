@@ -3,24 +3,29 @@
    Styles pour la zone de vagues animees
    ============================================ */
 
-/* Le conteneur principal : cache tout ce qui depasse */
+/* Le conteneur principal : flex pour que margin-top: auto fonctionne sur wave-content */
+/* Le footer est pousse vers le bas du conteneur, pas de gap en dessous */
 .wave-container {
   position: relative;
   overflow: hidden;
-  min-height: 700px;
+  min-height: 550px;
   background: var(--bg-gray);
+  display: flex;
+  flex-direction: column;
 }
 
-/* Le contenu passe en enfant (ex: Contact) doit etre au-dessus des vagues */
+/* Le contenu (footer) est pousse vers le bas grace a margin-top: auto */
 .wave-content {
   position: relative;
   z-index: 2;
+  margin-top: auto;
 }
 
 /* La zone ou vivent les vagues, le bateau, les particules */
+/* top: 0 pour que le bateau ait toute la hauteur du conteneur */
 .wave-inner {
   position: absolute;
-  top: 30%;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -107,7 +112,7 @@
   }
 
   .wave-inner {
-    top: 50%;
+    top: 0;
   }
 
   .wave-svg {

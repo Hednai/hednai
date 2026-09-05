@@ -4,7 +4,7 @@
    ═══════════════════════════════════════════ */
 
 /* Tailwind v4 — cet import charge tous les utilitaires Tailwind */
-@import "tailwindcss";
+/* Tailwind retire : aucune classe utilitaire n'etait utilisee dans le projet */
 
 
 /* ── Mode clair (par defaut) ── */
@@ -30,14 +30,30 @@
   --success-text: #047857;
   --error-bg: #FEF2F2;
   --error-text: #B91C1C;
-  --accent-cyan: hsl(184 100% 45%);
+  --accent-cyan: #0099cc;
+  /* Couleur de texte lisible SUR un fond accent (contraste AA verifie) */
+  --on-accent: #FFFFFF;
   --accent-warm: hsl(25 95% 55%);
   --radius-pill: 20px;
   --radius-circle: 50%;
 
   --nav-height: 72px;
+
+  /* Barre de filtres du portfolio : padding interne et hauteur totale reservee.
+     Sert au calcul de scroll-margin-top de .portfolio-anchor (Portfolio.css). */
+  --portfolio-filters-padding: 16px;
+  --portfolio-filters-height: 74px;
+
+  /* ---- Tiroir du menu mobile (modele Karibou Market) ----
+     Largeur du panneau, duree du glissement, opacite du voile.
+     Modifier ici et nulle part ailleurs. */
+  --drawer-width: 300px;
+  --drawer-duration: 0.28s;
+  --drawer-overlay: rgba(15, 23, 42, 0.45);
+  --drawer-active-bg: rgba(0, 153, 204, 0.10);
   --max-width: 1200px;
   --section-padding: 64px;
+  --mode-transition: 0.3s ease;
 
   --font-main: 'Outfit', sans-serif;
 
@@ -71,7 +87,12 @@
   --success-text: #6EE7B7;
   --error-bg: #450A0A;
   --error-text: #FCA5A5;
-  --accent-cyan: hsl(184 100% 55%);
+  --accent-cyan: #00b0e6;
+  --on-accent: #0F172A;
+
+  /* Voile plus dense en sombre pour garder le contraste avec le tiroir */
+  --drawer-overlay: rgba(2, 6, 23, 0.62);
+  --drawer-active-bg: rgba(0, 176, 230, 0.14);
   --accent-warm: hsl(25 95% 60%);
 
 }
@@ -116,6 +137,25 @@ ul {
 img {
   max-width: 100%;
   display: block;
+}
+
+/* ── Scrollbar globale #0099cc ── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0099cc transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #0099cc;
+  border-radius: 3px;
 }
 
 
@@ -171,6 +211,118 @@ img {
   margin-left: 0;
 }
 
+/* Fond bleu marine avec feuilles d'erable en filigrane (Retours + CTA) */
+.maple-section {
+  position: relative;
+  background: #0c2340;
+  overflow: hidden;
+}
+
+.maple-section__leaf {
+  position: absolute;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.05);
+}
+
+.maple-section__leaf--right {
+  width: 500px;
+  height: 500px;
+  right: -60px;
+  top: 10%;
+  transform: rotate(15deg);
+}
+
+.maple-section__leaf--left {
+  width: 300px;
+  height: 300px;
+  left: -40px;
+  bottom: 5%;
+  transform: rotate(-25deg);
+  color: rgba(255, 255, 255, 0.03);
+}
+
+/* Les sections enfants doivent avoir un fond transparent */
+.maple-section .section {
+  background: transparent;
+}
+
+.maple-section .section--gray {
+  background: transparent;
+}
+
+/* Textes en blanc sur fond bleu marine */
+.maple-section .section__title {
+  color: #ffffff;
+}
+
+.maple-section .section__subtitle {
+  color: #b0bec5;
+}
+
+/* Cartes temoignages : fond semi-transparent */
+.maple-section .card {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.maple-section .card h4,
+.maple-section .card strong {
+  color: #ffffff;
+}
+
+.maple-section .card p,
+.maple-section .card span {
+  color: #b0bec5;
+}
+
+.maple-section .card blockquote {
+  color: #d0d8e0;
+}
+
+.maple-section .card svg {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Noms et roles des temoignages en blanc sur fond bleu marine */
+.maple-section .testimonial__name {
+  color: #ffffff;
+}
+
+.maple-section .testimonial__role {
+  color: #b0bec5;
+}
+
+.maple-section .testimonial__context {
+  color: var(--accent-cyan);
+}
+
+.maple-section .testimonial__quote {
+  color: #d0d8e0;
+  font-style: italic;
+}
+
+/* Bento CTA : cartes claires restent visibles */
+.maple-section .cta-bento__card--calendar {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.maple-section .cta-bento__card--recruiter {
+  background: #e0f4f4;
+}
+
+
+
+@media (max-width: 768px) {
+  .maple-section__leaf--right {
+    width: 300px;
+    height: 300px;
+  }
+
+  .maple-section__leaf--left {
+    display: none;
+  }
+}
+
 /* Sur mobile, revenir en colonne unique */
 @media (max-width: 900px) {
   .about-roadmap-row__inner {
@@ -195,4 +347,13 @@ img {
     text-align: center;
     margin: 0 auto 48px;
   }
+}
+
+/* ============================================
+   Focus visible global — accessibilite clavier
+   Source : WCAG 2.4.7 — Focus Visible (Level AA)
+   ============================================ */
+*:focus-visible {
+  outline: 3px solid var(--accent-cyan);
+  outline-offset: 2px;
 }

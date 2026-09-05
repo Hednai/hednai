@@ -8,7 +8,12 @@ import { useState } from "react";
 import { sendContactMessage } from "../routes/contact";
 import { isValidEmail, isMinLength, isValidPhone } from "../utils/validation";
 import { SITE_CONFIG } from "../config/site";
+import { useLanguage } from "../i18n/useLanguage";
 import type { ContactForm, ContactMethod, FormStatus } from "../types";
+
+// Bornes de validation : une seule source de verite (config/site.ts),
+// alignee sur le schema Zod du backend
+const REGLES = SITE_CONFIG.formulaire;
 
 // Etat initial du formulaire (tous les champs vides)
 // Methode par defaut : email | Indicatif par defaut : Cote d'Ivoire (+225)
@@ -24,6 +29,9 @@ const INITIAL_FORM: ContactForm = {
 };
 
 export function useContactForm() {
+  // Traduction : le gabarit du message WhatsApp suit la langue du site
+  const { t } = useLanguage();
+
   // State du formulaire (les valeurs tapees par l'utilisateur)
   const [form, setForm] = useState<ContactForm>(INITIAL_FORM);
   // Statut de l'envoi : idle, loading, success ou error
@@ -61,7 +69,7 @@ export function useContactForm() {
   const validate = (): boolean => {
     const errors: Record<string, string> = {};
 
-    if (!isMinLength(form.name, 2)) {
+    if (!isMinLength(form.name, REGLES.nomMin)) {
       errors.name = "contact.form.error.name";
     }
 
@@ -76,10 +84,10 @@ export function useContactForm() {
       }
     }
 
-    if (!isMinLength(form.subject, 2)) {
+    if (!isMinLength(form.subject, REGLES.sujetMin)) {
       errors.subject = "contact.form.error.subject";
     }
-    if (!isMinLength(form.message, 10)) {
+    if (!isMinLength(form.message, REGLES.messageMin)) {
       errors.message = "contact.form.error.message";
     }
 
@@ -95,10 +103,17 @@ export function useContactForm() {
       return;
     }
 
+    // 2. Onglet WhatsApp reserve MAINTENANT, tant qu'on est encore dans le
+    // geste utilisateur (le clic). Un window.open appele apres un await, ou
+    // depuis un setTimeout, est bloque par le navigateur comme une popup.
+    // Source : developer.mozilla.org/docs/Web/API/Window/open (popup blocking)
+    const ongletWhatsapp =
+      form.contactMethod === "whatsapp" ? window.open("", "_blank") : null;
+
     setStatus("loading");
 
     try {
-      // 2. On appelle l'API avec seulement les champs pertinents
+      // 3. On appelle l'API avec seulement les champs pertinents
       // (le backend attend une union discriminee sur contactMethod)
       const payload =
         form.contactMethod === "email"
@@ -121,29 +136,36 @@ export function useContactForm() {
 
       await sendContactMessage(payload);
 
-      // 3. Succes
+      // 4. Succes
       setStatus("success");
       setFieldErrors({});
 
-      // 4. Si WhatsApp : ouvrir wa.me avec le message pre-rempli
-      // Le numero vient de SITE_CONFIG, pas d'une valeur en dur
+      // 5. Si WhatsApp : diriger l'onglet reserve vers wa.me avec le message
+      // pre-rempli. Numero et gabarit viennent de la config et de l'i18n,
+      // aucune chaine en dur ici.
       if (form.contactMethod === "whatsapp") {
-        const waMessage = encodeURIComponent(
-          `Bonjour,\n\nJe m'appelle ${form.name}.\nJe vous contacte pour : ${form.subject}\n\n${form.message}\n\nMerci.`,
-        );
+        const texte = t("contact.whatsapp.template")
+          .replace("{name}", form.name)
+          .replace("{subject}", form.subject)
+          .replace("{message}", form.message);
 
-        setTimeout(() => {
-          window.open(
-            `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=${waMessage}`,
-            "_blank",
-          );
-        }, 800);
+        const url = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(texte)}`;
+
+        // Si le navigateur a quand meme bloque l'onglet, on retombe sur un
+        // window.open direct plutot que de perdre silencieusement l'envoi.
+        if (ongletWhatsapp) {
+          ongletWhatsapp.location.href = url;
+        } else {
+          window.open(url, "_blank", "noopener");
+        }
       }
 
-      // 5. Reinitialiser le formulaire (on garde la methode choisie)
+      // 6. Reinitialiser le formulaire (on garde la methode choisie)
       setForm({ ...INITIAL_FORM, contactMethod: form.contactMethod });
     } catch {
-      // 6. Erreur (ex: serveur injoignable)
+      // 7. Erreur (ex: serveur injoignable) : on referme l'onglet reserve
+      // pour ne pas laisser un onglet blanc ouvert.
+      ongletWhatsapp?.close();
       setStatus("error");
       setFieldErrors({ general: "contact.form.error.network" });
     }

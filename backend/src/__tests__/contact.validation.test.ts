@@ -89,13 +89,15 @@ describe("contactSchema", () => {
   });
 
   // --- Honeypot rempli (bot detecte) ---
-  it("rejette un honeypot rempli (bot)", () => {
+  // Le schema accepte la valeur : c'est le service qui repond un faux succes.
+  // Rejeter ici renverrait une 400 qui signale au bot l'existence du piege.
+  it("accepte un honeypot rempli au niveau du schema", () => {
     const resultat = contactSchema.safeParse({
       ...donneeEmailValide,
       honeypot: "je-suis-un-bot",
     });
 
-    expect(resultat.success).toBe(false);
+    expect(resultat.success).toBe(true);
   });
 
   // --- Honeypot vide (humain) ---

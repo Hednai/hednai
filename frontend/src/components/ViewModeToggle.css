@@ -14,14 +14,14 @@
   border-radius: var(--radius-pill);
   font-size: 12px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #ffffff;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 /* Etat actif — couleur Hednai */
 .view-toggle:hover {
-  background: hsl(195 100% 40%);
+  background: #0099cc;
   color: #ffffff;
 }
 
@@ -29,8 +29,20 @@
   white-space: nowrap;
 }
 
+/* ===== CORRECTIF : le libelle etait masque en mobile =====
+   L'ancienne regle "display: none" sur .view-toggle__label sous 768px
+   rendait le bouton totalement vide : une pilule bleue sans texte ni icone.
+   Elle se justifiait quand la navbar mobile etait horizontale et manquait
+   de place. Depuis le passage au tiroir lateral (300px de large, liste
+   verticale), la place ne manque plus du tout.
+   Le libelle reste donc visible partout : un bouton sans intitule accessible
+   viole WCAG 2.4.6 (intitules descriptifs). */
 @media (max-width: 768px) {
-  .view-toggle__label {
-    display: none;
+  .view-toggle {
+    /* Le bouton occupe la largeur du tiroir, comme les autres liens */
+    width: 100%;
+    justify-content: center;
+    padding: 12px 24px;
+    font-size: 15px;
   }
 }

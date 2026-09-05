@@ -26,6 +26,8 @@ export interface Project {
   githubUrl: string;
   longDescriptionKey?: string;
   featureKeys?: string[];
+  badgeKey?: string;
+  featured?: boolean;
 }
 
 // Methode de contact choisie par le visiteur

@@ -51,5 +51,11 @@ cd backend && npm test
 # Tests frontend (composants + utilitaires)
 cd frontend && npm test
 ```
+## Prérequis
+
+- Node.js 22+ et NVM (Node Version Manager)
+- La version exacte de Node.js est définie dans `.nvmrc`
+- Utiliser `nvm use` pour activer la version du projet
+
 
 ## Structure du projet

@@ -18,12 +18,28 @@ export const SITE_CONFIG = {
   // Liens reseaux sociaux
   socials: {
     github: "https://github.com/Hednai",
-    linkedin: "https://linkedin.com/in/tonprofil",
+    linkedin: "https://www.linkedin.com/in/hednai",
   },
 
   // API backend
   api: {
     baseUrl: import.meta.env.VITE_API_URL || "http://localhost:3000",
+    // Plafond de duree d'un appel API, en millisecondes
+    timeoutMs: 15000,
+  },
+
+  // Regles de validation du formulaire de contact.
+  // Ces bornes doivent rester alignees sur le schema Zod du backend
+  // (backend/src/features/contact/contact.validation.ts).
+  formulaire: {
+    nomMin: 2,
+    nomMax: 100,
+    sujetMin: 2,
+    sujetMax: 200,
+    messageMin: 10,
+    messageMax: 2000,
+    // Delai avant l'ouverture de WhatsApp apres un envoi reussi (ms)
+    delaiWhatsappMs: 800,
   },
 
   // Calendrier de prise de rendez-vous (Cal.com)
@@ -39,7 +55,7 @@ export const SITE_CONFIG = {
 
   // Meta SEO
   meta: {
-    title: "Hednai — Solutions Digitales Maritime & IA",
+    title: "Hednai | Maritime Software & AI",
     description:
       "Developpeur freelance specialise en applications maritimes, web et IA.",
     url: "https://hednai.com",

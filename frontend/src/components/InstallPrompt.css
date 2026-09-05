@@ -5,8 +5,8 @@
 
 .install-prompt {
   position: fixed;
-  bottom: 80px; /* Au-dessus du ScrollToTop */
-  right: 20px;
+  bottom: 40px; /* En dessous du ScrollToTop */
+  right: 100px;
   z-index: 999;
   display: flex;
   align-items: center;

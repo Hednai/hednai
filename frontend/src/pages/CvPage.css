@@ -1,0 +1,157 @@
+/* ============================================
+   CvPage.css — Viewer PDF dans le MainLayout
+   Titre + onglets + iframe + bouton télécharger
+   ============================================ */
+
+.cv-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 16px 60px;
+}
+
+/* ── Bouton retour ── */
+.cv-page__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font-main);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+.cv-page__back:hover {
+  color: var(--text-primary);
+  background: var(--bg-gray);
+}
+
+/* ── Header : titre + sous-titre ── */
+.cv-page__header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.cv-page__title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.cv-page__subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ── Barre d'actions : onglets + télécharger ── */
+.cv-page__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* ── Onglets ── */
+.cv-page__tabs {
+  display: flex;
+  gap: 6px;
+}
+
+.cv-page__tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border: 1.5px solid var(--card-border);
+  border-radius: 6px;
+  background: none;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-main);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.cv-page__tab:hover {
+  border-color: var(--accent-cyan);
+  color: var(--text-primary);
+}
+/* Onglet actif en cyan Hednai */
+.cv-page__tab--active {
+  background: #0099cc;
+  border-color: #0099cc;
+  color: #ffffff;
+}
+
+/* ── Bouton télécharger ── */
+.cv-page__download {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 6px;
+  background: var(--accent-cyan);
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+.cv-page__download:hover {
+  opacity: 0.85;
+}
+
+/* ── Viewer PDF ── */
+.cv-page__viewer {
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-gray);
+}
+
+.cv-page__iframe {
+  width: 100%;
+  height: 85vh;
+  border: none;
+  display: block;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .cv-page {
+    padding: 24px 12px 40px;
+  }
+
+  .cv-page__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .cv-page__tabs {
+    width: 100%;
+  }
+
+  .cv-page__tab {
+    flex: 1;
+    justify-content: center;
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  .cv-page__download {
+    justify-content: center;
+  }
+
+  .cv-page__iframe {
+    height: 60vh;
+  }
+}

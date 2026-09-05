@@ -1,0 +1,23 @@
+{
+  // ============================================
+  // scripts/tsconfig.json
+  // Le tsconfig.json principal a "include": ["src/**/*"] et
+  // "rootDir": "./src" : le dossier scripts/ n'est donc couvert par AUCUNE
+  // configuration TypeScript. VS Code retombe alors sur ses reglages par
+  // defaut, sans @types/node : d'ou les erreurs "Cannot find name 'process'"
+  // et "Cannot find name 'node:net'" affichees dans l'onglet Problemes.
+  //
+  // Ce fichier donne aux scripts leur propre configuration. On n'ajoute PAS
+  // scripts/ a l'include principal : "tsc" sortirait alors dist/src/ et
+  // dist/scripts/, ce qui casserait "start": "node dist/server.js".
+  // ============================================
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    // Les scripts ne sont pas compiles : ils tournent via tsx
+    "noEmit": true,
+    "rootDir": "..",
+    // Types Node indispensables : process, node:net, node:dns
+    "types": ["node"]
+  },
+  "include": ["**/*.ts"]
+}

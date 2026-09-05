@@ -1,0 +1,25 @@
+/* ============================================
+   SkipLink.css
+   Lien invisible qui apparait au focus clavier
+   Permet de sauter la navbar pour aller au contenu principal
+   Source : WCAG 2.4.1 — Bypass Blocks (Level A)
+   ============================================ */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  padding: 12px 24px;
+  background: var(--text-primary);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+
+/* Visible seulement quand l'utilisateur tabule dessus */
+.skip-link:focus {
+  top: 12px;
+}

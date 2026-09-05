@@ -14,6 +14,11 @@ export function Hero() {
   const { t } = useLanguage();
   const { isRecruiter } = useViewMode();
 
+  // Fonction pour ouvrir le modal de contact
+  const openContactModal = () => {
+    window.dispatchEvent(new Event("open-contact-modal"));
+  };
+
   return (
     <section className="hero" id="accueil">
       {/* Conteneur en 2 colonnes : texte a gauche, radar a droite */}
@@ -36,7 +41,7 @@ export function Hero() {
           <div className="hero__buttons">
             {isRecruiter ? (
               <>
-                <Button href="/recruiter">
+                <Button href="/cv">
                   {t("hero.cta1.recruiter")} <ArrowRight size={18} />
                 </Button>
                 <Button href="#portfolio" variant="secondary">
@@ -45,7 +50,7 @@ export function Hero() {
               </>
             ) : (
               <>
-                <Button href="#contact">
+                <Button href="#contact" onClick={openContactModal}>
                   {t("hero.cta1")} <ArrowRight size={18} />
                 </Button>
                 <Button href="#services" variant="secondary">

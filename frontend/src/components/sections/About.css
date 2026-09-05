@@ -1,10 +1,19 @@
 /* ============================================
    About.css
-   Timeline verticale avec marqueurs et lignes de connexion
+   Section A propos avec cartes expandables
    ============================================ */
 
+#apropos {
+  background: #dfe4ed;
+}
+
+/* Mode sombre : fond adapte pour que le texte reste visible */
+[data-theme="dark"] #apropos {
+  background: var(--bg-gray);
+}
+
 .about__intro {
-  max-width: 700px;
+  max-width: 900px;
   margin: 0 auto 48px;
   text-align: center;
   color: var(--text-secondary);
@@ -12,16 +21,163 @@
   line-height: 1.7;
 }
 
-.about-timeline {
-  max-width: 700px;
+/* Grille des deux cartes compactes */
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 900px;
   margin: 0 auto;
+}
+
+/* Carte compacte cliquable */
+.about-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.about-card:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.about-card__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--bg-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-cyan);
+  flex-shrink: 0;
+}
+
+.about-card__text h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.about-card__text p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Overlay sombre — au-dessus de la navbar (z-index: 1000) */
+.about-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1100;
+}
+
+/* Conteneur de la carte expandee — centre dans le viewport complet */
+.about-overlay__container {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 1200;
+  padding: 20px;
+}
+
+/* Carte expandee */
+.about-expanded {
+  width: 100%;
+  max-width: 560px;
+  max-height: 85vh;
+  background: var(--card-bg);
+  border-radius: 20px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #0099cc transparent;
+}
+
+/* Scrollbar Webkit (Chrome, Edge, Safari) */
+.about-expanded::-webkit-scrollbar {
+  width: 6px;
+}
+
+.about-expanded::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.about-expanded::-webkit-scrollbar-thumb {
+  background: #0099cc;
+  border-radius: 3px;
+}
+
+/* En-tete de la carte expandee */
+.about-expanded__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 28px 28px 16px;
+  position: sticky;
+  top: 0;
+  background: var(--card-bg);
+  z-index: 1;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.about-expanded__header h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.about-expanded__header p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Bouton fermer */
+.about-expanded__close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg-gray);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.about-expanded__close:hover {
+  background: var(--card-border);
+}
+
+/* Corps de la carte expandee */
+.about-expanded__body {
+  padding: 24px 28px 32px;
+}
+
+/* Timeline du parcours (dans la carte expandee) */
+.about-timeline {
+  max-width: 100%;
+  margin: 0;
   display: flex;
   flex-direction: column;
 }
 
 .timeline-step {
   display: flex;
-  gap: 24px;
+  gap: 20px;
 }
 
 .timeline-step__marker {
@@ -32,43 +188,42 @@
 }
 
 .timeline-step__icon {
-  width: 52px;
-  height: 52px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: var(--card-bg);
-  border: 2px solid var(--card-border);
+  background: #0099cc;
+  border: 2px solid #0099cc;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-primary);
-  z-index: 1;
+  color: #ffffff;
 }
 
 .timeline-step__line {
   width: 2px;
   flex: 1;
   background: var(--card-border);
-  min-height: 40px;
+  min-height: 32px;
 }
 
 .timeline-step__content {
-  padding-bottom: 40px;
+  padding-bottom: 32px;
 }
 
 .timeline-step__period {
   display: inline-block;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-light);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .timeline-step__content h3 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .timeline-step__content p {
@@ -77,7 +232,30 @@
   line-height: 1.6;
 }
 
+/* Responsive mobile */
 @media (max-width: 640px) {
-  .timeline-step { gap: 16px; }
-  .timeline-step__icon { width: 44px; height: 44px; }
+  .about-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .about-expanded {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 16px;
+  }
+
+  .about-expanded__header {
+    padding: 20px 20px 12px;
+  }
+
+  .about-expanded__body {
+    padding: 16px 20px 24px;
+  }
+
+  .timeline-step__icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .timeline-step { gap: 14px; }
 }

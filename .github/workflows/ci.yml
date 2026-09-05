@@ -1,19 +1,29 @@
 # ============================================
-# CI Pipeline — Hednai
-# Se declenche sur chaque push et pull request vers main
-# Installe, lint, teste et build frontend + backend
+# .github/workflows/ci.yml
+# Pipeline CI : types, lint, tests, build et audit de securite
+# pour le frontend et le backend.
 # ============================================
 name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
   pull_request:
-    branches: [main]
+    branches: [main, dev]
+
+# Annule les executions precedentes encore en cours sur la meme branche
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Permissions minimales (principe du moindre privilege)
+permissions:
+  contents: read
 
 jobs:
-  # ---- Frontend ----
+  # ---- Frontend : lint, tests unitaires, build de production ----
   frontend:
+    name: Frontend
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -21,54 +31,97 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Installation de Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # Aligne sur le .nvmrc du depot
+          node-version-file: .nvmrc
           cache: npm
           cache-dependency-path: frontend/package-lock.json
 
-      - name: Install dependencies
+      # Le binaire Cypress (~200 Mo) n'est pas necessaire pour lint/test/build
+      - name: Installation des dependances
         run: npm ci
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+
+      - name: Verification des types
+        run: npx tsc -b --force
 
       - name: Lint
         run: npm run lint
 
-      - name: Run tests
+      - name: Tests unitaires
         run: npm test
 
-      - name: Build
+      - name: Build de production
         run: npm run build
 
-  # ---- Backend ----
+  # ---- Backend : types, tests unitaires, build ----
   backend:
+    name: Backend
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: backend
-    # Variables d'environnement pour les tests CI et prisma generate
     env:
+      # Valeurs factices : les tests utilisent Supertest sans base reelle.
+      # Sans elles, config/env.ts fait process.exit(1) et le job echoue.
       DATABASE_URL: "postgresql://test:test@localhost:5432/testdb"
+      ADMIN_TOKEN: "ci-token-factice-de-plus-de-32-caracteres"
+      FRONTEND_URL: "http://localhost:5173"
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Installation de Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version-file: .nvmrc
           cache: npm
           cache-dependency-path: backend/package-lock.json
 
-      - name: Install dependencies
+      - name: Installation des dependances
         run: npm ci
 
-      # Generer le client Prisma (dans .gitignore, donc absent en CI)
-      - name: Generate Prisma client
+      # Le client Prisma est genere, donc absent du depot (voir .gitignore)
+      - name: Generation du client Prisma
         run: npx prisma generate
 
-      - name: Run tests
+      - name: Verification des types
+        run: npx tsc --noEmit
+
+      - name: Tests unitaires
         run: npm test
 
-      - name: Build
+      - name: Build de production
         run: npm run build
-        
+
+  # ---- Audit de securite des dependances ----
+  audit:
+    name: Audit des dependances
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        dossier: [frontend, backend]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      # Bloquant : seules les dependances reellement livrees en production
+      # sont eliminatoires. --omit=optional est necessaire car le CLI Prisma
+      # est aussi une peerDependency optionnelle de @prisma/client : sans lui,
+      # npm le reintegre dans l'arbre audite malgre --omit=dev.
+      # Source : docs.npmjs.com/cli/commands/npm-audit (option --omit)
+      - name: npm audit (dependances de production)
+        working-directory: ${{ matrix.dossier }}
+        run: npm audit --omit=dev --omit=optional --audit-level=high
+
+      # Informatif : donne la visibilite sur les outils de developpement
+      # (CLI Prisma, chaine de build) sans bloquer le deploiement.
+      - name: npm audit complet (informatif)
+        working-directory: ${{ matrix.dossier }}
+        continue-on-error: true
+        run: npm audit

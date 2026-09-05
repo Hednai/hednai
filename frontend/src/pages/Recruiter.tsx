@@ -32,6 +32,10 @@ const SKILL_CATEGORIES = [
     titleKey: "recruiter.skills.other",
     skills: ["Zod", "i18n", "Helmet", "SEO", "Accessibilite", "SOLID"],
   },
+  {
+    titleKey: "recruiter.skills.methods",
+    skills: ["Agile", "Scrum", "Jira", "Git / GitHub", "Travail en équipe", "Gestion du backlog"],
+  },
 ];
 
 export function Recruiter() {
@@ -74,25 +78,17 @@ export function Recruiter() {
               >
                 <FaLinkedin size={16} /> LinkedIn
               </a>
-              <a
-                href={`mailto:${SITE_CONFIG.contact.email}`}
+              <button
                 className="btn btn--primary"
+                onClick={() => window.dispatchEvent(new Event("open-contact-modal"))}
               >
                 <Mail size={16} /> {t("recruiter.contact")}
-              </a>
+              </button>
             </div>
           </div>
         </FadeIn>
 
-        {/* Resume parcours */}
-        <FadeIn delay={0.1}>
-          <Card>
-            <div className="recruiter-section">
-              <h2>{t("recruiter.about.title")}</h2>
-              <p>{t("recruiter.about.text")}</p>
-            </div>
-          </Card>
-        </FadeIn>
+        {/* Parcours retire : deja dans ProfileSection sur la page d'accueil */}
 
         {/* Competences techniques */}
         <FadeIn delay={0.2}>
@@ -117,21 +113,16 @@ export function Recruiter() {
           </div>
         </FadeIn>
 
-        {/* Ce qui me differencie */}
-        <FadeIn delay={0.3}>
-          <Card>
-            <div className="recruiter-section">
-              <h2>{t("recruiter.diff.title")}</h2>
-              <p>{t("recruiter.diff.text")}</p>
-            </div>
-          </Card>
-        </FadeIn>
+        {/* "Ce qui me differencie" retire : deja dans WhyHednai mode recruteur */}
 
         {/* CTA final */}
         <div className="recruiter-page__cta">
-          <a href={`mailto:${SITE_CONFIG.contact.email}`} className="btn btn--primary">
+          <button
+            className="btn btn--primary"
+            onClick={() => window.dispatchEvent(new Event("open-contact-modal"))}
+          >
             <Mail size={16} /> {t("recruiter.cta")}
-          </a>
+          </button>
         </div>
       </div>
     </div>

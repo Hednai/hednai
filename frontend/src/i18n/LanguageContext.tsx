@@ -4,7 +4,7 @@
 // Ce fichier ne contient QUE le composant Provider
 // Le contexte et le hook sont dans useLanguage.ts (voir ce fichier)
 // ============================================
-import { useState } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import type { ReactNode } from "react";
 import { LanguageContext, translations } from "./useLanguage";
 
@@ -24,22 +24,40 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   // Fonction de traduction : on lui donne une cle, elle retourne le texte
   // Si la cle n'existe pas, on affiche la cle elle-meme (utile pour debugger)
-  const t = (key: string): string => {
-    return translations[lang][key] || key;
-  };
+  // useCallback : sans lui, une nouvelle fonction t etait creee a chaque rendu,
+  // ce qui invalidait la valeur du contexte et re-rendait TOUS les consommateurs
+  const t = useCallback(
+    (key: string): string => translations[lang][key] || key,
+    [lang],
+  );
 
-  // Fonction pour basculer entre francais et anglais
-  // Basculer la langue et sauvegarder dans localStorage
-  const toggleLang = () => {
-    setLang((prev) => {
-      const next = prev === "fr" ? "en" : "fr";
-      try { localStorage.setItem("hednai-lang", next); } catch { /* tests */ }
-      return next;
-    });
-  };
+  // Basculer la langue. La fonction de mise a jour d'etat reste PURE :
+  // elle ne fait que calculer la valeur suivante. La sauvegarde et la mise a
+  // jour du DOM sont faites dans l'effet ci-dessous.
+  const toggleLang = useCallback(() => {
+    setLang((prev) => (prev === "fr" ? "en" : "fr"));
+  }, []);
+
+  // Synchroniser l'attribut lang du document et le localStorage.
+  // Ce code etait auparavant execute PENDANT le rendu, ce qui est interdit :
+  // React peut rendre un composant plusieurs fois ou abandonner un rendu.
+  // L'attribut lang correct est indispensable aux lecteurs d'ecran et au SEO
+  // (WCAG 3.1.1 — Langue de la page).
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    try {
+      localStorage.setItem("hednai-lang", lang);
+    } catch (e) {
+      console.warn("Impossible de sauvegarder la langue :", e);
+    }
+  }, [lang]);
+
+  // useMemo : un objet recree a chaque rendu forcerait tous les consommateurs
+  // du contexte a se re-rendre inutilement
+  const valeur = useMemo(() => ({ lang, t, toggleLang }), [lang, t, toggleLang]);
 
   return (
-    <LanguageContext.Provider value={{ lang, t, toggleLang }}>
+    <LanguageContext.Provider value={valeur}>
       {children}
     </LanguageContext.Provider>
   );

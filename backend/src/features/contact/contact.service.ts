@@ -9,6 +9,7 @@ import type { Request } from "express";
 
 import { createMessage } from "./contact.model";
 import { logAction } from "../../utils/auditLog";
+import { logger } from "../../lib/logger";
 import { sendContactNotification } from "../../lib/mailer";
 import { sendDiscordNotification } from "../../lib/discord";
 
@@ -27,7 +28,6 @@ interface ValidatedContactData {
 interface ContactResult {
   isBot: boolean;
   messageId?: number;
-  emailSent?: boolean;
 }
 
 // ---- Traiter un message de contact ----
@@ -64,36 +64,46 @@ export const processContactMessage = async (
     message: data.message,
   });
 
-  // 4. Journaliser l'action (non-bloquant)
+  // 4. Journaliser l'enregistrement du message
   await logAction(req, "CONTACT_SUBMIT", "Message", String(msg.id), {
     contactMethod: data.contactMethod,
     subject: data.subject,
   });
 
-  // 5. Envoyer l'email de notification si methode = email
-  const emailSent = await sendContactNotification({
-    name: data.name,
-    email: cleanEmail,
-    subject: data.subject,
-    message: data.message,
-  });
+  // 5. Notifications (email, Discord).
+  // Le message est deja en base : la reponse au visiteur ne depend plus de ces
+  // appels sortants. Ils s'executent donc en arriere-plan et leur echec est
+  // journalise sans jamais remonter au client.
+  void (async () => {
+    try {
+      if (data.contactMethod === "email") {
+        const emailSent = await sendContactNotification({
+          name: data.name,
+          email: cleanEmail,
+          subject: data.subject,
+          message: data.message,
+        });
 
-  // 6. Journaliser le resultat de l'envoi email
-  if (data.contactMethod === "email") {
-    const action = emailSent ? "CONTACT_EMAIL_SENT" : "CONTACT_EMAIL_FAILED";
-    await logAction(req, action, "Message", String(msg.id));
-  }
+        await logAction(
+          req,
+          emailSent ? "CONTACT_EMAIL_SENT" : "CONTACT_EMAIL_FAILED",
+          "Message",
+          String(msg.id),
+        );
+      }
 
-  // 7. Notifier via Discord (optionnel, non-bloquant)
-  await sendDiscordNotification({
-    name: data.name,
-    contactMethod: data.contactMethod,
-    subject: data.subject,
-  });
+      await sendDiscordNotification({
+        name: data.name,
+        contactMethod: data.contactMethod,
+        subject: data.subject,
+      });
+    } catch (err) {
+      logger.warn({ err }, "Echec des notifications de contact (non-bloquant)");
+    }
+  })();
 
   return {
     isBot: false,
     messageId: msg.id,
-    emailSent,
   };
 };
