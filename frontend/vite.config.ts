@@ -68,6 +68,8 @@ export default defineConfig({
           "**/*-greek*.woff2",
           "**/*-vietnamese*.woff2",
           "**/*-latin-ext*.woff2",
+          "**/pdf.worker*.mjs",
+          "**/vendor-pdf-*.js",
         ],
 
         // Toute navigation retombe sur index.html (application monopage)
@@ -117,6 +119,9 @@ export default defineConfig({
           }
           if (id.includes("react-router") || id.includes("/react-dom/") || id.includes("/react/")) {
             return "vendor-react";
+          }
+          if (id.includes("pdfjs-dist") || id.includes("react-pdf")) {
+            return "vendor-pdf";
           }
           return "vendor";
         },

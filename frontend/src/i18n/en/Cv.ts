@@ -10,4 +10,8 @@ export const cv = {
   "cv.download": "Download",
   "cv.print": "Print",
   "cv.back": "Back to site",
+  "cv.loading": "Loading document...",
+  "cv.error": "The document could not be displayed.",
+  "cv.openInNewTab": "Open the PDF in a new tab",
+  "cv.page": "Page",
 };

@@ -8,6 +8,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Download, Briefcase, Anchor, ArrowLeft } from "lucide-react";
 import { useLanguage } from "../i18n/useLanguage";
+import { PdfViewer } from "../components/pdfViewer";
 import "./CvPage.css";
 
 // Onglets avec chemins PDF par langue
@@ -35,9 +36,6 @@ export function CvPage() {
 
   // L'URL est la SOURCE DE VERITE de l'onglet actif : on la lit a chaque rendu
   // au lieu de la recopier dans un etat local synchronise par un effet.
-  // L'ancienne version appelait setActiveTab() dans un useEffect, ce qui
-  // provoquait un rendu en cascade (React affichait le mauvais onglet une
-  // frame, puis le corrigeait) et declenchait la regle set-state-in-effect.
   // Source : react.dev/learn/you-might-not-need-an-effect
   const activeTab: CvTabId =
     searchParams.get("tab") === "captain" ? "captain" : "fullstack";
@@ -97,13 +95,18 @@ export function CvPage() {
         </a>
       </div>
 
-      {/* Viewer PDF — iframe */}
+      {/* Viewer PDF rendu en canvas par PDF.js */}
       <div className="cv-page__viewer">
-        <iframe
+        <PdfViewer
           key={pdfUrl}
-          src={pdfUrl}
-          className="cv-page__iframe"
+          file={pdfUrl}
           title={t("cv.title")}
+          labels={{
+            loading: t("cv.loading"),
+            error: t("cv.error"),
+            openInNewTab: t("cv.openInNewTab"),
+            page: t("cv.page"),
+          }}
         />
       </div>
     </section>

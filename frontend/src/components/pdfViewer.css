@@ -1,0 +1,91 @@
+/* ============================================
+   PdfViewer.css
+   Styles de la visionneuse PDF responsive
+   ============================================ */
+
+/* Conteneur principal de la visionneuse PDF. */
+.pdf-viewer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Conteneur individuel de chaque page PDF. */
+.pdf-viewer__page {
+  position: relative;
+  max-width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--card-shadow-hover);
+  background: #FFFFFF;
+}
+
+/* Canvas généré par PDF.js.
+   La largeur s'adapte au conteneur tout en conservant
+   les proportions originales du document. */
+.pdf-viewer__page canvas {
+  display: block;
+  max-width: 100%;
+  height: auto !important;
+}
+
+/* Badge affichant le numéro de la page. */
+.pdf-viewer__page-number {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 0, 0, 0.55);
+  font-size: 11px;
+  font-weight: 600;
+  color: #FFFFFF;
+
+  /* Empêche le badge d'intercepter les interactions avec le PDF. */
+  pointer-events: none;
+}
+
+/* Conteneur utilisé pour les états de chargement et d'erreur. */
+.pdf-viewer__message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+/* Lien permettant d'ouvrir le PDF directement dans un nouvel onglet
+   lorsque la visionneuse ne peut pas afficher le document. */
+.pdf-viewer__link {
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-cyan);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--on-accent);
+}
+
+/* Masque visuellement le contenu tout en le conservant
+   accessible aux lecteurs d'écran. */
+.pdf-viewer__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Permet à l'utilisateur de sélectionner le texte
+   rendu par la couche textuelle de React-PDF. */
+.pdf-viewer .react-pdf__Page__textContent {
+  user-select: text;
+}
