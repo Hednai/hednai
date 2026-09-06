@@ -2,14 +2,11 @@
 // vite.config.ts
 // Configuration Vite + Vitest + PWA + decoupage du bundle
 //
-// Trois changements par rapport a la version precedente :
-//   1. Tailwind retire : aucune classe utilitaire n'etait utilisee dans le code
-//      (verifie par recherche sur tout src/). Deux dependances en moins.
-//   2. vite-plugin-pwa : genere le manifeste ET le service worker. Sans service
+//   1. vite-plugin-pwa : genere le manifeste ET le service worker. Sans service
 //      worker, Chrome ne declenche jamais "beforeinstallprompt" : la banniere
 //      d'installation ne pouvait pas apparaitre.
 //      Source : web.dev/articles/install-criteria
-//   3. manualChunks : le bundle principal faisait 449 ko d'un seul bloc.
+//   2. manualChunks : le bundle principal faisait 449 ko d'un seul bloc.
 //      On isole les grosses librairies pour qu'elles soient mises en cache
 //      independamment du code applicatif.
 // ============================================
@@ -64,14 +61,18 @@ export default defineConfig({
         // Ressources mises en precache au premier chargement
         globPatterns: ["**/*.{js,css,html,webp,png,svg,woff2}"],
 
-        // Les PDF des CV pesent environ 300 ko chacun : on les sert par le
-        // reseau, pas la peine de les precacher
-        globIgnores: ["**/*.pdf"],
+        // Fichiers exclus du precache (PDF lourds, sous-ensembles de polices non latins)
+        globIgnores: [
+          "**/*.pdf",
+          "**/*-cyrillic*.woff2",
+          "**/*-greek*.woff2",
+          "**/*-vietnamese*.woff2",
+          "**/*-latin-ext*.woff2",
+        ],
 
         // Toute navigation retombe sur index.html (application monopage)
         navigateFallback: "/index.html",
 
-        // ...SAUF pour ces chemins, qui ne sont PAS des routes React.
         // Sans cette liste, le service worker interceptait la navigation vers
         // /cv-fullstack.pdf et renvoyait index.html a la place du PDF.
         // C'est ce que signalait la console :
@@ -88,22 +89,9 @@ export default defineConfig({
         // Le nouveau service worker prend la main immediatement
         skipWaiting: true,
         clientsClaim: true,
-
-        runtimeCaching: [
-          {
-            // Polices Google : cache longue duree, mise a jour en arriere-plan
-            urlPattern: /^https:\/\/fonts\.(googleapis|gstatic)\.com\/.*/i,
-            handler: "StaleWhileRevalidate",
-            options: { cacheName: "google-fonts" },
-          },
-        ],
       },
 
       // Service worker actif AUSSI en developpement.
-      // Sans cela, "beforeinstallprompt" ne se declenche jamais sur
-      // localhost:5173 : la banniere d'installation reste invisible en dev,
-      // ce qui donne l'impression que la PWA ne marche pas.
-      // type: "module" est requis par le serveur de dev de Vite.
       // Si le cache du service worker te gene pendant que tu codes :
       // DevTools > Application > Service Workers > cocher "Update on reload".
       devOptions: {

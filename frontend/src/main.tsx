@@ -6,14 +6,14 @@ import { createRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import { registerSW } from "virtual:pwa-register";
 import App from "./App";
+
+// Polices auto-hebergees (version variable, toutes graisses 100-900)
+import "@fontsource-variable/outfit";
+import "@fontsource-variable/jetbrains-mono/wght.css";
+
 import "./index.css";
 
-// ---- Service worker (PWA) ----
-// Genere par vite-plugin-pwa au build. Sans service worker actif, Chrome ne
-// declenche jamais l'evenement "beforeinstallprompt" : la banniere
-// d'installation du site ne peut pas apparaitre.
-// immediate: true => enregistrement des le chargement, sans attendre "load".
-// En developpement, le plugin ne genere rien : l'appel est simplement inerte.
+// Service worker PWA
 registerSW({ immediate: true });
 
 createRoot(document.getElementById("root")!).render(

@@ -56,16 +56,8 @@
          Source : web.dev/articles/optimize-lcp#optimize_when_the_resource_is_discovered -->
     <link rel="preload" as="image" href="/hednai_bridge.webp" type="image/webp" fetchpriority="high" />
 
-    <!-- Police chargee en feuille de style normale.
-         L'astuce media="print" + onload repoussait l'application de la police
-         apres le premier rendu : le texte s'affichait puis changeait de fonte,
-         ce qui degrade CLS dans Lighthouse. "display=swap" est deja present dans
-         l'URL, il suffit a eviter le texte invisible.
-         Source : web.dev/articles/font-best-practices -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Polices auto-hebergees, importees dans src/main.tsx -->
+
   </head>
   <body>
     <!-- Applique le theme AVANT le premier rendu.
