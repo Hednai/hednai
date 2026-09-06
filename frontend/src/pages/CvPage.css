@@ -117,12 +117,7 @@
   background: var(--bg-gray);
 }
 
-.cv-page__iframe {
-  width: 100%;
-  height: 85vh;
-  border: none;
-  display: block;
-}
+/* Supprime l'iframe, remplacee par PdfViewer */
 
 /* ── Responsive ── */
 @media (max-width: 640px) {
@@ -151,7 +146,7 @@
     justify-content: center;
   }
 
-  .cv-page__iframe {
-    height: 60vh;
+  .cv-page__viewer {
+    padding: 10px;
   }
 }
