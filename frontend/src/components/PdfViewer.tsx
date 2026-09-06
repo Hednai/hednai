@@ -73,13 +73,6 @@ export function PdfViewer({ file, title, labels }: PdfViewerProps) {
     return () => observateur.disconnect();
   }, []);
 
-  // Réinitialise l'état lorsque le fichier PDF change.
-  useEffect(() => {
-    setNbPages(0);
-    setErreur(false);
-  }, [file]);
-
-  // Callback exécuté lorsque PDF.js termine le chargement du document.
   const onLoadSuccess = useCallback(
     ({ numPages }: { numPages: number }) => {
       setNbPages(numPages);

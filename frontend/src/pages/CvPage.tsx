@@ -8,10 +8,10 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Download, Briefcase, Anchor, ArrowLeft } from "lucide-react";
 import { useLanguage } from "../i18n/useLanguage";
-import { PdfViewer } from "../components/pdfViewer";
+import { PdfViewer } from "../components/PdfViewer";
 import "./CvPage.css";
 
-// Onglets avec chemins PDF par langue
+// Onglets avec chemins PDF par langue.
 const CV_TABS = [
   {
     id: "fullstack",
