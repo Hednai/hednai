@@ -11,7 +11,7 @@ import { useLanguage } from "../i18n/useLanguage";
 import { PdfViewer } from "../components/PdfViewer";
 import "./CvPage.css";
 
-// Onglets avec chemins PDF par langue
+// Onglets avec chemins PDF par langue.
 const CV_TABS = [
   {
     id: "fullstack",
