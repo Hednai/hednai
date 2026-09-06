@@ -25,6 +25,11 @@ const envSchema = z.object({
 
   REDIS_URL: z.url().optional(),
 
+  // Resend (API HTTP, prioritaire sur le SMTP)
+  RESEND_API_KEY: z.string().min(1).optional(),
+  MAIL_FROM: z.string().min(1).default("Hednai <contact@send.hednai.com>"),
+
+  // SMTP (repli, utilise si RESEND_API_KEY est absente)
   SMTP_HOST: z.string().optional(),
   SMTP_PORT: z.coerce.number().int().positive().optional(),
   SMTP_USER: z.string().optional(),

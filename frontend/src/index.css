@@ -39,6 +39,10 @@
 
   --nav-height: 72px;
 
+  /* Fond de la navbar, semi-transparent au repos, plus dense apres le scroll */
+  --nav-bg: rgba(255, 255, 255, 0.88);
+  --nav-bg-scrolled: rgba(255, 255, 255, 0.97);
+
   /* Barre de filtres du portfolio : padding interne et hauteur totale reservee.
      Sert au calcul de scroll-margin-top de .portfolio-anchor (Portfolio.css). */
   --portfolio-filters-padding: 16px;
@@ -55,7 +59,9 @@
   --section-padding: 64px;
   --mode-transition: 0.3s ease;
 
-  --font-main: 'Outfit', sans-serif;
+  /* Polices du site */
+  --font-main: 'Outfit Variable', 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', monospace;
 
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -89,6 +95,9 @@
   --error-text: #FCA5A5;
   --accent-cyan: #00b0e6;
   --on-accent: #0F172A;
+
+  --nav-bg: rgba(15, 23, 42, 0.88);
+  --nav-bg-scrolled: rgba(15, 23, 42, 0.97);
 
   /* Voile plus dense en sombre pour garder le contraste avec le tiroir */
   --drawer-overlay: rgba(2, 6, 23, 0.62);

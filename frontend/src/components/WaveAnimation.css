@@ -37,7 +37,7 @@
 /* Style des lignes de code qui defilent */
 .floating-code {
   position: absolute;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 11px;
   color: hsl(195 100% 35% / 0.4);
   white-space: nowrap;
@@ -81,7 +81,7 @@
 /* Les petits textes techniques flottants */
 .wave-tech-text {
   position: absolute;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 9px;
   color: hsl(195 100% 35% / 0.5);
   z-index: 2;

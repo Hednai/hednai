@@ -13,6 +13,8 @@ export const nav = {
   "nav.cv": "Resume",
   "nav.openMenu": "Open menu",
   "nav.closeMenu": "Close menu",
+  "nav.menuLabel": "Navigation menu",
+  "nav.contactCta": "Get in touch",
   "nav.lightMode": "Light mode",
   "nav.darkMode": "Dark mode",
   "nav.why": "Why",

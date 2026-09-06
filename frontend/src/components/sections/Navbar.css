@@ -1,11 +1,10 @@
 /* ============================================
    Navbar.css
-   Style icones + soulignement actif + theme cercle + FR|EN
-   Fond clair permanent (pas de transparence sur le Hero)
+   Barre horizontale desktop : logo, liens soulignes, theme, FR|EN, mode.
+   Sous 769px, la navigation passe au panneau MobileMenu (MobileMenu.css).
    ============================================ */
 
-/* La navbar reste collee en haut meme quand on scroll */
-/* Fond clair applique en permanence, des le chargement de la page */
+/* Navbar fixe */
 .navbar {
   position: fixed;
   top: 0;
@@ -14,39 +13,21 @@
   height: var(--nav-height);
   z-index: 1000;
 
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--nav-bg);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 1px 0 var(--card-border);
 
-  transition: box-shadow 0.3s;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Legere ombre en plus une fois qu'on a scrolle, pour marquer la separation */
+/* Fond plus dense apres le scroll */
 .navbar--scrolled {
+  background: var(--nav-bg-scrolled);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* ===== CORRECTIF MENU MOBILE INVISIBLE =====
-   Une valeur de backdrop-filter differente de "none" cree un BLOC CONTENEUR
-   pour tous les descendants en position: fixed (au meme titre que transform
-   ou filter). Consequence : .navbar__links { position: fixed; inset: 0 }
-   n'etait pas cale sur la fenetre mais sur la navbar de 72px de haut, donc
-   invisible et sans zone de fond cliquable.
-   Reference : W3C Filter Effects — "backdrop-filter" containing block.
-   On desactive donc le flou pendant que le menu est ouvert : le menu recouvre
-   deja tout l'ecran, le flou n'apporte plus rien visuellement. */
-.navbar--menu-open {
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-/* Mode sombre : fond fonce en permanence aussi */
-[data-theme="dark"] .navbar {
-  background: rgba(15, 23, 42, 0.95);
-}
-
-/* Conteneur interieur : logo a gauche, liens a droite */
-/* Max-width elargi pour eviter l'entassement des liens */
+/* Conteneur interieur */
 .navbar__inner {
   max-width: 1320px;
   margin: 0 auto;
@@ -57,13 +38,11 @@
   padding: 0 32px;
 }
 
-/* ===== LOGO ===== */
-/* z-index 10000 pour rester visible quand le menu mobile est ouvert */
+/* Logo */
 .navbar__logo {
   display: flex;
   align-items: center;
   gap: 10px;
-  z-index: 10000;
   flex-shrink: 0;
   margin-right: 16px;
 }
@@ -72,31 +51,22 @@
   height: 36px;
 }
 
-/* Le texte du logo et le badge sont empiles verticalement */
 .navbar__logo-text {
   display: flex;
   flex-direction: column;
   line-height: 1;
 }
 
-/* Texte du logo dans la couleur normale du texte (fond navbar toujours clair) */
 .navbar__logo-text > span:first-child {
   font-size: 20px;
   font-weight: 700;
   color: var(--text-primary);
 }
 
-/* Accent colore du logo ("nai") — remplace un style inline en dur dans le TSX */
 .navbar__logo-accent {
   color: var(--accent-cyan);
 }
 
-/* Fond cliquable du menu mobile — masque en desktop */
-.navbar__backdrop {
-  display: none;
-}
-
-/* Badge identitaire sous le nom — petite ligne de contexte */
 .navbar__badge {
   font-size: 9px;
   font-weight: 500;
@@ -105,15 +75,13 @@
   margin-top: 2px;
 }
 
-/* ===== LIENS ===== */
-/* Gap reduit entre les liens, le separateur fait la coupure visuelle */
+/* Liens */
 .navbar__links {
   display: flex;
   align-items: center;
   gap: 2px;
 }
 
-/* Chaque lien : texte seul en desktop, icone + texte en mobile */
 .navbar__link {
   display: flex;
   align-items: center;
@@ -128,36 +96,25 @@
   padding: 8px 12px;
   white-space: nowrap;
 
-  /* Soulignement invisible par defaut, pret a apparaitre */
   border-bottom: 2px solid transparent;
-
   transition: color 0.2s, border-color 0.2s;
-}
-
-/* Icones cachees en desktop — visibles uniquement sur mobile */
-.navbar__link-icon {
-  display: none;
 }
 
 .navbar__link:hover {
   color: var(--text-primary);
 }
 
-/* Lien actif : texte en couleur primaire + soulignement visible */
 .navbar__link--active {
   color: var(--text-primary);
   border-bottom-color: var(--text-primary);
 }
 
-/* Mode sombre : le soulignement actif est blanc */
 [data-theme="dark"] .navbar__link--active {
   color: #FFFFFF;
   border-bottom-color: #FFFFFF;
 }
 
-/* ===== SEPARATEUR VERTICAL ===== */
-/* Trait vertical net entre les liens et les controles */
-/* Espacement genereux pour separer navigation et controles */
+/* Separateur vertical */
 .navbar__separator {
   width: 1px;
   height: 20px;
@@ -165,7 +122,7 @@
   margin: 0 32px;
 }
 
-/* ===== BOUTON THEME (cercle) ===== */
+/* Bouton theme */
 .navbar__theme-btn {
   display: flex;
   align-items: center;
@@ -174,7 +131,7 @@
   width: 36px;
   height: 36px;
 
-  border-radius: 50%;
+  border-radius: var(--radius-circle);
   border: 1px solid var(--card-border);
 
   background: none;
@@ -189,19 +146,17 @@
   color: var(--text-primary);
 }
 
-/* ===== BOUTONS FR | EN ===== */
-/* Le groupe qui contient FR, le separateur, et EN */
+/* Boutons FR | EN */
 .navbar__lang-group {
   display: flex;
   align-items: center;
   gap: 0;
   border: 1px solid var(--card-border);
-  border-radius: 20px;
+  border-radius: var(--radius-pill);
   padding: 2px;
   background: var(--bg-gray);
 }
 
-/* Chaque bouton FR ou EN */
 .navbar__lang-btn {
   background: none;
   border: none;
@@ -217,30 +172,26 @@
   transition: color 0.2s, background 0.2s;
 }
 
-/* Langue active : fond cyan arrondi (comme le bouton Mode Client) */
 .navbar__lang-btn--active {
   background: var(--accent-cyan);
-  color: #ffffff;
+  color: var(--on-accent);
 }
 
-/* Le trait | masque — le fond arrondi fait la distinction */
 .navbar__lang-sep {
   display: none;
 }
 
-/* ===== BOUTON BURGER (mobile) ===== */
-/* Bouton burger : z-index 10000 pour rester cliquable meme quand le menu est ouvert */
+/* Burger (mobile) */
 .navbar__burger {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
   color: var(--text-primary);
-  z-index: 10000;
   padding: 4px;
 }
 
-/* ===== RESPONSIVE ===== */
+/* Responsive */
 @media (max-width: 768px) {
 
   .navbar__burger {
@@ -248,122 +199,11 @@
     align-items: center;
   }
 
-  /* ===== MENU MOBILE : TIROIR LATERAL (modele Karibou Market) =====
-     Le menu n'occupe plus tout l'ecran : il glisse sur le cote et laisse
-     voir le site derriere, assombri par un voile. Cliquer sur le voile ferme.
-
-     Pour faire glisser le tiroir depuis la GAUCHE au lieu de la droite,
-     une seule variable a changer : --drawer-side (voir index.css). */
-
-  /* Voile semi-transparent : couvre le site derriere le tiroir.
-     C'est lui qui ferme le menu au clic (WCAG : cible d'au moins 24px). */
-  .navbar__backdrop {
-    display: block;
-    position: fixed;
-    inset: 0;
-    z-index: 9998;
-    background: var(--drawer-overlay);
-    /* Apparition en fondu, synchronisee avec le glissement du tiroir */
-    animation: navbar-backdrop-in var(--drawer-duration) ease forwards;
-  }
-
-  @keyframes navbar-backdrop-in {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-
-  /* Le voile ne s'anime pas si l'utilisateur refuse les animations */
-  @media (prefers-reduced-motion: reduce) {
-    .navbar__backdrop { animation: none; }
-  }
-
-  /* Tiroir : colle sous la navbar, jusqu'en bas, sur un seul cote.
-     z-index 9999 pour passer devant le voile et tout le contenu du site. */
   .navbar__links {
-    position: fixed;
-    top: var(--nav-height);
-    bottom: 0;
-    /* Le tiroir occupe --drawer-width, sans jamais depasser 85% de l'ecran */
-    width: min(var(--drawer-width), 85vw);
-    /* --drawer-side vaut "right" ou "left" : un seul point a modifier */
-    right: 0;
-    left: auto;
-    z-index: 9999;
-
-    /* Ferme : le tiroir est pousse hors de l'ecran, cote droit */
-    transform: translateX(100%);
-    transition: transform var(--drawer-duration) ease,
-                visibility var(--drawer-duration);
-    visibility: hidden;
-    /* Le menu ferme ne doit intercepter aucun clic */
-    pointer-events: none;
-
-    /* Defilement si la liste depasse sur un petit ecran (WCAG 1.4.10) */
-    overflow-y: auto;
-    overscroll-behavior: contain;
-
-    padding: 24px 0 32px;
-    background: var(--card-bg);
-    border-left: 1px solid var(--card-border);
-    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.12);
-
-    flex-direction: column;
-    /* Les liens partent du haut, ils ne sont plus centres verticalement */
-    justify-content: flex-start;
-    align-items: stretch;
-    gap: 4px;
+    display: none;
   }
 
-  /* Tiroir ouvert : il glisse en place */
-  .navbar__links--open {
-    transform: translateX(0);
-    visibility: visible;
-    pointer-events: auto;
-  }
-
-  /* Sans animation : le tiroir apparait directement */
-  @media (prefers-reduced-motion: reduce) {
-    .navbar__links { transition: none; }
-  }
-
-  .navbar__link {
-    font-size: 17px;
-    /* Aligne a gauche dans le tiroir, plus lisible qu'un texte centre */
-    justify-content: flex-start;
-    padding: 14px 24px;
-    color: var(--text-primary);
-  }
-
-  /* Lien actif dans le tiroir : barre coloree sur le bord interieur */
-  .navbar__links--open .navbar__link--active {
-    background: var(--drawer-active-bg);
-    box-shadow: inset 3px 0 0 var(--accent-cyan);
-  }
-
-  /* Sur mobile (menu plein ecran), les icones reapparaissent */
-  .navbar__link-icon {
-    display: flex;
-  }
-
-  /* Le separateur devient horizontal sur mobile */
-  .navbar__separator {
-    width: 60px;
-    height: 1px;
-    margin: 8px 0;
-  }
-
-  /* Les boutons theme et langue sont centres */
-  .navbar__theme-btn {
-    width: 44px;
-    height: 44px;
-  }
-
-  .navbar__lang-group {
-    padding: 2px;
-  }
-
-  .navbar__lang-btn {
-    font-size: 14px;
-    padding: 6px 14px;
+  .navbar__inner {
+    padding: 0 16px;
   }
 }
