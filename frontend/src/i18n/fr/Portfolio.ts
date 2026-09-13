@@ -7,6 +7,7 @@ export const portfolio = {
   "portfolio.subtitle": "Projets réels, du concours au terrain maritime",
   "portfolio.view": "Voir le projet",
   "portfolio.code": "Code source",
+  "portfolio.link.soon": "Bientôt disponible",
   "portfolio.filter.selection": "Sélection",
   "portfolio.filter.all": "Tous",
   "portfolio.filter.maritime": "Maritime",

@@ -1,0 +1,24 @@
+/* ============================================
+   components/ui/ProjectLink.css
+   Etat gele d'un lien de projet : meme mise en forme qu'un lien actif,
+   mais grise et non cliquable tant que le lien n'est pas publie
+   ============================================ */
+
+.project-link--frozen {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-light);
+  opacity: 0.55;
+  cursor: not-allowed;
+  user-select: none;
+}
+
+/* Variante bouton utilisee sur la page detail d'un projet :
+   le composant Button garde sa taille, seul le contraste est reduit */
+.btn.project-link--frozen {
+  font-size: inherit;
+  filter: grayscale(1);
+}

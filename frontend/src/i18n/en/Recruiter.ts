@@ -16,6 +16,7 @@ export const recruiter = {
   "recruiter.skills.tools": "Tools and DevOps",
   "recruiter.skills.other": "Quality and best practices",
   "recruiter.skills.methods": "Methods and collaboration",
+  "recruiter.skills.leadershipManagement": "Leadership and Managerial Skills (Transport Canada)",
   "recruiter.diff.title": "What sets me apart",
   "recruiter.diff.intro": "A career at the crossroads of maritime, software development and artificial intelligence.",
   "recruiter.diff.card1.title": "Maritime experience",

@@ -1,7 +1,9 @@
 {
-  "name": "frontend",
+  "name": "hednai-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Hednai",
   "type": "module",
   "scripts": {
     "dev": "vite",
