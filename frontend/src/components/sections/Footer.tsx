@@ -245,6 +245,26 @@ export function Footer() {
                 ·
               </span>
               <Link to="/confidentialite">{t("footer.legal.privacy")}</Link>
+
+              {/* Licence du code : affichee uniquement en mode recruteur,
+                  ou l'information a un sens pour la personne qui consulte */}
+              {isRecruiter && (
+                <>
+                  <span className="footer__legal-sep" aria-hidden="true">
+                    ·
+                  </span>
+                  <a
+                    href={SITE_CONFIG.repository.licenseUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {t("footer.legal.license").replace(
+                      "{license}",
+                      SITE_CONFIG.repository.licenseName
+                    )}
+                  </a>
+                </>
+              )}
             </div>
           </div>
         </div>

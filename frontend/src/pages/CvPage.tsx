@@ -5,7 +5,7 @@
 // La navbar du site gère la navigation (flèche retour fonctionne)
 // ============================================
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import { Seo } from "../components/Seo";
 import { Download, Briefcase, Anchor, ArrowLeft } from "lucide-react";
 import { useLanguage } from "../i18n/useLanguage";
 import { PdfViewer } from "../components/PdfViewer";
@@ -54,10 +54,8 @@ export function CvPage() {
 
   return (
     <section className="cv-page">
-      <Helmet>
-        <title>{pageTitle}</title>
-        <meta name="description" content={t("cv.subtitle")} />
-      </Helmet>
+      {/* /cv et /resume servent la meme page : une seule URL canonique */}
+      <Seo title={pageTitle} description={t("cv.subtitle")} canonicalPath="/cv" />
 
       {/* Lien retour — ramène à la page précédente */}
       <button onClick={() => navigate(-1)} className="cv-page__back">

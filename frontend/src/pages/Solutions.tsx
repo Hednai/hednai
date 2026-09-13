@@ -6,7 +6,7 @@
 // ============================================
 import { Link } from "react-router-dom";
 import { ArrowRight, Ship, Anchor, ClipboardCheck, Brain } from "lucide-react";
-import { Helmet } from "react-helmet-async";
+import { Seo } from "../components/Seo";
 import { Card } from "../components/ui/Card";
 import { FadeIn } from "../components/FadeIn";
 import { useLanguage } from "../i18n/useLanguage";
@@ -23,10 +23,7 @@ export function Solutions() {
 
   return (
     <div className="solutions-page">
-      <Helmet>
-        <title>{t("solutions.seo.title")}</title>
-        <meta name="description" content={t("solutions.seo.desc")} />
-      </Helmet>
+      <Seo title={t("solutions.seo.title")} description={t("solutions.seo.desc")} />
 
       <div className="container">
         {/* En-tete */}

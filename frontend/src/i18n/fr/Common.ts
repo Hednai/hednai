@@ -30,6 +30,8 @@ export const common = {
   "footer.skills.architecture": "Architecture logicielle",
   "footer.legal.terms": "Mentions légales",
   "footer.legal.privacy": "Politique de confidentialité",
+  // {license} est remplace par le nom de la licence defini dans config/site.ts
+  "footer.legal.license": "Code source sous licence {license}",
   "scrollToTop": "Retour en haut",
   "seo.home.title": "Hednai | Logiciels maritimes et IA",
   "seo.home.desc": "Hednai développe des solutions logicielles sur mesure pour les ports, armateurs et compagnies maritimes. Gestion de flotte, maintenance prédictive, IA.",

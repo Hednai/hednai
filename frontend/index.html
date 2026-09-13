@@ -4,9 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- ==================== SEO de base ==================== -->
-    <title>Hednai | Logiciels maritimes et IA</title>
+    <!-- ==================== SEO de base ====================
+         Ces balises sont la valeur de repli servie avant l'execution du
+         JavaScript : c'est ce que lisent les robots qui n'executent pas le JS.
+         L'attribut data-rh="true" cede le controle a react-helmet-async :
+         le composant Seo remplace ces balises au lieu de les dupliquer. -->
+    <title data-rh="true">Hednai | Logiciels maritimes et IA</title>
     <meta
+      data-rh="true"
       name="description"
       content="Hednai conçoit des logiciels et solutions IA pour le secteur maritime. De la mer au code."
     />
@@ -14,26 +19,34 @@
     <meta name="author" content="Hednai" />
     <meta name="robots" content="index, follow" />
 
+    <!-- URL de reference du site. Le composant Seo la remplace par l'URL
+         canonique de la route affichee des que React est monte. -->
+    <link data-rh="true" rel="canonical" href="https://hednai.com/" />
+
     <!-- ==================== Open Graph (LinkedIn, Facebook) ==================== -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://hednai.com/" />
-    <meta property="og:title" content="Hednai | Logiciels maritimes et IA" />
+    <meta property="og:site_name" content="Hednai" />
+    <meta data-rh="true" property="og:type" content="website" />
+    <meta data-rh="true" property="og:url" content="https://hednai.com/" />
+    <meta data-rh="true" property="og:title" content="Hednai | Logiciels maritimes et IA" />
     <meta
+      data-rh="true"
       property="og:description"
       content="Hednai conçoit des logiciels et solutions IA pour le secteur maritime."
     />
-    <meta property="og:image" content="https://hednai.com/og-image.png" />
+    <meta data-rh="true" property="og:image" content="https://hednai.com/og-image.png" />
     <meta property="og:locale" content="fr_CA" />
+    <meta property="og:locale:alternate" content="en_CA" />
 
     <!-- ==================== Twitter / X ==================== -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://hednai.com/" />
-    <meta name="twitter:title" content="Hednai | Logiciels maritimes et IA" />
+    <meta data-rh="true" name="twitter:card" content="summary_large_image" />
+    <meta data-rh="true" name="twitter:url" content="https://hednai.com/" />
+    <meta data-rh="true" name="twitter:title" content="Hednai | Logiciels maritimes et IA" />
     <meta
+      data-rh="true"
       name="twitter:description"
       content="Hednai conçoit des logiciels et solutions IA pour le secteur maritime."
     />
-    <meta name="twitter:image" content="https://hednai.com/og-image.png" />
+    <meta data-rh="true" name="twitter:image" content="https://hednai.com/og-image.png" />
 
     <!-- Icone de l'onglet du navigateur.
          CORRECTIF : les anciennes references pointaient vers /logo-anchor.png,

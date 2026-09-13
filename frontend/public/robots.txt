@@ -1,5 +1,9 @@
+# Exploration autorisee sur tout le site public
 User-agent: *
 Allow: /
+
+# Espace admin et pages sans valeur pour la recherche
 Disallow: /admin
 
+# Emplacement du sitemap (meme domaine que les URL qu'il contient)
 Sitemap: https://hednai.com/sitemap.xml

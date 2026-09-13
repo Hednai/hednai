@@ -21,6 +21,14 @@ export const SITE_CONFIG = {
     linkedin: "https://www.linkedin.com/in/hednai",
   },
 
+  // Depot public du site et licence du code source.
+  // Un seul endroit a modifier si le depot change de nom ou d'organisation.
+  repository: {
+    url: "https://github.com/Hednai/hednai",
+    licenseName: "MIT",
+    licenseUrl: "https://github.com/Hednai/hednai/blob/main/LICENSE",
+  },
+
   // API backend
   api: {
     baseUrl: import.meta.env.VITE_API_URL || "http://localhost:3000",

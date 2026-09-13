@@ -7,6 +7,7 @@ export const portfolio = {
   "portfolio.subtitle": "Real projects, from competitions to maritime operations",
   "portfolio.view": "View project",
   "portfolio.code": "Source code",
+  "portfolio.link.soon": "Coming soon",
   "portfolio.filter.selection": "Selection",
   "portfolio.filter.all": "All",
   "portfolio.filter.maritime": "Maritime",
