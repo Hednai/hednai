@@ -1,4 +1,15 @@
 {
+  "name": "hednai",
+  "version": "1.0.0",
+  "description": "Site 2-en-1 : portfolio developpeur full stack et vitrine du projet Hednai",
+  "private": true,
+  "license": "MIT",
+  "author": "Hednai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hednai/hednai.git"
+  },
+  "homepage": "https://hednai.com",
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
     "tailwindcss": "^4.3.3"

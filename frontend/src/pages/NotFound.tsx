@@ -5,6 +5,7 @@
 // ============================================
 import { Link } from "react-router-dom";
 import { Anchor, ArrowLeft } from "lucide-react";
+import { Seo } from "../components/Seo";
 import { useLanguage } from "../i18n/useLanguage";
 import "./NotFound.css";
 
@@ -13,6 +14,9 @@ export function NotFound() {
 
   return (
     <div className="not-found">
+      {/* Page d'erreur : exclue de l'index Google */}
+      <Seo title={`404 | Hednai`} description={t("notFound.message")} noIndex />
+
       <div className="not-found__inner">
         {/* Icone ancre maritime pour rester dans le theme */}
         <Anchor size={64} strokeWidth={1} className="not-found__icon" />

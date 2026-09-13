@@ -7,15 +7,23 @@
 import { Link } from "react-router-dom";
 import { Mail, ArrowLeft } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { Helmet } from "react-helmet-async";
+import { Seo } from "../components/Seo";
 import { Card } from "../components/ui/Card";
 import { FadeIn } from "../components/FadeIn";
 import { useLanguage } from "../i18n/useLanguage";
 import { SITE_CONFIG } from "../config/site";
 import "./Recruiter.css";
 
+// Une categorie regroupe des libelles bruts (noms de technologies, identiques
+// dans les deux langues) et, optionnellement, des libelles traduits via i18n
+interface SkillCategory {
+  titleKey: string;
+  skills: string[];
+  skillKeys?: string[];
+}
+
 // Categories de competences techniques
-const SKILL_CATEGORIES = [
+const SKILL_CATEGORIES: SkillCategory[] = [
   {
     titleKey: "recruiter.skills.frontend",
     skills: ["React", "TypeScript", "HTML/CSS", "Framer Motion", "Vite", "PWA"],
@@ -35,6 +43,7 @@ const SKILL_CATEGORIES = [
   {
     titleKey: "recruiter.skills.methods",
     skills: ["Agile", "Scrum", "Jira", "Git / GitHub", "Travail en équipe", "Gestion du backlog"],
+    skillKeys: ["recruiter.skills.leadershipManagement"],
   },
 ];
 
@@ -43,10 +52,7 @@ export function Recruiter() {
 
   return (
     <div className="recruiter-page">
-      <Helmet>
-        <title>{t("recruiter.seo.title")}</title>
-        <meta name="description" content={t("recruiter.seo.desc")} />
-      </Helmet>
+      <Seo title={t("recruiter.seo.title")} description={t("recruiter.seo.desc")} />
 
       <div className="container">
         {/* Bouton retour */}
@@ -101,7 +107,7 @@ export function Recruiter() {
                 <div className="recruiter-skill-cat">
                   <h3>{t(cat.titleKey)}</h3>
                   <div className="recruiter-skill-tags">
-                    {cat.skills.map((skill) => (
+                    {[...cat.skills, ...(cat.skillKeys ?? []).map((key) => t(key))].map((skill) => (
                       <span key={skill} className="recruiter-skill-tag">
                         {skill}
                       </span>

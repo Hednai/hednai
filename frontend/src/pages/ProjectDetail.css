@@ -41,10 +41,13 @@
 }
 
 /* ===== IMAGE ===== */
+/* Cadre 16/9 et "contain" : la capture du projet est affichee en entier,
+   sans rognage des bords gauche et droit */
 .pd__img {
   width: 100%;
-  max-height: 400px;
-  object-fit: cover;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: var(--bg-gray);
   border-radius: var(--radius-lg);
   margin-bottom: 32px;
 }

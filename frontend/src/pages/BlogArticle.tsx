@@ -6,7 +6,7 @@
 // ============================================
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Clock } from "lucide-react";
-import { Helmet } from "react-helmet-async";
+import { Seo } from "../components/Seo";
 import { useLanguage } from "../i18n/useLanguage";
 import { articles } from "../data/articles";
 import "./Blog.css";
@@ -46,10 +46,7 @@ export function BlogArticle() {
 
   return (
     <div className="blog-article">
-      <Helmet>
-        <title>{t(article.titleKey)} | Hednai</title>
-        <meta name="description" content={t(article.summaryKey)} />
-      </Helmet>
+      <Seo title={`${t(article.titleKey)} | Hednai`} description={t(article.summaryKey)} />
 
       <div className="container">
         {/* Bouton retour */}

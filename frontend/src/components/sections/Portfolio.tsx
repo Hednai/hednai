@@ -10,6 +10,7 @@ import { FaGithub } from "react-icons/fa";
 import { projects, CATEGORIES } from "../../data/projects";
 import { SectionWrapper } from "../ui/SectionWrapper";
 import { Card } from "../ui/Card";
+import { ProjectLink } from "../ui/ProjectLink";
 import { FadeIn } from "../FadeIn";
 import { useLanguage } from "../../i18n/useLanguage";
 import { useViewMode } from "../../context/useViewMode";
@@ -204,17 +205,18 @@ export function Portfolio() {
                     <span className="tech-tag" key={tech}>{tech}</span>
                   ))}
                 </div>
+                {/* Liens du projet : geles automatiquement si l'URL n'est pas publiee */}
                 <div className="proj__links">
-                  {active.liveUrl !== "#" && (
-                    <a href={active.liveUrl} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink size={16} /> {t("portfolio.view")}
-                    </a>
-                  )}
-                  {active.githubUrl !== "#" && (
-                    <a href={active.githubUrl} target="_blank" rel="noopener noreferrer">
-                      <FaGithub size={16} /> {t("portfolio.code")}
-                    </a>
-                  )}
+                  <ProjectLink
+                    url={active.liveUrl}
+                    icon={<ExternalLink size={16} />}
+                    label={t("portfolio.view")}
+                  />
+                  <ProjectLink
+                    url={active.githubUrl}
+                    icon={<FaGithub size={16} />}
+                    label={t("portfolio.code")}
+                  />
                 </div>
               </div>
             </motion.div>
@@ -237,7 +239,7 @@ export function Portfolio() {
               <div onClick={() => setActive(p)} onDoubleClick={() => setActive(p)} style={{ cursor: "pointer" }}>
                 <Card>
                   <div className="proj__img">
-                    <img src={p.image} alt={t(p.titleKey)} width={600} height={400} loading="lazy" />
+                    <img src={p.image} alt={t(p.titleKey)} width={1600} height={900} loading="lazy" />
                     <span className="proj__badge">{t(p.categoryKey)}</span>
                     {p.badgeKey && (
                       <span className="proj__badge-special">
@@ -266,13 +268,20 @@ export function Portfolio() {
                         <span className="tech-tag" key={tech}>{tech}</span>
                       ))}
                     </div>
+                    {/* Liens du projet : geles automatiquement si l'URL n'est pas publiee */}
                     <div className="proj__links">
-                      <a href={p.liveUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
-                        <ExternalLink size={16} /> {t("portfolio.view")}
-                      </a>
-                      <a href={p.githubUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
-                        <FaGithub size={16} /> {t("portfolio.code")}
-                      </a>
+                      <ProjectLink
+                        url={p.liveUrl}
+                        icon={<ExternalLink size={16} />}
+                        label={t("portfolio.view")}
+                        onClick={(e) => e.stopPropagation()}
+                      />
+                      <ProjectLink
+                        url={p.githubUrl}
+                        icon={<FaGithub size={16} />}
+                        label={t("portfolio.code")}
+                        onClick={(e) => e.stopPropagation()}
+                      />
                     </div>
                   </div>
                 </Card>

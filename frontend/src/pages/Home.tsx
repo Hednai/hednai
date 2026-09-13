@@ -4,7 +4,8 @@
 // ============================================
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import { Seo } from "../components/Seo";
+import { SITE_CONFIG } from "../config/site";
 import { useLanguage } from "../i18n/useLanguage";
 import { useViewMode } from "../context/useViewMode";
 import { Hero } from "../components/sections/Hero";
@@ -15,6 +16,42 @@ import { Portfolio } from "../components/sections/Portfolio";
 import { Testimonials } from "../components/sections/Testimonials";
 import { CtaBanner } from "../components/sections/CtaBanner";
 import { ProfileSection } from "../components/sections/ProfileSection";
+
+// Donnees structurees de la page d'accueil.
+// Le graphe declare a la fois la personne et l'activite Hednai afin que
+// Google relie le nom, le metier, les profils sociaux et le domaine.
+const HOME_JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${SITE_CONFIG.meta.url}/#person`,
+      name: "Daren",
+      jobTitle: "Developpeur Full Stack",
+      url: SITE_CONFIG.meta.url,
+      email: `mailto:${SITE_CONFIG.contact.email}`,
+      sameAs: [SITE_CONFIG.socials.github, SITE_CONFIG.socials.linkedin],
+    },
+    {
+      "@type": "Organization",
+      "@id": `${SITE_CONFIG.meta.url}/#organization`,
+      name: "Hednai",
+      url: SITE_CONFIG.meta.url,
+      logo: `${SITE_CONFIG.meta.url}/logo-anchor.webp`,
+      email: `mailto:${SITE_CONFIG.contact.email}`,
+      founder: { "@id": `${SITE_CONFIG.meta.url}/#person` },
+      sameAs: [SITE_CONFIG.socials.github, SITE_CONFIG.socials.linkedin],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_CONFIG.meta.url}/#website`,
+      url: SITE_CONFIG.meta.url,
+      name: "Hednai",
+      publisher: { "@id": `${SITE_CONFIG.meta.url}/#organization` },
+      inLanguage: ["fr-CA", "en-CA"],
+    },
+  ],
+};
 
 export function Home() {
   const { t } = useLanguage();
@@ -37,10 +74,11 @@ export function Home() {
 
   return (
     <>
-      <Helmet>
-        <title>{t("seo.home.title")}</title>
-        <meta name="description" content={t("seo.home.desc")} />
-      </Helmet>
+      <Seo
+        title={t("seo.home.title")}
+        description={t("seo.home.desc")}
+        jsonLd={HOME_JSON_LD}
+      />
       <Hero />
       <WhyHednai />
 

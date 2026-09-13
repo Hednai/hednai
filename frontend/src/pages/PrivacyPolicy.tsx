@@ -4,7 +4,7 @@
 // 10 sections : responsable, collecte, motifs, tiers/transferts, conservation,
 //               securite, droits, cookies/stockage, modifications, contact
 // ============================================
-import { Helmet } from "react-helmet-async";
+import { Seo } from "../components/Seo";
 import { useLanguage } from "../i18n/useLanguage";
 import "./Legal.css";
 
@@ -13,10 +13,7 @@ export function PrivacyPolicy() {
 
   return (
     <div className="legal-page">
-      <Helmet>
-        <title>{t("privacy.seo.title")}</title>
-        <meta name="description" content={t("privacy.seo.desc")} />
-      </Helmet>
+      <Seo title={t("privacy.seo.title")} description={t("privacy.seo.desc")} />
 
       <div className="container">
         <h1 className="legal-page__title">{t("privacy.title")}</h1>

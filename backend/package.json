@@ -2,6 +2,7 @@
   "name": "hednai-backend",
   "version": "6.0.0",
   "description": "API Hednai — portfolio developpeur maritime & IA",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "node --watch --import tsx src/server.ts",

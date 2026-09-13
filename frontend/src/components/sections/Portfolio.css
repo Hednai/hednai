@@ -95,18 +95,21 @@
   flex-direction: column;
 }
 
-/* Image du projet, avec zoom leger au survol de la carte */
+/* Cadre 16/9 : la hauteur suit la largeur de la carte, donc la capture
+   est affichee en entier quelle que soit la taille de la grille */
 .proj__img {
   position: relative;
-  height: 200px;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   flex-shrink: 0;
+  background: var(--bg-gray);
 }
 
+/* "contain" et non "cover" : aucune partie de la capture n'est rognee */
 .proj__img img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.4s;
 }
 

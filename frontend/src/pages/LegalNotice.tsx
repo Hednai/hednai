@@ -3,7 +3,7 @@
 // Page Mentions legales — accessible via /mentions-legales
 // 7 sections : exploitant, hebergement, PI, responsabilite, liens, droit applicable, contact
 // ============================================
-import { Helmet } from "react-helmet-async";
+import { Seo } from "../components/Seo";
 import { useLanguage } from "../i18n/useLanguage";
 import "./Legal.css";
 
@@ -12,10 +12,7 @@ export function LegalNotice() {
 
   return (
     <div className="legal-page">
-      <Helmet>
-        <title>{t("legal.seo.title")}</title>
-        <meta name="description" content={t("legal.seo.desc")} />
-      </Helmet>
+      <Seo title={t("legal.seo.title")} description={t("legal.seo.desc")} />
 
       <div className="container">
         <h1 className="legal-page__title">{t("legal.title")}</h1>
