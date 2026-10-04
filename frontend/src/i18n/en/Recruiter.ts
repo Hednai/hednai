@@ -2,10 +2,10 @@
 // i18n/en/recruiter.ts — Recruiter page and recruiter mode content
 // ============================================
 export const recruiter = {
-  "recruiter.seo.title": "Recruiter — Daren | Hednai",
+  "recruiter.seo.title": "Recruiter — Stephane ZOHOU | Hednai",
   "recruiter.seo.desc": "Developer profile: marine background, React/Node/AI skills, completed projects.",
   "recruiter.back": "Back to site",
-  "recruiter.title": "Daren — Full Stack Developer",
+  "recruiter.title": "Stephane ZOHOU — Full Stack Developer",
   "recruiter.tagline": "Merchant navy officer → developer | Maritime, Software, AI",
   "recruiter.contact": "Contact me",
   "recruiter.about.title": "Background",
@@ -34,8 +34,11 @@ export const recruiter = {
 export const profile = {
   "profile.title": "Background",
   "profile.subtitle": "From sea to code — an atypical journey turned strength",
-  "profile.photo.alt": "Daren — Full Stack Developer",
-  "profile.photo.caption": "Capt. Daren MCS · Ottawa, ON",
+  "profile.photo.alt": "Stephane ZOHOU — Full Stack Developer",
+  "profile.photo.caption": "Capt. Stephane ZOHOU · Ottawa, ON",
+  "profile.photo.title1": "Master Mariner",
+  "profile.photo.title2": "Full Stack Developer",
+  "profile.photo.subtitle": "AI Software Development Student",
   "profile.step1.period": "2011 — 2024",
   "profile.step1.title": "Merchant navy officer",
   "profile.step1.desc": "Over ten years aboard, between navigation, operations management, crew leadership and port environments. An experience that taught me to work with real constraints, make decisions and above all understand the maritime field.",

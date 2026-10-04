@@ -38,6 +38,9 @@ export function ProfileSection() {
               />
             </div>
             <p className="profile__photo-caption">{t("profile.photo.caption")}</p>
+            <p className="profile__photo-title">{t("profile.photo.title1")}</p>
+            <p className="profile__photo-title">{t("profile.photo.title2")}</p>
+            <p className="profile__photo-subtitle">{t("profile.photo.subtitle")}</p>
           </div>
         </FadeIn>
 

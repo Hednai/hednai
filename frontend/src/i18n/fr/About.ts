@@ -4,7 +4,7 @@
 export const about = {
   "about.title": "À propos",
   "about.subtitle": "De l'expérience maritime aux solutions numériques.",
-  "about.intro": "Je m'appelle Daren, fondateur de Hednai. Après plus de dix ans dans la marine marchande, j'ai choisi de développer une nouvelle expertise dans le développement logiciel. Hednai est né de cette rencontre entre mon expérience du terrain maritime et mon parcours dans le développement logiciel : un projet ouvert à différents horizons, avec un positionnement maritime naturellement issu de mon parcours.",
+  "about.intro": "Je m'appelle Stéphane ZOHOU, fondateur de Hednai. Après plus de dix ans dans la marine marchande, j'ai choisi de développer une nouvelle expertise dans le développement logiciel. Hednai est né de cette rencontre entre mon expérience du terrain maritime et mon parcours dans le développement logiciel : un projet ouvert à différents horizons, avec un positionnement maritime naturellement issu de mon parcours.",
   "about.tab.parcours": "Mon parcours",
   "about.tab.roadmap": "Feuille de route",
   "about.step1.period": "2011 – 2024",

@@ -4,7 +4,7 @@
 export const about = {
   "about.title": "About",
   "about.subtitle": "From maritime experience to digital solutions.",
-  "about.intro": "My name is Daren, founder of Hednai. After more than ten years in the merchant navy, I chose to develop new expertise in software development. Hednai was born from the intersection of my maritime field experience and my path in software development: a project open to many horizons, with a maritime focus naturally rooted in my background.",
+  "about.intro": "My name is Stephane ZOHOU, founder of Hednai. After more than ten years in the merchant navy, I chose to develop new expertise in software development. Hednai was born from the intersection of my maritime field experience and my path in software development: a project open to many horizons, with a maritime focus naturally rooted in my background.",
   "about.tab.parcours": "My journey",
   "about.tab.roadmap": "Roadmap",
   "about.step1.period": "2011 – 2024",

@@ -26,8 +26,8 @@ const HOME_JSON_LD = {
     {
       "@type": "Person",
       "@id": `${SITE_CONFIG.meta.url}/#person`,
-      name: "Daren",
-      jobTitle: "Developpeur Full Stack",
+      name: "Stéphane ZOHOU",
+      jobTitle: "Développeur Full Stack",
       url: SITE_CONFIG.meta.url,
       email: `mailto:${SITE_CONFIG.contact.email}`,
       sameAs: [SITE_CONFIG.socials.github, SITE_CONFIG.socials.linkedin],
