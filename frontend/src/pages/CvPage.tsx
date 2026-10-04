@@ -17,13 +17,13 @@ const CV_TABS = [
     id: "fullstack",
     labelKey: "cv.tab.fullstack",
     icon: Briefcase,
-    pdf: { fr: "/cv-fullstack.pdf", en: "/resume-fullstack.pdf" },
+    pdf: { fr: "/cv_stephane_zohou_fullstack_fr.pdf", en: "/resume_stephane_zohou_fullstack_en.pdf" },
   },
   {
     id: "captain",
     labelKey: "cv.tab.captain",
     icon: Anchor,
-    pdf: { fr: "/cv-maritime.pdf", en: "/resume-maritime.pdf" },
+    pdf: { fr: "/cv_stephane_zohou_clc_fr.pdf", en: "/resume_stephane_zohou_master_en.pdf" },
   },
 ] as const;
 
@@ -50,7 +50,7 @@ export function CvPage() {
   const currentTab = CV_TABS.find((tab) => tab.id === activeTab)!;
   const pdfLang = lang === "fr" ? "fr" : "en";
   const pdfUrl = currentTab.pdf[pdfLang];
-  const pageTitle = lang === "fr" ? "CV | Daren - Hednai" : "Resume | Daren - Hednai";
+  const pageTitle = lang === "fr" ? "CV | Stéphane ZOHOU - Hednai" : "Resume | Stephane ZOHOU - Hednai";
 
   return (
     <section className="cv-page">

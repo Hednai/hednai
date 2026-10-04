@@ -11,7 +11,7 @@ export const legal = {
   "legal.updated": "Dernière mise à jour : août 2026",
 
   "legal.editor.title": "Exploitant du site",
-  "legal.editor.text": "Le site hednai.com est exploité par Daren. Hednai est le nom utilisé pour présenter ses activités et projets dans le domaine des solutions numériques et maritimes.\nActivité : développement logiciel, solutions numériques et applications intégrant l'intelligence artificielle.\nLocalisation : Ontario, Canada.\nContact : contact@hednai.com",
+  "legal.editor.text": "Le site hednai.com est exploité par Stéphane ZOHOU. Hednai est le nom utilisé pour présenter ses activités et projets dans le domaine des solutions numériques et maritimes.\nActivité : développement logiciel, solutions numériques et applications intégrant l'intelligence artificielle.\nLocalisation : Ontario, Canada.\nContact : contact@hednai.com",
 
   "legal.hosting.title": "Hébergement",
   "legal.hosting.text": "Le frontend de ce site est hébergé par Vercel Inc. (340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis).\nLe backend est hébergé séparément sur Render, un fournisseur d'infrastructure cloud (San Francisco, CA, États-Unis).",
@@ -38,7 +38,7 @@ export const legal = {
   "privacy.updated": "Dernière mise à jour : août 2026",
 
   "privacy.controller.title": "Personne-ressource",
-  "privacy.controller.text": "Daren est responsable de la gestion des renseignements personnels recueillis sur ce site, exploité sous le nom Hednai.\nContact : contact@hednai.com\nLocalisation : Ontario, Canada",
+  "privacy.controller.text": "Stéphane ZOHOU est responsable de la gestion des renseignements personnels recueillis sur ce site, exploité sous le nom Hednai.\nContact : contact@hednai.com\nLocalisation : Ontario, Canada",
 
   "privacy.collected.title": "Renseignements collectés",
   "privacy.collected.text": "Le site recueille principalement les renseignements que vous fournissez volontairement via le formulaire de contact :\n- Nom complet\n- Adresse courriel (si vous choisissez le contact par courriel)\n- Numéro de téléphone (si vous choisissez le contact par WhatsApp)\n- Sujet et contenu de votre message\n\nDes données techniques peuvent également être générées automatiquement dans le cadre du fonctionnement normal du site et de ses fournisseurs d'hébergement : adresse IP, type de navigateur et d'appareil, données de journaux serveur, date et heure des requêtes. Ces données sont utilisées à des fins de sécurité et de fonctionnement technique.",

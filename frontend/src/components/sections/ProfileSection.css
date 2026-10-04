@@ -53,13 +53,34 @@
   pointer-events: none;
 }
 
-/* Légende sous la photo — dans le sticky, hors du overflow */
+/* Nom et localisation sous la photo */
 .profile__photo-caption {
   text-align: center;
   margin-top: 14px;
   font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+/* Titres professionnels, un par ligne */
+.profile__photo-title {
+  text-align: center;
+  margin-top: 3px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--accent-cyan);
+  letter-spacing: 0.03em;
+}
+
+/* Formation en cours */
+.profile__photo-subtitle {
+  text-align: center;
+  margin-top: 6px;
+  font-size: 0.75rem;
   color: var(--text-secondary);
   letter-spacing: 0.02em;
+  font-style: italic;
 }
 
 /* ── Timeline ── */

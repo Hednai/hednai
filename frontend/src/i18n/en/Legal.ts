@@ -11,7 +11,7 @@ export const legal = {
   "legal.updated": "Last updated: August 2026",
 
   "legal.editor.title": "Site Operator",
-  "legal.editor.text": "The website hednai.com is operated by Daren. Hednai is the name used to present his activities and projects in the field of digital and maritime solutions.\nActivity: software development, digital solutions and applications integrating artificial intelligence.\nLocation: Ontario, Canada.\nContact: contact@hednai.com",
+  "legal.editor.text": "The website hednai.com is operated by Stephane ZOHOU. Hednai is the name used to present his activities and projects in the field of digital and maritime solutions.\nActivity: software development, digital solutions and applications integrating artificial intelligence.\nLocation: Ontario, Canada.\nContact: contact@hednai.com",
 
   "legal.hosting.title": "Hosting",
   "legal.hosting.text": "The frontend of this site is hosted by Vercel Inc. (340 S Lemon Ave #4133, Walnut, CA 91789, United States).\nThe backend is hosted separately on Render, a cloud infrastructure provider (San Francisco, CA, United States).",
@@ -38,7 +38,7 @@ export const legal = {
   "privacy.updated": "Last updated: August 2026",
 
   "privacy.controller.title": "Privacy Contact",
-  "privacy.controller.text": "Daren is responsible for the management of personal information collected on this site, operated under the name Hednai.\nContact: contact@hednai.com\nLocation: Ontario, Canada",
+  "privacy.controller.text": "Stephane ZOHOU is responsible for the management of personal information collected on this site, operated under the name Hednai.\nContact: contact@hednai.com\nLocation: Ontario, Canada",
 
   "privacy.collected.title": "Information Collected",
   "privacy.collected.text": "This site primarily collects information that you voluntarily provide through the contact form:\n- Full name\n- Email address (if you choose email contact)\n- Phone number (if you choose WhatsApp contact)\n- Subject and content of your message\n\nTechnical data may also be generated automatically as part of the normal operation of the site and its hosting providers: IP address, browser and device type, server log data, date and time of requests. This data is used for security and technical operation purposes.",
